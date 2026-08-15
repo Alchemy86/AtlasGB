@@ -1,11 +1,17 @@
-# Using this atlas in your own project
+# Using an atlas in your own project
 
-[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md)
+[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md) ·
+[adding an atlas](adding-an-atlas.md)
 
 This repository is meant to be **consumed**. You are writing an emulator, a save editor, a
 randomiser, a mod tool, a debugger, a bot — and you want the addresses without adopting
 anybody's build system. Nothing here depends on any other project, and using it does not
 require you to run any of the tooling in `tools/`.
+
+**Consume one atlas at a time.** AtlasGB publishes one atlas per cartridge, under
+`atlases/<id>/`; the examples below use `pokemon-rb`, which is the only one published
+today. Every path here has the atlas id in it on purpose — an address is a fact about *a
+cartridge*, and code that forgets which one is the bug this layout exists to make hard.
 
 ---
 
@@ -14,16 +20,27 @@ require you to run any of the tooling in `tools/`.
 Everything is a plain file. Fetch what you want:
 
 ```bash
+BASE=https://raw.githubusercontent.com/Alchemy86/AtlasGB/main/atlases/pokemon-rb/data
+
 # the source of truth, tab separated (see docs/schema.md for the columns)
-curl -fsSLO https://raw.githubusercontent.com/Alchemy86/AtlasGB/main/data/atlas.tsv
+curl -fsSLO $BASE/atlas.tsv
 
 # the same rows as typed JSON, or minified for the network
-curl -fsSLO https://raw.githubusercontent.com/Alchemy86/AtlasGB/main/data/atlas.json
-curl -fsSLO https://raw.githubusercontent.com/Alchemy86/AtlasGB/main/data/atlas.min.json
+curl -fsSLO $BASE/atlas.json
+curl -fsSLO $BASE/atlas.min.json
 ```
 
 Pin a tag rather than `main` if you want a stable answer:
-`.../AtlasGB/<tag>/data/atlas.tsv`.
+`.../AtlasGB/<tag>/atlases/pokemon-rb/data/atlas.tsv`.
+
+The JSON's own `meta` block names the cartridge it is about — `atlas`, `title` and `games`
+— so a file that has been copied out of its directory can still say what it is. Read it
+rather than assuming.
+
+> **These paths changed** when the repository was namespaced by game; the Red/Blue data
+> used to sit at `data/atlas.tsv`. The rows did not change, so an existing pinned snapshot
+> is still correct — only a refresh needs the new URL. See
+> [`../data/README.md`](../data/README.md).
 
 Five lines of Python is a complete reader:
 
@@ -74,7 +91,7 @@ but `curl` and `sha256sum` — copy it into your repository:
 
 ```bash
 # pin the current release into third_party/atlasgb/
-tools/fetch-atlas.sh --ref v1.0.0 --dest third_party/atlasgb
+tools/fetch-atlas.sh --ref v1.0.0 --atlas pokemon-rb --dest third_party/atlasgb
 
 # later: is the vendored copy still the file we pinned?
 tools/fetch-atlas.sh --verify --dest third_party/atlasgb
@@ -83,11 +100,17 @@ tools/fetch-atlas.sh --verify --dest third_party/atlasgb
 tools/fetch-atlas.sh --check-upstream --dest third_party/atlasgb
 ```
 
+`--atlas` defaults to `pokemon-rb` and names the directory under `atlases/`. If you vendor
+more than one, give each its own `--dest` — `third_party/atlasgb/pokemon-rb/` — so the
+locks do not collide and a reader can see which cartridge a file is about from its path.
+`--file` overrides the path inside the repository, which is needed only for a ref from
+before the atlases were namespaced.
+
 It writes two files:
 
 ```
 third_party/atlasgb/atlas.tsv        the snapshot
-third_party/atlasgb/atlas.lock       ref, commit, sha256, fetched-on
+third_party/atlasgb/atlas.lock       atlas, ref, commit, sha256, fetched-on
 ```
 
 `--verify` is offline and cheap — run it in your test suite, not just in CI. It is what
@@ -99,11 +122,11 @@ catches the hand-edit.
 
 This is the check worth copying even if you take nothing else.
 
-**Every Gen 1 address hard-coded anywhere in your source must appear in the atlas.** In
-the emulator this atlas came out of, `wCurMap` was written out in nine separate files
-before the gate existed and nothing could tell you whether they agreed. The gate is a text
-scan over a named list of files, looking for constants of the shape a Gen 1 address is
-written in, and it costs nothing:
+**Every cartridge address hard-coded anywhere in your source must appear in that
+cartridge's atlas.** In the emulator this project came out of, `wCurMap` was written out in
+nine separate files before the gate existed and nothing could tell you whether they agreed.
+The gate is a text scan over a named list of files, looking for constants of the shape a
+Game Boy address is written in, and it costs nothing:
 
 ```rust
 // Only *named* constants of the right width: an inline literal may be a length,
@@ -129,9 +152,10 @@ for itself: **prove entries and publish the tiers back.** That is not a nice-to-
 atlas whose evidence never gets re-run becomes a transcription again, slowly.
 
 The report format and the loop are in [verification.md](verification.md). The short
-version: emit one JSON object mapping every symbol to its evidence tokens, open a pull
-request that runs `tools/apply-evidence.py report.json`, and the run's provenance — your
-repository, your commit, the cartridge's SHA-1, the script — is recorded beside the data.
+version: emit one JSON object naming the atlas and mapping every symbol to its evidence
+tokens, open a pull request that runs `tools/apply-evidence.py report.json --atlas <id>`,
+and the run's provenance — your repository, your commit, the cartridge's SHA-1, the script
+— is recorded beside the data.
 
 Your harness already computes the tokens if it does any of this work; emitting them is a
 few lines. In Rust, roughly:
@@ -140,7 +164,8 @@ few lines. In Rust, roughly:
 // `fresh` is what this run observed: symbol -> the tokens it earned.
 // Write it under an env var so an ordinary test run does not produce a file.
 if let Ok(path) = std::env::var("ATLAS_EVIDENCE_OUT") {
-    let mut out = String::from("{\n \"schema\": \"atlasgb-evidence/1\",\n");
+    let mut out = String::from(
+        "{\n \"schema\": \"atlasgb-evidence/1\",\n \"atlas\": \"pokemon-rb\",\n");
     out += &format!(
         " \"produced_by\": {{\"repo\": \"{repo}\", \"commit\": \"{commit}\", \
           \"harness\": \"{harness}\"}},\n \
@@ -180,9 +205,11 @@ Only the script is missing.
   and CI checks the digest; a hand-edited tier is a claim with nothing behind it, which is
   the failure mode this whole project is a reaction to.
 - **Do not treat an unmarked entry as unused.** It means nobody has observed it yet.
-- **Do not use these addresses for Pokémon Yellow.** Its work RAM shifted, so an address
-  from here is *wrong* there rather than approximately right, and the failure mode is a
-  write landing in the middle of somebody else's data and passing its own checksum.
+- **Do not use one atlas's addresses for another cartridge.** In particular, not for
+  Pokémon Yellow. Its work RAM shifted, so an address from the Red/Blue atlas is *wrong*
+  there rather than approximately right, and the failure mode is a write landing in the
+  middle of somebody else's data and passing its own checksum. A cartridge with no atlas here has no atlas
+  here; see [adding one](adding-an-atlas.md).
 - **Do not ship game data.** The addresses are facts and are free to use; the cartridge's
   contents are not ours or yours to distribute. Locate the tables in the player's own
-  cartridge at run time, as [rom-data](rom-data.md) describes.
+  cartridge at run time, as [rom-data](../atlases/pokemon-rb/docs/rom-data.md) describes.

@@ -12,7 +12,7 @@ Nothing here is specific to Pokemon; it is a parser for the RGBDS map grammar:
     <tab>         $4000 = SpriteFacingAndAnimationTable
     <tab>EMPTY: $7c49-$7fff ($03b7 bytes)
 
-Used by `extract.py`.  See docs/gen1/atlas/README.md for why we regenerate rather
+Used by `extract.py`.  See docs/provenance.md for why we regenerate rather
 than transcribe.
 """
 

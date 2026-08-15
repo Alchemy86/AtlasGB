@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
-"""Regenerate the derived columns of the atlas.
+"""Regenerate the derived columns of the Pokemon Red/Blue atlas.
 
-`data/atlas.tsv` is the single source of truth for where Pokemon Red and Blue
-keep everything.  Eight of its ten columns are *derived* from a built
-`pret/pokered` checkout, and two are *ours*: what the entry is, in our own
-words, and how it was verified.  This script rewrites the derived columns and
-leaves ours alone, so a pokered bump is a reviewable diff rather than a rewrite.
+`atlases/pokemon-rb/data/atlas.tsv` is the single source of truth for where
+Pokemon Red and Blue keep everything.  Eight of its ten columns are *derived*
+from a built `pret/pokered` checkout, and two are *ours*: what the entry is, in
+our own words, and how it was verified.  This script rewrites the derived
+columns and leaves ours alone, so a pokered bump is a reviewable diff rather
+than a rewrite.
 
     tools/extract.py --pokered /path/to/pokered            # report drift
     tools/extract.py --pokered /path/to/pokered --write    # apply it
+
+This extractor is **specific to pokered**, which is why it names its atlas
+rather than looping over `atlases/`: a different cartridge has a different
+disassembly, a different map file and a different set of facts to read out of
+it, so it gets its own extractor beside this one.  `--atlas` is here so the
+destination is explicit rather than assumed; see `docs/adding-an-atlas.md`.
 
 The checkout must have been *built* (`make blue`, RGBDS 1.0.3) so that
 `pokeblue.map` exists and `pokeblue.gbc` matches `roms.sha1`; this script checks
@@ -39,8 +46,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import chapters  # noqa: E402
 import mapfile  # noqa: E402
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ATLAS = os.path.join(REPO, "data", "atlas.tsv")
+import atlases as atlases_mod  # noqa: E402
+
+REPO = atlases_mod.REPO
 
 # Byte-for-byte retail English Pokemon Blue (USA/Europe).  pokered's own
 # `roms.sha1` carries this; we re-check it here so an unbuilt or patched
@@ -299,6 +307,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--pokered", required=True, help="a BUILT pret/pokered checkout")
     ap.add_argument("--game", default="blue", choices=("blue", "red"))
+    ap.add_argument("--atlas", default="pokemon-rb",
+                    help="which atlas to rewrite (default: pokemon-rb)")
     ap.add_argument("--no-rom", action="store_true", help="RAM regions only")
     ap.add_argument("--write", action="store_true", help="apply changes to the atlas")
     args = ap.parse_args()
@@ -317,6 +327,8 @@ def main() -> int:
         print(f"{rom} is sha1 {got}, expected {want}: not the retail cartridge",
               file=sys.stderr)
         return 2
+
+    ATLAS = atlases_mod.Atlas(args.atlas).tsv
 
     sections, gaps = mapfile.parse(mp)
     fresh = derive_rows(sections, gaps, want_rom=not args.no_rom)

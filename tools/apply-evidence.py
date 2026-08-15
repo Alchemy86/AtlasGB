@@ -7,12 +7,13 @@ against a running cartridge needs an emulator, and the emulator lives
 elsewhere.  So the tiers arrive here as a **report**, and the loop is closed by
 making the `verify` column unwritable by hand.
 
-    tools/apply-evidence.py report.json          # land a run
-    tools/apply-evidence.py --check              # is the verify column still the
-                                                 # one the last landed run produced?
+    tools/apply-evidence.py report.json                       # land a run
+    tools/apply-evidence.py report.json --atlas pokemon-rb    # ... into that atlas
+    tools/apply-evidence.py --check              # every atlas: is the verify column
+                                                 # still the one its last run produced?
 
-`--check` runs in CI.  `data/evidence.json` records the provenance of the last
-landed run *and a digest of the verify column it produced*; if anybody edits an
+`--check` runs in CI.  Each atlas's `data/evidence.json` records the provenance of
+the last run landed into it *and a digest of the verify column it produced*; if anybody edits an
 evidence token by hand, or adds a symbol without re-running the verification,
 the digest stops matching and CI is red.  A tier in this atlas therefore always
 names a real run against a real cartridge — which is the whole claim.
@@ -24,12 +25,18 @@ A producer writes one JSON object.  See `docs/verification.md` for the prose and
 
     {
       "schema": "atlasgb-evidence/1",
+      "atlas": "pokemon-rb",
       "produced_by": {"repo": "...", "commit": "...", "harness": "..."},
       "cartridge":   {"title": "POKEMON BLUE", "sha1": "..."},
       "script":      {"name": "opening+overworld", "frames": 3600},
       "run":         {"date": "2026-08-15"},
       "verify":      {"wPartyCount": ["rom", "live", "inv"], ...}
     }
+
+`atlas` names which atlas the run is about.  It is **optional** — a report
+without it lands into `--atlas`, which is how reports written before the project
+grew a second cartridge keep working — but emitting it is the better habit, and
+if it is present it must agree with the atlas being landed into.
 
 Every symbol in the atlas must appear in `verify`, and every symbol in `verify`
 must be in the atlas: a partial report would silently downgrade whatever it left
@@ -46,16 +53,17 @@ import json
 import os
 import sys
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ATLAS = os.path.join(REPO, "data", "atlas.tsv")
-RECORD = os.path.join(REPO, "data", "evidence.json")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import atlases as atlases_mod  # noqa: E402
+
+REPO = atlases_mod.REPO
 
 SCHEMA = "atlasgb-evidence/1"
 TOKENS = ("rom", "live", "inv")
 STORAGE = ("VRAM", "SRAM", "WRAM0", "HRAM")
 
 
-def read_atlas() -> tuple[list[str], list[dict]]:
+def read_atlas(ATLAS) -> tuple[list[str], list[dict]]:
     with open(ATLAS, encoding="utf-8") as handle:
         lines = [line.rstrip("\n") for line in handle if line.strip()]
     header = lines[0].split("\t")
@@ -87,9 +95,16 @@ def load_report(path: str) -> dict:
     return report
 
 
-def apply(path: str) -> int:
+def apply(path: str, atlas) -> int:
     report = load_report(path)
-    header, rows = read_atlas()
+    named = report.get("atlas")
+    if named is not None and named != atlas.id:
+        raise SystemExit(
+            f"{path}: the report is for atlas {named!r}, but this is {atlas.id!r}. "
+            "Landing it here would attribute one cartridge's evidence to another."
+        )
+    ATLAS, RECORD = atlas.tsv, atlas.evidence
+    header, rows = read_atlas(ATLAS)
     have = {r["symbol"] for r in rows}
     want = set(report["verify"])
     if have - want:
@@ -127,6 +142,8 @@ def apply(path: str) -> int:
 
     record = {
         "schema": SCHEMA,
+        "atlas": atlas.id,
+        "title": atlas.title,
         "produced_by": report["produced_by"],
         "cartridge": report["cartridge"],
         "script": report["script"],
@@ -153,25 +170,28 @@ def apply(path: str) -> int:
     return 0
 
 
-def check() -> int:
-    _, rows = read_atlas()
+def check(atlas) -> int:
+    _, rows = read_atlas(atlas.tsv)
+    RECORD = atlas.evidence
     if not os.path.exists(RECORD):
-        print(f"FAIL — {os.path.relpath(RECORD, REPO)} is missing: the evidence "
-              "tiers in the atlas name no run at all")
+        print(f"FAIL — {atlas.rel(RECORD)} is missing: the evidence "
+              f"tiers in the {atlas.id} atlas name no run at all")
         return 1
     with open(RECORD, encoding="utf-8") as handle:
         record = json.load(handle)
     now = digest(rows)
     if now != record.get("verify_digest"):
-        print("FAIL — the verify column is not the one the last landed run produced.")
+        print(f"FAIL — {atlas.id}: the verify column is not the one the last "
+              "landed run produced.")
         print(f"  recorded {record.get('verify_digest')}")
         print(f"  actual   {now}")
         print("  Evidence is not editable by hand: land a report with")
-        print("  `tools/apply-evidence.py report.json`. See docs/verification.md.")
+        print(f"  `tools/apply-evidence.py report.json --atlas {atlas.id}`.")
+        print("  See docs/verification.md.")
         return 1
     run = record["run"].get("date", "?")
     cart = record["cartridge"].get("title", "?")
-    print(f"OK — evidence tiers match the run of {run} against {cart} "
+    print(f"OK — {atlas.id}: evidence tiers match the run of {run} against {cart} "
           f"({record['entries']:,} entries, {len(record['unevidenced'])} unevidenced)")
     return 0
 
@@ -181,12 +201,15 @@ def main() -> int:
     ap.add_argument("report", nargs="?", help="a verification report to land")
     ap.add_argument("--check", action="store_true",
                     help="verify the tiers still match the last landed run")
+    atlases_mod.add_argument(ap)
     args = ap.parse_args()
     if args.check:
-        return check()
+        # Every atlas by default: a run that stops checking an atlas because
+        # nobody named it is the drift this file exists to prevent.
+        return max(check(a) for a in atlases_mod.select(args.atlas))
     if not args.report:
         ap.error("give a report to land, or pass --check")
-    return apply(args.report)
+    return apply(args.report, atlases_mod.one(args.atlas))
 
 
 if __name__ == "__main__":

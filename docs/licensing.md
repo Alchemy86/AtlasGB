@@ -18,7 +18,7 @@ are not subject to copyright, in this jurisdiction or the ones this is most like
 read in. `wPartyCount` is at `$D163` whether or not anybody writes it down, and writing it
 down does not create a monopoly on it.
 
-So the MIT grant over `data/atlas.tsv` should be read as *a promise not to make trouble*
+So the MIT grant over each atlas's `atlas.tsv` should be read as *a promise not to make trouble*
 rather than as a claim that the numbers were ours to give away. Use them. You do not need
 our permission and you never did.
 
@@ -35,7 +35,7 @@ is narrow and deliberate: **we take addresses, symbol names and structure layout
 nothing else.** In particular —
 
 **pokered's prose and comments are not ours to copy.** Every description in
-`data/atlas.tsv` and every paragraph on every page here is written from scratch. Where a
+every `atlas.tsv` and every paragraph on every page here is written from scratch. Where a
 page states a fact that came from the disassembly, it cites the repository, the file and
 the symbol rather than quoting.
 
@@ -59,7 +59,7 @@ Nothing from pokered is vendored here and nothing is fetched at run time: you po
 
 **No commercial ROM data, in any form.** No sprites, no text, no tables, no music, no
 fragment of any of them. The cartridge's own data tables appear in the
-[rom-data](rom-data.md) chapter as *addresses*; the numbers at those addresses are read
+[rom-data](../atlases/pokemon-rb/docs/rom-data.md) chapter as *addresses*; the numbers at those addresses are read
 out of the player's own cartridge at run time and are never written down here.
 
 **No boot-ROM content, in any form.**

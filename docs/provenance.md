@@ -1,10 +1,16 @@
 # Where this came from, and what is ours
 
-[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md) · [licence](licensing.md)
+[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md) ·
+[licence](licensing.md) · [adding an atlas](adding-an-atlas.md)
 
-This page carries the provenance that used to open `data/atlas.tsv` as six `#` comment
-lines. It was moved here because those six lines cost the file GitHub's rendered table
-view — the TSV viewer has no notion of a comment, read them as one-column rows, and
+**Where the [Pokémon Red/Blue atlas](../atlases/pokemon-rb/) came from**, and what is ours
+in it. Each atlas derives from its own disassembly, so each one has its own pipeline; this
+is the first one's, and it is the shape a
+[second one](adding-an-atlas.md) is expected to follow.
+
+This page carries the provenance that used to open that atlas's `atlas.tsv` as six `#`
+comment lines. It was moved here because those six lines cost the file GitHub's rendered
+table view — the TSV viewer has no notion of a comment, read them as one-column rows, and
 refused to render the file at all. Provenance belongs with the prose; the artefact should
 be just the data.
 
@@ -16,7 +22,7 @@ be just the data.
 flowchart LR
     P["pret/pokered<br/>checkout, built"] -->|"rgblink -m"| M["pokeblue.map<br/>sections + symbols"]
     M --> E["tools/extract.py<br/>+ mapfile.py + chapters.py"]
-    E -->|"8 derived columns"| A[("data/atlas.tsv<br/>2,898 claims")]
+    E -->|"8 derived columns"| A[("atlases/pokemon-rb/<br/>data/atlas.tsv<br/>2,898 claims")]
     V["a verification run<br/>on a real cartridge"] -->|"tools/apply-evidence.py"| A
     D["written descriptions"] -->|"by hand, from scratch"| A
     A --> R["tools/render.py"] --> PG["22 Markdown pages<br/>+ the README"]
@@ -100,7 +106,7 @@ or it is hedged.
 
 **No commercial ROM data, in any form.** No sprites, no text, no tables, no music, no
 fragment of any of them. The cartridge's own data tables appear in the
-[rom-data](rom-data.md) chapter as *addresses*, and the harness that reads them locates
+[rom-data](../atlases/pokemon-rb/docs/rom-data.md) chapter as *addresses*, and the harness that reads them locates
 them by byte signature at run time out of the player's own cartridge — the numbers are
 never written down here.
 

@@ -2,15 +2,21 @@
 
 [← AtlasGB](../README.md) · [provenance](provenance.md) · [verification](verification.md) · [consuming it](consuming.md)
 
-**[`data/atlas.tsv`](../data/atlas.tsv) is the product.** Everything else in this
-repository — the chapter pages, the two indexes, the structure tables, the JSON — is
-generated from it. This page is its contract: every column, what it holds, what units it
-is in, and every value it is allowed to take. You should be able to write a parser from
-this page alone, without opening the generator.
+**An atlas's `atlas.tsv` is the product.** Everything else about it in this repository —
+the chapter pages, the two indexes, the structure tables, the JSON — is generated from it.
+This page is the contract for *every* atlas: the columns, the vocabularies and the anchor
+scheme are the same whichever cartridge you are reading, so a consumer writes one parser.
+The published example is
+[`atlases/pokemon-rb/data/atlas.tsv`](../atlases/pokemon-rb/data/atlas.tsv).
 
-If you want the machine-readable version, [`data/atlas.schema.json`](../data/atlas.schema.json)
-is a JSON Schema for [`data/atlas.json`](../data/atlas.json), which carries the same rows
-with the types applied.
+Every column, what it holds, what units it is in, and every value it is allowed to take:
+you should be able to write a parser from this page alone, without opening the generator.
+
+If you want the machine-readable version,
+[`schema/atlas.schema.json`](../schema/atlas.schema.json) is a JSON Schema for the
+generated [`atlas.json`](../atlases/pokemon-rb/data/atlas.json), which carries the same
+rows with the types applied. It is shared by every atlas, and each file's own `meta` block
+names the cartridge it is about.
 
 ---
 
@@ -31,7 +37,7 @@ Markdown; treat `desc` as Markdown and everything else as plain text.
 
 ```python
 import csv
-with open("data/atlas.tsv", encoding="utf-8", newline="") as f:
+with open("atlases/pokemon-rb/data/atlas.tsv", encoding="utf-8", newline="") as f:
     rows = list(csv.DictReader(f, delimiter="\t"))
 ```
 
@@ -227,9 +233,9 @@ they cannot drift:
 
 | file | what it is |
 |---|---|
-| [`data/atlas.json`](../data/atlas.json) | `{"meta": …, "entries": […]}` — every row as an object, indented, with the types applied |
-| [`data/atlas.min.json`](../data/atlas.min.json) | the same, minified, with empty fields dropped |
-| [`data/atlas.schema.json`](../data/atlas.schema.json) | a JSON Schema for `atlas.json` |
+| [`data/atlas.json`](../atlases/pokemon-rb/data/atlas.json) | `{"meta": …, "entries": […]}` — every row as an object, indented, with the types applied |
+| [`data/atlas.min.json`](../atlases/pokemon-rb/data/atlas.min.json) | the same, minified, with empty fields dropped |
+| [`schema/atlas.schema.json`](../schema/atlas.schema.json) | a JSON Schema for `atlas.json`, shared by every atlas |
 
 The JSON rows carry the TSV's columns plus two conveniences:
 
@@ -249,8 +255,8 @@ from the position of anything in a file, so they survive regeneration:
 
 | link | goes to |
 |---|---|
-| `docs/<group>.md#s-<symbol>` | the entry on its chapter page — [`docs/party.md#s-wPartyCount`](party.md#s-wPartyCount) |
-| `docs/by-address.md#a-<addr>` | the entry in the address index — [`docs/by-address.md#a-D163`](by-address.md#a-D163) |
+| `atlases/<id>/docs/<group>.md#s-<symbol>` | the entry on its chapter page — [`…/pokemon-rb/docs/party.md#s-wPartyCount`](../atlases/pokemon-rb/docs/party.md#s-wPartyCount) |
+| `atlases/<id>/docs/by-address.md#a-<addr>` | the entry in the address index — [`…/pokemon-rb/docs/by-address.md#a-D163`](../atlases/pokemon-rb/docs/by-address.md#a-D163) |
 
 `<addr>` is the four hex digits without the `$`, plus ` b<bank>` collapsed to `b<bank>`
 where the region is banked (`#a-A000b2`). Every one of those links is checked on every

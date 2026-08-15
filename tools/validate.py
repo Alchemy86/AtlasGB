@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Check that `data/atlas.tsv` is structurally sound — no emulator required.
+"""Check that every atlas's `atlas.tsv` is structurally sound — no emulator needed.
 
-This is the part of the verification that needs nothing but the file itself, so
-it runs here, in this repository's CI, on every push.  The part that needs a
+Runs over every atlas under `atlases/`, or over one named with `--atlas`.  This
+is the part of the verification that needs nothing but the file itself, so it
+runs here, in this repository's CI, on every push.  The part that needs a
 running cartridge lives in the emulator that produces the evidence tiers; see
 [`docs/verification.md`](../docs/verification.md).
 
-What it proves:
+What it proves, for each atlas:
 
 * the file parses: one header row, then rows of exactly that many tab-separated
   fields, and no comment or blank lines (the TSV starts with its header so that
@@ -23,8 +24,9 @@ What it proves:
   this repository's central claim is that there are none;
 * every symbol name is unique, because the evidence loop keys on it.
 
-    tools/validate.py            # report and exit non-zero on any failure
-    tools/validate.py --quiet    # only print failures
+    tools/validate.py                     # every atlas; non-zero on any failure
+    tools/validate.py --atlas pokemon-rb  # just that one
+    tools/validate.py --quiet             # only print failures
 """
 
 from __future__ import annotations
@@ -33,8 +35,10 @@ import argparse
 import os
 import sys
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ATLAS = os.path.join(REPO, "data", "atlas.tsv")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import atlases as atlases_mod  # noqa: E402
+
+REPO = atlases_mod.REPO
 
 COLUMNS = ["region", "bank", "addr", "len", "symbol", "role", "sect", "group",
            "verify", "desc"]
@@ -70,14 +74,14 @@ class Report:
         print(f"  {mark} {name}" + (f" — {note}" if note else ""))
 
 
-def read() -> list[dict]:
-    with open(ATLAS, encoding="utf-8") as handle:
+def read(path: str) -> list[dict]:
+    with open(path, encoding="utf-8") as handle:
         lines = [line.rstrip("\n") for line in handle]
     if not lines:
-        raise SystemExit(f"{ATLAS}: empty")
+        raise SystemExit(f"{path}: empty")
     header = lines[0].split("\t")
     if header != COLUMNS:
-        raise SystemExit(f"{ATLAS}:1: header is {header}, expected {COLUMNS}")
+        raise SystemExit(f"{path}:1: header is {header}, expected {COLUMNS}")
     rows = []
     for n, line in enumerate(lines[1:], start=2):
         if not line.strip():
@@ -85,7 +89,7 @@ def read() -> list[dict]:
         fields = line.split("\t")
         if len(fields) != len(header):
             raise SystemExit(
-                f"{ATLAS}:{n}: {len(fields)} columns, header has {len(header)}"
+                f"{path}:{n}: {len(fields)} columns, header has {len(header)}"
             )
         row = dict(zip(header, fields))
         row["_line"] = n
@@ -95,14 +99,20 @@ def read() -> list[dict]:
     return rows
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--quiet", action="store_true")
-    args = ap.parse_args()
+def validate(atlas, quiet: bool) -> int:
+    """Every structural check, for one atlas.  Returns the number that failed."""
+    ATLAS = atlas.tsv
+    print(f"AtlasGB — validating {atlas.id} ({atlas.title})")
+    print(f"  {atlas.rel(ATLAS)}\n")
+    rows = read(ATLAS)
+    rep = Report(quiet)
 
-    print(f"AtlasGB — validating {os.path.relpath(ATLAS, REPO)}\n")
-    rows = read()
-    rep = Report(args.quiet)
+    # --- the atlas says which cartridge it is about ------------------------
+    # A number without a game attached is meaningless, and every generated
+    # page's title comes from here.
+    for key in ("title", "games", "summary"):
+        rep.check(f"meta.json names a {key}", bool(atlas.meta.get(key)),
+                  f"{atlas.rel(atlas.meta_path)} is what the pages are titled from")
 
     # --- the file itself ---------------------------------------------------
     raw = open(ATLAS, encoding="utf-8").read()
@@ -214,27 +224,25 @@ def main() -> int:
     # --- the published JSON really does match its published schema ---------
     # A schema nobody runs is documentation that has not been checked, and this
     # one is what a consumer writes their parser against.
+    label = f"{atlas.rel(atlas.json)} matches {atlas.rel(atlases_mod.SCHEMA)}"
     try:
         import json
 
         import jsonschema
     except ImportError:
-        rep.check("data/atlas.json matches data/atlas.schema.json", True,
-                  "SKIPPED — `pip install jsonschema` to run it")
+        rep.check(label, True, "SKIPPED — `pip install jsonschema` to run it")
     else:
-        schema_path = os.path.join(REPO, "data", "atlas.schema.json")
-        json_path = os.path.join(REPO, "data", "atlas.json")
-        if not os.path.exists(json_path):
-            rep.check("data/atlas.json matches data/atlas.schema.json", False,
-                      "data/atlas.json is missing — run `make data`")
+        if not os.path.exists(atlas.json):
+            rep.check(label, False,
+                      f"{atlas.rel(atlas.json)} is missing — run `make data`")
         else:
-            with open(schema_path, encoding="utf-8") as handle:
+            with open(atlases_mod.SCHEMA, encoding="utf-8") as handle:
                 schema = json.load(handle)
-            with open(json_path, encoding="utf-8") as handle:
+            with open(atlas.json, encoding="utf-8") as handle:
                 doc = json.load(handle)
             errs = list(jsonschema.Draft202012Validator(schema).iter_errors(doc))
             rep.check(
-                "data/atlas.json matches data/atlas.schema.json", not errs,
+                label, not errs,
                 "; ".join(f"{list(e.path)[:3]}: {e.message}" for e in errs[:3]),
             )
 
@@ -252,9 +260,28 @@ def main() -> int:
         print(f"         {r['addr']} {r['symbol']}")
 
     if rep.failed:
-        print(f"\n{rep.failed} check(s) failed.")
+        print(f"\n{atlas.id}: {rep.failed} check(s) failed.")
+    else:
+        print(f"\n{atlas.id}: all checks passed.")
+    return rep.failed
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    atlases_mod.add_argument(ap)
+    ap.add_argument("--quiet", action="store_true")
+    args = ap.parse_args()
+
+    selected = atlases_mod.select(args.atlas)
+    failed = 0
+    for n, atlas in enumerate(selected):
+        if n:
+            print()
+        failed += validate(atlas, args.quiet)
+    if failed:
+        print(f"\n{failed} check(s) failed across {len(selected)} atlas(es).")
         return 1
-    print("\nAll checks passed.")
+    print(f"\nOK — {len(selected)} atlas(es) validated.")
     return 0
 
 

@@ -1,12 +1,24 @@
 #!/bin/sh
-# Vendor a pinned snapshot of AtlasGB into your own repository.
+# Vendor a pinned snapshot of one AtlasGB atlas into your own repository.
 #
 # This script is meant to be COPIED into a consuming project. It needs nothing
 # but `curl` and `sha256sum` (or `shasum -a 256`), so vendoring the atlas adds
 # no dependency to your build.
 #
+# AtlasGB publishes one atlas per cartridge under `atlases/<id>/`, so every
+# invocation names one. `--atlas` defaults to pokemon-rb, which is the only one
+# published today; pinning a second cartridge is a flag, not a restructuring.
+#
 #   tools/fetch-atlas.sh --ref v1.0.0 --dest third_party/atlasgb
-#       fetch that ref, write the file and a lock recording ref/commit/sha256.
+#       fetch that ref, write the file and a lock recording atlas/ref/commit/sha256.
+#
+#   tools/fetch-atlas.sh --ref v1.0.0 --atlas pokemon-rb --dest third_party/atlasgb
+#       the same, said explicitly. Worth doing once there is more than one.
+#
+#   tools/fetch-atlas.sh --ref 91b5d18 --file data/atlas.tsv --dest third_party/atlasgb
+#       override the path inside the repository. Needed only for a ref from
+#       BEFORE the atlases were namespaced by game, when the Red/Blue data sat
+#       at data/atlas.tsv.
 #
 #   tools/fetch-atlas.sh --verify --dest third_party/atlasgb
 #       OFFLINE. Recompute the sha256 and compare it to the lock. This is the
@@ -28,7 +40,8 @@
 set -eu
 
 REPO="Alchemy86/AtlasGB"
-FILE="data/atlas.tsv"
+ATLAS="pokemon-rb"
+FILE=""
 NAME="atlas.tsv"
 LOCK="atlas.lock"
 
@@ -37,13 +50,15 @@ DEST="third_party/atlasgb"
 MODE="fetch"
 
 usage() {
-	sed -n '2,30p' "$0" | sed 's/^# \{0,1\}//'
+	sed -n '2,38p' "$0" | sed 's/^# \{0,1\}//'
 	exit "${1:-0}"
 }
 
 while [ $# -gt 0 ]; do
 	case "$1" in
 	--ref) REF="$2"; shift 2 ;;
+	--atlas) ATLAS="$2"; shift 2 ;;
+	--file) FILE="$2"; shift 2 ;;
 	--dest) DEST="$2"; shift 2 ;;
 	--verify) MODE="verify"; shift ;;
 	--check-upstream) MODE="upstream"; shift ;;
@@ -51,6 +66,9 @@ while [ $# -gt 0 ]; do
 	*) echo "unknown argument: $1" >&2; usage 2 ;;
 	esac
 done
+
+# The path inside the repository, unless --file overrode it.
+[ -n "$FILE" ] || FILE="atlases/$ATLAS/data/atlas.tsv"
 
 sha256() {
 	if command -v sha256sum >/dev/null 2>&1; then
@@ -79,7 +97,7 @@ verify)
 		echo "  here — fix it upstream at https://github.com/$REPO and re-pin." >&2
 		exit 1
 	fi
-	echo "ok: $DEST/$NAME matches the lock ($(lock_get ref), ${got%"${got#??????????}"}…)"
+	echo "ok: $DEST/$NAME matches the lock ($(lock_get atlas), $(lock_get ref), ${got%"${got#??????????}"}…)"
 	;;
 
 upstream)
@@ -96,7 +114,7 @@ upstream)
 		echo "note: $REPO has moved on."
 		echo "  pinned  $pinned  ($(lock_get ref), fetched $(lock_get fetched))"
 		echo "  current $head"
-		echo "  Re-pin with: $0 --ref <tag> --dest $DEST"
+		echo "  Re-pin with: $0 --ref <tag> --atlas $(lock_get atlas) --dest $DEST"
 		echo "  If the evidence tiers changed, that is a real update: they are"
 		echo "  the reason to track this file rather than freeze it."
 	fi
@@ -125,6 +143,7 @@ fetch)
 # Pinned AtlasGB snapshot. Written by tools/fetch-atlas.sh — do not hand-edit,
 # and do not hand-edit $NAME either: fix it upstream and re-pin.
 repo=https://github.com/$REPO
+atlas=$ATLAS
 file=$FILE
 ref=$REF
 commit=$commit
@@ -132,6 +151,8 @@ sha256=$(sha256 "$DEST/$NAME")
 fetched=$(date -u +%Y-%m-%d)
 EOF
 	echo "wrote $DEST/$NAME and $DEST/$LOCK"
+	echo "  atlas  $ATLAS"
+	echo "  file   $FILE"
 	echo "  ref    $REF"
 	echo "  commit $commit"
 	echo "  sha256 $(sha256 "$DEST/$NAME")"

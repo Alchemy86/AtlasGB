@@ -1,6 +1,11 @@
 # How an entry is proved, and how the proof gets back here
 
-[← AtlasGB](../README.md) · [the schema](schema.md) · [provenance](provenance.md) · [consuming it](consuming.md)
+[← AtlasGB](../README.md) · [the schema](schema.md) · [provenance](provenance.md) ·
+[consuming it](consuming.md) · [adding an atlas](adding-an-atlas.md)
+
+**This is the contract every atlas in the project is held to**, not a description of one
+cartridge's run. The worked figures below come from the published
+[Pokémon Red/Blue atlas](../atlases/pokemon-rb/); a new atlas earns its tiers the same way.
 
 Every published Gen 1 memory map is a **transcription**: somebody read an address once and
 everybody since has copied it, and there is no way, from inside any of them, to tell a
@@ -71,7 +76,7 @@ the wrong reason is worse than no check**.
 ### · — no evidence yet
 
 Seven storage entries carry no evidence at all. They are listed by name in
-[`data/evidence.json`](../data/evidence.json) and they stay marked as unevidenced. That
+[`data/evidence.json`](../atlases/pokemon-rb/data/evidence.json) and they stay marked as unevidenced. That
 honesty is the product: a map you cannot audit from the inside is the thing this
 repository exists not to be.
 
@@ -86,25 +91,26 @@ the `verify` column unwritable by hand.
 
 ```mermaid
 flowchart LR
-    A[("AtlasGB<br/>data/atlas.tsv")] -->|"pinned snapshot<br/>+ sha256"| E["an emulator<br/>with a real cartridge"]
+    A[("AtlasGB<br/>atlases/&lt;id&gt;/data/atlas.tsv")] -->|"pinned snapshot<br/>+ sha256"| E["an emulator<br/>with a real cartridge"]
     E -->|"Tier A: structure<br/>no cartridge needed"| E
     E -->|"report.json<br/>symbol → tokens"| L["tools/apply-evidence.py"]
     L -->|"rewrites verify,<br/>records the run"| A
-    L --> R[("data/evidence.json<br/>provenance + digest")]
+    L --> R[("atlases/&lt;id&gt;/data/evidence.json<br/>provenance + digest")]
     R -.->|"CI: does the verify column<br/>still match the digest?"| A
 ```
 
 ### The report
 
-A producer writes one JSON object. Every symbol in the atlas must appear in `verify`, and
-every symbol in `verify` must be in the atlas — a partial report would silently downgrade
-whatever it left out, which is exactly the failure this design exists to prevent. An
-**empty list means "no evidence"**, which is a claim the report is making, not an
-omission.
+A producer writes one JSON object, for **one atlas**. Every symbol in that atlas must
+appear in `verify`, and every symbol in `verify` must be in it — a partial report would
+silently downgrade whatever it left out, which is exactly the failure this design exists to
+prevent. An **empty list means "no evidence"**, which is a claim the report is making, not
+an omission.
 
 ```json
 {
   "schema": "atlasgb-evidence/1",
+  "atlas": "pokemon-rb",
   "produced_by": {"repo": "…", "commit": "…", "harness": "…"},
   "cartridge":   {"title": "POKEMON BLUE", "region": "USA/Europe", "sha1": "…"},
   "script":      {"name": "opening+overworld", "frames": 3600, "save": "none (cold boot)"},
@@ -116,18 +122,27 @@ omission.
 }
 ```
 
+`atlas` names which atlas the run is about. It is optional — a report without it lands
+into whatever `--atlas` says, so reports written before the project grew a second cartridge
+keep working — but emit it. With more than one atlas in the repository, a report that does
+not say which cartridge it is about is one mis-typed flag away from attributing one
+cartridge's evidence to another, and `apply-evidence.py` refuses the mismatch only if the
+report states its position.
+
 Land it:
 
 ```bash
-tools/apply-evidence.py report.json
+tools/apply-evidence.py report.json --atlas pokemon-rb
 make docs data          # the pages and the JSON carry the new counts
 ```
 
 ### Why it cannot go stale
 
-[`data/evidence.json`](../data/evidence.json) records the provenance of the last landed
-run **and a SHA-256 digest of the `verify` column it produced**. `tools/apply-evidence.py
---check` recomputes that digest and runs in CI, so:
+Each atlas's `data/evidence.json` — for Red/Blue,
+[this one](../atlases/pokemon-rb/data/evidence.json) — records the provenance of the last
+run landed into it **and a SHA-256 digest of the `verify` column it produced**.
+`tools/apply-evidence.py --check` recomputes that digest for **every** atlas and runs in
+CI, so:
 
 - editing an evidence token by hand turns CI red;
 - adding a symbol to the atlas without re-running the verification turns CI red, because

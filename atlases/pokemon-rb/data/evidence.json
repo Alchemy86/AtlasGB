@@ -1,5 +1,7 @@
 {
  "schema": "atlasgb-evidence/1",
+ "atlas": "pokemon-rb",
+ "title": "Pokémon Red and Blue",
  "produced_by": {
   "repo": "Alchemy86/TerminalGB",
   "commit": "109f98d69ab9a222e84d90f2292d98de9321d7c3",

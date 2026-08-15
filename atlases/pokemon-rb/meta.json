@@ -1,0 +1,32 @@
+{
+ "schema": "atlasgb-atlas/1",
+ "id": "pokemon-rb",
+ "title": "Pokémon Red and Blue",
+ "short_title": "Pokémon R/B",
+ "platform": "Game Boy",
+ "status": "published",
+ "summary": "Every address in Pokémon Red and Blue, what lives there, and — for almost all of them — evidence that we watched the cartridge use it.",
+ "games": [
+  "Pokémon Blue (English, USA/Europe)",
+  "Pokémon Red (English, USA/Europe)"
+ ],
+ "engine": {
+  "name": "Generation 1",
+  "note": "Red and Blue build from one source and share their work RAM map, so every address here is Red's too. The differences are in ROM data, not in where anything lives."
+ },
+ "source": {
+  "disassembly": "pret/pokered",
+  "url": "https://github.com/pret/pokered",
+  "note": "Addresses, symbol names and structure layouts are derived from a built checkout. Nothing is vendored and no ROM data is fetched."
+ },
+ "verified_by": {
+  "repo": "Alchemy86/TerminalGB",
+  "url": "https://github.com/Alchemy86/TerminalGB",
+  "cartridge": "POKEMON BLUE (USA/Europe)"
+ },
+ "not_covered": [
+  "Pokémon Yellow — its work RAM shifted, so an address from here is wrong there rather than approximately right. It needs its own build, its own extraction and its own verification run; the machinery would do it and nobody has.",
+  "Generation 2 (Gold, Silver, Crystal) — different engine, different map.",
+  "Any cartridge outside the English USA/Europe releases of Red and Blue."
+ ]
+}

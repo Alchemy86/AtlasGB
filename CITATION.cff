@@ -1,23 +1,28 @@
 cff-version: 1.2.0
-title: "AtlasGB — every address in Pokémon Red and Blue, with the evidence for it"
+title: "AtlasGB — evidenced memory maps for Game Boy cartridges"
 message: >-
-  If you use this atlas, a citation is appreciated but not required. What is
-  most useful to the next person is a link, so they can check the evidence for
-  themselves.
+  If you use an atlas from this project, a citation is appreciated but not
+  required. What is most useful to the next person is a link, so they can check
+  the evidence for themselves. Please name the atlas you used — an address is a
+  fact about one cartridge, and a citation that does not say which one is not
+  much of a citation.
 type: dataset
 authors:
   - name: "The AtlasGB contributors"
 repository-code: "https://github.com/Alchemy86/AtlasGB"
 url: "https://github.com/Alchemy86/AtlasGB"
 abstract: >-
-  A machine-readable map of the whole address space of Pokémon Red and Blue
-  (English, USA/Europe): 2,898 evidenced claims covering video RAM, cartridge
-  RAM, work RAM, high RAM and the cartridge's own data tables. Unlike every
-  other published Generation 1 memory map, every entry carries the evidence
-  that supports it — named as an instruction operand in the cartridge image,
-  observed to change on a running cartridge under a fixed script, or proved by
-  a named invariant — and the entries with no evidence say so. Work RAM and
-  high RAM are 100% accounted for, with no holes.
+  A project publishing machine-readable memory maps of Game Boy cartridges,
+  one atlas per cartridge under atlases/, in which every entry carries the
+  evidence that supports it. One atlas is published: Pokémon Red and Blue
+  (English, USA/Europe) — 2,898 evidenced claims covering video RAM, cartridge
+  RAM, work RAM, high RAM and the cartridge's own data tables, with work RAM
+  and high RAM 100% accounted for and no holes. Unlike every other published
+  Generation 1 memory map, each entry names how it was checked — found as an
+  instruction operand in the cartridge image, observed to change on a running
+  cartridge under a fixed script, or proved by a named invariant — and the
+  seven entries with no evidence say so rather than borrowing confidence from
+  the rows beside them.
 keywords:
   - "Game Boy"
   - "memory map"
@@ -26,3 +31,15 @@ keywords:
   - "Pokémon"
   - "dataset"
 license: MIT
+references:
+  - type: data
+    title: "AtlasGB — Pokémon Red and Blue"
+    abstract: >-
+      Every address in Pokémon Red and Blue (English, USA/Europe), with the
+      evidence for it. 2,898 claims; 2,842 of them in storage regions, of which
+      1,594 are named by the cartridge, 2,694 were observed live, 36 are covered
+      by an invariant, and 7 carry no evidence and say so.
+    authors:
+      - name: "The AtlasGB contributors"
+    url: "https://github.com/Alchemy86/AtlasGB/tree/main/atlases/pokemon-rb"
+    license: MIT

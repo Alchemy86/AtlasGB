@@ -6,31 +6,36 @@
 * text=auto eol=lf
 
 # --- the data ---------------------------------------------------------------
+# One atlas per cartridge under atlases/<id>/, so these are globbed rather than
+# named: a new atlas must not need an edit here to be rendered correctly.
+#
 # atlas.tsv is the source of truth and is hand-reviewed on every change, so it
 # is emphatically NOT marked generated: its diffs are the point.
-data/atlas.tsv     text linguist-language=TSV
+atlases/*/data/atlas.tsv     text linguist-language=TSV
 
 # The JSON exports are derived from atlas.tsv by tools/export.py and are
 # checked in CI, so a diff of them carries no information a diff of the TSV
 # does not. Collapse them in review and keep them out of the language stats.
-data/atlas.json     linguist-generated=true -diff
-data/atlas.min.json linguist-generated=true -diff
+atlases/*/data/atlas.json     linguist-generated=true -diff
+atlases/*/data/atlas.min.json linguist-generated=true -diff
 
 # The evidence record is written by tools/apply-evidence.py, but its diff is
 # meaningful — it is how you see a verification run land — so it stays visible.
-data/evidence.json  linguist-language=JSON
+atlases/*/data/evidence.json  linguist-language=JSON
 
 # --- the pages --------------------------------------------------------------
 # The two indexes are 100% generated table and nothing else; a diff of 2,900
 # rows buries the change that caused it. The chapter pages carry hand-written
 # prose alongside their generated block, so they stay visible.
-docs/by-address.md linguist-generated=true
-docs/by-name.md    linguist-generated=true
+atlases/*/docs/by-address.md linguist-generated=true
+atlases/*/docs/by-name.md    linguist-generated=true
 
 # Documentation, not code: keep the language bar honest about what this is.
 # (Deliberately not `docs/**` — that would also swallow the brand generator,
 # which is real source and should be counted as such.)
-docs/*.md          linguist-documentation=true
+docs/*.md               linguist-documentation=true
+atlases/*/docs/*.md     linguist-documentation=true
+atlases/*/README.md     linguist-documentation=true
 
 # --- the brand --------------------------------------------------------------
 # Written by docs/brand/generate.py; edit the generator, never the SVGs.

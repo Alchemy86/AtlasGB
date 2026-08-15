@@ -66,12 +66,13 @@ def targets(path: str) -> set[str]:
     return out
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--external", action="store_true",
-                    help="also fetch every http(s) link (needs the network)")
-    args = ap.parse_args()
+def scan(external_too: bool = False) -> tuple[list[str], int, int, set[str]]:
+    """Walk every Markdown file and resolve every link in it.
 
+    Returns `(broken, links checked, files, external urls)`.  Split out from
+    `main` so `tools/render.py` can run the same scan after it rewrites the
+    pages — two link checkers that disagreed would be worse than one.
+    """
     files = markdown_files()
     cache: dict[str, set[str]] = {}
     broken: list[str] = []
@@ -102,10 +103,7 @@ def main() -> int:
                 if frag not in cache[dest]:
                     broken.append(f"{rel}: {target} — no such anchor")
 
-    print(f"{checked:,} links in {len(files)} Markdown files "
-          f"({len(external)} external, not fetched)")
-
-    if args.external:
+    if external_too:
         import urllib.error
         import urllib.request
         for url in sorted(external):
@@ -118,6 +116,19 @@ def main() -> int:
                     broken.append(f"(external) {url} — HTTP {exc.code}")
             except Exception as exc:  # noqa: BLE001 — any failure is a report
                 broken.append(f"(external) {url} — {exc}")
+
+    return broken, checked, len(files), external
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--external", action="store_true",
+                    help="also fetch every http(s) link (needs the network)")
+    args = ap.parse_args()
+
+    broken, checked, files, external = scan(args.external)
+    print(f"{checked:,} links in {files} Markdown files "
+          f"({len(external)} external, {'fetched' if args.external else 'not fetched'})")
 
     if broken:
         print(f"\nFAIL — {len(broken)} dead link(s):")

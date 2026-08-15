@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
-"""Export `data/atlas.tsv` to the other shapes people consume it in.
+"""Export each atlas's `atlas.tsv` to the other shapes people consume it in.
 
 The TSV is the source of truth and everything else is derived from it, so a
-consumer never has to choose which file is right.  Two derived forms ship:
+consumer never has to choose which file is right.  Two derived forms ship per
+atlas, beside the TSV in `atlases/<id>/data/`:
 
-* `data/atlas.json` — the whole atlas as one object: a `meta` block with the
-  counts, then `entries`, an array of objects with the TSV's columns typed
-  (`addr` and `len` become integers, `verify` becomes a list).  This is the
-  form a web tool or a save editor wants; `data/atlas.schema.json` describes it.
-* `data/atlas.min.json` — the same entries with the empty fields dropped and no
+* `atlas.json` — the whole atlas as one object: a `meta` block naming the game
+  and carrying the counts, then `entries`, an array of objects with the TSV's
+  columns typed (`addr` and `len` become integers, `verify` becomes a list).
+  This is the form a web tool or a save editor wants; `schema/atlas.schema.json`
+  describes it, and it is shared by every atlas.
+* `atlas.min.json` — the same entries with the empty fields dropped and no
   indentation, for anything that has to fetch it over a network.
 
-    tools/export.py            # rewrite both
-    tools/export.py --check    # fail if either is stale
+`meta` says **which cartridge** the numbers are about, because a count with no
+game attached is meaningless once there is more than one atlas.
+
+    tools/export.py                     # rewrite both, for every atlas
+    tools/export.py --atlas pokemon-rb  # just that one
+    tools/export.py --check             # fail if anything is stale
 
 `--check` runs in CI, so the JSON cannot drift away from the TSV the way a
 hand-maintained second copy always eventually does.
@@ -25,10 +31,10 @@ import json
 import os
 import sys
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ATLAS = os.path.join(REPO, "data", "atlas.tsv")
-FULL = os.path.join(REPO, "data", "atlas.json")
-MIN = os.path.join(REPO, "data", "atlas.min.json")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import atlases as atlases_mod  # noqa: E402
+
+REPO = atlases_mod.REPO
 
 # The regions that are storage.  ROM entries are addresses of *tables in the
 # cartridge*, and the evidence tiers mean something different for them (a ROM
@@ -71,21 +77,30 @@ def typed(row: dict) -> dict:
     return out
 
 
-def meta(entries: list[dict]) -> dict:
+def meta(atlas, entries: list[dict]) -> dict:
+    """The `meta` block: which cartridge this is, then the counts.
+
+    The identity fields come from the atlas's own `meta.json`, so the JSON, the
+    pages and the citation cannot end up disagreeing about which game 2,898
+    claims are claims *about*.
+    """
     storage = [e for e in entries if e["region"] in STORAGE]
 
     def tier(tok: str) -> int:
         return sum(1 for e in storage if tok in e["verify"])
 
     return {
-        "name": "AtlasGB",
-        "description": (
-            "Every address in Pokemon Red and Blue, with the evidence for it."
-        ),
-        "source_of_truth": "data/atlas.tsv",
-        "schema": "data/atlas.schema.json",
+        "project": "AtlasGB",
+        "atlas": atlas.id,
+        "title": atlas.title,
+        "platform": atlas.meta.get("platform", "Game Boy"),
+        "description": atlas.summary,
+        "games": atlas.games,
+        "engine": atlas.meta.get("engine", {}).get("name", ""),
+        "source_of_truth": atlas.rel(atlas.tsv),
+        "schema": atlas.rel(atlases_mod.SCHEMA),
         "documentation": "docs/schema.md",
-        "games": ["Pokemon Blue (USA/Europe)", "Pokemon Red (USA/Europe)"],
+        "pages": atlas.rel(atlas.docs) + "/",
         "entries": len(entries),
         "storage_entries": len(storage),
         "evidence": {
@@ -99,15 +114,15 @@ def meta(entries: list[dict]) -> dict:
     }
 
 
-def build() -> tuple[str, str]:
-    _, rows = read_tsv(ATLAS)
+def build(atlas) -> tuple[str, str]:
+    _, rows = read_tsv(atlas.tsv)
     entries = [typed(r) for r in rows]
     full = json.dumps(
-        {"meta": meta(entries), "entries": entries}, indent=1, ensure_ascii=False
+        {"meta": meta(atlas, entries), "entries": entries}, indent=1, ensure_ascii=False
     ) + "\n"
     slim = json.dumps(
         {
-            "meta": meta(entries),
+            "meta": meta(atlas, entries),
             "entries": [
                 {k: v for k, v in e.items() if v not in ("", [], 0) or k == "len"}
                 for e in entries
@@ -121,18 +136,22 @@ def build() -> tuple[str, str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
+    atlases_mod.add_argument(ap)
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
 
-    full, slim = build()
-    stale = []
-    for path, want in ((FULL, full), (MIN, slim)):
-        have = open(path, encoding="utf-8").read() if os.path.exists(path) else None
-        if have != want:
-            stale.append(os.path.relpath(path, REPO))
-        if not args.check:
-            with open(path, "w", encoding="utf-8") as handle:
-                handle.write(want)
+    selected = atlases_mod.select(args.atlas)
+    stale, wrote = [], []
+    for atlas in selected:
+        full, slim = build(atlas)
+        for path, want in ((atlas.json, full), (atlas.min_json, slim)):
+            have = open(path, encoding="utf-8").read() if os.path.exists(path) else None
+            if have != want:
+                stale.append(atlas.rel(path))
+            if not args.check:
+                with open(path, "w", encoding="utf-8") as handle:
+                    handle.write(want)
+                wrote.append(f"{atlas.rel(path)} ({len(want):,} bytes)")
 
     if args.check:
         if stale:
@@ -140,11 +159,11 @@ def main() -> int:
             for s in stale:
                 print(f"  {s}")
             return 1
-        print("OK — data/atlas.json and data/atlas.min.json match data/atlas.tsv")
+        print(f"OK — the JSON of {len(selected)} atlas(es) matches its TSV")
         return 0
 
-    print(f"wrote {os.path.relpath(FULL, REPO)} ({len(full):,} bytes) and "
-          f"{os.path.relpath(MIN, REPO)} ({len(slim):,} bytes)")
+    for w in wrote:
+        print(f"wrote {w}")
     return 0
 
 

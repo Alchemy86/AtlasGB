@@ -1,10 +1,13 @@
 name: check
 
 # The same no-drift discipline the pages have always had: everything in this
-# repository is generated from data/atlas.tsv, so CI regenerates it all and
-# fails if the committed output does not match. It also checks that the
-# evidence tiers still name a real verification run, which is the one claim
-# this repository cannot re-derive on its own.
+# repository is generated from the atlases' own atlas.tsv files, so CI
+# regenerates it all and fails if the committed output does not match. It also
+# checks that the evidence tiers still name a real verification run, which is
+# the one claim this repository cannot re-derive on its own.
+#
+# Every step runs over EVERY atlas under atlases/. None of them names one, so
+# adding a cartridge needs no edit here — and cannot be quietly left unchecked.
 
 on:
   push:
@@ -26,20 +29,20 @@ jobs:
           python-version: "3.12"
 
       - name: Install the one dependency
-        # Only used to check data/atlas.json against its own published schema.
+        # Only used to check each atlas.json against the published schema.
         # Nothing in this repository needs it at run time.
         run: pip install --disable-pip-version-check jsonschema
 
-      - name: The data is structurally sound
+      - name: Every atlas is structurally sound
         run: python3 tools/validate.py
 
       - name: The evidence tiers still name a real run
         run: python3 tools/apply-evidence.py --check
 
-      - name: The pages match the data
+      - name: Every page matches its atlas
         run: python3 tools/render.py --check
 
-      - name: The JSON matches the data
+      - name: Every JSON export matches its TSV
         run: python3 tools/export.py --check
 
       - name: Every link and anchor resolves

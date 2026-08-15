@@ -133,6 +133,39 @@ version: emit one JSON object mapping every symbol to its evidence tokens, open 
 request that runs `tools/apply-evidence.py report.json`, and the run's provenance — your
 repository, your commit, the cartridge's SHA-1, the script — is recorded beside the data.
 
+Your harness already computes the tokens if it does any of this work; emitting them is a
+few lines. In Rust, roughly:
+
+```rust
+// `fresh` is what this run observed: symbol -> the tokens it earned.
+// Write it under an env var so an ordinary test run does not produce a file.
+if let Ok(path) = std::env::var("ATLAS_EVIDENCE_OUT") {
+    let mut out = String::from("{\n \"schema\": \"atlasgb-evidence/1\",\n");
+    out += &format!(
+        " \"produced_by\": {{\"repo\": \"{repo}\", \"commit\": \"{commit}\", \
+          \"harness\": \"{harness}\"}},\n \
+         \"cartridge\": {{\"title\": \"{title}\", \"sha1\": \"{sha1}\"}},\n \
+         \"script\": {{\"name\": \"{script}\", \"frames\": {frames}}},\n \
+         \"run\": {{\"date\": \"{date}\"}},\n \"verify\": {{\n"
+    );
+    // EVERY symbol in the atlas, including the ones that earned nothing —
+    // an omission would be read as a downgrade, and apply-evidence.py
+    // refuses a partial report rather than guessing.
+    let rows: Vec<String> = entries.iter().map(|e| {
+        let toks: Vec<String> = fresh[&e.symbol].iter()
+            .map(|t| format!("\"{t}\"")).collect();
+        format!("  \"{}\": [{}]", e.symbol, toks.join(", "))
+    }).collect();
+    out += &rows.join(",\n");
+    out += "\n }\n}\n";
+    std::fs::write(path, out).expect("write the evidence report");
+}
+```
+
+Guard it behind an environment variable rather than writing on every run: the report is a
+deliberate publication, and a file that appears whenever the tests run is a file somebody
+commits by accident.
+
 **The highest-value contribution available right now** is a second live script. The
 current one plays the opening and then walks and opens menus, so it never reaches a battle
 or a PC; a script that starts from a save, fights something and opens the storage system

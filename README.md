@@ -178,7 +178,7 @@ grep -P '\twParty' data/atlas.tsv
 | to parse the file | **[the schema](docs/schema.md)** — every column, its units, its allowed values |
 | to build against it | **[consuming it](docs/consuming.md)** — vendoring, pinning, and the anti-drift gate |
 | to trust it | **[verification](docs/verification.md)** — the four tiers, the invariants, the loop |
-| to know where it came from | **[provenance](docs/provenance.md)** and **[licence](docs/licence.md)** |
+| to know where it came from | **[provenance](docs/provenance.md)** and **[licence](docs/licensing.md)** |
 
 | file | what it is |
 |---|---|
@@ -248,7 +248,7 @@ machinery here would do it, and nobody has.
 
 **No ROM data of any kind is here, and none is fetched.** The cartridge's own tables appear
 as *addresses*; the numbers at them are read out of the player's own cartridge at run
-time. See [licence](docs/licence.md).
+time. See [licence](docs/licensing.md).
 
 ---
 
@@ -295,6 +295,6 @@ chapter rules. The evidence is produced by
 [TerminalGB](https://github.com/Alchemy86/TerminalGB), which consumes this atlas as a
 pinned snapshot and publishes verification runs back to it.
 
-Licence: [MIT](LICENSE) — see [docs/licence.md](docs/licence.md) for what is and is not
+Licence: [MIT](LICENSE) — see [docs/licensing.md](docs/licensing.md) for what is and is not
 ours to license. Pokémon, Game Boy and Nintendo are trade marks of their respective
 owners; this project is not affiliated with any of them.

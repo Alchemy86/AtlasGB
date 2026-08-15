@@ -1,6 +1,6 @@
 # Where this came from, and what is ours
 
-[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md) · [licence](licence.md)
+[← AtlasGB](../README.md) · [the schema](schema.md) · [verification](verification.md) · [licence](licensing.md)
 
 This page carries the provenance that used to open `data/atlas.tsv` as six `#` comment
 lines. It was moved here because those six lines cost the file GitHub's rendered table
@@ -46,7 +46,7 @@ supply addresses for a different cartridge.
 
 **Nothing from pokered is vendored here, and nothing is fetched at run time.** You point
 the extractor at your own checkout, or you do not run it. `pret/pokered` is licensed under
-its own terms; see [licence.md](licence.md) for the position this repository takes.
+its own terms; see [licensing.md](licensing.md) for the position this repository takes.
 
 ### Cite it like this
 

@@ -1,3 +1,31 @@
+AtlasGB — tooling licence
+=========================
+
+This repository is licensed in two parts, and the boundary is a path:
+
+    tools/**              MIT — this file
+    schema/**             MIT — this file
+    Makefile, .github/**  MIT — this file
+
+    everything else       CC BY-SA 4.0 — see LICENSE-CC-BY-SA
+                          (atlases/**, docs/**.md, docs/brand/**, README.md)
+
+The **tooling and the schema are MIT** on purpose. The generator, the exporter,
+the validator, the link checker and `tools/fetch-atlas.sh` are code other
+projects should be able to lift without a second thought, and
+`schema/atlas.schema.json` is what lets somebody produce an atlas that is
+compatible with this one. Gating either of those would help nobody.
+
+The **atlas content is CC BY-SA 4.0**: credit AtlasGB, and share derivatives of
+the content alike. `docs/licensing.md` is the path-by-path table and the honest
+longer answer — including what a licence over a set of facts can and cannot
+claim.
+
+Copies published under MIT before this change remain MIT, in whole. A grant
+already made cannot be withdrawn.
+
+-----------------------------------------------------------------------
+
 MIT License
 
 Copyright (c) 2026 Aaron and the AtlasGB contributors

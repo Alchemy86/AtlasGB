@@ -14,6 +14,33 @@ transcription, and this project exists because transcriptions are unauditable.
 
 ---
 
+## The terms, before you start
+
+Know this at the top rather than at the pull request, because it is not something anybody
+should discover late.
+
+**An atlas you contribute is published under [CC BY-SA 4.0](../LICENSE-CC-BY-SA)**, like
+every other atlas here: your rows, your descriptions, your evidence record and your prose.
+Anyone may use it, and anyone who publishes an improved or extended version of it must
+credit AtlasGB and release theirs under the same terms. You keep your copyright; you are
+licensing, not assigning.
+
+**The extractor and the chapter rules you write go in [`tools/`](../tools/) and are
+[MIT](../LICENSE)**, like the rest of the tooling. That is deliberate: your extractor is
+the most reusable thing in your contribution, and the next cartridge's author should be
+able to start from it without a condition attached.
+
+**The schema is MIT too**, which is the part that matters most here: you do **not** need
+to publish inside this repository to produce a compatible atlas. Implement
+[`schema/atlas.schema.json`](../schema/atlas.schema.json) wherever you like, under whatever
+terms you like. A second compatible atlas somewhere else is worth more to everybody than an
+exclusive one here — that interoperability is why this page exists.
+
+[licensing.md](licensing.md) is the path-by-path table and the reasoning behind the split,
+including why the addresses and the symbol names are not ours to gate in the first place.
+
+---
+
 ## What an atlas is
 
 A directory under [`atlases/`](../atlases/), named for the cartridge, holding everything
@@ -181,6 +208,7 @@ A pull request adding an atlas is expected to contain:
 | a landed verification run | with `data/evidence.json` naming the emulator, the commit and the cartridge's SHA-1 |
 | prose | the atlas README and whatever chapter pages you have written; generated tables come for free |
 | green CI | `make check` |
+| agreement to the terms | the atlas content under [CC BY-SA 4.0](../LICENSE-CC-BY-SA), the extractor and chapter rules under [MIT](../LICENSE) — see [the terms](#the-terms-before-you-start) |
 
 **No commercial ROM data, in any form** — not a table of values, not a byte of the boot
 ROM. The cartridge's own tables appear as *addresses*; the numbers at them are read from

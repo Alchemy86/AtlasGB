@@ -83,6 +83,11 @@ def meta(atlas, entries: list[dict]) -> dict:
     The identity fields come from the atlas's own `meta.json`, so the JSON, the
     pages and the citation cannot end up disagreeing about which game 2,898
     claims are claims *about*.
+
+    `license` is here for the same reason `atlas` is: this file gets copied out
+    of its directory, away from the LICENSE files, and the terms have to travel
+    with it. It names the *content* licence — the tooling is MIT and this is not
+    a tooling file.
     """
     storage = [e for e in entries if e["region"] in STORAGE]
 
@@ -97,6 +102,9 @@ def meta(atlas, entries: list[dict]) -> dict:
         "description": atlas.summary,
         "games": atlas.games,
         "engine": atlas.meta.get("engine", {}).get("name", ""),
+        "license": "CC-BY-SA-4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "attribution": "AtlasGB — https://github.com/Alchemy86/AtlasGB",
         "source_of_truth": atlas.rel(atlas.tsv),
         "schema": atlas.rel(atlases_mod.SCHEMA),
         "documentation": "docs/schema.md",

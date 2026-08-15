@@ -16,7 +16,7 @@ would take. The maps themselves live with the cartridge they are about, under
 | **[verification](verification.md)** | the evidence tiers, the invariants, and the loop that keeps them true |
 | **[adding an atlas](adding-an-atlas.md)** | what a second cartridge would cost, and what you would have to hand over |
 | **[provenance](provenance.md)** | where the data came from, what is ours and what is the community's |
-| **[licence](licensing.md)** | MIT, and the honest longer answer about facts, names and prose |
+| **[licence](licensing.md)** | CC BY-SA 4.0 over the atlas content, MIT over the tooling and the schema — and the honest longer answer about facts, names and prose |
 | **[the brand](brand/README.md)** | the mark, and how it is generated |
 
 ## The atlases

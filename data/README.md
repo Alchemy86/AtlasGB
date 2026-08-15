@@ -45,6 +45,13 @@ tools/fetch-atlas.sh --ref main --atlas pokemon-rb --dest third_party/atlasgb
 tools/fetch-atlas.sh --ref 91b5d18 --file data/atlas.tsv --dest third_party/atlasgb
 ```
 
+> **One thing a re-pin does change: the terms.** The atlas content is now
+> [CC BY-SA 4.0](../LICENSE-CC-BY-SA) — credit AtlasGB, share a modified atlas alike —
+> while a snapshot pinned before that relicence is MIT and stays MIT. So it is the re-pin
+> that brings the new terms in, not the passage of time, and both statements are true of
+> the same rows. The tooling is MIT throughout.
+> [`docs/licensing.md`](../docs/licensing.md) is the full account.
+
 Anchors are unchanged: `#s-wPartyCount` and `#a-D163` mean what they always meant, and the
 chapter pages kept their filenames. Only the directory in front of them moved.
 

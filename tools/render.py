@@ -560,7 +560,12 @@ def badges_block(loaded: list[tuple]) -> str:
     out = [
         '<a href="https://github.com/Alchemy86/AtlasGB/actions/workflows/ci.yml">'
         '<img src="https://github.com/Alchemy86/AtlasGB/actions/workflows/ci.yml/badge.svg" alt="check"></a>',
-        f'<a href="LICENSE"><img src="{shield("licence", "MIT")}" alt="MIT"></a>',
+        # Two badges, because the repository has two licences and a single
+        # badge would have to pick one and mislead about the other. Content
+        # first: it is what most people are here to take.
+        f'<a href="LICENSE-CC-BY-SA"><img src="{shield("atlas data", "CC BY-SA 4.0")}" '
+        f'alt="atlas data: CC BY-SA 4.0"></a>',
+        f'<a href="LICENSE"><img src="{shield("tools", "MIT")}" alt="tools: MIT"></a>',
         f'<a href="atlases/"><img src="{shield("atlases", f"{len(loaded)} published")}" '
         f'alt="{len(loaded)} atlas{"es" if len(loaded) != 1 else ""} published"></a>',
     ]

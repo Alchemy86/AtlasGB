@@ -39,6 +39,12 @@ new here and drawn to the same rules.
 No Nintendo artwork, logotype or trade dress is used or imitated; the whole vocabulary is
 a bar chart and a full stop.
 
+The marks themselves are content and are [CC BY-SA 4.0](../../LICENSE-CC-BY-SA), like the
+rest of the atlas content; [`generate.py`](generate.py), which draws them, is code and is
+[MIT](../../LICENSE) like everything in `tools/`. Using the mark to say "this uses AtlasGB"
+is nominative and always fine; presenting a modified mark as AtlasGB's is not, licence
+aside. See [licensing.md](../licensing.md).
+
 ## Regenerating
 
 **Edit the generator, never the SVGs by hand**, and re-render the previews in the same

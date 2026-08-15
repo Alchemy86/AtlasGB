@@ -243,3 +243,10 @@ description here is written from scratch.
 
 The evidence is produced by [TerminalGB](https://github.com/Alchemy86/TerminalGB), which
 consumes this atlas as a pinned snapshot and publishes verification runs back to it.
+
+**Licence: this atlas is [CC BY-SA 4.0](../../LICENSE-CC-BY-SA).** Credit AtlasGB, and if
+you publish a corrected or extended version of it, release that under the same terms. The
+addresses themselves are facts and nobody owns them — you can re-derive every one from
+`pret/pokered` — and the tooling that generates these pages is [MIT](../../LICENSE). See
+[licensing.md](../../docs/licensing.md), which also says plainly which copies of this file
+stay MIT and why.

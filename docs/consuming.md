@@ -15,6 +15,52 @@ cartridge*, and code that forgets which one is the bug this layout exists to mak
 
 ---
 
+## What you are agreeing to
+
+Short version, because it fits in three lines:
+
+- **The atlas content is [CC BY-SA 4.0](../LICENSE-CC-BY-SA)** — the TSV, the JSON exports,
+  the evidence record, the chapter pages and the descriptions. **Credit AtlasGB**, and if
+  you publish a modified or extended atlas, **release it under the same terms.**
+- **The tooling and the schema are [MIT](../LICENSE)** — `tools/` and
+  `schema/atlas.schema.json`. Copy them, vendor them, change them, ship them. No conditions
+  beyond keeping the notice. `tools/fetch-atlas.sh` exists to be copied.
+- **The addresses themselves are facts** and nobody owns them. You can re-derive every one
+  from the public disassembly. The licence is over this compilation — the selection, the
+  evidence and the prose — not over the number `$D163`.
+
+What that means in practice for the two common shapes of consumer:
+
+| you are | what you owe |
+|---|---|
+| reading addresses at run time in a tool of your own | credit AtlasGB somewhere a user can find it — an about box, a README, a `--version` line. Your tool's own code is yours; share-alike does not reach it |
+| **redistributing the atlas** — vendoring the TSV or JSON, republishing it, or publishing a corrected or extended version | credit AtlasGB, and license the atlas content you ship under CC BY-SA 4.0 too |
+
+Attribution that satisfies the licence:
+
+```
+AtlasGB — https://github.com/Alchemy86/AtlasGB — CC BY-SA 4.0
+atlas: pokemon-rb @ v1.0.0
+```
+
+Naming the atlas and the ref is not decoration: an address is a fact about *one cartridge*
+at *one revision*, and a credit that says neither is not much of a credit.
+[`tools/fetch-atlas.sh`](../tools/fetch-atlas.sh) records both in `atlas.lock`, so you can
+generate that line rather than typing it.
+
+> **A snapshot you pinned before this change is MIT and stays MIT** — a grant already made
+> cannot be withdrawn. CC BY-SA applies to the versions published from that point on, so it
+> is a **re-pin** that brings the new terms in, not the passage of time. If you vendor,
+> record which terms your vendored copy is under next to the lock file.
+> [licensing.md](licensing.md#what-actually-changed-and-what-did-not) is the full account.
+
+The one thing this licence is actually for: nobody should be able to absorb a verified
+atlas into a closed product and quietly strip the evidence off it. If you improve the data,
+the improvement comes back. **[Publishing verification back](#publishing-verification-back)
+is the best-case version of that**, and it is welcome.
+
+---
+
 ## Just the data
 
 Everything is a plain file. Fetch what you want:
@@ -110,8 +156,13 @@ It writes two files:
 
 ```
 third_party/atlasgb/atlas.tsv        the snapshot
-third_party/atlasgb/atlas.lock       atlas, ref, commit, sha256, fetched-on
+third_party/atlasgb/atlas.lock       atlas, ref, commit, sha256, fetched-on,
+                                     and the attribution line for that ref
 ```
+
+The lock's `attribution=` line is the credit to reproduce, already naming the atlas and the
+ref. Its header comment says which terms apply and why the script cannot decide it for you
+— a ref from before the relicence is MIT and stays MIT.
 
 `--verify` is offline and cheap — run it in your test suite, not just in CI. It is what
 catches the hand-edit.
@@ -205,6 +256,11 @@ Only the script is missing.
   and CI checks the digest; a hand-edited tier is a claim with nothing behind it, which is
   the failure mode this whole project is a reaction to.
 - **Do not treat an unmarked entry as unused.** It means nobody has observed it yet.
+- **Do not redistribute the atlas with the credit or the evidence stripped off.** The
+  `verify` column is the whole point of the file, and shipping the rows without it turns an
+  evidenced atlas back into the transcription this project exists to replace. Redistributing
+  the content means [CC BY-SA 4.0](../LICENSE-CC-BY-SA): credit AtlasGB, share alike. The
+  tooling is MIT and carries no such condition.
 - **Do not use one atlas's addresses for another cartridge.** In particular, not for
   Pokémon Yellow. Its work RAM shifted, so an address from the Red/Blue atlas is *wrong*
   there rather than approximately right, and the failure mode is a write landing in the

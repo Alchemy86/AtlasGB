@@ -36,6 +36,12 @@
 # dependency cost a clone; a build-time download puts the network on the path
 # of your test suite. A committed snapshot shows up in the diff when it moves,
 # which is the reviewable option. See docs/consuming.md.
+#
+# Licence: THIS SCRIPT is MIT, like everything in AtlasGB's tools/ — copy it,
+# change it, ship it. The atlas content it fetches is CC BY-SA 4.0: credit
+# AtlasGB, and share a modified or extended atlas under the same terms. A
+# snapshot pinned before that relicence is MIT and stays MIT; it is a re-pin
+# that brings the new terms in. See docs/licensing.md.
 
 set -eu
 
@@ -142,7 +148,15 @@ fetch)
 	cat >"$DEST/$LOCK" <<EOF
 # Pinned AtlasGB snapshot. Written by tools/fetch-atlas.sh — do not hand-edit,
 # and do not hand-edit $NAME either: fix it upstream and re-pin.
+#
+# Terms: AtlasGB's atlas content is CC BY-SA 4.0 — credit AtlasGB, and share a
+# modified or extended atlas under the same terms. This script cannot tell you
+# which terms *this* snapshot came under, because a ref from before the
+# relicence is MIT and stays MIT: check the LICENSE files at the commit below.
+# Either way the tooling — including this script — is MIT and free of that
+# condition. See docs/licensing.md.
 repo=https://github.com/$REPO
+attribution=AtlasGB — https://github.com/$REPO — atlas $ATLAS @ $REF
 atlas=$ATLAS
 file=$FILE
 ref=$REF

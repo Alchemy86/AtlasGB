@@ -246,6 +246,12 @@ The JSON rows carry the TSV's columns plus two conveniences:
 
 `len` is an integer. Everything else is a string.
 
+The `meta` block carries `license`, `license_url` and `attribution` for the same reason it
+carries `atlas`: this file gets copied out of its directory, away from the `LICENSE` files,
+and the terms have to travel with it. It names the **content** licence
+(`CC-BY-SA-4.0` — credit AtlasGB, share alike); the exporter that produced the file is MIT,
+like everything in [`tools/`](../tools/). See [licensing.md](licensing.md).
+
 ---
 
 ## Stable anchors

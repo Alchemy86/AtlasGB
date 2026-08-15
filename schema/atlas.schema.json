@@ -25,6 +25,15 @@
     "platform": {"type": "string"},
     "engine": {"type": "string"},
     "description": {"type": "string"},
+    "license": {
+      "type": "string",
+      "description": "SPDX id of the licence over the atlas *content*. It travels in the file because the file gets copied away from the LICENSE files. The tooling that generated it is MIT and is licensed separately."
+    },
+    "license_url": {"type": "string"},
+    "attribution": {
+      "type": "string",
+      "description": "The credit that satisfies the content licence. Name the atlas and the ref alongside it."
+    },
     "source_of_truth": {"type": "string"},
     "schema": {"type": "string"},
     "documentation": {"type": "string"},

@@ -89,6 +89,45 @@ case-insensitively, so `#s-wPartyCount` is the form to publish and it works — 
 browser, not assumed. The consequence is that two symbols differing only in case would
 collide on one anchor, so `tools/validate.py` fails if one ever appears.
 
+### Two licences, and the boundary is a path
+
+**Content is CC BY-SA 4.0; code is MIT.** `atlases/**`, `docs/**.md`, `docs/brand/**` and
+the root prose are content (`LICENSE-CC-BY-SA`); `tools/**`, `schema/**`, the `Makefile`
+and `.github/**` are code (`LICENSE`). The split is not cosmetic: the schema and the
+tooling are permissive *on purpose*, because somebody producing a compatible atlas
+elsewhere is worth more than an exclusive one here, and a schema you need permission to
+implement is a schema nobody implements. Do not "tidy" a file across the boundary without
+moving its licence with it.
+
+The reasoning lives in `docs/licensing.md` and it is the page to amend, never to replace:
+its argument that **the addresses are facts and the symbol names are the community's** is
+why the licence is share-alike rather than permission-required. A licence that gated the
+addresses would be claiming the half that is not ours.
+
+Two facts that are easy to state wrongly and are stated plainly in several places, so keep
+them consistent if you touch any of them:
+
+- **MIT already granted cannot be revoked.** Every copy published before the relicence
+  stays MIT — including the atlas vendored into public TerminalGB at
+  `third_party/atlasgb/pokemon-rb/atlas.tsv`. It is a **re-pin** that brings CC BY-SA in,
+  not the passage of time.
+- **Share-alike reaches the compilation, the evidence and the prose — not the fact that
+  `$D05A` is `wBattleType`.** Anyone may re-derive every address from the public
+  disassembly. Saying so is the point; overclaiming is what `docs/licensing.md` exists to
+  avoid.
+
+One known trade-off, taken deliberately: `LICENSE` opens with the path table rather than
+with the bare MIT text, so GitHub's licence detector will likely show "Other" in the
+sidebar instead of "MIT". That is the honest outcome — a sidebar reading "MIT" over a
+repository whose data is share-alike is worse than one reading nothing — and the two
+README badges carry the real answer. Not verified against a live render; if it matters,
+check it on github.com rather than assuming either way.
+
+Three generated things carry the licence and will silently go stale if the terms move:
+the two README badges in `tools/render.py:badges_block`, the `license` / `license_url` /
+`attribution` keys in `tools/export.py:meta` (they exist because `atlas.json` gets copied
+away from the LICENSE files), and the SVG header comment in `docs/brand/generate.py`.
+
 ## Layout
 
 | path | what it is |
@@ -102,6 +141,8 @@ collide on one anchor, so `tools/validate.py` fails if one ever appears.
 | `schema/atlas.schema.json` | JSON Schema for every `atlas.json`; validated by `tools/validate.py` |
 | `docs/*.md` | the shared contracts: schema, consuming, verification, adding an atlas |
 | `docs/brand/generate.py` | the only source of truth for the SVGs — never edit the SVGs |
+| `LICENSE` | MIT, over `tools/`, `schema/`, the `Makefile` and CI. Opens with the path table |
+| `LICENSE-CC-BY-SA` | CC BY-SA 4.0, over the atlas content and the prose. Verbatim CC text under a short scope note |
 | `data/README.md` | a signpost for the pre-namespacing paths; there is no data here any more |
 | `tools/atlases.py` | discovers the atlases; every other tool takes `--atlas` from it |
 | `tools/extract.py` | rewrites the eight derived columns of `pokemon-rb` from a built `pret/pokered` |

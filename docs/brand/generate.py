@@ -96,9 +96,9 @@ def draw_word(text, x, y, scale, color, track=TRACK):
 
 def svg(width, height, body, comment):
     return (f"<!-- {comment}\n"
-            "     Hand-authored for AtlasGB (MIT). No font embedded, subset or "
-            "traced;\n     letterforms are original stroked paths. Regenerate "
-            "with docs/brand/generate.py -->\n"
+            "     Hand-authored for AtlasGB (CC BY-SA 4.0). No font embedded, "
+            "subset or traced;\n     letterforms are original stroked paths. "
+            "Regenerate with docs/brand/generate.py -->\n"
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} '
             f'{height}" width="{width}" height="{height}" role="img">\n'
             f"{body}\n</svg>\n")

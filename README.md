@@ -6,7 +6,8 @@
 
 <p align="center">
   <a href="https://github.com/Alchemy86/AtlasGB/actions/workflows/ci.yml"><img src="https://github.com/Alchemy86/AtlasGB/actions/workflows/ci.yml/badge.svg" alt="check"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-9bbc0f" alt="MIT"></a>
+  <a href="LICENSE-CC-BY-SA"><img src="https://img.shields.io/badge/atlas%20data-CC%20BY--SA%204.0-9bbc0f" alt="atlas data: CC BY-SA 4.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/tools-MIT-9bbc0f" alt="tools: MIT"></a>
   <a href="atlases/"><img src="https://img.shields.io/badge/atlases-1%20published-9bbc0f" alt="1 atlas published"></a>
   <a href="atlases/pokemon-rb/data/atlas.tsv"><img src="https://img.shields.io/badge/Pok%C3%A9mon%20R%2FB-2%2C898%20claims-9bbc0f" alt="Pokémon R/B: 2,898 claims"></a>
 </p>
@@ -197,6 +198,27 @@ chapter rules. The evidence is produced by
 [TerminalGB](https://github.com/Alchemy86/TerminalGB), which consumes this project as a
 pinned snapshot and publishes verification runs back to it.
 
-Licence: [MIT](LICENSE) — see [docs/licensing.md](docs/licensing.md) for what is and is not
-ours to license. Pokémon, Game Boy and Nintendo are trade marks of their respective
-owners; this project is not affiliated with any of them.
+## Licence
+
+Two licences, and the boundary is a path.
+
+- **The atlas content is [CC BY-SA 4.0](LICENSE-CC-BY-SA)** — the data, the generated
+  chapters, the indexes and the written descriptions. **Credit AtlasGB**, and if you
+  publish a modified or extended atlas, **share it back under the same terms.** That is
+  the whole of the condition: nobody should be able to absorb a verified atlas into a
+  closed product and quietly strip the evidence off it.
+- **The tooling and the schema are [MIT](LICENSE)** — [`tools/`](tools/) and
+  [`schema/atlas.schema.json`](schema/atlas.schema.json). Copy them, change them, ship
+  them. Gating the generator or the schema would only make it harder for somebody to
+  produce a compatible atlas, which is the opposite of what this project wants.
+
+Two things that would be easy to overstate, so they are stated plainly instead:
+**the addresses are still facts and nobody owns them** — you can re-derive every one from
+the public disassembly, and share-alike reaches the compilation, the evidence and the
+prose, not the number `$D163`. And **every copy already published under MIT stays MIT**;
+a grant already made cannot be withdrawn, so this governs versions published from here on,
+not a snapshot somebody already pinned.
+
+[docs/licensing.md](docs/licensing.md) is the path-by-path table and the honest longer
+answer about what is and is not ours to license. Pokémon, Game Boy and Nintendo are trade
+marks of their respective owners; this project is not affiliated with any of them.

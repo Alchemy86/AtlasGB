@@ -1,11 +1,14 @@
 cff-version: 1.2.0
 title: "AtlasGB — evidenced memory maps for Game Boy cartridges"
 message: >-
-  If you use an atlas from this project, a citation is appreciated but not
-  required. What is most useful to the next person is a link, so they can check
-  the evidence for themselves. Please name the atlas you used — an address is a
-  fact about one cartridge, and a citation that does not say which one is not
-  much of a citation.
+  The atlas content is licensed CC BY-SA 4.0, so attribution is a condition of
+  the licence and not only a courtesy: credit AtlasGB, and release a modified or
+  extended atlas under the same terms. Please name the atlas you used, and the
+  tag or commit if you can — an address is a fact about one cartridge at one
+  revision, and a citation that says neither is not much of a citation. The
+  tooling under tools/ and schema/atlas.schema.json are MIT and carry no such
+  condition; use them freely. Copies published under MIT before the relicence
+  remain MIT. See docs/licensing.md.
 type: dataset
 authors:
   - name: "The AtlasGB contributors"
@@ -30,7 +33,7 @@ keywords:
   - "emulation"
   - "Pokémon"
   - "dataset"
-license: MIT
+license: CC-BY-SA-4.0
 references:
   - type: data
     title: "AtlasGB — Pokémon Red and Blue"
@@ -42,4 +45,4 @@ references:
     authors:
       - name: "The AtlasGB contributors"
     url: "https://github.com/Alchemy86/AtlasGB/tree/main/atlases/pokemon-rb"
-    license: MIT
+    license: CC-BY-SA-4.0

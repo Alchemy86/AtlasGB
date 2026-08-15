@@ -10,6 +10,9 @@
    "Pokémon Red (English, USA/Europe)"
   ],
   "engine": "Generation 1",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "attribution": "AtlasGB — https://github.com/Alchemy86/AtlasGB",
   "source_of_truth": "atlases/pokemon-rb/data/atlas.tsv",
   "schema": "schema/atlas.schema.json",
   "documentation": "docs/schema.md",

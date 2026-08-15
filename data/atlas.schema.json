@@ -1,0 +1,115 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/Alchemy86/AtlasGB/blob/main/data/atlas.schema.json",
+ "title": "AtlasGB",
+ "description": "Every address in Pokemon Red and Blue, with the evidence for it. This schema describes data/atlas.json, which is generated from data/atlas.tsv by tools/export.py. The prose contract is docs/schema.md.",
+ "type": "object",
+ "required": ["meta", "entries"],
+ "additionalProperties": false,
+ "properties": {
+  "meta": {
+   "type": "object",
+   "description": "Counts and identity, recomputed from the entries on every export.",
+   "required": ["name", "entries", "storage_entries", "evidence"],
+   "properties": {
+    "name": {"const": "AtlasGB"},
+    "description": {"type": "string"},
+    "source_of_truth": {"const": "data/atlas.tsv"},
+    "schema": {"type": "string"},
+    "documentation": {"type": "string"},
+    "games": {"type": "array", "items": {"type": "string"}},
+    "entries": {"type": "integer", "minimum": 0},
+    "storage_entries": {
+     "type": "integer",
+     "minimum": 0,
+     "description": "Entries in VRAM, SRAM, WRAM0 or HRAM. The published evidence tiers count these, because 'observed live' means something different for a table in the cartridge."
+    },
+    "evidence": {
+     "type": "object",
+     "description": "How many storage entries carry each tier.",
+     "required": ["rom", "live", "inv", "none"],
+     "properties": {
+      "rom": {"type": "integer", "minimum": 0},
+      "live": {"type": "integer", "minimum": 0},
+      "inv": {"type": "integer", "minimum": 0},
+      "none": {"type": "integer", "minimum": 0}
+     },
+     "additionalProperties": false
+    },
+    "regions": {"type": "array", "items": {"type": "string"}},
+    "chapters": {"type": "array", "items": {"type": "string"}}
+   }
+  },
+  "entries": {
+   "type": "array",
+   "description": "One object per row of data/atlas.tsv, in the same order.",
+   "items": {"$ref": "#/$defs/entry"}
+  }
+ },
+ "$defs": {
+  "entry": {
+   "type": "object",
+   "required": ["region", "bank", "addr", "addr_int", "len", "symbol", "role",
+                "sect", "group", "verify", "desc"],
+   "additionalProperties": false,
+   "properties": {
+    "region": {
+     "enum": ["VRAM", "SRAM", "WRAM0", "HRAM", "ROM0", "ROMX"],
+     "description": "The CPU address range the entry lives in."
+    },
+    "bank": {
+     "type": "string",
+     "pattern": "^(-|[0-9]+)$",
+     "description": "Bank number as a decimal string, or '-' where the region is not banked. Only SRAM and ROMX are banked; (region, bank, addr) is the identifying triple."
+    },
+    "addr": {
+     "type": "string",
+     "pattern": "^\\$[0-9A-F]{4}$",
+     "description": "The CPU address, as every other Gen 1 document spells it."
+    },
+    "addr_int": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 65535,
+     "description": "The same address as an integer, so a tool can index by it without parsing."
+    },
+    "len": {
+     "type": "integer",
+     "minimum": 0,
+     "description": "Bytes this entry owns before the next distinct address. A span, not a type width. 0 means an end marker that owns nothing."
+    },
+    "symbol": {
+     "type": "string",
+     "minLength": 1,
+     "description": "The pret/pokered label, unique across the file. gap and free rows carry a synthetic identifier instead."
+    },
+    "role": {
+     "enum": ["entry", "alias", "instance", "gap", "free"],
+     "description": "entry: the canonical row. alias: another name for the same bytes. instance: slot 2..N of a repeated structure. gap: bytes no label reaches. free: RAM the linker reported EMPTY."
+    },
+    "sect": {
+     "type": "string",
+     "description": "The linker section the symbol was declared in, verbatim from the RGBDS map file."
+    },
+    "group": {
+     "enum": ["player", "party", "storage", "battle", "bag", "pokedex", "events",
+              "overworld", "sprites", "screen", "graphics", "audio", "link", "rng",
+              "save", "system", "scratch", "rom-data", "misc"],
+     "description": "Our chapter, and the page the entry is rendered onto (docs/<group>.md). Editorial judgement, produced by rules in tools/chapters.py."
+    },
+    "verify": {
+     "type": "array",
+     "description": "The evidence for this entry. Empty means no evidence yet — stated, not hidden. Written only by landing a verification report; see docs/verification.md.",
+     "uniqueItems": true,
+     "items": {
+      "enum": ["rom", "live", "inv"]
+     }
+    },
+    "desc": {
+     "type": "string",
+     "description": "What it is, in our own words, as Markdown. May be empty."
+    }
+   }
+  }
+ }
+}

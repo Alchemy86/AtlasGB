@@ -1,0 +1,59 @@
+name: check
+
+# The same no-drift discipline the pages have always had: everything in this
+# repository is generated from data/atlas.tsv, so CI regenerates it all and
+# fails if the committed output does not match. It also checks that the
+# evidence tiers still name a real verification run, which is the one claim
+# this repository cannot re-derive on its own.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the one dependency
+        # Only used to check data/atlas.json against its own published schema.
+        # Nothing in this repository needs it at run time.
+        run: pip install --disable-pip-version-check jsonschema
+
+      - name: The data is structurally sound
+        run: python3 tools/validate.py
+
+      - name: The evidence tiers still name a real run
+        run: python3 tools/apply-evidence.py --check
+
+      - name: The pages match the data
+        run: python3 tools/render.py --check
+
+      - name: The JSON matches the data
+        run: python3 tools/export.py --check
+
+      - name: Every link and anchor resolves
+        run: python3 tools/checklinks.py
+
+      - name: The brand SVGs match their generator
+        run: |
+          python3 docs/brand/generate.py
+          git diff --exit-code -- docs/brand/atlasgb-logo.svg docs/brand/atlasgb-icon.svg
+
+      - name: Nothing else drifted
+        # Belt and braces: regenerate everything and require a clean tree, so a
+        # generated file nobody thought to check is still caught.
+        run: |
+          python3 tools/render.py
+          python3 tools/export.py
+          git diff --exit-code

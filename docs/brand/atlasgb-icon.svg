@@ -1,0 +1,10 @@
+<!-- AtlasGB icon — the region bar, stacked
+     Hand-authored for AtlasGB (MIT). No font embedded, subset or traced;
+     letterforms are original stroked paths. Regenerate with docs/brand/generate.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img">
+<rect x="1" y="1" width="126" height="126" rx="28" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+<rect x="24" y="24" width="80" height="16" rx="8" fill="#9bbc0f"/>
+<rect x="24" y="48" width="80" height="16" rx="8" fill="#9bbc0f"/>
+<rect x="24" y="72" width="80" height="16" rx="8" fill="#9bbc0f"/>
+<rect x="24" y="96" width="32" height="16" rx="8" fill="#9bbc0f"/>
+</svg>

@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "AtlasGB — every address in Pokémon Red and Blue, with the evidence for it"
+message: >-
+  If you use this atlas, a citation is appreciated but not required. What is
+  most useful to the next person is a link, so they can check the evidence for
+  themselves.
+type: dataset
+authors:
+  - name: "The AtlasGB contributors"
+repository-code: "https://github.com/Alchemy86/AtlasGB"
+url: "https://github.com/Alchemy86/AtlasGB"
+abstract: >-
+  A machine-readable map of the whole address space of Pokémon Red and Blue
+  (English, USA/Europe): 2,898 evidenced claims covering video RAM, cartridge
+  RAM, work RAM, high RAM and the cartridge's own data tables. Unlike every
+  other published Generation 1 memory map, every entry carries the evidence
+  that supports it — named as an instruction operand in the cartridge image,
+  observed to change on a running cartridge under a fixed script, or proved by
+  a named invariant — and the entries with no evidence say so. Work RAM and
+  high RAM are 100% accounted for, with no holes.
+keywords:
+  - "Game Boy"
+  - "memory map"
+  - "reverse engineering"
+  - "emulation"
+  - "Pokémon"
+  - "dataset"
+license: MIT

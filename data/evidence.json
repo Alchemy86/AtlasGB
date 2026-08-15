@@ -1,0 +1,44 @@
+{
+ "schema": "atlasgb-evidence/1",
+ "produced_by": {
+  "repo": "Alchemy86/TerminalGB",
+  "commit": "109f98d69ab9a222e84d90f2292d98de9321d7c3",
+  "harness": "testharness/gen1atlas.rs",
+  "note": "the run that produced the tiers the atlas was first published with, before the split"
+ },
+ "cartridge": {
+  "title": "POKEMON BLUE",
+  "region": "USA/Europe",
+  "sha1": "d7037c83e1ae5b39bde3c30787637ba1d4c48ce2"
+ },
+ "script": {
+  "name": "opening+overworld",
+  "frames": 3600,
+  "save": "none (cold boot)"
+ },
+ "run": {
+  "date": "2026-08-15"
+ },
+ "entries": 2898,
+ "storage_entries": 2842,
+ "evidence": {
+  "rom": 1594,
+  "live": 2694,
+  "inv": 36
+ },
+ "evidence_including_rom_tables": {
+  "rom": 1594,
+  "live": 2694,
+  "inv": 39
+ },
+ "unevidenced": [
+  "free:SRAM0:$B858",
+  "free:SRAM1:$B524",
+  "free:SRAM2:$BA53",
+  "free:SRAM3:$BA53",
+  "wBoxMon15Status",
+  "wEnemyMoveMaxPP",
+  "wSprite11StateData2MapX"
+ ],
+ "verify_digest": "sha256:59c413f2ff645ff3b71c062206705c1baa42c55a983392ed7fc4794582498a2b"
+}

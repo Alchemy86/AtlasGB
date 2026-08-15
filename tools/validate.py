@@ -153,6 +153,20 @@ def main() -> int:
     rep.check("every symbol name is unique", not clashes,
               "; ".join(f"{s} on lines {ls}" for s, ls in list(clashes.items())[:5]))
 
+    # GitHub lowercases the `id` it renders from `<a id="s-SYMBOL">`, so two
+    # symbols differing only in case would land on one anchor and one of the
+    # two permanent links would silently point at the wrong entry. There are
+    # none today; this is here so there are none tomorrow either.
+    fold = {}
+    for r in rows:
+        fold.setdefault(r["symbol"].lower(), []).append(r["symbol"])
+    folded = {k: v for k, v in fold.items() if len(set(v)) > 1}
+    rep.check(
+        "no two symbols differ only in case", not folded,
+        "; ".join(f"{sorted(set(v))}" for v in list(folded.values())[:5])
+        + (" — their anchors would collide" if folded else ""),
+    )
+
     # --- ordering and extent ----------------------------------------------
     groups: dict[tuple, list[dict]] = {}
     for r in rows:

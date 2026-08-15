@@ -59,6 +59,12 @@ turns each space into its own dash, so a heading containing an em dash — which
 — produces two consecutive dashes (`## I — an invariant covers it` is
 `#i--an-invariant-covers-it`).
 
+GitHub also **lowercases** the `id` it renders from inline HTML and prefixes it:
+`<a id="s-wPartyCount">` becomes `id="user-content-s-wpartycount"`. Fragments resolve
+case-insensitively, so `#s-wPartyCount` is the form to publish and it works — verified in a
+browser, not assumed. The consequence is that two symbols differing only in case would
+collide on one anchor, so `tools/validate.py` fails if one ever appears.
+
 ## Layout
 
 | path | what it is |

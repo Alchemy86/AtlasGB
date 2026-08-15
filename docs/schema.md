@@ -257,6 +257,12 @@ where the region is banked (`#a-A000b2`). Every one of those links is checked on
 push by [`tools/checklinks.py`](../tools/checklinks.py); an index of 2,400 anchored links
 is exactly the kind of thing that rots silently, and it once did.
 
+**Build the link with the symbol's exact spelling.** GitHub lowercases the `id` it renders
+(`s-wPartyCount` becomes `user-content-s-wpartycount`) but resolves the fragment
+case-insensitively, so `#s-wPartyCount` is the form to publish and it works. Two symbols
+differing only in case would therefore land on one anchor; there are none, and
+[`tools/validate.py`](../tools/validate.py) fails if one ever appears.
+
 ---
 
 ## What is covered

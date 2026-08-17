@@ -51,6 +51,31 @@ the cartridge and watches what it does. See [how an entry is proved](docs/verifi
 **That promise belongs to the project, not to one file.** Every atlas added here inherits
 it, which is exactly why there is room for more.
 
+### Where the findings are written down
+
+An entry says *what* an address is for. The reasoning behind it — the symptom, the wrong
+turns, the measurement that settled it — does not fit in a cell, so it is recorded once
+next door: **the findings that back these descriptions live in TerminalGB's discovery
+record**,
+**[docs/gen1/discoveries.md](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md)**
+— twenty-one findings about Pokémon Red/Blue, each with the evidence that produced it.
+
+Six chapter pages carry a **Findings behind these bytes** table linking into it, so the two
+repositories point at each other rather than leaving you to notice it by accident:
+
+| chapter | the findings it points at |
+|---|---|
+| **[battle](atlases/pokemon-rb/docs/battle.md)** | what the battle-status bytes and the in-battle sentinels were watched doing |
+| **[overworld](atlases/pokemon-rb/docs/overworld.md)** | `wCurMap` and the coordinates — the bytes this project has been wrong about most often |
+| **[scratch](atlases/pokemon-rb/docs/scratch.md)** | shared scratch bytes that matter for something other than their name |
+| **[screen](atlases/pokemon-rb/docs/screen.md)** | the menu cursor and tile-map findings that never announce themselves |
+| **[sprites](atlases/pokemon-rb/docs/sprites.md)** | the object-buffer overrun that stamps tiles into the map |
+| **[events](atlases/pokemon-rb/docs/events.md)** | the blackout carve-out behind the one described map script |
+
+Written descriptions cover **475 of the 1,012 distinct addresses**, and **819 entries and
+aliases are deliberately blank**: this project cannot yet describe them honestly, and a
+plausible sentence derived from a symbol name is the thing it exists as a reaction to.
+
 ---
 
 ## The atlases

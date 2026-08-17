@@ -40,7 +40,7 @@ Base `wPartyMon1` at `$D16B`.
 | 1 | 2 | `HP` | Current HP, **big-endian**. |
 | 3 | 1 | `BoxLevel` | The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is. |
 | 4 | 1 | `Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
-| 5 | 1 | `Type` / `Type1` | First type. |
+| 5 | 1 | `Type` / `Type1` | The two type bytes as a pair, `Type1` then `Type2`. |
 | 6 | 1 | `Type2` | Second type; equal to `Type1` for a single-typed Pokemon. |
 | 7 | 1 | `CatchRate` | The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths. |
 | 8 | 4 | `Moves` | Four move ids, 0 for an empty slot. |
@@ -72,7 +72,7 @@ Base `wBoxMon1` at `$DA96`.
 | 1 | 2 | `HP` | Current HP, **big-endian**. |
 | 3 | 1 | `BoxLevel` | The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is. |
 | 4 | 1 | `Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
-| 5 | 1 | `Type` / `Type1` | First type. |
+| 5 | 1 | `Type` / `Type1` | The two type bytes as a pair. |
 | 6 | 1 | `Type2` | Second type; equal to `Type1` for a single-typed Pokemon. |
 | 7 | 1 | `CatchRate` | The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths. |
 | 8 | 4 | `Moves` | Four move ids, 0 for an empty slot. |
@@ -98,7 +98,7 @@ Base `wBattleMon` at `$D014`.
 | 1 | 2 | `HP` | Current HP, **big-endian**. |
 | 3 | 1 | `BoxLevel` / `PartyPos` | The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is. |
 | 4 | 1 | `Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
-| 5 | 1 | `Type` / `Type1` | First type. |
+| 5 | 1 | `Type` / `Type1` | Your active Pokemon's two type bytes as a pair. |
 | 6 | 1 | `Type2` | Second type; equal to `Type1` for a single-typed Pokemon. |
 | 7 | 1 | `CatchRate` | The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths. |
 | 8 | 4 | `Moves` | Four move ids, 0 for an empty slot. |
@@ -123,7 +123,7 @@ Base `wEnemyMon` at `$CFE5`.
 | 1 | 2 | `HP` | Current HP, **big-endian**. |
 | 3 | 1 | `BoxLevel` / `PartyPos` | The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is. |
 | 4 | 1 | `Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
-| 5 | 1 | `Type` / `Type1` | First type. |
+| 5 | 1 | `Type` / `Type1` | The opponent's two type bytes as a pair, `Type1` then `Type2`. |
 | 6 | 1 | `Type2` | Second type; equal to `Type1` for a single-typed Pokemon. |
 | 7 | 1 | `CatchRate` | The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths. |
 | 8 | 4 | `Moves` | Four move ids, 0 for an empty slot. |
@@ -139,29 +139,29 @@ Base `wEnemyMon` at `$CFE5`.
 | 34 | 1 | `ActualCatchRate` | The catch rate the ball routine actually reads — **not** the species' base rate, because Safari bait and rocks move it. |
 | 35 | 1 | `BaseExp` |  |
 | 1838 | 1 | `OrTrainerClass` |  |
-| 2239 | 1 | `1` / `1Species` / `s` | The opposing team as six 44-byte `party_struct`s — the *party* shape, not the battle shape. Shares storage with the map's wild encounter tables. |
-| 2240 | 2 | `1HP` |  |
-| 2242 | 1 | `1BoxLevel` |  |
-| 2243 | 1 | `1Status` |  |
-| 2244 | 1 | `1Type` / `1Type1` |  |
+| 2239 | 1 | `1` / `1Species` / `s` | The opposing trainer's first Pokemon, a whole 44-byte `party_struct` — the *party* shape, not the 29-byte battle shape. Shares its storage with the map's wild encounter tables, so it only means anything once `wIsInBattle` says a trainer battle is running. |
+| 2240 | 2 | `1HP` | Current HP, **big-endian**. |
+| 2242 | 1 | `1BoxLevel` | The level as stored, kept in step with `Level`. |
+| 2243 | 1 | `1Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
+| 2244 | 1 | `1Type` / `1Type1` | The two type bytes as a pair. |
 | 2245 | 1 | `1Type2` |  |
-| 2246 | 1 | `1CatchRate` |  |
-| 2247 | 4 | `1Moves` |  |
-| 2251 | 2 | `1OTID` |  |
-| 2253 | 3 | `1Exp` |  |
-| 2256 | 2 | `1HPExp` |  |
-| 2258 | 2 | `1AttackExp` |  |
-| 2260 | 2 | `1DefenseExp` |  |
-| 2262 | 2 | `1SpeedExp` |  |
-| 2264 | 2 | `1SpecialExp` |  |
-| 2266 | 2 | `1DVs` |  |
-| 2268 | 4 | `1PP` |  |
-| 2272 | 1 | `1Level` |  |
-| 2273 | 2 | `1MaxHP` / `1Stats` |  |
-| 2275 | 2 | `1Attack` |  |
-| 2277 | 2 | `1Defense` |  |
-| 2279 | 2 | `1Speed` |  |
-| 2281 | 2 | `1Special` |  |
+| 2246 | 1 | `1CatchRate` | The species' base catch rate, carried in the structure. Fixed for a trainer's Pokemon, which is one of the things that makes a trainer battle different from a wild one. |
+| 2247 | 4 | `1Moves` | Four move ids, 0 for an empty slot. |
+| 2251 | 2 | `1OTID` | The original trainer's ID, **big-endian**. |
+| 2253 | 3 | `1Exp` | Experience, **three bytes big-endian**. |
+| 2256 | 2 | `1HPExp` | Stat experience for HP, big-endian. |
+| 2258 | 2 | `1AttackExp` | Stat experience for Attack, big-endian. |
+| 2260 | 2 | `1DefenseExp` | Stat experience for Defense, big-endian. |
+| 2262 | 2 | `1SpeedExp` | Stat experience for Speed, big-endian. |
+| 2264 | 2 | `1SpecialExp` | Stat experience for Special, big-endian. |
+| 2266 | 2 | `1DVs` | Two bytes, four nybbles: attack, defense, speed, special. **A trainer's Pokemon has fixed DVs** — `LoadEnemyMonData` writes the same two bytes into every one of them — so anything that draws a conclusion from DVs has to exclude trainer battles or it will report the same answer forever. |
+| 2268 | 4 | `1PP` | Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2. |
+| 2272 | 1 | `1Level` | The level the stats below were computed at. |
+| 2273 | 2 | `1MaxHP` / `1Stats` | Computed maximum HP, big-endian. |
+| 2275 | 2 | `1Attack` | Computed Attack, big-endian. |
+| 2277 | 2 | `1Defense` | Computed Defense, big-endian. |
+| 2279 | 2 | `1Speed` | Computed Speed, big-endian. |
+| 2281 | 2 | `1Special` | Computed Special, big-endian. |
 | 2283 | 1 | `2` / `2Species` |  |
 | 2284 | 2 | `2HP` |  |
 | 2286 | 1 | `2BoxLevel` |  |
@@ -277,13 +277,13 @@ Base `wEnemyMon` at `$CFE5`.
 | 2497 | 2 | `6Defense` |  |
 | 2499 | 2 | `6Speed` |  |
 | 2501 | 2 | `6Special` |  |
-| 2503 | 11 | `1OT` / `OT` | The opposing team's original-trainer names. |
+| 2503 | 11 | `1OT` / `OT` | Slot 1's original-trainer name, 11 bytes. |
 | 2514 | 11 | `2OT` |  |
 | 2525 | 11 | `3OT` |  |
 | 2536 | 11 | `4OT` |  |
 | 2547 | 11 | `5OT` |  |
 | 2558 | 11 | `6OT` |  |
-| 2569 | 11 | `1Nick` / `Nicks` | The opposing team's nicknames. |
+| 2569 | 11 | `1Nick` / `Nicks` | Slot 1's nickname, 11 bytes. |
 | 2580 | 11 | `2Nick` |  |
 | 2591 | 11 | `3Nick` |  |
 | 2602 | 11 | `4Nick` |  |
@@ -302,7 +302,7 @@ Base `wDayCareMon` at `$DA5F`.
 | 1 | 2 | `HP` | Current HP, **big-endian**. |
 | 3 | 1 | `BoxLevel` | The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is. |
 | 4 | 1 | `Status` | Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter. |
-| 5 | 1 | `Type` / `Type1` | First type. |
+| 5 | 1 | `Type` / `Type1` | The two type bytes as a pair. |
 | 6 | 1 | `Type2` | Second type; equal to `Type1` for a single-typed Pokemon. |
 | 7 | 1 | `CatchRate` | The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths. |
 | 8 | 4 | `Moves` | Four move ids, 0 for an empty slot. |

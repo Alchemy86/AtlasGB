@@ -18,1387 +18,1405 @@ it, **·** no evidence yet. [What each one means.](../README.md#the-evidence)
 
 | symbol | address | bytes | chapter | ev |
 |---|---|---:|---|:--:|
-| [`_AddPartyMon`](rom-data.md#s-_AddPartyMon) | `$72E5` b3 | 2405 | [rom-data](rom-data.md) | · |
-| [`AddPartyMon`](rom-data.md#s-AddPartyMon) | `$3927` | 15 | [rom-data](rom-data.md) | · |
-| [`BaseStats`](rom-data.md#s-BaseStats) | `$43DE` b14 | 5309 | [rom-data](rom-data.md) | I |
-| [`BattleHudTiles1`](rom-data.md#s-BattleHudTiles1) | `$6080` b4 | 72 | [rom-data](rom-data.md) | · |
-| [`BattleRandom`](rom-data.md#s-BattleRandom) | `$6E9B` b15 | 3373 | [rom-data](rom-data.md) | · |
-| [`CalcCheckSum`](save.md#s-CalcCheckSum) | `$7856` b28 | 839 | [save](save.md) | · |
-| [`CalcStat`](rom-data.md#s-CalcStat) | `$394A` | 1628 | [rom-data](rom-data.md) | · |
-| [`CalcStats`](rom-data.md#s-CalcStats) | `$3936` | 20 | [rom-data](rom-data.md) | · |
-| [`CheckForDisobedience`](rom-data.md#s-CheckForDisobedience) | `$5C88` b15 | 3705 | [rom-data](rom-data.md) | · |
-| [`EvosMovesPointerTable`](rom-data.md#s-EvosMovesPointerTable) | `$705C` b14 | 2954 | [rom-data](rom-data.md) | · |
-| [`FontGraphics`](rom-data.md#s-FontGraphics) | `$5A80` b4 | 1056 | [rom-data](rom-data.md) | · |
-| [`GetMonHeader`](rom-data.md#s-GetMonHeader) | `$1537` | 240 | [rom-data](rom-data.md) | · |
-| [`hAutoBGTransferDest`](system.md#s-hAutoBGTransferDest) | `$FFBC` | 2 | [system](system.md) | RL |
-| [`hAutoBGTransferEnabled`](system.md#s-hAutoBGTransferEnabled) | `$FFBA` | 1 | [system](system.md) | RL |
-| [`hAutoBGTransferPortion`](system.md#s-hAutoBGTransferPortion) | `$FFBB` | 1 | [system](system.md) | RL |
-| [`hBackupGymGateIndex`](system.md) | `$FFE0` | 1 | [system](system.md) | R |
-| [`hBaseTileID`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hClearLetterPrintingDelayFlags`](system.md#s-hClearLetterPrintingDelayFlags) | `$FFF4` | 2 | [system](system.md) | R |
-| [`hCoins`](system.md#s-hCoins) | `$FFA0` | 2 | [system](system.md) | R |
-| [`hCollidingSpriteAdjustedDistance`](system.md#s-hCollidingSpriteAdjustedDistance) | `$FF92` | 1 | [system](system.md) | R |
-| [`hCollidingSpriteOffset`](system.md#s-hCollidingSpriteOffset) | `$FF8F` | 1 | [system](system.md) | R |
-| [`hCollidingSpriteTempXValue`](system.md#s-hCollidingSpriteTempXValue) | `$FF91` | 1 | [system](system.md) | R |
-| [`hCollidingSpriteTempYValue`](system.md#s-hCollidingSpriteTempYValue) | `$FF90` | 1 | [system](system.md) | R |
-| [`hCoordsInFrontOfPlayerMatch`](system.md) | `$FFEA` | 1 | [system](system.md) | R |
-| [`hCurrentSpriteOffset`](system.md#s-hCurrentSpriteOffset) | `$FFDA` | 1 | [system](system.md) | R |
-| [`hDexRatingNumMonsOwned`](system.md) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hDexRatingNumMonsSeen`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hDexWeight`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hDidntFindAnyHiddenEvent`](system.md#s-hDidntFindAnyHiddenEvent) | `$FFEE` | 5 | [system](system.md) | R |
-| [`hDisableJoypadPolling`](system.md#s-hDisableJoypadPolling) | `$FFF9` | 6 | [system](system.md) | RL |
-| [`hDivideBCDBuffer`](system.md#s-hDivideBCDBuffer) | `$FFA5` | 4 | [system](system.md) | R |
-| [`hDivideBCDDivisor`](system.md) | `$FFA2` | 3 | [system](system.md) | R |
-| [`hDivideBCDQuotient`](system.md#s-hDivideBCDQuotient) | `$FFA2` | 3 | [system](system.md) | R |
-| [`hDivideBuffer`](system.md) | `$FF9A` | 1 | [system](system.md) | R |
-| [`hDividend`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hDividend2`](system.md) | `$FFE5` | 1 | [system](system.md) | R |
-| [`hDivisor`](system.md) | `$FF99` | 1 | [system](system.md) | R |
-| [`hDivisor2`](system.md#s-hDivisor2) | `$FFE6` | 1 | [system](system.md) | R |
-| [`hDMARoutine`](system.md#s-hDMARoutine) | `$FF80` | 10 | [system](system.md) | RL |
-| [`hDownArrowBlinkCount1`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hEastWestConnectedMapWidth`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hEnemySpeed`](system.md#s-hEnemySpeed) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hExperience`](system.md#s-hExperience) | `$FF96` | 1 | [system](system.md) | R |
-| [`hFieldMoveMonMenuTopMenuItemX`](system.md#s-hFieldMoveMonMenuTopMenuItemX) | `$FFF7` | 1 | [system](system.md) | R |
-| [`hFindPathFlags`](system.md#s-hFindPathFlags) | `$FF98` | 1 | [system](system.md) | R |
-| [`hFindPathNumSteps`](system.md) | `$FF97` | 1 | [system](system.md) | R |
-| [`hFindPathXProgress`](system.md#s-hFindPathXProgress) | `$FF9A` | 1 | [system](system.md) | R |
-| [`hFindPathYProgress`](system.md#s-hFindPathYProgress) | `$FF99` | 1 | [system](system.md) | R |
-| [`hFourTileSpriteCount`](system.md) | `$FF8E` | 1 | [system](system.md) | R |
-| [`hFrameCounter`](system.md#s-hFrameCounter) | `$FFD5` | 1 | [system](system.md) | RL |
-| [`hGymGateAnswer`](system.md) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hGymGateIndex`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hGymTrashCanRandNumMask`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hHalveItemPrices`](system.md#s-hHalveItemPrices) | `$FF8E` | 1 | [system](system.md) | R |
-| [`hInteractedWithBookshelf`](system.md#s-hInteractedWithBookshelf) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hIsToggleableObjectOff`](system.md#s-hIsToggleableObjectOff) | `$FFE5` | 1 | [system](system.md) | R |
-| [`hItemAlreadyFound`](system.md#s-hItemAlreadyFound) | `$FFEB` | 1 | [system](system.md) | R |
-| [`hItemCounter`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hItemPrice`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hItemToRemoveID`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hItemToRemoveIndex`](system.md#s-hItemToRemoveIndex) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hJoy5`](system.md#s-hJoy5) | `$FFB5` | 1 | [system](system.md) | RL |
-| [`hJoy6`](system.md#s-hJoy6) | `$FFB6` | 1 | [system](system.md) | R |
-| [`hJoy7`](system.md#s-hJoy7) | `$FFB7` | 1 | [system](system.md) | R |
-| [`hJoyHeld`](system.md#s-hJoyHeld) | `$FFB4` | 1 | [system](system.md) | RL |
-| [`hJoyInput`](system.md#s-hJoyInput) | `$FFF8` | 1 | [system](system.md) | RL |
-| [`hJoyLast`](system.md#s-hJoyLast) | `$FFB1` | 1 | [system](system.md) | RL |
-| [`hJoyPressed`](system.md#s-hJoyPressed) | `$FFB3` | 1 | [system](system.md) | RL |
-| [`hJoyReleased`](system.md#s-hJoyReleased) | `$FFB2` | 1 | [system](system.md) | RL |
-| [`hLoadedROMBank`](system.md#s-hLoadedROMBank) | `$FFB8` | 1 | [system](system.md) | RL |
-| [`hLoadSpriteTemp1`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hMapROMBank`](system.md#s-hMapROMBank) | `$FFE8` | 1 | [system](system.md) | R |
-| [`hMapStride`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hMapWidth`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hMoney`](system.md) | `$FF9F` | 1 | [system](system.md) | R |
-| [`hMovingBGTilesCounter1`](system.md#s-hMovingBGTilesCounter1) | `$FFD8` | 2 | [system](system.md) | R |
-| [`hMultiplicand`](system.md) | `$FF96` | 1 | [system](system.md) | R |
-| [`hMultiplier`](system.md) | `$FF99` | 1 | [system](system.md) | R |
-| [`hMultiplyBuffer`](system.md) | `$FF9B` | 1 | [system](system.md) | R |
-| [`hMutateWX`](system.md#s-hMutateWX) | `$FF97` | 1 | [system](system.md) | R |
-| [`hMutateWY`](system.md) | `$FF96` | 1 | [system](system.md) | R |
-| [`hNewPartyLength`](system.md#s-hNewPartyLength) | `$FFE4` | 1 | [system](system.md) | R |
-| [`hNorthSouthConnectedMapWidth`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hNorthSouthConnectionStripWidth`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hNPCMovementDirections2Index`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hNPCPlayerRelativePosFlags`](system.md#s-hNPCPlayerRelativePosFlags) | `$FF9D` | 2 | [system](system.md) | R |
-| [`hNPCPlayerRelativePosPerspective`](system.md#s-hNPCPlayerRelativePosPerspective) | `$FF9B` | 1 | [system](system.md) | R |
-| [`hNPCPlayerXDistance`](system.md) | `$FF96` | 1 | [system](system.md) | R |
-| [`hNPCPlayerYDistance`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hNPCSpriteOffset`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hNumToPrint`](system.md) | `$FF96` | 1 | [system](system.md) | R |
-| [`hOaksAideNumMonsOwned`](system.md#s-hOaksAideNumMonsOwned) | `$FFDD` | 3 | [system](system.md) | R |
-| [`hOaksAideRequirement`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hOaksAideResult`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hOaksAideRewardItem`](system.md) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hOAMBufferOffset`](system.md) | `$FF90` | 1 | [system](system.md) | R |
-| [`hOAMTile`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hPartyMonIndex`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hPastLeadingZeros`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`HpBarAndStatusGraphics`](rom-data.md#s-HpBarAndStatusGraphics) | `$5EA0` b4 | 480 | [rom-data](rom-data.md) | · |
-| [`hPlayerFacing`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hPlayerXCoord`](system.md) | `$FFDD` | 3 | [system](system.md) | R |
-| [`hPlayerYCoord`](system.md) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hPowerOf10`](system.md) | `$FF99` | 1 | [system](system.md) | R |
-| [`hPreviousTileset`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hProduct`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hQuotient`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hQuotient2`](system.md#s-hQuotient2) | `$FFE7` | 1 | [system](system.md) | R |
-| [`hRandomAdd`](rng.md#s-hRandomAdd) | `$FFD3` | 1 | [rng](rng.md) | RLI |
-| [`hRandomSub`](rng.md#s-hRandomSub) | `$FFD4` | 1 | [rng](rng.md) | RLI |
-| [`hRedrawMapViewRowOffset`](system.md#s-hRedrawMapViewRowOffset) | `$FFBE` | 1 | [system](system.md) | R |
-| [`hRedrawRowOrColumnDest`](system.md#s-hRedrawRowOrColumnDest) | `$FFD1` | 2 | [system](system.md) | R |
-| [`hRedrawRowOrColumnMode`](system.md#s-hRedrawRowOrColumnMode) | `$FFD0` | 1 | [system](system.md) | R |
-| [`hRemainder`](system.md) | `$FF99` | 1 | [system](system.md) | R |
-| [`hRLEByteValue`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hROMBankTemp`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hSavedCoordIndex`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hSavedMapTextPtr`](system.md#s-hSavedMapTextPtr) | `$FFEC` | 1 | [system](system.md) | R |
-| [`hSavedNumToPrint`](system.md#s-hSavedNumToPrint) | `$FF9C` | 1 | [system](system.md) | R |
-| [`hSavedROMBank`](system.md#s-hSavedROMBank) | `$FFB9` | 1 | [system](system.md) | RL |
-| [`hSCX`](system.md#s-hSCX) | `$FFAE` | 1 | [system](system.md) | RL |
-| [`hSCY`](system.md#s-hSCY) | `$FFAF` | 1 | [system](system.md) | RL |
-| [`hSerialConnectionStatus`](overworld.md#s-hSerialConnectionStatus) | `$FFAA` | 1 | [overworld](overworld.md) | RL |
-| [`hSerialIgnoringInitialData`](link.md#s-hSerialIgnoringInitialData) | `$FFAB` | 1 | [link](link.md) | R |
-| [`hSerialReceiveData`](link.md#s-hSerialReceiveData) | `$FFAD` | 1 | [link](link.md) | R |
-| [`hSerialReceivedNewData`](link.md#s-hSerialReceivedNewData) | `$FFA9` | 1 | [link](link.md) | R |
-| [`hSerialSendData`](link.md#s-hSerialSendData) | `$FFAC` | 1 | [link](link.md) | R |
-| [`hSignCoordPointer`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hSlideAmount`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hSlideDirection`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hSlidingRegionSize`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hSoftReset`](system.md#s-hSoftReset) | `$FF8A` | 1 | [system](system.md) | RL |
-| [`hSpriteAnimFrameCounter`](system.md#s-hSpriteAnimFrameCounter) | `$FFEA` | 1 | [system](system.md) | R |
-| [`hSpriteDataOffset`](system.md#s-hSpriteDataOffset) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hSpriteFacingDirection`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hSpriteHeight`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hSpriteImageIndex`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hSpriteIndex`](system.md#s-hSpriteIndex) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hSpriteInterlaceCounter`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hSpriteMapXCoord`](system.md) | `$FFEE` | 5 | [system](system.md) | R |
-| [`hSpriteMapYCoord`](system.md#s-hSpriteMapYCoord) | `$FFED` | 1 | [system](system.md) | R |
-| [`hSpriteMovementByte2`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hSpriteOffset`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hSpriteOffset2`](system.md) | `$FF8F` | 1 | [system](system.md) | R |
-| [`hSpritePriority`](system.md#s-hSpritePriority) | `$FF94` | 1 | [system](system.md) | R |
-| [`hSpriteScreenX`](system.md) | `$FF91` | 1 | [system](system.md) | R |
-| [`hSpriteScreenXCoord`](system.md) | `$FFEC` | 1 | [system](system.md) | R |
-| [`hSpriteScreenY`](system.md) | `$FF92` | 1 | [system](system.md) | R |
-| [`hSpriteScreenYCoord`](system.md) | `$FFEB` | 1 | [system](system.md) | R |
-| [`hSpriteVRAMSlotAndFacing`](system.md#s-hSpriteVRAMSlotAndFacing) | `$FFE9` | 1 | [system](system.md) | R |
-| [`hSpriteWidth`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hSPTemp`](system.md#s-hSPTemp) | `$FFBF` | 2 | [system](system.md) | RL |
-| [`hStartTileID`](system.md#s-hStartTileID) | `$FFE1` | 3 | [system](system.md) | R |
-| [`hSwapItemID`](system.md) | `$FF95` | 1 | [system](system.md) | R |
-| [`hSwapItemQuantity`](system.md) | `$FF96` | 1 | [system](system.md) | R |
-| [`hSwapTemp`](system.md#s-hSwapTemp) | `$FF95` | 1 | [system](system.md) | R |
-| [`hTextID`](system.md) | `$FF8C` | 1 | [system](system.md) | RL |
-| [`hTileAnimations`](system.md#s-hTileAnimations) | `$FFD7` | 1 | [system](system.md) | R |
-| [`hTilePlayerStandingOn`](system.md#s-hTilePlayerStandingOn) | `$FF93` | 1 | [system](system.md) | R |
-| [`hToggleableObjectIndex`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hUILayoutFlags`](system.md#s-hUILayoutFlags) | `$FFF6` | 1 | [system](system.md) | R |
-| [`hUnlockedSilphCoDoors`](system.md#s-hUnlockedSilphCoDoors) | `$FFE0` | 1 | [system](system.md) | R |
-| [`hUnusedCoinsByte`](system.md#s-hUnusedCoinsByte) | `$FF9F` | 1 | [system](system.md) | R |
-| [`hVBlankCopyBGDest`](system.md#s-hVBlankCopyBGDest) | `$FFC3` | 2 | [system](system.md) | R |
-| [`hVBlankCopyBGNumRows`](system.md#s-hVBlankCopyBGNumRows) | `$FFC5` | 1 | [system](system.md) | R |
-| [`hVBlankCopyBGSource`](system.md#s-hVBlankCopyBGSource) | `$FFC1` | 2 | [system](system.md) | R |
-| [`hVBlankCopyDest`](system.md#s-hVBlankCopyDest) | `$FFC9` | 2 | [system](system.md) | RL |
-| [`hVBlankCopyDoubleDest`](system.md#s-hVBlankCopyDoubleDest) | `$FFCE` | 2 | [system](system.md) | RL |
-| [`hVBlankCopyDoubleSize`](system.md#s-hVBlankCopyDoubleSize) | `$FFCB` | 1 | [system](system.md) | RL |
-| [`hVBlankCopyDoubleSource`](system.md#s-hVBlankCopyDoubleSource) | `$FFCC` | 2 | [system](system.md) | RL |
-| [`hVBlankCopySize`](system.md#s-hVBlankCopySize) | `$FFC6` | 1 | [system](system.md) | RL |
-| [`hVBlankCopySource`](system.md#s-hVBlankCopySource) | `$FFC7` | 2 | [system](system.md) | RL |
-| [`hVBlankOccurred`](system.md#s-hVBlankOccurred) | `$FFD6` | 1 | [system](system.md) | RL |
-| [`hVendingMachineItem`](system.md) | `$FFDB` | 1 | [system](system.md) | R |
-| [`hVendingMachinePrice`](system.md) | `$FFDC` | 1 | [system](system.md) | R |
-| [`hVRAMSlot`](system.md) | `$FF8D` | 1 | [system](system.md) | RL |
-| [`hWarpDestinationMap`](system.md) | `$FF8B` | 1 | [system](system.md) | RL |
-| [`hWhoseTurn`](system.md#s-hWhoseTurn) | `$FFF3` | 1 | [system](system.md) | R |
-| [`hWY`](system.md#s-hWY) | `$FFB0` | 1 | [system](system.md) | RL |
-| [`InitBattleVariables`](rom-data.md#s-InitBattleVariables) | `$65AF` b20 | 196 | [rom-data](rom-data.md) | · |
-| [`ItemNames`](rom-data.md#s-ItemNames) | `$472B` b1 | 13598 | [rom-data](rom-data.md) | · |
-| [`ItemPrices`](rom-data.md#s-ItemPrices) | `$4608` b1 | 291 | [rom-data](rom-data.md) | · |
-| [`ItemUseBall`](rom-data.md#s-ItemUseBall) | `$5687` b3 | 7262 | [rom-data](rom-data.md) | · |
-| [`LoadEnemyMonData`](rom-data.md#s-LoadEnemyMonData) | `$6B01` b15 | 922 | [rom-data](rom-data.md) | · |
-| [`LoadMapHeader`](rom-data.md#s-LoadMapHeader) | `$107C` | 1211 | [rom-data](rom-data.md) | · |
-| [`LoadTileBlockMap`](rom-data.md#s-LoadTileBlockMap) | `$09FC` | 1664 | [rom-data](rom-data.md) | · |
-| [`MapHeaderBanks`](rom-data.md#s-MapHeaderBanks) | `$423D` b3 | 1409 | [rom-data](rom-data.md) | · |
-| [`MapHeaderPointers`](rom-data.md#s-MapHeaderPointers) | `$01AE` | 2126 | [rom-data](rom-data.md) | · |
-| [`MapSongBanks`](rom-data.md#s-MapSongBanks) | `$404D` b3 | 496 | [rom-data](rom-data.md) | · |
-| [`MapSpriteSets`](rom-data.md#s-MapSpriteSets) | `$7A64` b5 | 195 | [rom-data](rom-data.md) | · |
-| [`MewBaseStats`](rom-data.md#s-MewBaseStats) | `$425B` b1 | 941 | [rom-data](rom-data.md) | · |
-| [`MonPartyData`](rom-data.md#s-MonPartyData) | `$590D` b28 | 3259 | [rom-data](rom-data.md) | · |
-| [`MonsterNames`](rom-data.md#s-MonsterNames) | `$421E` b7 | 2043 | [rom-data](rom-data.md) | I |
-| [`MonsterPalettes`](rom-data.md#s-MonsterPalettes) | `$65C8` b28 | 4128 | [rom-data](rom-data.md) | · |
-| [`MoveNames`](rom-data.md#s-MoveNames) | `$4000` b44 | 1551 | [rom-data](rom-data.md) | · |
-| [`Moves`](rom-data.md#s-Moves) | `$4000` b14 | 990 | [rom-data](rom-data.md) | · |
-| [`NintendoCopyrightLogoGraphics`](rom-data.md#s-NintendoCopyrightLogoGraphics) | `$60C8` b4 | 448 | [rom-data](rom-data.md) | · |
-| [`PlaceString`](rom-data.md#s-PlaceString) | `$1955` | 491 | [rom-data](rom-data.md) | · |
-| [`PokedexEntryPointers`](rom-data.md#s-PokedexEntryPointers) | `$447E` b16 | 2982 | [rom-data](rom-data.md) | · |
-| [`PokedexOrder`](rom-data.md#s-PokedexOrder) | `$5024` b16 | 6095 | [rom-data](rom-data.md) | I |
-| [`PokemonLogoGraphics`](rom-data.md#s-PokemonLogoGraphics) | `$5380` b4 | 1792 | [rom-data](rom-data.md) | · |
-| [`Random_`](rom-data.md#s-Random_) | `$7A8F` b4 | 17 | [rom-data](rom-data.md) | · |
-| [`ReadTrainer`](rom-data.md#s-ReadTrainer) | `$5C53` b14 | 232 | [rom-data](rom-data.md) | · |
-| [`RedPicFront`](rom-data.md#s-RedPicFront) | `$6EDE` b4 | 266 | [rom-data](rom-data.md) | · |
-| [`sBank2AllBoxesChecksum`](storage.md#s-sBank2AllBoxesChecksum) | `$BA4C` b2 | 1 | [storage](storage.md) | R |
-| [`sBank2IndividualBoxChecksums`](storage.md#s-sBank2IndividualBoxChecksums) | `$BA4D` b2 | 6 | [storage](storage.md) | R |
-| [`sBank3AllBoxesChecksum`](storage.md#s-sBank3AllBoxesChecksum) | `$BA4C` b3 | 1 | [storage](storage.md) | R |
-| [`sBank3IndividualBoxChecksums`](storage.md#s-sBank3IndividualBoxChecksums) | `$BA4D` b3 | 6 | [storage](storage.md) | R |
-| [`sBox1`](storage.md#s-sBox1) | `$A000` b2 | 1122 | [storage](storage.md) | R |
-| [`sBox10`](storage.md#s-sBox10) | `$AD26` b3 | 1122 | [storage](storage.md) | R |
-| [`sBox11`](storage.md#s-sBox11) | `$B188` b3 | 1122 | [storage](storage.md) | R |
-| [`sBox12`](storage.md#s-sBox12) | `$B5EA` b3 | 1122 | [storage](storage.md) | R |
-| [`sBox7`](storage.md#s-sBox7) | `$A000` b3 | 1122 | [storage](storage.md) | R |
-| [`sBox8`](storage.md#s-sBox8) | `$A462` b3 | 1122 | [storage](storage.md) | R |
-| [`sBox9`](storage.md#s-sBox9) | `$A8C4` b3 | 1122 | [storage](storage.md) | R |
-| [`sCurBoxData`](save.md#s-sCurBoxData) | `$B0C0` b1 | 1122 | [save](save.md) | R |
-| [`SFX_Headers_1`](rom-data.md#s-SFX_Headers_1) | `$4000` b2 | 558 | [rom-data](rom-data.md) | · |
-| [`sGameData`](save.md) | `$A598` b1 | 11 | [save](save.md) | R |
-| [`sGameDataEnd`](save.md) | `$B523` b1 | 1 | [save](save.md) | R |
-| [`sHallOfFame`](save.md#s-sHallOfFame) | `$A598` b0 | 4800 | [save](save.md) | R |
-| [`ShrinkPic1`](rom-data.md#s-ShrinkPic1) | `$6FE8` b4 | 90 | [rom-data](rom-data.md) | · |
-| [`sMainData`](save.md#s-sMainData) | `$A5A3` b1 | 1929 | [save](save.md) | R |
-| [`sMainDataCheckSum`](save.md#s-sMainDataCheckSum) | `$B523` b1 | 1 | [save](save.md) | R |
-| [`sPartyData`](party.md#s-sPartyData) | `$AF2C` b1 | 404 | [party](party.md) | R |
-| [`sPlayerName`](save.md#s-sPlayerName) | `$A598` b1 | 11 | [save](save.md) | R |
-| [`SpriteSheetPointerTable`](rom-data.md#s-SpriteSheetPointerTable) | `$7B27` b5 | 1080 | [rom-data](rom-data.md) | · |
-| [`sSpriteBuffer0`](graphics.md#s-sSpriteBuffer0) | `$A000` b0 | 392 | [graphics](graphics.md) | R |
-| [`sSpriteBuffer1`](graphics.md#s-sSpriteBuffer1) | `$A188` b0 | 392 | [graphics](graphics.md) | R |
-| [`sSpriteData`](save.md#s-sSpriteData) | `$AD2C` b1 | 512 | [save](save.md) | R |
-| [`sTileAnimations`](save.md#s-sTileAnimations) | `$B522` b1 | 1 | [save](save.md) | R |
-| [`TechnicalMachines`](rom-data.md#s-TechnicalMachines) | `$7773` b4 | 796 | [rom-data](rom-data.md) | · |
-| [`TextBoxGraphics`](rom-data.md#s-TextBoxGraphics) | `$6288` b4 | 1616 | [rom-data](rom-data.md) | · |
-| [`TextCommandProcessor`](rom-data.md#s-TextCommandProcessor) | `$1B40` | 2493 | [rom-data](rom-data.md) | · |
-| [`Tilesets`](rom-data.md#s-Tilesets) | `$47BE` b3 | 1837 | [rom-data](rom-data.md) | · |
-| [`TrainerAIPointers`](rom-data.md#s-TrainerAIPointers) | `$655C` b14 | 2816 | [rom-data](rom-data.md) | · |
-| [`TrainerClassMoveChoiceModifications`](rom-data.md#s-TrainerClassMoveChoiceModifications) | `$589B` b14 | 121 | [rom-data](rom-data.md) | · |
-| [`TrainerDataPointers`](rom-data.md#s-TrainerDataPointers) | `$5D3B` b14 | 2081 | [rom-data](rom-data.md) | · |
-| [`TrainerNames`](rom-data.md#s-TrainerNames) | `$59FF` b14 | 596 | [rom-data](rom-data.md) | · |
-| [`TrainerPicAndMoneyPointers`](rom-data.md#s-TrainerPicAndMoneyPointers) | `$5914` b14 | 235 | [rom-data](rom-data.md) | · |
-| [`TryLoadSaveFile`](rom-data.md#s-TryLoadSaveFile) | `$75E8` b28 | 622 | [rom-data](rom-data.md) | · |
-| [`UncompressMonSprite`](rom-data.md#s-UncompressMonSprite) | `$1627` | 814 | [rom-data](rom-data.md) | · |
-| [`UncompressSpriteData`](rom-data.md#s-UncompressSpriteData) | `$24FD` | 89 | [rom-data](rom-data.md) | · |
-| [`UncompressSpriteDataLoop`](rom-data.md#s-UncompressSpriteDataLoop) | `$2556` | 5073 | [rom-data](rom-data.md) | · |
-| [`vBackPic`](graphics.md) | `$9310` | 1264 | [graphics](graphics.md) | RL |
-| [`vBGMap0`](graphics.md#s-vBGMap0) | `$9800` | 1024 | [graphics](graphics.md) | RL |
-| [`vBGMap1`](graphics.md#s-vBGMap1) | `$9C00` | 1024 | [graphics](graphics.md) | RL |
-| [`vChars0`](graphics.md#s-vChars0) | `$8000` | 2048 | [graphics](graphics.md) | RL |
-| [`vChars1`](graphics.md) | `$8800` | 2048 | [graphics](graphics.md) | RL |
-| [`vFont`](graphics.md) | `$8800` | 2048 | [graphics](graphics.md) | RL |
-| [`vFrontPic`](graphics.md) | `$9000` | 784 | [graphics](graphics.md) | RL |
-| [`vNPCSprites`](graphics.md) | `$8000` | 2048 | [graphics](graphics.md) | RL |
-| [`vNPCSprites2`](graphics.md) | `$8800` | 2048 | [graphics](graphics.md) | RL |
-| [`vSprites`](graphics.md) | `$8000` | 2048 | [graphics](graphics.md) | RL |
-| [`vTileset`](graphics.md#s-vTileset) | `$9000` | 784 | [graphics](graphics.md) | RL |
-| [`vTitleLogo`](graphics.md#s-vTitleLogo) | `$8800` | 2048 | [graphics](graphics.md) | RL |
-| [`vTitleLogo2`](graphics.md#s-vTitleLogo2) | `$9310` | 1264 | [graphics](graphics.md) | RL |
-| [`wActionResultOrTookBattleTurn`](scratch.md#s-wActionResultOrTookBattleTurn) | `$CD6A` | 1 | [scratch](scratch.md) | RL |
-| [`wAddedToParty`](battle.md) | `$CCD3` | 1 | [battle](battle.md) | RL |
-| [`wAgathasRoomCurScript`](events.md#s-wAgathasRoomCurScript) | `$D64F` | 1 | [events](events.md) | RL |
-| [`wAICount`](battle.md#s-wAICount) | `$CCDF` | 3 | [battle](battle.md) | RL |
-| [`wAIItem`](battle.md#s-wAIItem) | `$CF05` | 1 | [battle](battle.md) | RL |
-| [`wAILayer2Encouragement`](battle.md#s-wAILayer2Encouragement) | `$CCD5` | 2 | [battle](battle.md) | RL |
-| [`wAlphabetCase`](battle.md) | `$CEEB` | 1 | [battle](battle.md) | RL |
-| [`wAmountMoneyWon`](scratch.md) | `$D079` | 1 | [scratch](scratch.md) | RL |
-| [`wAnimationID`](battle.md#s-wAnimationID) | `$D07C` | 1 | [battle](battle.md) | RL |
-| [`wAnimationType`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wAnimCounter`](scratch.md) | `$D08B` | 1 | [scratch](scratch.md) | RL |
-| [`wAnimPalette`](battle.md#s-wAnimPalette) | `$CC79` | 30 | [battle](battle.md) | RL |
-| [`wAnimSoundID`](battle.md#s-wAnimSoundID) | `$CF07` | 1 | [battle](battle.md) | RL |
-| [`wAudioFadeOutControl`](audio.md#s-wAudioFadeOutControl) | `$CFC7` | 1 | [audio](audio.md) | RL |
-| [`wAudioFadeOutCounter`](audio.md#s-wAudioFadeOutCounter) | `$CFC9` | 1 | [audio](audio.md) | RL |
-| [`wAudioFadeOutCounterReloadValue`](audio.md#s-wAudioFadeOutCounterReloadValue) | `$CFC8` | 1 | [audio](audio.md) | RL |
-| [`wAudioROMBank`](audio.md#s-wAudioROMBank) | `$C0EF` | 1 | [audio](audio.md) | RL |
-| [`wAudioSavedROMBank`](audio.md#s-wAudioSavedROMBank) | `$C0F0` | 1 | [audio](audio.md) | RL |
-| [`wAutoTextBoxDrawingControl`](scratch.md#s-wAutoTextBoxDrawingControl) | `$CF0C` | 1 | [scratch](scratch.md) | RL |
-| [`wBadgeNameTile`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wBadgeNumberTile`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wBadgeOrFaceTiles`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wBagItems`](bag.md#s-wBagItems) | `$D31E` | 41 | [bag](bag.md) | RLI |
-| [`wBagSavedMenuItem`](bag.md#s-wBagSavedMenuItem) | `$CC2C` | 1 | [bag](bag.md) | RL |
-| [`wBankswitchHomeSavedROMBank`](scratch.md#s-wBankswitchHomeSavedROMBank) | `$CF08` | 1 | [scratch](scratch.md) | RL |
-| [`wBankswitchHomeTemp`](scratch.md#s-wBankswitchHomeTemp) | `$CF09` | 1 | [scratch](scratch.md) | RL |
-| [`wBaseCoordX`](battle.md#s-wBaseCoordX) | `$D081` | 1 | [battle](battle.md) | RL |
-| [`wBaseCoordY`](battle.md#s-wBaseCoordY) | `$D082` | 1 | [battle](battle.md) | RL |
-| [`wBattleAndStartSavedMenuItem`](battle.md#s-wBattleAndStartSavedMenuItem) | `$CC2D` | 1 | [battle](battle.md) | RL |
-| [`wBattleMenuCurrentPP`](battle.md#s-wBattleMenuCurrentPP) | `$CD6D` | 4 | [battle](battle.md) | RL |
-| [`wBattleMon`](battle.md) | `$D014` | 1 | [battle](battle.md) | RLI |
-| [`wBattleMonAttack`](battle.md#s-wBattleMonAttack) | `$D025` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonBoxLevel`](battle.md#s-wBattleMonBoxLevel) | `$D017` | 1 | [battle](battle.md) | L |
-| [`wBattleMonCatchRate`](battle.md#s-wBattleMonCatchRate) | `$D01B` | 1 | [battle](battle.md) | L |
-| [`wBattleMonDefense`](battle.md#s-wBattleMonDefense) | `$D027` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonDVs`](battle.md#s-wBattleMonDVs) | `$D020` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonHP`](battle.md#s-wBattleMonHP) | `$D015` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonLevel`](battle.md#s-wBattleMonLevel) | `$D022` | 1 | [battle](battle.md) | RL |
-| [`wBattleMonMaxHP`](battle.md#s-wBattleMonMaxHP) | `$D023` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonMoves`](battle.md#s-wBattleMonMoves) | `$D01C` | 4 | [battle](battle.md) | RL |
-| [`wBattleMonNick`](battle.md#s-wBattleMonNick) | `$D009` | 11 | [battle](battle.md) | RL |
-| [`wBattleMonPartyPos`](battle.md) | `$D017` | 1 | [battle](battle.md) | L |
-| [`wBattleMonPP`](battle.md#s-wBattleMonPP) | `$D02D` | 4 | [battle](battle.md) | RLI |
-| [`wBattleMonSpecial`](battle.md#s-wBattleMonSpecial) | `$D02B` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonSpecies`](battle.md#s-wBattleMonSpecies) | `$D014` | 1 | [battle](battle.md) | RL |
-| [`wBattleMonSpecies2`](battle.md#s-wBattleMonSpecies2) | `$CFD9` | 1 | [battle](battle.md) | RL |
-| [`wBattleMonSpeed`](battle.md#s-wBattleMonSpeed) | `$D029` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonStats`](battle.md) | `$D023` | 2 | [battle](battle.md) | RL |
-| [`wBattleMonStatus`](battle.md#s-wBattleMonStatus) | `$D018` | 1 | [battle](battle.md) | RL |
-| [`wBattleMonType`](battle.md) | `$D019` | 1 | [battle](battle.md) | RL |
-| [`wBattleMonType1`](battle.md#s-wBattleMonType1) | `$D019` | 1 | [battle](battle.md) | RL |
-| [`wBattleResult`](battle.md#s-wBattleResult) | `$CF0B` | 1 | [battle](battle.md) | RL |
-| [`wBattleStatusData`](scratch.md) | `$D060` | 1 | [scratch](scratch.md) | RL |
-| [`wBattleStatusDataEnd`](battle.md) | `$D078` | 1 | [battle](battle.md) | RL |
-| [`wBattleTransitionCircleScreenQuadrantX`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wBattleTransitionCircleScreenQuadrantY`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wBattleTransitionCopyTilesOffset`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wBattleTransitionSpiralDirection`](battle.md#s-wBattleTransitionSpiralDirection) | `$CD47` | 1 | [battle](battle.md) | RL |
-| [`wBattleType`](battle.md#s-wBattleType) | `$D05A` | 1 | [battle](battle.md) | RL |
-| [`wBeatGymFlags`](events.md#s-wBeatGymFlags) | `$D72A` | 2 | [events](events.md) | RL |
-| [`wBillsHouseCurScript`](events.md#s-wBillsHouseCurScript) | `$D661` | 1 | [events](events.md) | RL |
-| [`wBluesHouseCurScript`](events.md#s-wBluesHouseCurScript) | `$D5F3` | 1 | [events](events.md) | RL |
-| [`wBoostExpByExpAll`](battle.md#s-wBoostExpByExpAll) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wBoughtOrSoldItemInMart`](scratch.md#s-wBoughtOrSoldItemInMart) | `$CF0A` | 1 | [scratch](scratch.md) | RL |
-| [`wBoulderSpriteIndex`](events.md#s-wBoulderSpriteIndex) | `$D718` | 1 | [events](events.md) | RL |
-| [`wBoxCount`](storage.md#s-wBoxCount) | `$DA80` | 1 | [storage](storage.md) | RLI |
-| [`wBoxDataEnd`](storage.md#s-wBoxDataEnd) | `$DEE2` | — | [storage](storage.md) | RL |
-| [`wBoxDataStart`](storage.md) | `$DA80` | 1 | [storage](storage.md) | RL |
-| [`wBoxItems`](bag.md#s-wBoxItems) | `$D53B` | 101 | [bag](bag.md) | LI |
-| [`wBoxMon1`](storage.md) | `$DA96` | 1 | [storage](storage.md) | RLI |
-| [`wBoxMon1AttackExp`](storage.md#s-wBoxMon1AttackExp) | `$DAA9` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1BoxLevel`](storage.md#s-wBoxMon1BoxLevel) | `$DA99` | 1 | [storage](storage.md) | L |
-| [`wBoxMon1CatchRate`](storage.md#s-wBoxMon1CatchRate) | `$DA9D` | 1 | [storage](storage.md) | L |
-| [`wBoxMon1DefenseExp`](storage.md#s-wBoxMon1DefenseExp) | `$DAAB` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1DVs`](storage.md#s-wBoxMon1DVs) | `$DAB1` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1Exp`](storage.md#s-wBoxMon1Exp) | `$DAA4` | 3 | [storage](storage.md) | L |
-| [`wBoxMon1HP`](storage.md#s-wBoxMon1HP) | `$DA97` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1HPExp`](storage.md#s-wBoxMon1HPExp) | `$DAA7` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1Moves`](storage.md#s-wBoxMon1Moves) | `$DA9E` | 4 | [storage](storage.md) | RL |
-| [`wBoxMon1Nick`](storage.md#s-wBoxMon1Nick) | `$DE06` | 11 | [storage](storage.md) | RL |
-| [`wBoxMon1OT`](storage.md#s-wBoxMon1OT) | `$DD2A` | 11 | [storage](storage.md) | RL |
-| [`wBoxMon1OTID`](storage.md#s-wBoxMon1OTID) | `$DAA2` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1PP`](storage.md#s-wBoxMon1PP) | `$DAB3` | 4 | [storage](storage.md) | L |
-| [`wBoxMon1SpecialExp`](storage.md#s-wBoxMon1SpecialExp) | `$DAAF` | 2 | [storage](storage.md) | RL |
-| [`wBoxMon1Species`](storage.md#s-wBoxMon1Species) | `$DA96` | 1 | [storage](storage.md) | RL |
-| [`wBoxMon1SpeedExp`](storage.md#s-wBoxMon1SpeedExp) | `$DAAD` | 2 | [storage](storage.md) | L |
-| [`wBoxMon1Status`](storage.md#s-wBoxMon1Status) | `$DA9A` | 1 | [storage](storage.md) | L |
-| [`wBoxMon1Type`](storage.md) | `$DA9B` | 1 | [storage](storage.md) | L |
-| [`wBoxMon1Type1`](storage.md#s-wBoxMon1Type1) | `$DA9B` | 1 | [storage](storage.md) | L |
-| [`wBoxMonCounts`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wBoxMonNicks`](storage.md) | `$DE06` | 11 | [storage](storage.md) | RL |
-| [`wBoxMonNicksEnd`](storage.md) | `$DEE2` | — | [storage](storage.md) | RL |
-| [`wBoxMonOT`](storage.md) | `$DD2A` | 11 | [storage](storage.md) | RL |
-| [`wBoxMons`](storage.md) | `$DA96` | 1 | [storage](storage.md) | RLI |
-| [`wBoxNumString`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wBoxSpecies`](storage.md#s-wBoxSpecies) | `$DA81` | 21 | [storage](storage.md) | RLI |
-| [`wBrunosRoomCurScript`](events.md#s-wBrunosRoomCurScript) | `$D64E` | 1 | [events](events.md) | RL |
-| [`wBuffer`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wCableClubDestinationMap`](overworld.md#s-wCableClubDestinationMap) | `$D72D` | 1 | [overworld](overworld.md) | RL |
-| [`wCalculateWhoseStats`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wCanEvolveFlags`](battle.md#s-wCanEvolveFlags) | `$CCD3` | 1 | [battle](battle.md) | RL |
-| [`wCanPlaySlots`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wCapturedMonSpecies`](scratch.md#s-wCapturedMonSpecies) | `$D11C` | 1 | [scratch](scratch.md) | RL |
-| [`wCardKeyDoorX`](events.md#s-wCardKeyDoorX) | `$D740` | 3 | [events](events.md) | RL |
-| [`wCardKeyDoorY`](events.md#s-wCardKeyDoorY) | `$D73F` | 1 | [events](events.md) | RL |
-| [`wCeladonGymCurScript`](events.md#s-wCeladonGymCurScript) | `$D5FF` | 1 | [events](events.md) | RL |
-| [`wCeruleanCaveB1FCurScript`](events.md#s-wCeruleanCaveB1FCurScript) | `$D650` | 1 | [events](events.md) | RL |
-| [`wCeruleanCityCurScript`](events.md#s-wCeruleanCityCurScript) | `$D60F` | 8 | [events](events.md) | RL |
-| [`wCeruleanGymCurScript`](events.md#s-wCeruleanGymCurScript) | `$D5FD` | 1 | [events](events.md) | RL |
-| [`wChampionsRoomCurScript`](events.md#s-wChampionsRoomCurScript) | `$D64C` | 1 | [events](events.md) | RL |
-| [`wChangeBoxSavedMapTextPointer`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wChangeMonPicEnemyTurnSpecies`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wChangeMonPicPlayerTurnSpecies`](scratch.md#s-wChangeMonPicPlayerTurnSpecies) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
-| [`wChannelCommandPointers`](audio.md#s-wChannelCommandPointers) | `$C006` | 16 | [audio](audio.md) | RL |
-| [`wChannelDutyCyclePatterns`](audio.md#s-wChannelDutyCyclePatterns) | `$C046` | 8 | [audio](audio.md) | RL |
-| [`wChannelDutyCycles`](audio.md#s-wChannelDutyCycles) | `$C03E` | 8 | [audio](audio.md) | RL |
-| [`wChannelFlags1`](audio.md#s-wChannelFlags1) | `$C02E` | 8 | [audio](audio.md) | RL |
-| [`wChannelFrequencyLowBytes`](audio.md#s-wChannelFrequencyLowBytes) | `$C066` | 8 | [audio](audio.md) | RL |
-| [`wChannelLoopCounters`](audio.md#s-wChannelLoopCounters) | `$C0BE` | 8 | [audio](audio.md) | RL |
-| [`wChannelNoteDelayCounters`](audio.md#s-wChannelNoteDelayCounters) | `$C0B6` | 8 | [audio](audio.md) | RL |
-| [`wChannelNoteDelayCountersFractionalPart`](audio.md#s-wChannelNoteDelayCountersFractionalPart) | `$C0CE` | 8 | [audio](audio.md) | RL |
-| [`wChannelNoteSpeeds`](audio.md#s-wChannelNoteSpeeds) | `$C0C6` | 8 | [audio](audio.md) | RL |
-| [`wChannelOctaves`](audio.md#s-wChannelOctaves) | `$C0D6` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideCurrentFrequencyFractionalPart`](audio.md#s-wChannelPitchSlideCurrentFrequencyFractionalPart) | `$C08E` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideCurrentFrequencyHighBytes`](audio.md#s-wChannelPitchSlideCurrentFrequencyHighBytes) | `$C096` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideCurrentFrequencyLowBytes`](audio.md#s-wChannelPitchSlideCurrentFrequencyLowBytes) | `$C09E` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideFrequencySteps`](audio.md#s-wChannelPitchSlideFrequencySteps) | `$C07E` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideFrequencyStepsFractionalPart`](audio.md#s-wChannelPitchSlideFrequencyStepsFractionalPart) | `$C086` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideLengthModifiers`](audio.md#s-wChannelPitchSlideLengthModifiers) | `$C076` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideTargetFrequencyHighBytes`](audio.md#s-wChannelPitchSlideTargetFrequencyHighBytes) | `$C0A6` | 8 | [audio](audio.md) | RL |
-| [`wChannelPitchSlideTargetFrequencyLowBytes`](audio.md#s-wChannelPitchSlideTargetFrequencyLowBytes) | `$C0AE` | 8 | [audio](audio.md) | RL |
-| [`wChannelReturnAddresses`](audio.md#s-wChannelReturnAddresses) | `$C016` | 16 | [audio](audio.md) | RL |
-| [`wChannelSoundIDs`](audio.md#s-wChannelSoundIDs) | `$C026` | 8 | [audio](audio.md) | RL |
-| [`wChannelVibratoDelayCounterReloadValues`](audio.md#s-wChannelVibratoDelayCounterReloadValues) | `$C06E` | 8 | [audio](audio.md) | RL |
-| [`wChannelVibratoDelayCounters`](audio.md#s-wChannelVibratoDelayCounters) | `$C04E` | 8 | [audio](audio.md) | RL |
-| [`wChannelVibratoExtents`](audio.md#s-wChannelVibratoExtents) | `$C056` | 8 | [audio](audio.md) | RL |
-| [`wChannelVibratoRates`](audio.md#s-wChannelVibratoRates) | `$C05E` | 8 | [audio](audio.md) | RL |
-| [`wChannelVolumes`](audio.md#s-wChannelVolumes) | `$C0DE` | 8 | [audio](audio.md) | RL |
-| [`wChargeMoveNum`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wCheckFor180DegreeTurn`](scratch.md#s-wCheckFor180DegreeTurn) | `$CC4B` | 2 | [scratch](scratch.md) | RL |
-| [`wChosenMenuItem`](scratch.md) | `$D12D` | 1 | [scratch](scratch.md) | RL |
-| [`wCinnabarGymCurScript`](events.md#s-wCinnabarGymCurScript) | `$D65E` | 1 | [events](events.md) | RL |
-| [`wCinnabarIslandCurScript`](events.md#s-wCinnabarIslandCurScript) | `$D639` | 1 | [events](events.md) | RL |
-| [`wCompletedInGameTradeFlags`](events.md#s-wCompletedInGameTradeFlags) | `$D737` | 4 | [events](events.md) | RL |
-| [`wCoordAdjustmentAmount`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wCoordIndex`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wCopyingSGBTileData`](graphics.md) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
-| [`wCriticalHitOrOHKO`](battle.md#s-wCriticalHitOrOHKO) | `$D05E` | 1 | [battle](battle.md) | RL |
-| [`wCurEnemyLevel`](battle.md#s-wCurEnemyLevel) | `$D127` | 1 | [battle](battle.md) | RL |
-| [`wCurItem`](scratch.md) | `$CF91` | 1 | [scratch](scratch.md) | RL |
-| [`wCurListMenuItem`](scratch.md#s-wCurListMenuItem) | `$CF91` | 1 | [scratch](scratch.md) | RL |
-| [`wCurMap`](overworld.md#s-wCurMap) | `$D35E` | 1 | [overworld](overworld.md) | RLI |
-| [`wCurMapConnections`](overworld.md#s-wCurMapConnections) | `$D370` | 1 | [overworld](overworld.md) | RL |
-| [`wCurMapDataPtr`](overworld.md#s-wCurMapDataPtr) | `$D36A` | 2 | [overworld](overworld.md) | RL |
-| [`wCurMapHeader`](overworld.md) | `$D367` | 1 | [overworld](overworld.md) | RL |
-| [`wCurMapHeaderEnd`](overworld.md) | `$D371` | 1 | [overworld](overworld.md) | RL |
-| [`wCurMapHeight`](overworld.md#s-wCurMapHeight) | `$D368` | 1 | [overworld](overworld.md) | RLI |
-| [`wCurMapScript`](events.md#s-wCurMapScript) | `$DA39` | 8 | [events](events.md) | RL |
-| [`wCurMapScriptPtr`](events.md#s-wCurMapScriptPtr) | `$D36E` | 2 | [events](events.md) | RL |
-| [`wCurMapTextPtr`](overworld.md#s-wCurMapTextPtr) | `$D36C` | 2 | [overworld](overworld.md) | RL |
-| [`wCurMapTileset`](overworld.md#s-wCurMapTileset) | `$D367` | 1 | [overworld](overworld.md) | RL |
-| [`wCurMapWidth`](overworld.md#s-wCurMapWidth) | `$D369` | 1 | [overworld](overworld.md) | RLI |
-| [`wCurOpponent`](battle.md#s-wCurOpponent) | `$D059` | 1 | [battle](battle.md) | RL |
-| [`wCurPartySpecies`](scratch.md) | `$CF91` | 1 | [scratch](scratch.md) | RL |
-| [`wCurrentBoxNum`](storage.md#s-wCurrentBoxNum) | `$D5A0` | 2 | [storage](storage.md) | RLI |
-| [`wCurrentMapHeight2`](overworld.md#s-wCurrentMapHeight2) | `$D524` | 1 | [overworld](overworld.md) | RL |
-| [`wCurrentMapScriptFlags`](overworld.md#s-wCurrentMapScriptFlags) | `$D126` | 1 | [overworld](overworld.md) | RL |
-| [`wCurrentMapWidth2`](overworld.md#s-wCurrentMapWidth2) | `$D525` | 1 | [overworld](overworld.md) | RL |
-| [`wCurrentMenuItem`](screen.md#s-wCurrentMenuItem) | `$CC26` | 1 | [screen](screen.md) | RL |
-| [`wCurrentTileBlockMapViewPointer`](overworld.md#s-wCurrentTileBlockMapViewPointer) | `$D35F` | 2 | [overworld](overworld.md) | RL |
-| [`wCurSpecies`](scratch.md) | `$D0B5` | 1 | [scratch](scratch.md) | RL |
-| [`wCurSpriteMovement2`](scratch.md#s-wCurSpriteMovement2) | `$CF14` | 3 | [scratch](scratch.md) | RL |
-| [`wCutTile`](scratch.md#s-wCutTile) | `$CD4D` | 1 | [scratch](scratch.md) | RL |
-| [`wDamage`](battle.md#s-wDamage) | `$D0D7` | 4 | [battle](battle.md) | RL |
-| [`wDamageMultipliers`](battle.md#s-wDamageMultipliers) | `$D05B` | 1 | [battle](battle.md) | RL |
-| [`wDayCareInUse`](storage.md#s-wDayCareInUse) | `$DA48` | 1 | [storage](storage.md) | RL |
-| [`wDayCareMon`](storage.md) | `$DA5F` | 1 | [storage](storage.md) | RL |
-| [`wDayCareMonAttackExp`](storage.md#s-wDayCareMonAttackExp) | `$DA72` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonBoxLevel`](storage.md#s-wDayCareMonBoxLevel) | `$DA62` | 1 | [storage](storage.md) | RL |
-| [`wDayCareMonCatchRate`](storage.md#s-wDayCareMonCatchRate) | `$DA66` | 1 | [storage](storage.md) | L |
-| [`wDayCareMonDefenseExp`](storage.md#s-wDayCareMonDefenseExp) | `$DA74` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonDVs`](storage.md#s-wDayCareMonDVs) | `$DA7A` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonExp`](storage.md#s-wDayCareMonExp) | `$DA6D` | 3 | [storage](storage.md) | RL |
-| [`wDayCareMonHP`](storage.md#s-wDayCareMonHP) | `$DA60` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonHPExp`](storage.md#s-wDayCareMonHPExp) | `$DA70` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonMoves`](storage.md#s-wDayCareMonMoves) | `$DA67` | 4 | [storage](storage.md) | RL |
-| [`wDayCareMonName`](storage.md#s-wDayCareMonName) | `$DA49` | 11 | [storage](storage.md) | RL |
-| [`wDayCareMonOT`](storage.md#s-wDayCareMonOT) | `$DA54` | 11 | [storage](storage.md) | RL |
-| [`wDayCareMonOTID`](storage.md#s-wDayCareMonOTID) | `$DA6B` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonPP`](storage.md#s-wDayCareMonPP) | `$DA7C` | 4 | [storage](storage.md) | L |
-| [`wDayCareMonSpecialExp`](storage.md#s-wDayCareMonSpecialExp) | `$DA78` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonSpecies`](storage.md#s-wDayCareMonSpecies) | `$DA5F` | 1 | [storage](storage.md) | RL |
-| [`wDayCareMonSpeedExp`](storage.md#s-wDayCareMonSpeedExp) | `$DA76` | 2 | [storage](storage.md) | L |
-| [`wDayCareMonStatus`](storage.md#s-wDayCareMonStatus) | `$DA63` | 1 | [storage](storage.md) | L |
-| [`wDayCareMonType`](storage.md) | `$DA64` | 1 | [storage](storage.md) | L |
-| [`wDayCareMonType1`](storage.md#s-wDayCareMonType1) | `$DA64` | 1 | [storage](storage.md) | L |
-| [`wDayCareNumLevelsGrown`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wDayCarePerLevelCost`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wDayCareStartLevel`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wDayCareTotalCost`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wDefaultMap`](battle.md) | `$D07C` | 1 | [battle](battle.md) | RL |
-| [`wDefaultPaletteCommand`](scratch.md#s-wDefaultPaletteCommand) | `$CF1C` | 1 | [scratch](scratch.md) | RL |
-| [`wDestinationMap`](overworld.md#s-wDestinationMap) | `$D71A` | 1 | [overworld](overworld.md) | RL |
-| [`wDestinationWarpID`](overworld.md#s-wDestinationWarpID) | `$D42F` | 129 | [overworld](overworld.md) | RL |
-| [`wDexMaxSeenMon`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wDexRatingNumMonsOwned`](pokedex.md#s-wDexRatingNumMonsOwned) | `$CC5C` | 1 | [pokedex](pokedex.md) | L |
-| [`wDexRatingNumMonsSeen`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wDexRatingText`](pokedex.md#s-wDexRatingText) | `$CC5D` | 1 | [pokedex](pokedex.md) | RL |
-| [`wDisableChannelOutputWhenSfxEnds`](audio.md#s-wDisableChannelOutputWhenSfxEnds) | `$C003` | 1 | [audio](audio.md) | RL |
-| [`wDisableVBlankWYUpdate`](scratch.md#s-wDisableVBlankWYUpdate) | `$D0A0` | 1 | [scratch](scratch.md) | RL |
-| [`wDoNotWaitForButtonPressAfterDisplayingText`](screen.md#s-wDoNotWaitForButtonPressAfterDisplayingText) | `$CC3C` | 1 | [screen](screen.md) | RL |
-| [`wDownscaledMonSize`](scratch.md) | `$CD6C` | 1 | [scratch](scratch.md) | RL |
-| [`wDropletTile`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wDungeonWarpDataEntrySize`](scratch.md) | `$D12F` | 1 | [scratch](scratch.md) | RL |
-| [`wDungeonWarpDestinationMap`](overworld.md#s-wDungeonWarpDestinationMap) | `$D71D` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectedMap`](overworld.md#s-wEastConnectedMap) | `$D392` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectedMapViewPointer`](overworld.md#s-wEastConnectedMapViewPointer) | `$D39B` | 2 | [overworld](overworld.md) | RL |
-| [`wEastConnectedMapWidth`](overworld.md#s-wEastConnectedMapWidth) | `$D398` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectedMapXAlignment`](overworld.md#s-wEastConnectedMapXAlignment) | `$D39A` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectedMapYAlignment`](overworld.md#s-wEastConnectedMapYAlignment) | `$D399` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectionHeader`](overworld.md) | `$D392` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectionStripDest`](overworld.md#s-wEastConnectionStripDest) | `$D395` | 2 | [overworld](overworld.md) | RL |
-| [`wEastConnectionStripLength`](overworld.md#s-wEastConnectionStripLength) | `$D397` | 1 | [overworld](overworld.md) | RL |
-| [`wEastConnectionStripSrc`](overworld.md#s-wEastConnectionStripSrc) | `$D393` | 2 | [overworld](overworld.md) | RL |
-| [`wElevatorWarpMaps`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wElite4Flags`](events.md#s-wElite4Flags) | `$D734` | 2 | [events](events.md) | RL |
-| [`wEmotionBubbleSpriteIndex`](scratch.md#s-wEmotionBubbleSpriteIndex) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
-| [`wEndBattleLoseTextPointer`](scratch.md#s-wEndBattleLoseTextPointer) | `$D08E` | 4 | [scratch](scratch.md) | RL |
-| [`wEndBattleTextRomBank`](scratch.md#s-wEndBattleTextRomBank) | `$D092` | 2 | [scratch](scratch.md) | RL |
-| [`wEndBattleWinTextPointer`](scratch.md#s-wEndBattleWinTextPointer) | `$D08C` | 2 | [scratch](scratch.md) | RL |
-| [`wEnemyBattleStatus1`](battle.md#s-wEnemyBattleStatus1) | `$D067` | 1 | [battle](battle.md) | RL |
-| [`wEnemyBideAccumulatedDamage`](scratch.md) | `$CD05` | 10 | [scratch](scratch.md) | RL |
-| [`wEnemyConfusedCounter`](scratch.md#s-wEnemyConfusedCounter) | `$D070` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyDisabledMove`](battle.md#s-wEnemyDisabledMove) | `$D072` | 2 | [battle](battle.md) | RL |
-| [`wEnemyDisabledMoveNumber`](battle.md#s-wEnemyDisabledMoveNumber) | `$CCEF` | 1 | [battle](battle.md) | RL |
-| [`wEnemyHPBarColor`](scratch.md#s-wEnemyHPBarColor) | `$CF1E` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyMon`](battle.md) | `$CFE5` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMon1`](battle.md) | `$D8A4` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMon1Attack`](battle.md#s-wEnemyMon1Attack) | `$D8C8` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1AttackExp`](battle.md#s-wEnemyMon1AttackExp) | `$D8B7` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1BoxLevel`](battle.md#s-wEnemyMon1BoxLevel) | `$D8A7` | 1 | [battle](battle.md) | L |
-| [`wEnemyMon1CatchRate`](battle.md#s-wEnemyMon1CatchRate) | `$D8AB` | 1 | [battle](battle.md) | L |
-| [`wEnemyMon1Defense`](battle.md#s-wEnemyMon1Defense) | `$D8CA` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1DefenseExp`](battle.md#s-wEnemyMon1DefenseExp) | `$D8B9` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1DVs`](battle.md#s-wEnemyMon1DVs) | `$D8BF` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1Exp`](battle.md#s-wEnemyMon1Exp) | `$D8B2` | 3 | [battle](battle.md) | L |
-| [`wEnemyMon1HP`](battle.md#s-wEnemyMon1HP) | `$D8A5` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMon1HPExp`](battle.md#s-wEnemyMon1HPExp) | `$D8B5` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1Level`](battle.md#s-wEnemyMon1Level) | `$D8C5` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMon1MaxHP`](battle.md#s-wEnemyMon1MaxHP) | `$D8C6` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMon1Moves`](battle.md#s-wEnemyMon1Moves) | `$D8AC` | 4 | [battle](battle.md) | RL |
-| [`wEnemyMon1Nick`](battle.md#s-wEnemyMon1Nick) | `$D9EE` | 11 | [battle](battle.md) | RL |
-| [`wEnemyMon1OT`](battle.md#s-wEnemyMon1OT) | `$D9AC` | 11 | [battle](battle.md) | RL |
-| [`wEnemyMon1OTID`](battle.md#s-wEnemyMon1OTID) | `$D8B0` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1PP`](battle.md#s-wEnemyMon1PP) | `$D8C1` | 4 | [battle](battle.md) | RL |
-| [`wEnemyMon1Special`](battle.md#s-wEnemyMon1Special) | `$D8CE` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1SpecialExp`](battle.md#s-wEnemyMon1SpecialExp) | `$D8BD` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1Species`](battle.md#s-wEnemyMon1Species) | `$D8A4` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMon1Speed`](battle.md#s-wEnemyMon1Speed) | `$D8CC` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1SpeedExp`](battle.md#s-wEnemyMon1SpeedExp) | `$D8BB` | 2 | [battle](battle.md) | L |
-| [`wEnemyMon1Stats`](battle.md) | `$D8C6` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMon1Status`](battle.md#s-wEnemyMon1Status) | `$D8A8` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMon1Type`](battle.md) | `$D8A9` | 1 | [battle](battle.md) | L |
-| [`wEnemyMon1Type1`](battle.md#s-wEnemyMon1Type1) | `$D8A9` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonAccuracyMod`](battle.md#s-wEnemyMonAccuracyMod) | `$CD32` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonActualCatchRate`](battle.md#s-wEnemyMonActualCatchRate) | `$D007` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonAttack`](battle.md#s-wEnemyMonAttack) | `$CFF6` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonAttackMod`](battle.md) | `$CD2E` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonBaseExp`](battle.md#s-wEnemyMonBaseExp) | `$D008` | 1 | [battle](battle.md) | R |
-| [`wEnemyMonBaseStats`](battle.md#s-wEnemyMonBaseStats) | `$D002` | 5 | [battle](battle.md) | RL |
-| [`wEnemyMonBoxLevel`](battle.md#s-wEnemyMonBoxLevel) | `$CFE8` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonCatchRate`](battle.md#s-wEnemyMonCatchRate) | `$CFEC` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonDefense`](battle.md#s-wEnemyMonDefense) | `$CFF8` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonDefenseMod`](battle.md#s-wEnemyMonDefenseMod) | `$CD2F` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonDVs`](battle.md#s-wEnemyMonDVs) | `$CFF1` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonEvasionMod`](battle.md#s-wEnemyMonEvasionMod) | `$CD33` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonHP`](battle.md#s-wEnemyMonHP) | `$CFE6` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonLevel`](battle.md#s-wEnemyMonLevel) | `$CFF3` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonMaxHP`](battle.md#s-wEnemyMonMaxHP) | `$CFF4` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonMinimized`](battle.md#s-wEnemyMonMinimized) | `$CCF3` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonMoves`](battle.md#s-wEnemyMonMoves) | `$CFED` | 4 | [battle](battle.md) | RL |
-| [`wEnemyMonNick`](battle.md#s-wEnemyMonNick) | `$CFDA` | 11 | [battle](battle.md) | RL |
-| [`wEnemyMonNicks`](battle.md) | `$D9EE` | 11 | [battle](battle.md) | RL |
-| [`wEnemyMonOrTrainerClass`](battle.md#s-wEnemyMonOrTrainerClass) | `$D713` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonOT`](battle.md) | `$D9AC` | 11 | [battle](battle.md) | RL |
-| [`wEnemyMonPartyPos`](battle.md) | `$CFE8` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonPP`](battle.md#s-wEnemyMonPP) | `$CFFE` | 4 | [battle](battle.md) | RL |
-| [`wEnemyMons`](battle.md) | `$D8A4` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonSpecial`](battle.md#s-wEnemyMonSpecial) | `$CFFC` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonSpecialMod`](battle.md#s-wEnemyMonSpecialMod) | `$CD31` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonSpecies`](battle.md#s-wEnemyMonSpecies) | `$CFE5` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonSpecies2`](battle.md#s-wEnemyMonSpecies2) | `$CFD8` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonSpeed`](battle.md#s-wEnemyMonSpeed) | `$CFFA` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonSpeedMod`](battle.md#s-wEnemyMonSpeedMod) | `$CD30` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonStatMods`](battle.md) | `$CD2E` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonStatModsEnd`](battle.md#s-wEnemyMonStatModsEnd) | `$CD36` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonStats`](battle.md) | `$CFF4` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonStatus`](battle.md#s-wEnemyMonStatus) | `$CFE9` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonType`](battle.md) | `$CFEA` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonType1`](battle.md#s-wEnemyMonType1) | `$CFEA` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonUnmodifiedAttack`](battle.md#s-wEnemyMonUnmodifiedAttack) | `$CD26` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonUnmodifiedDefense`](battle.md#s-wEnemyMonUnmodifiedDefense) | `$CD28` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonUnmodifiedLevel`](battle.md#s-wEnemyMonUnmodifiedLevel) | `$CD23` | 1 | [battle](battle.md) | RL |
-| [`wEnemyMonUnmodifiedMaxHP`](battle.md#s-wEnemyMonUnmodifiedMaxHP) | `$CD24` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMonUnmodifiedSpecial`](battle.md#s-wEnemyMonUnmodifiedSpecial) | `$CD2C` | 1 | [battle](battle.md) | L |
-| [`wEnemyMonUnmodifiedSpeed`](battle.md#s-wEnemyMonUnmodifiedSpeed) | `$CD2A` | 2 | [battle](battle.md) | RL |
-| [`wEnemyMoveAccuracy`](scratch.md#s-wEnemyMoveAccuracy) | `$CFD0` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyMoveEffect`](scratch.md#s-wEnemyMoveEffect) | `$CFCD` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyMoveListIndex`](scratch.md#s-wEnemyMoveListIndex) | `$CCE2` | 1 | [scratch](scratch.md) | R |
-| [`wEnemyMoveMaxPP`](scratch.md#s-wEnemyMoveMaxPP) | `$CFD1` | 1 | [scratch](scratch.md) | · |
-| [`wEnemyMoveNum`](scratch.md#s-wEnemyMoveNum) | `$CFCC` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyMovePower`](scratch.md#s-wEnemyMovePower) | `$CFCE` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyMoveType`](scratch.md#s-wEnemyMoveType) | `$CFCF` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyNumAttacksLeft`](battle.md#s-wEnemyNumAttacksLeft) | `$D06F` | 1 | [battle](battle.md) | RL |
-| [`wEnemyNumHits`](scratch.md#s-wEnemyNumHits) | `$CD05` | 10 | [scratch](scratch.md) | RL |
-| [`wEnemyPartyCount`](battle.md#s-wEnemyPartyCount) | `$D89C` | 1 | [battle](battle.md) | RL |
-| [`wEnemyPartySpecies`](battle.md#s-wEnemyPartySpecies) | `$D89D` | 7 | [battle](battle.md) | RL |
-| [`wEnemySelectedMove`](battle.md#s-wEnemySelectedMove) | `$CCDD` | 1 | [battle](battle.md) | RL |
-| [`wEnemyStatsToDouble`](scratch.md#s-wEnemyStatsToDouble) | `$D065` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyStatsToHalve`](scratch.md#s-wEnemyStatsToHalve) | `$D066` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemySubstituteHP`](battle.md#s-wEnemySubstituteHP) | `$CCD8` | 1 | [battle](battle.md) | RL |
-| [`wEnemyToxicCounter`](scratch.md#s-wEnemyToxicCounter) | `$D071` | 1 | [scratch](scratch.md) | RL |
-| [`wEnemyUsedMove`](battle.md#s-wEnemyUsedMove) | `$CCF2` | 1 | [battle](battle.md) | RL |
-| [`wEngagedTrainerClass`](battle.md#s-wEngagedTrainerClass) | `$CD2D` | 1 | [battle](battle.md) | RL |
-| [`wEngagedTrainerSet`](battle.md#s-wEngagedTrainerSet) | `$CD2E` | 1 | [battle](battle.md) | RL |
-| [`wEnteringCableClub`](scratch.md) | `$CC47` | 2 | [scratch](scratch.md) | RL |
-| [`wEscapedFromBattle`](battle.md#s-wEscapedFromBattle) | `$D078` | 1 | [battle](battle.md) | RL |
-| [`wEventFlags`](events.md#s-wEventFlags) | `$D747` | 320 | [events](events.md) | RL |
-| [`wEvoCancelled`](scratch.md#s-wEvoCancelled) | `$CEEC` | 1 | [scratch](scratch.md) | RL |
-| [`wEvoDataBuffer`](battle.md) | `$CD6D` | 4 | [battle](battle.md) | RL |
-| [`wEvoDataBufferEnd`](scratch.md#s-wEvoDataBufferEnd) | `$CD7A` | 7 | [scratch](scratch.md) | RL |
-| [`wEvolutionOccurred`](scratch.md#s-wEvolutionOccurred) | `$D121` | 1 | [scratch](scratch.md) | RL |
-| [`wEvoMonTileOffset`](battle.md) | `$CEEB` | 1 | [battle](battle.md) | RL |
-| [`wEvoNewSpecies`](scratch.md) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
-| [`wEvoOldSpecies`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wEvoStoneItemID`](battle.md#s-wEvoStoneItemID) | `$D156` | 1 | [battle](battle.md) | RL |
-| [`wExpAmountGained`](battle.md#s-wExpAmountGained) | `$CF4B` | 2 | [battle](battle.md) | RL |
-| [`wFacingDirectionList`](scratch.md#s-wFacingDirectionList) | `$CD48` | 1 | [scratch](scratch.md) | RL |
-| [`wFallingObjectMovementByte`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wFallingObjectsMovementData`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wFBDestAddr`](battle.md#s-wFBDestAddr) | `$D09C` | 2 | [battle](battle.md) | RL |
-| [`wFBMode`](battle.md#s-wFBMode) | `$D09E` | 1 | [battle](battle.md) | RL |
-| [`wFBTileCounter`](battle.md#s-wFBTileCounter) | `$D084` | 1 | [battle](battle.md) | RL |
-| [`wFieldMoves`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wFieldMovesLeftmostXCoord`](scratch.md) | `$CD42` | 1 | [scratch](scratch.md) | RL |
-| [`wFightingDojoCurScript`](events.md#s-wFightingDojoCurScript) | `$D642` | 1 | [events](events.md) | RL |
-| [`wFilteredBagItems`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wFilteredBagItemsCount`](bag.md#s-wFilteredBagItemsCount) | `$CD37` | 1 | [bag](bag.md) | RL |
-| [`wFirstLockTrashCanIndex`](events.md#s-wFirstLockTrashCanIndex) | `$D743` | 1 | [events](events.md) | RL |
-| [`wFirstMonsNotOutYet`](scratch.md#s-wFirstMonsNotOutYet) | `$D11D` | 1 | [scratch](scratch.md) | RL |
-| [`wFlashScreenLongCounter`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wFlyAnimBirdSpriteImageIndex`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wFlyAnimCounter`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wFlyAnimUsingCoordList`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wFlyLocationsList`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wFontLoaded`](screen.md#s-wFontLoaded) | `$CFC4` | 1 | [screen](screen.md) | RL |
-| [`wForceEvolution`](battle.md#s-wForceEvolution) | `$CCD4` | 1 | [battle](battle.md) | RL |
-| [`wForcePlayerToChooseMon`](scratch.md#s-wForcePlayerToChooseMon) | `$D11F` | 1 | [scratch](scratch.md) | RL |
-| [`wFossilItem`](events.md#s-wFossilItem) | `$D70F` | 1 | [events](events.md) | RL |
-| [`wFossilMon`](events.md#s-wFossilMon) | `$D710` | 3 | [events](events.md) | RL |
-| [`wFrequencyModifier`](audio.md#s-wFrequencyModifier) | `$C0F1` | 1 | [audio](audio.md) | RL |
-| [`wFuchsiaGymCurScript`](events.md#s-wFuchsiaGymCurScript) | `$D65B` | 1 | [events](events.md) | RL |
-| [`wGainBoostedExp`](scratch.md#s-wGainBoostedExp) | `$CF4D` | 18 | [scratch](scratch.md) | RL |
-| [`wGameCornerCurScript`](events.md#s-wGameCornerCurScript) | `$D65F` | 1 | [events](events.md) | RL |
-| [`wGameProgressFlags`](events.md) | `$D5F0` | 1 | [events](events.md) | RL |
-| [`wGameProgressFlagsEnd`](events.md#s-wGameProgressFlagsEnd) | `$D6B8` | 56 | [events](events.md) | L |
-| [`wGrassMons`](overworld.md#s-wGrassMons) | `$D888` | 11 | [overworld](overworld.md) | RL |
-| [`wGrassRate`](link.md) | `$D887` | 1 | [link](link.md) | RL |
-| [`wGrassTile`](overworld.md#s-wGrassTile) | `$D535` | 5 | [overworld](overworld.md) | RL |
-| [`wGymCityName`](scratch.md#s-wGymCityName) | `$CF5F` | 17 | [scratch](scratch.md) | RL |
-| [`wGymGateTileBlock`](scratch.md#s-wGymGateTileBlock) | `$D12F` | 1 | [scratch](scratch.md) | RL |
-| [`wGymLeaderName`](scratch.md#s-wGymLeaderName) | `$CF70` | 11 | [scratch](scratch.md) | RL |
-| [`wGymLeaderNo`](battle.md#s-wGymLeaderNo) | `$D05C` | 1 | [battle](battle.md) | RL |
-| [`wGymTrashCanIndex`](scratch.md#s-wGymTrashCanIndex) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
-| [`wHallOfFame`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wHallOfFameCurScript`](events.md#s-wHallOfFameCurScript) | `$D64B` | 1 | [events](events.md) | RL |
-| [`wHiddenEventFunctionArgument`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wHiddenEventFunctionRomBank`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wHiddenEventIndex`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wHiddenEventX`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wHiddenEventY`](player.md) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wHiddenItemOrCoinsIndex`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wHoFMonLevel`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wHoFMonOrPlayer`](player.md) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wHoFMonSpecies`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wHoFPartyMonIndex`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wHoFTeamIndex`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wHoFTeamIndex2`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wHoFTeamNo`](scratch.md) | `$CD42` | 1 | [scratch](scratch.md) | RL |
-| [`wHPBarDelta`](battle.md#s-wHPBarDelta) | `$CEEF` | 1 | [battle](battle.md) | RL |
-| [`wHPBarHPDifference`](battle.md#s-wHPBarHPDifference) | `$CEFD` | 8 | [battle](battle.md) | RL |
-| [`wHPBarMaxHP`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wHPBarNewHP`](battle.md#s-wHPBarNewHP) | `$CEED` | 2 | [battle](battle.md) | RL |
-| [`wHPBarOldHP`](battle.md#s-wHPBarOldHP) | `$CEEB` | 1 | [battle](battle.md) | RL |
-| [`wHPBarTempHP`](battle.md#s-wHPBarTempHP) | `$CEF0` | 13 | [battle](battle.md) | RL |
-| [`wHPBarType`](screen.md) | `$CF94` | 1 | [screen](screen.md) | RL |
-| [`wHUDCornerTile`](player.md) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wHUDGraphicsTiles`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wHUDGraphicsTilesEnd`](scratch.md) | `$CD42` | 1 | [scratch](scratch.md) | RL |
-| [`wHUDPokeballGfxOffsetX`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wHUDTriangleTile`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wHUDUnusedTopTile`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wIgnoreInputCounter`](scratch.md#s-wIgnoreInputCounter) | `$D13A` | 1 | [scratch](scratch.md) | RL |
-| [`WildDataPointers`](rom-data.md#s-WildDataPointers) | `$4EEB` b3 | 1948 | [rom-data](rom-data.md) | · |
-| [`wInGameTradeGiveMonName`](scratch.md#s-wInGameTradeGiveMonName) | `$CD13` | 1 | [scratch](scratch.md) | RL |
-| [`wInGameTradeGiveMonSpecies`](battle.md) | `$CD0F` | 1 | [battle](battle.md) | RL |
-| [`wInGameTradeMonNick`](scratch.md#s-wInGameTradeMonNick) | `$CD29` | 1 | [scratch](scratch.md) | RL |
-| [`wInGameTradeReceiveMonName`](battle.md) | `$CD1E` | 1 | [battle](battle.md) | R |
-| [`wInGameTradeReceiveMonSpecies`](scratch.md#s-wInGameTradeReceiveMonSpecies) | `$CD34` | 2 | [scratch](scratch.md) | RL |
-| [`wInGameTradeTextPointerTableIndex`](battle.md) | `$CD12` | 1 | [battle](battle.md) | RL |
-| [`wInGameTradeTextPointerTablePointer`](battle.md) | `$CD10` | 2 | [battle](battle.md) | RL |
-| [`wInHandlePlayerMonFainted`](battle.md#s-wInHandlePlayerMonFainted) | `$CCF0` | 1 | [battle](battle.md) | RL |
-| [`wInitListType`](scratch.md#s-wInitListType) | `$D11B` | 1 | [scratch](scratch.md) | RL |
-| [`wIntroNidorinoBaseTile`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wInwardSpiralUpdateScreenCounter`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wIsInBattle`](battle.md#s-wIsInBattle) | `$D057` | 1 | [battle](battle.md) | RL |
-| [`wIsKeyItem`](system.md#s-wIsKeyItem) | `$D124` | 1 | [system](system.md) | RL |
-| [`wItemList`](scratch.md#s-wItemList) | `$CF7B` | 16 | [scratch](scratch.md) | RL |
-| [`wItemListPointer`](scratch.md#s-wItemListPointer) | `$D128` | 2 | [scratch](scratch.md) | RL |
-| [`wItemPrices`](bag.md#s-wItemPrices) | `$CF8F` | 2 | [bag](bag.md) | RL |
-| [`wItemQuantity`](bag.md#s-wItemQuantity) | `$CF96` | 1 | [bag](bag.md) | RL |
-| [`wJigglypuffFacingDirections`](scratch.md#s-wJigglypuffFacingDirections) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wJoyIgnore`](system.md#s-wJoyIgnore) | `$CD6B` | 1 | [system](system.md) | RL |
-| [`wLancesRoomCurScript`](events.md#s-wLancesRoomCurScript) | `$D653` | 5 | [events](events.md) | RL |
-| [`wLastBlackoutMap`](overworld.md#s-wLastBlackoutMap) | `$D719` | 1 | [overworld](overworld.md) | RL |
-| [`wLastFieldMoveID`](scratch.md) | `$CD43` | 1 | [scratch](scratch.md) | RL |
-| [`wLastMap`](overworld.md#s-wLastMap) | `$D365` | 1 | [overworld](overworld.md) | RL |
-| [`wLastMenuItem`](screen.md#s-wLastMenuItem) | `$CC2A` | 1 | [screen](screen.md) | RL |
-| [`wLastMusicSoundID`](audio.md#s-wLastMusicSoundID) | `$CFCA` | 1 | [audio](audio.md) | RL |
-| [`wLastSwitchInEnemyMonHP`](battle.md#s-wLastSwitchInEnemyMonHP) | `$CCE3` | 2 | [battle](battle.md) | RL |
-| [`wLearningMovesFromDayCare`](scratch.md#s-wLearningMovesFromDayCare) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wLearnMoveMonName`](scratch.md#s-wLearnMoveMonName) | `$D036` | 16 | [scratch](scratch.md) | RL |
-| [`wLeftGBMonSpecies`](scratch.md#s-wLeftGBMonSpecies) | `$CD5E` | 1 | [scratch](scratch.md) | RL |
-| [`wLetterPrintingDelayFlags`](player.md#s-wLetterPrintingDelayFlags) | `$D358` | 1 | [player](player.md) | RL |
-| [`wLinkBattleRandomNumberList`](rng.md#s-wLinkBattleRandomNumberList) | `$D148` | 10 | [rng](rng.md) | RL |
-| [`wLinkBattleRandomNumberListIndex`](rng.md#s-wLinkBattleRandomNumberListIndex) | `$CCDE` | 1 | [rng](rng.md) | RL |
-| [`wLinkCableAnimBulgeToggle`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wLinkEnemyTrainerName`](link.md#s-wLinkEnemyTrainerName) | `$D887` | 1 | [link](link.md) | RL |
-| [`wLinkMenuSelectionReceiveBuffer`](link.md) | `$CC3D` | 1 | [link](link.md) | RL |
-| [`wLinkMenuSelectionSendBuffer`](link.md) | `$CC42` | 5 | [link](link.md) | RL |
-| [`wLinkState`](link.md#s-wLinkState) | `$D12B` | 1 | [link](link.md) | RL |
-| [`wLinkTimeoutCounter`](scratch.md) | `$CC47` | 2 | [scratch](scratch.md) | RL |
-| [`wListCount`](screen.md#s-wListCount) | `$D12A` | 1 | [screen](screen.md) | RL |
-| [`wListMenuID`](screen.md#s-wListMenuID) | `$CF94` | 1 | [screen](screen.md) | RL |
-| [`wListPointer`](screen.md#s-wListPointer) | `$CF8B` | 2 | [screen](screen.md) | RL |
-| [`wListScrollOffset`](screen.md#s-wListScrollOffset) | `$CC36` | 1 | [screen](screen.md) | RL |
-| [`wLoadedMon`](scratch.md) | `$CF98` | 1 | [scratch](scratch.md) | RL |
-| [`wLoadedMonAttack`](scratch.md#s-wLoadedMonAttack) | `$CFBC` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonAttackExp`](scratch.md#s-wLoadedMonAttackExp) | `$CFAB` | 2 | [scratch](scratch.md) | L |
-| [`wLoadedMonBoxLevel`](scratch.md#s-wLoadedMonBoxLevel) | `$CF9B` | 1 | [scratch](scratch.md) | RL |
-| [`wLoadedMonCatchRate`](scratch.md#s-wLoadedMonCatchRate) | `$CF9F` | 1 | [scratch](scratch.md) | L |
-| [`wLoadedMonDefense`](scratch.md#s-wLoadedMonDefense) | `$CFBE` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonDefenseExp`](scratch.md#s-wLoadedMonDefenseExp) | `$CFAD` | 2 | [scratch](scratch.md) | L |
-| [`wLoadedMonDVs`](scratch.md#s-wLoadedMonDVs) | `$CFB3` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonExp`](scratch.md#s-wLoadedMonExp) | `$CFA6` | 3 | [scratch](scratch.md) | RL |
-| [`wLoadedMonHP`](scratch.md#s-wLoadedMonHP) | `$CF99` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonHPExp`](scratch.md#s-wLoadedMonHPExp) | `$CFA9` | 2 | [scratch](scratch.md) | L |
-| [`wLoadedMonLevel`](scratch.md#s-wLoadedMonLevel) | `$CFB9` | 1 | [scratch](scratch.md) | RL |
-| [`wLoadedMonMaxHP`](scratch.md#s-wLoadedMonMaxHP) | `$CFBA` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonMoves`](scratch.md#s-wLoadedMonMoves) | `$CFA0` | 4 | [scratch](scratch.md) | RL |
-| [`wLoadedMonOTID`](scratch.md#s-wLoadedMonOTID) | `$CFA4` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonPP`](scratch.md#s-wLoadedMonPP) | `$CFB5` | 4 | [scratch](scratch.md) | L |
-| [`wLoadedMonSpecial`](scratch.md#s-wLoadedMonSpecial) | `$CFC2` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonSpecialExp`](scratch.md#s-wLoadedMonSpecialExp) | `$CFB1` | 2 | [scratch](scratch.md) | L |
-| [`wLoadedMonSpecies`](scratch.md#s-wLoadedMonSpecies) | `$CF98` | 1 | [scratch](scratch.md) | RL |
-| [`wLoadedMonSpeed`](scratch.md#s-wLoadedMonSpeed) | `$CFC0` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonSpeedExp`](scratch.md#s-wLoadedMonSpeedExp) | `$CFAF` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonStats`](scratch.md) | `$CFBA` | 2 | [scratch](scratch.md) | RL |
-| [`wLoadedMonStatus`](scratch.md#s-wLoadedMonStatus) | `$CF9C` | 1 | [scratch](scratch.md) | RL |
-| [`wLoadedMonType`](scratch.md) | `$CF9D` | 1 | [scratch](scratch.md) | L |
-| [`wLoadedMonType1`](scratch.md#s-wLoadedMonType1) | `$CF9D` | 1 | [scratch](scratch.md) | L |
-| [`wLoneAttackNo`](battle.md) | `$D05C` | 1 | [battle](battle.md) | RL |
-| [`wLoreleisRoomCurScript`](events.md#s-wLoreleisRoomCurScript) | `$D64D` | 1 | [events](events.md) | RL |
-| [`wLowHealthAlarm`](battle.md#s-wLowHealthAlarm) | `$D083` | 1 | [battle](battle.md) | RL |
-| [`wLowHealthAlarmDisabled`](battle.md#s-wLowHealthAlarmDisabled) | `$CCF6` | 1 | [battle](battle.md) | RL |
-| [`wLuckySlotHiddenEventIndex`](scratch.md) | `$CD05` | 10 | [scratch](scratch.md) | RL |
-| [`wMainDataEnd`](save.md#s-wMainDataEnd) | `$DA80` | — | [save](save.md) | RL |
-| [`wMainDataStart`](pokedex.md) | `$D2F7` | 19 | [pokedex](pokedex.md) | RL |
-| [`wMapBackgroundTile`](overworld.md#s-wMapBackgroundTile) | `$D3AD` | 1 | [overworld](overworld.md) | RL |
-| [`wMapMusicROMBank`](overworld.md#s-wMapMusicROMBank) | `$D35C` | 1 | [overworld](overworld.md) | RL |
-| [`wMapMusicSoundID`](overworld.md#s-wMapMusicSoundID) | `$D35B` | 1 | [overworld](overworld.md) | RL |
-| [`wMapPalOffset`](overworld.md#s-wMapPalOffset) | `$D35D` | 1 | [overworld](overworld.md) | RL |
-| [`wMapSpriteData`](overworld.md#s-wMapSpriteData) | `$D4E4` | 32 | [overworld](overworld.md) | RL |
-| [`wMapSpriteExtraData`](overworld.md#s-wMapSpriteExtraData) | `$D504` | 32 | [overworld](overworld.md) | RL |
-| [`wMapViewVRAMPointer`](overworld.md#s-wMapViewVRAMPointer) | `$D526` | 2 | [overworld](overworld.md) | RL |
-| [`wMaxItemQuantity`](scratch.md#s-wMaxItemQuantity) | `$CF97` | 1 | [scratch](scratch.md) | RL |
-| [`wMaxMenuItem`](screen.md#s-wMaxMenuItem) | `$CC28` | 1 | [screen](screen.md) | RL |
-| [`wMaxPP`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wMenuCursorLocation`](screen.md#s-wMenuCursorLocation) | `$CC30` | 4 | [screen](screen.md) | RL |
-| [`wMenuExitMethod`](screen.md#s-wMenuExitMethod) | `$D12E` | 1 | [screen](screen.md) | RL |
-| [`wMenuItemOffset`](battle.md) | `$D07C` | 1 | [battle](battle.md) | RL |
-| [`wMenuItemToSwap`](screen.md#s-wMenuItemToSwap) | `$CC35` | 1 | [screen](screen.md) | RL |
-| [`wMenuJoypadPollCount`](screen.md#s-wMenuJoypadPollCount) | `$CC34` | 1 | [screen](screen.md) | RL |
-| [`wMenuWatchedKeys`](screen.md#s-wMenuWatchedKeys) | `$CC29` | 1 | [screen](screen.md) | RL |
-| [`wMenuWatchMovingOutOfBounds`](screen.md#s-wMenuWatchMovingOutOfBounds) | `$CC37` | 1 | [screen](screen.md) | RL |
-| [`wMenuWrappingEnabled`](screen.md#s-wMenuWrappingEnabled) | `$CC4A` | 1 | [screen](screen.md) | RL |
-| [`wMiscBattleData`](battle.md) | `$CCD3` | 1 | [battle](battle.md) | RL |
-| [`wMiscBattleDataEnd`](battle.md) | `$CD0F` | 1 | [battle](battle.md) | RL |
-| [`wMiscFlags`](scratch.md#s-wMiscFlags) | `$CD60` | 10 | [scratch](scratch.md) | RL |
-| [`wMonDataLocation`](scratch.md#s-wMonDataLocation) | `$CC49` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHBackSprite`](scratch.md#s-wMonHBackSprite) | `$D0C5` | 2 | [scratch](scratch.md) | L |
-| [`wMonHBaseAttack`](scratch.md#s-wMonHBaseAttack) | `$D0BA` | 1 | [scratch](scratch.md) | L |
-| [`wMonHBaseDefense`](scratch.md#s-wMonHBaseDefense) | `$D0BB` | 1 | [scratch](scratch.md) | L |
-| [`wMonHBaseEXP`](scratch.md#s-wMonHBaseEXP) | `$D0C1` | 1 | [scratch](scratch.md) | L |
-| [`wMonHBaseHP`](scratch.md#s-wMonHBaseHP) | `$D0B9` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHBaseSpecial`](scratch.md#s-wMonHBaseSpecial) | `$D0BD` | 1 | [scratch](scratch.md) | L |
-| [`wMonHBaseSpeed`](scratch.md#s-wMonHBaseSpeed) | `$D0BC` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHBaseStats`](scratch.md) | `$D0B9` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHCatchRate`](scratch.md#s-wMonHCatchRate) | `$D0C0` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHeader`](scratch.md) | `$D0B8` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHeaderEnd`](scratch.md) | `$D0D4` | 3 | [scratch](scratch.md) | RL |
-| [`wMonHFrontSprite`](scratch.md#s-wMonHFrontSprite) | `$D0C3` | 2 | [scratch](scratch.md) | RL |
-| [`wMonHGrowthRate`](scratch.md#s-wMonHGrowthRate) | `$D0CB` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHIndex`](scratch.md#s-wMonHIndex) | `$D0B8` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHLearnset`](scratch.md#s-wMonHLearnset) | `$D0CC` | 8 | [scratch](scratch.md) | RL |
-| [`wMonHMoves`](scratch.md#s-wMonHMoves) | `$D0C7` | 4 | [scratch](scratch.md) | RL |
-| [`wMonHSpriteDim`](scratch.md#s-wMonHSpriteDim) | `$D0C2` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHType1`](scratch.md#s-wMonHType1) | `$D0BE` | 1 | [scratch](scratch.md) | RL |
-| [`wMonHTypes`](scratch.md) | `$D0BE` | 1 | [scratch](scratch.md) | RL |
-| [`wMonIsDisobedient`](battle.md#s-wMonIsDisobedient) | `$CCED` | 1 | [battle](battle.md) | RL |
-| [`wMonPartySpriteSpecies`](scratch.md#s-wMonPartySpriteSpecies) | `$CD5D` | 1 | [scratch](scratch.md) | RL |
-| [`wMonPartySpritesSavedOAM`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wMoveData`](battle.md) | `$CD6D` | 4 | [battle](battle.md) | RL |
-| [`wMoveDidntMiss`](battle.md#s-wMoveDidntMiss) | `$CCF4` | 1 | [battle](battle.md) | RL |
-| [`wMoveDownSmallStarsOAMCount`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wMoveGrammar`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wMovementFlags`](events.md#s-wMovementFlags) | `$D736` | 1 | [events](events.md) | RL |
-| [`wMoveMenuType`](battle.md#s-wMoveMenuType) | `$CCDB` | 1 | [battle](battle.md) | RL |
-| [`wMoveMissed`](battle.md#s-wMoveMissed) | `$D05F` | 1 | [battle](battle.md) | RL |
-| [`wMoveMonType`](scratch.md#s-wMoveMonType) | `$CF95` | 1 | [scratch](scratch.md) | RL |
-| [`wMoveNum`](scratch.md#s-wMoveNum) | `$D0E0` | 1 | [scratch](scratch.md) | RL |
-| [`wMoves`](scratch.md#s-wMoves) | `$D0DC` | 4 | [scratch](scratch.md) | RL |
-| [`wMovesString`](scratch.md#s-wMovesString) | `$D0E1` | 56 | [scratch](scratch.md) | RL |
-| [`wMoveType`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wMovingBGTilesCounter2`](scratch.md#s-wMovingBGTilesCounter2) | `$D085` | 1 | [scratch](scratch.md) | RL |
-| [`wMtMoon1FCurScript`](events.md#s-wMtMoon1FCurScript) | `$D606` | 1 | [events](events.md) | RL |
-| [`wMtMoonB2FCurScript`](events.md#s-wMtMoonB2FCurScript) | `$D607` | 1 | [events](events.md) | RL |
-| [`wMuseum1FCurScript`](events.md#s-wMuseum1FCurScript) | `$D619` | 1 | [events](events.md) | RL |
-| [`wMusicTempo`](audio.md#s-wMusicTempo) | `$C0E8` | 2 | [audio](audio.md) | RL |
-| [`wMusicWaveInstrument`](audio.md#s-wMusicWaveInstrument) | `$C0E6` | 1 | [audio](audio.md) | RL |
-| [`wMuteAudioAndPauseMusic`](audio.md#s-wMuteAudioAndPauseMusic) | `$C002` | 1 | [audio](audio.md) | RL |
-| [`wNameBuffer`](battle.md) | `$CD6D` | 4 | [battle](battle.md) | RL |
-| [`wNamedObjectIndex`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wNameListIndex`](scratch.md#s-wNameListIndex) | `$D0B5` | 1 | [scratch](scratch.md) | RL |
-| [`wNameListType`](scratch.md#s-wNameListType) | `$D0B6` | 1 | [scratch](scratch.md) | RL |
-| [`wNameOfPlayerMonToBeTraded`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wNamingScreenLetter`](battle.md) | `$CEED` | 2 | [battle](battle.md) | RL |
-| [`wNamingScreenNameLength`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wNamingScreenSubmitName`](scratch.md) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
-| [`wNamingScreenType`](scratch.md) | `$D07D` | 1 | [scratch](scratch.md) | RL |
-| [`wNewSlotMachineBallTile`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wNewSoundID`](audio.md#s-wNewSoundID) | `$C0EE` | 1 | [audio](audio.md) | RL |
-| [`wNewTileBlockID`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wNextSafariZoneGateScript`](scratch.md#s-wNextSafariZoneGateScript) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
-| [`wNormalMaxPPList`](scratch.md#s-wNormalMaxPPList) | `$CD78` | 2 | [scratch](scratch.md) | RL |
-| [`wNorthConnectedMap`](overworld.md#s-wNorthConnectedMap) | `$D371` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectedMapViewPointer`](overworld.md#s-wNorthConnectedMapViewPointer) | `$D37A` | 2 | [overworld](overworld.md) | RL |
-| [`wNorthConnectedMapWidth`](overworld.md#s-wNorthConnectedMapWidth) | `$D377` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectedMapXAlignment`](overworld.md#s-wNorthConnectedMapXAlignment) | `$D379` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectedMapYAlignment`](overworld.md#s-wNorthConnectedMapYAlignment) | `$D378` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectionHeader`](overworld.md) | `$D371` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectionStripDest`](overworld.md#s-wNorthConnectionStripDest) | `$D374` | 2 | [overworld](overworld.md) | RL |
-| [`wNorthConnectionStripLength`](overworld.md#s-wNorthConnectionStripLength) | `$D376` | 1 | [overworld](overworld.md) | RL |
-| [`wNorthConnectionStripSrc`](overworld.md#s-wNorthConnectionStripSrc) | `$D372` | 2 | [overworld](overworld.md) | RL |
-| [`wNPCMovementDirections`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wNPCMovementDirections2`](scratch.md#s-wNPCMovementDirections2) | `$CC97` | 10 | [scratch](scratch.md) | RL |
-| [`wNPCMovementDirections2Index`](bag.md) | `$CD37` | 1 | [bag](bag.md) | RL |
-| [`wNPCMovementScriptBank`](events.md#s-wNPCMovementScriptBank) | `$CC58` | 3 | [events](events.md) | RL |
-| [`wNPCMovementScriptFunctionNum`](events.md#s-wNPCMovementScriptFunctionNum) | `$CF10` | 1 | [events](events.md) | RL |
-| [`wNPCMovementScriptPointerTableNum`](events.md#s-wNPCMovementScriptPointerTableNum) | `$CC57` | 1 | [events](events.md) | RL |
-| [`wNPCMovementScriptSpriteOffset`](events.md#s-wNPCMovementScriptSpriteOffset) | `$CF17` | 1 | [events](events.md) | RL |
-| [`wNPCNumScriptedSteps`](scratch.md#s-wNPCNumScriptedSteps) | `$CF0F` | 1 | [scratch](scratch.md) | RL |
-| [`wNumBagItems`](bag.md#s-wNumBagItems) | `$D31D` | 1 | [bag](bag.md) | RLI |
-| [`wNumberOfNoRandomBattleStepsLeft`](scratch.md#s-wNumberOfNoRandomBattleStepsLeft) | `$D13C` | 1 | [scratch](scratch.md) | RL |
-| [`wNumberOfWarps`](overworld.md#s-wNumberOfWarps) | `$D3AE` | 1 | [overworld](overworld.md) | RLI |
-| [`wNumBoxItems`](bag.md#s-wNumBoxItems) | `$D53A` | 1 | [bag](bag.md) | RLI |
-| [`wNumCreditsMonsDisplayed`](scratch.md#s-wNumCreditsMonsDisplayed) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wNumFallingObjects`](scratch.md) | `$D08B` | 1 | [scratch](scratch.md) | RL |
-| [`wNumFBTiles`](scratch.md#s-wNumFBTiles) | `$D089` | 1 | [scratch](scratch.md) | RL |
-| [`wNumFieldMoves`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wNumHoFTeams`](player.md#s-wNumHoFTeams) | `$D5A2` | 1 | [player](player.md) | RL |
-| [`wNumMovesMinusOne`](scratch.md#s-wNumMovesMinusOne) | `$CD6C` | 1 | [scratch](scratch.md) | RL |
-| [`wNumRunAttempts`](battle.md#s-wNumRunAttempts) | `$D120` | 1 | [battle](battle.md) | RL |
-| [`wNumSafariBalls`](bag.md#s-wNumSafariBalls) | `$DA47` | 1 | [bag](bag.md) | RL |
-| [`wNumSetBits`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wNumShakes`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wNumShootingBalls`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wNumSigns`](overworld.md#s-wNumSigns) | `$D4B0` | 1 | [overworld](overworld.md) | RL |
-| [`wNumSprites`](sprites.md#s-wNumSprites) | `$D4E1` | 1 | [sprites](sprites.md) | RL |
-| [`wNumStepsToTake`](overworld.md#s-wNumStepsToTake) | `$CCA1` | 49 | [overworld](overworld.md) | RL |
-| [`wOaksAideRewardItemName`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wOaksLabCurScript`](events.md#s-wOaksLabCurScript) | `$D5F0` | 1 | [events](events.md) | RL |
-| [`wOakWalkedToPlayer`](scratch.md) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
-| [`wOAMBaseTile`](scratch.md) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
-| [`wObjectDataPointerTemp`](overworld.md#s-wObjectDataPointerTemp) | `$D3A9` | 4 | [overworld](overworld.md) | RL |
-| [`wObjectToHide`](scratch.md#s-wObjectToHide) | `$D079` | 1 | [scratch](scratch.md) | RL |
-| [`wObjectToShow`](scratch.md#s-wObjectToShow) | `$D07A` | 2 | [scratch](scratch.md) | RL |
-| [`wObtainedBadges`](player.md#s-wObtainedBadges) | `$D356` | 1 | [player](player.md) | RLI |
-| [`wObtainedHiddenCoinsFlags`](events.md#s-wObtainedHiddenCoinsFlags) | `$D6FE` | 2 | [events](events.md) | RL |
-| [`wObtainedHiddenItemsFlags`](events.md#s-wObtainedHiddenItemsFlags) | `$D6F0` | 14 | [events](events.md) | RL |
-| [`wOnCGB`](scratch.md#s-wOnCGB) | `$CF1A` | 1 | [scratch](scratch.md) | RL |
-| [`wOnSGB`](scratch.md#s-wOnSGB) | `$CF1B` | 1 | [scratch](scratch.md) | RL |
-| [`wOpponentAfterWrongAnswer`](events.md#s-wOpponentAfterWrongAnswer) | `$DA38` | 1 | [events](events.md) | RL |
-| [`wOptions`](player.md#s-wOptions) | `$D355` | 1 | [player](player.md) | RL |
-| [`wOptionsBattleAnimCursorX`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wOptionsBattleStyleCursorX`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wOptionsCancelCursorX`](player.md#s-wOptionsCancelCursorX) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wOptionsInitialized`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wOptionsTextSpeedCursorX`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wOutOfBattleBlackout`](scratch.md#s-wOutOfBattleBlackout) | `$D12D` | 1 | [scratch](scratch.md) | RL |
-| [`wOutwardSpiralCurrentDirection`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wOutwardSpiralTileMapPointer`](scratch.md#s-wOutwardSpiralTileMapPointer) | `$D09A` | 1 | [scratch](scratch.md) | RL |
-| [`wOverrideSimulatedJoypadStatesMask`](system.md#s-wOverrideSimulatedJoypadStatesMask) | `$CD3B` | 2 | [system](system.md) | RL |
-| [`wOverworldMap`](overworld.md) | `$C6E8` | 1300 | [overworld](overworld.md) | RL |
-| [`wOverworldMapEnd`](overworld.md#s-wOverworldMapEnd) | `$CBFC` | — | [overworld](overworld.md) | RL |
-| [`wPalletTownCurScript`](events.md#s-wPalletTownCurScript) | `$D5F1` | 2 | [events](events.md) | RL |
-| [`wPalPacket`](graphics.md#s-wPalPacket) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
-| [`wParentMenuItem`](battle.md) | `$CCD3` | 1 | [battle](battle.md) | RL |
-| [`wPartyAndBillsPCSavedMenuItem`](party.md#s-wPartyAndBillsPCSavedMenuItem) | `$CC2B` | 1 | [party](party.md) | RL |
-| [`wPartyCount`](party.md#s-wPartyCount) | `$D163` | 1 | [party](party.md) | RLI |
-| [`wPartyDataEnd`](party.md#s-wPartyDataEnd) | `$D2F7` | — | [party](party.md) | RL |
-| [`wPartyDataStart`](party.md) | `$D163` | 1 | [party](party.md) | RL |
-| [`wPartyFoughtCurrentEnemyFlags`](party.md#s-wPartyFoughtCurrentEnemyFlags) | `$CCF5` | 1 | [party](party.md) | RL |
-| [`wPartyGainExpFlags`](party.md#s-wPartyGainExpFlags) | `$D058` | 1 | [party](party.md) | RL |
-| [`wPartyMenuAnimMonEnabled`](scratch.md) | `$D09B` | 1 | [scratch](scratch.md) | RL |
-| [`wPartyMenuBlkPacket`](graphics.md#s-wPartyMenuBlkPacket) | `$CF2E` | 29 | [graphics](graphics.md) | RL |
-| [`wPartyMenuHPBarColors`](scratch.md#s-wPartyMenuHPBarColors) | `$CF1F` | 6 | [scratch](scratch.md) | RL |
-| [`wPartyMenuTypeOrMessageID`](scratch.md) | `$D07D` | 1 | [scratch](scratch.md) | RL |
-| [`wPartyMon1`](party.md) | `$D16B` | 1 | [party](party.md) | RLI |
-| [`wPartyMon1Attack`](party.md#s-wPartyMon1Attack) | `$D18F` | 2 | [party](party.md) | RL |
-| [`wPartyMon1AttackExp`](party.md#s-wPartyMon1AttackExp) | `$D17E` | 2 | [party](party.md) | L |
-| [`wPartyMon1BoxLevel`](party.md#s-wPartyMon1BoxLevel) | `$D16E` | 1 | [party](party.md) | L |
-| [`wPartyMon1CatchRate`](party.md#s-wPartyMon1CatchRate) | `$D172` | 1 | [party](party.md) | L |
-| [`wPartyMon1Defense`](party.md#s-wPartyMon1Defense) | `$D191` | 2 | [party](party.md) | RL |
-| [`wPartyMon1DefenseExp`](party.md#s-wPartyMon1DefenseExp) | `$D180` | 2 | [party](party.md) | L |
-| [`wPartyMon1DVs`](party.md#s-wPartyMon1DVs) | `$D186` | 2 | [party](party.md) | L |
-| [`wPartyMon1Exp`](party.md#s-wPartyMon1Exp) | `$D179` | 3 | [party](party.md) | L |
-| [`wPartyMon1HP`](party.md#s-wPartyMon1HP) | `$D16C` | 2 | [party](party.md) | RL |
-| [`wPartyMon1HPExp`](party.md#s-wPartyMon1HPExp) | `$D17C` | 2 | [party](party.md) | L |
-| [`wPartyMon1Level`](party.md#s-wPartyMon1Level) | `$D18C` | 1 | [party](party.md) | RL |
-| [`wPartyMon1MaxHP`](party.md#s-wPartyMon1MaxHP) | `$D18D` | 2 | [party](party.md) | RL |
-| [`wPartyMon1Moves`](party.md#s-wPartyMon1Moves) | `$D173` | 4 | [party](party.md) | RL |
-| [`wPartyMon1Nick`](party.md#s-wPartyMon1Nick) | `$D2B5` | 11 | [party](party.md) | RL |
-| [`wPartyMon1OT`](party.md#s-wPartyMon1OT) | `$D273` | 11 | [party](party.md) | RL |
-| [`wPartyMon1OTID`](party.md#s-wPartyMon1OTID) | `$D177` | 2 | [party](party.md) | RL |
-| [`wPartyMon1PP`](party.md#s-wPartyMon1PP) | `$D188` | 4 | [party](party.md) | RL |
-| [`wPartyMon1Special`](party.md#s-wPartyMon1Special) | `$D195` | 2 | [party](party.md) | RL |
-| [`wPartyMon1SpecialExp`](party.md#s-wPartyMon1SpecialExp) | `$D184` | 2 | [party](party.md) | L |
-| [`wPartyMon1Species`](party.md#s-wPartyMon1Species) | `$D16B` | 1 | [party](party.md) | RL |
-| [`wPartyMon1Speed`](party.md#s-wPartyMon1Speed) | `$D193` | 2 | [party](party.md) | RL |
-| [`wPartyMon1SpeedExp`](party.md#s-wPartyMon1SpeedExp) | `$D182` | 2 | [party](party.md) | L |
-| [`wPartyMon1Stats`](party.md) | `$D18D` | 2 | [party](party.md) | RL |
-| [`wPartyMon1Status`](party.md#s-wPartyMon1Status) | `$D16F` | 1 | [party](party.md) | RL |
-| [`wPartyMon1Type`](party.md) | `$D170` | 1 | [party](party.md) | L |
-| [`wPartyMon1Type1`](party.md#s-wPartyMon1Type1) | `$D170` | 1 | [party](party.md) | L |
-| [`wPartyMonNicks`](party.md) | `$D2B5` | 11 | [party](party.md) | RLI |
-| [`wPartyMonNicksEnd`](pokedex.md) | `$D2F7` | — | [pokedex](pokedex.md) | RL |
-| [`wPartyMonOT`](party.md) | `$D273` | 11 | [party](party.md) | RLI |
-| [`wPartyMons`](party.md) | `$D16B` | 1 | [party](party.md) | RLI |
-| [`wPartySpecies`](party.md#s-wPartySpecies) | `$D164` | 7 | [party](party.md) | RLI |
-| [`wPayDayMoney`](battle.md) | `$CD6D` | 4 | [battle](battle.md) | RL |
-| [`wPayoutCoins`](bag.md#s-wPayoutCoins) | `$CD4A` | 2 | [bag](bag.md) | RL |
-| [`wPewterCityCurScript`](events.md#s-wPewterCityCurScript) | `$D5F7` | 1 | [events](events.md) | RL |
-| [`wPewterGymCurScript`](events.md#s-wPewterGymCurScript) | `$D5FC` | 1 | [events](events.md) | RL |
-| [`wPlayerBattleStatus1`](battle.md#s-wPlayerBattleStatus1) | `$D062` | 1 | [battle](battle.md) | RL |
-| [`wPlayerBideAccumulatedDamage`](scratch.md) | `$D074` | 4 | [scratch](scratch.md) | RL |
-| [`wPlayerCharacterOAMTile`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerCoins`](player.md#s-wPlayerCoins) | `$D5A4` | 2 | [player](player.md) | RL |
-| [`wPlayerConfusedCounter`](scratch.md#s-wPlayerConfusedCounter) | `$D06B` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerDirection`](overworld.md#s-wPlayerDirection) | `$D52A` | 1 | [overworld](overworld.md) | RL |
-| [`wPlayerDisabledMove`](battle.md#s-wPlayerDisabledMove) | `$D06D` | 2 | [battle](battle.md) | RL |
-| [`wPlayerDisabledMoveNumber`](battle.md#s-wPlayerDisabledMoveNumber) | `$CCEE` | 1 | [battle](battle.md) | RL |
-| [`wPlayerHPBarColor`](scratch.md) | `$CF1D` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerID`](player.md#s-wPlayerID) | `$D359` | 2 | [player](player.md) | RL |
-| [`wPlayerJumpingYScreenCoordsIndex`](overworld.md#s-wPlayerJumpingYScreenCoordsIndex) | `$D714` | 1 | [overworld](overworld.md) | RL |
-| [`wPlayerLastStopDirection`](overworld.md#s-wPlayerLastStopDirection) | `$D529` | 1 | [overworld](overworld.md) | RL |
-| [`wPlayerMonAccuracyMod`](battle.md#s-wPlayerMonAccuracyMod) | `$CD1E` | 1 | [battle](battle.md) | R |
-| [`wPlayerMonAttackMod`](battle.md#s-wPlayerMonAttackMod) | `$CD1A` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonDefenseMod`](battle.md#s-wPlayerMonDefenseMod) | `$CD1B` | 1 | [battle](battle.md) | L |
-| [`wPlayerMonEvasionMod`](battle.md#s-wPlayerMonEvasionMod) | `$CD1F` | 3 | [battle](battle.md) | RL |
-| [`wPlayerMoney`](player.md#s-wPlayerMoney) | `$D347` | 3 | [player](player.md) | RLI |
-| [`wPlayerMonMinimized`](battle.md#s-wPlayerMonMinimized) | `$CCF7` | 14 | [battle](battle.md) | RL |
-| [`wPlayerMonNumber`](battle.md#s-wPlayerMonNumber) | `$CC2F` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonSpecialMod`](battle.md#s-wPlayerMonSpecialMod) | `$CD1D` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonSpeedMod`](battle.md#s-wPlayerMonSpeedMod) | `$CD1C` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonStatMods`](battle.md) | `$CD1A` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonStatModsEnd`](battle.md#s-wPlayerMonStatModsEnd) | `$CD22` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedAttack`](battle.md#s-wPlayerMonUnmodifiedAttack) | `$CD12` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedDefense`](battle.md#s-wPlayerMonUnmodifiedDefense) | `$CD14` | 2 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedLevel`](battle.md#s-wPlayerMonUnmodifiedLevel) | `$CD0F` | 1 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedMaxHP`](battle.md#s-wPlayerMonUnmodifiedMaxHP) | `$CD10` | 2 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedSpecial`](battle.md#s-wPlayerMonUnmodifiedSpecial) | `$CD18` | 2 | [battle](battle.md) | RL |
-| [`wPlayerMonUnmodifiedSpeed`](battle.md#s-wPlayerMonUnmodifiedSpeed) | `$CD16` | 2 | [battle](battle.md) | L |
-| [`wPlayerMoveAccuracy`](scratch.md#s-wPlayerMoveAccuracy) | `$CFD6` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMoveEffect`](scratch.md#s-wPlayerMoveEffect) | `$CFD3` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMoveListIndex`](scratch.md#s-wPlayerMoveListIndex) | `$CC2E` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMoveMaxPP`](scratch.md#s-wPlayerMoveMaxPP) | `$CFD7` | 1 | [scratch](scratch.md) | L |
-| [`wPlayerMoveNum`](scratch.md#s-wPlayerMoveNum) | `$CFD2` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMovePower`](scratch.md#s-wPlayerMovePower) | `$CFD4` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMoveType`](scratch.md#s-wPlayerMoveType) | `$CFD5` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerMovingDirection`](overworld.md#s-wPlayerMovingDirection) | `$D528` | 1 | [overworld](overworld.md) | RL |
-| [`wPlayerName`](player.md#s-wPlayerName) | `$D158` | 11 | [player](player.md) | RLI |
-| [`wPlayerNumAttacksLeft`](battle.md#s-wPlayerNumAttacksLeft) | `$D06A` | 1 | [battle](battle.md) | RL |
-| [`wPlayerNumHits`](scratch.md) | `$D074` | 4 | [scratch](scratch.md) | RL |
-| [`wPlayerSelectedMove`](battle.md#s-wPlayerSelectedMove) | `$CCDC` | 1 | [battle](battle.md) | RL |
-| [`wPlayerSpinInPlaceAnimFrameDelay`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSpinInPlaceAnimFrameDelayDelta`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSpinInPlaceAnimFrameDelayEndValue`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSpinInPlaceAnimSoundID`](player.md) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wPlayerSpinWhileMovingUpOrDownAnimDeltaY`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSpinWhileMovingUpOrDownAnimFrameDelay`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSpinWhileMovingUpOrDownAnimMaxY`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerStarter`](events.md#s-wPlayerStarter) | `$D717` | 1 | [events](events.md) | RL |
-| [`wPlayerStatsToDouble`](scratch.md#s-wPlayerStatsToDouble) | `$D060` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerStatsToHalve`](scratch.md#s-wPlayerStatsToHalve) | `$D061` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerSubstituteHP`](battle.md#s-wPlayerSubstituteHP) | `$CCD7` | 1 | [battle](battle.md) | RL |
-| [`wPlayerToxicCounter`](scratch.md#s-wPlayerToxicCounter) | `$D06C` | 1 | [scratch](scratch.md) | RL |
-| [`wPlayerUsedMove`](battle.md#s-wPlayerUsedMove) | `$CCF1` | 1 | [battle](battle.md) | RL |
-| [`wPlayTimeFrames`](player.md#s-wPlayTimeFrames) | `$DA45` | 1 | [player](player.md) | RL |
-| [`wPlayTimeHours`](player.md#s-wPlayTimeHours) | `$DA41` | 1 | [player](player.md) | RL |
-| [`wPlayTimeMaxed`](player.md#s-wPlayTimeMaxed) | `$DA42` | 1 | [player](player.md) | RL |
-| [`wPlayTimeMinutes`](player.md#s-wPlayTimeMinutes) | `$DA43` | 1 | [player](player.md) | RL |
-| [`wPlayTimeSeconds`](player.md#s-wPlayTimeSeconds) | `$DA44` | 1 | [player](player.md) | RL |
-| [`wPokeBallAnimData`](scratch.md#s-wPokeBallAnimData) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wPokeBallCaptureCalcTemp`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wPokedexNum`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wPokedexOwned`](pokedex.md#s-wPokedexOwned) | `$D2F7` | 19 | [pokedex](pokedex.md) | RLI |
-| [`wPokedexOwnedEnd`](pokedex.md) | `$D30A` | 19 | [pokedex](pokedex.md) | RL |
-| [`wPokedexSeen`](pokedex.md#s-wPokedexSeen) | `$D30A` | 19 | [pokedex](pokedex.md) | RLI |
-| [`wPokedexSeenEnd`](bag.md) | `$D31D` | 1 | [bag](bag.md) | RL |
-| [`wPokemonMansion1FCurScript`](events.md#s-wPokemonMansion1FCurScript) | `$D63A` | 2 | [events](events.md) | RL |
-| [`wPokemonMansionB1FCurScript`](events.md#s-wPokemonMansionB1FCurScript) | `$D63E` | 1 | [events](events.md) | RL |
-| [`wPokemonTower2FCurScript`](events.md#s-wPokemonTower2FCurScript) | `$D62B` | 1 | [events](events.md) | RL |
-| [`wPokemonTower3FCurScript`](events.md#s-wPokemonTower3FCurScript) | `$D62C` | 1 | [events](events.md) | RL |
-| [`wPokemonTower4FCurScript`](events.md#s-wPokemonTower4FCurScript) | `$D62D` | 1 | [events](events.md) | RL |
-| [`wPokemonTower5FCurScript`](events.md#s-wPokemonTower5FCurScript) | `$D62E` | 1 | [events](events.md) | RL |
-| [`wPokemonTower6FCurScript`](events.md#s-wPokemonTower6FCurScript) | `$D62F` | 1 | [events](events.md) | RL |
-| [`wPokemonTower7FCurScript`](events.md#s-wPokemonTower7FCurScript) | `$D630` | 1 | [events](events.md) | RL |
-| [`wPowerPlantCurScript`](events.md) | `$D663` | 2 | [events](events.md) | RL |
-| [`wPPRestoreItem`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wPPUpCountAndMaxPP`](scratch.md#s-wPPUpCountAndMaxPP) | `$CD73` | 5 | [scratch](scratch.md) | L |
-| [`wPredefBank`](system.md#s-wPredefBank) | `$D0B7` | 1 | [system](system.md) | RL |
-| [`wPredefBC`](system.md#s-wPredefBC) | `$CC53` | 2 | [system](system.md) | RL |
-| [`wPredefDE`](system.md#s-wPredefDE) | `$CC51` | 2 | [system](system.md) | RL |
-| [`wPredefHL`](system.md#s-wPredefHL) | `$CC4F` | 2 | [system](system.md) | RL |
-| [`wPredefID`](system.md#s-wPredefID) | `$CC4E` | 1 | [system](system.md) | RL |
-| [`wPredefParentBank`](system.md#s-wPredefParentBank) | `$CF12` | 1 | [system](system.md) | RL |
-| [`wPriceTemp`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wPrintItemPrices`](scratch.md#s-wPrintItemPrices) | `$CF93` | 1 | [scratch](scratch.md) | RL |
-| [`wPrize1`](bag.md#s-wPrize1) | `$D13D` | 1 | [bag](bag.md) | RL |
-| [`wPrize1Price`](bag.md#s-wPrize1Price) | `$D141` | 2 | [bag](bag.md) | RL |
-| [`wPseudoItemID`](bag.md#s-wPseudoItemID) | `$D152` | 1 | [bag](bag.md) | RL |
-| [`wRedrawRowOrColumnSrcTiles`](overworld.md#s-wRedrawRowOrColumnSrcTiles) | `$CBFC` | 40 | [overworld](overworld.md) | RL |
-| [`wRedsHouse2FCurScript`](events.md#s-wRedsHouse2FCurScript) | `$D60C` | 1 | [events](events.md) | RL |
-| [`wRemoveMonFromBox`](scratch.md) | `$CF95` | 1 | [scratch](scratch.md) | RL |
-| [`wRepelRemainingSteps`](scratch.md#s-wRepelRemainingSteps) | `$D0DB` | 1 | [scratch](scratch.md) | RL |
-| [`wRightGBMonSpecies`](scratch.md#s-wRightGBMonSpecies) | `$CD5F` | 1 | [scratch](scratch.md) | RL |
-| [`wRivalName`](player.md#s-wRivalName) | `$D34A` | 11 | [player](player.md) | RLI |
-| [`wRivalStarter`](events.md#s-wRivalStarter) | `$D715` | 2 | [events](events.md) | RL |
-| [`wRivalStarterBallSpriteIndex`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wRivalStarterTemp`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wRLEByteCount`](scratch.md#s-wRLEByteCount) | `$CCD2` | 1 | [scratch](scratch.md) | RL |
-| [`wRocketHideoutB1FCurScript`](events.md#s-wRocketHideoutB1FCurScript) | `$D631` | 1 | [events](events.md) | RL |
-| [`wRockTunnel1FCurScript`](events.md#s-wRockTunnel1FCurScript) | `$D621` | 2 | [events](events.md) | RL |
-| [`wRockTunnelB1FCurScript`](events.md#s-wRockTunnelB1FCurScript) | `$D620` | 1 | [events](events.md) | RL |
-| [`wRodResponse`](scratch.md#s-wRodResponse) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wRoute10CurScript`](events.md#s-wRoute10CurScript) | `$D605` | 1 | [events](events.md) | RL |
-| [`wRoute11CurScript`](events.md#s-wRoute11CurScript) | `$D623` | 1 | [events](events.md) | RL |
-| [`wRoute12CurScript`](events.md#s-wRoute12CurScript) | `$D624` | 1 | [events](events.md) | RL |
-| [`wRoute13CurScript`](events.md#s-wRoute13CurScript) | `$D61A` | 1 | [events](events.md) | RL |
-| [`wRoute14CurScript`](events.md#s-wRoute14CurScript) | `$D61B` | 1 | [events](events.md) | RL |
-| [`wRoute15CurScript`](events.md#s-wRoute15CurScript) | `$D625` | 1 | [events](events.md) | RL |
-| [`wRoute16CurScript`](events.md#s-wRoute16CurScript) | `$D626` | 1 | [events](events.md) | RL |
-| [`wRoute16Gate1FCurScript`](events.md#s-wRoute16Gate1FCurScript) | `$D660` | 1 | [events](events.md) | RL |
-| [`wRoute17CurScript`](events.md#s-wRoute17CurScript) | `$D61C` | 1 | [events](events.md) | RL |
-| [`wRoute18CurScript`](events.md#s-wRoute18CurScript) | `$D627` | 1 | [events](events.md) | RL |
-| [`wRoute18Gate1FCurScript`](events.md#s-wRoute18Gate1FCurScript) | `$D669` | 79 | [events](events.md) | RL |
-| [`wRoute19CurScript`](events.md#s-wRoute19CurScript) | `$D61D` | 1 | [events](events.md) | RL |
-| [`wRoute20CurScript`](events.md#s-wRoute20CurScript) | `$D628` | 1 | [events](events.md) | RL |
-| [`wRoute21CurScript`](events.md#s-wRoute21CurScript) | `$D61E` | 1 | [events](events.md) | RL |
-| [`wRoute22CurScript`](events.md#s-wRoute22CurScript) | `$D60A` | 2 | [events](events.md) | RL |
-| [`wRoute22GateCurScript`](events.md#s-wRoute22GateCurScript) | `$D60E` | 1 | [events](events.md) | RL |
-| [`wRoute23CurScript`](events.md#s-wRoute23CurScript) | `$D667` | 1 | [events](events.md) | RL |
-| [`wRoute24CurScript`](events.md#s-wRoute24CurScript) | `$D602` | 1 | [events](events.md) | RL |
-| [`wRoute25CurScript`](events.md#s-wRoute25CurScript) | `$D603` | 1 | [events](events.md) | RL |
-| [`wRoute3CurScript`](events.md#s-wRoute3CurScript) | `$D5F8` | 1 | [events](events.md) | RL |
-| [`wRoute4CurScript`](events.md#s-wRoute4CurScript) | `$D5F9` | 2 | [events](events.md) | RL |
-| [`wRoute5GateCurScript`](events.md#s-wRoute5GateCurScript) | `$D662` | 1 | [events](events.md) | RL |
-| [`wRoute6CurScript`](events.md#s-wRoute6CurScript) | `$D600` | 1 | [events](events.md) | RL |
-| [`wRoute6GateCurScript`](events.md#s-wRoute6GateCurScript) | `$D636` | 1 | [events](events.md) | RL |
-| [`wRoute7GateCurScript`](events.md#s-wRoute7GateCurScript) | `$D663` | 2 | [events](events.md) | RL |
-| [`wRoute8CurScript`](events.md#s-wRoute8CurScript) | `$D601` | 1 | [events](events.md) | RL |
-| [`wRoute8GateCurScript`](events.md#s-wRoute8GateCurScript) | `$D637` | 2 | [events](events.md) | RL |
-| [`wRoute9CurScript`](events.md#s-wRoute9CurScript) | `$D604` | 1 | [events](events.md) | RL |
-| [`wSafariBaitFactor`](battle.md#s-wSafariBaitFactor) | `$CCE9` | 2 | [battle](battle.md) | RL |
-| [`wSafariEscapeFactor`](battle.md#s-wSafariEscapeFactor) | `$CCE8` | 1 | [battle](battle.md) | RL |
-| [`wSafariSteps`](battle.md#s-wSafariSteps) | `$D70D` | 2 | [battle](battle.md) | RL |
-| [`wSafariZoneGameOver`](battle.md#s-wSafariZoneGameOver) | `$DA46` | 1 | [battle](battle.md) | RL |
-| [`wSafariZoneGateCurScript`](battle.md#s-wSafariZoneGateCurScript) | `$D61F` | 1 | [battle](battle.md) | RL |
-| [`wSaffronGymCurScript`](events.md#s-wSaffronGymCurScript) | `$D65C` | 2 | [events](events.md) | RL |
-| [`wSavedCoordIndex`](scratch.md) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedListScrollOffset`](scratch.md#s-wSavedListScrollOffset) | `$D07E` | 3 | [scratch](scratch.md) | RL |
-| [`wSavedNPCMovementDirections2Index`](scratch.md#s-wSavedNPCMovementDirections2Index) | `$D157` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedPlayerFacingDirection`](scratch.md) | `$CD50` | 9 | [scratch](scratch.md) | RL |
-| [`wSavedPlayerScreenY`](scratch.md) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedSpriteImageIndex`](events.md#s-wSavedSpriteImageIndex) | `$D5CD` | 1 | [events](events.md) | RL |
-| [`wSavedSpriteMapX`](scratch.md#s-wSavedSpriteMapX) | `$D133` | 6 | [scratch](scratch.md) | RL |
-| [`wSavedSpriteMapY`](scratch.md#s-wSavedSpriteMapY) | `$D132` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedSpriteScreenX`](scratch.md#s-wSavedSpriteScreenX) | `$D131` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedSpriteScreenY`](scratch.md#s-wSavedSpriteScreenY) | `$D130` | 1 | [scratch](scratch.md) | RL |
-| [`wSavedTileAnimations`](scratch.md#s-wSavedTileAnimations) | `$D0D4` | 3 | [scratch](scratch.md) | RL |
-| [`wSavedVolume`](audio.md#s-wSavedVolume) | `$C005` | 1 | [audio](audio.md) | RL |
-| [`wSavedY`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wSaveFileStatus`](scratch.md#s-wSaveFileStatus) | `$D088` | 1 | [scratch](scratch.md) | RL |
-| [`wScriptedNPCWalkCounter`](events.md#s-wScriptedNPCWalkCounter) | `$CF18` | 2 | [events](events.md) | RL |
-| [`wSeafoamIslandsB3FCurScript`](events.md#s-wSeafoamIslandsB3FCurScript) | `$D666` | 1 | [events](events.md) | RL |
-| [`wSeafoamIslandsB4FCurScript`](events.md#s-wSeafoamIslandsB4FCurScript) | `$D668` | 1 | [events](events.md) | RL |
-| [`wSecondLockTrashCanIndex`](events.md#s-wSecondLockTrashCanIndex) | `$D744` | 3 | [events](events.md) | RL |
-| [`wSerialEnemyDataBlock`](link.md#s-wSerialEnemyDataBlock) | `$D893` | 9 | [link](link.md) | RL |
-| [`wSerialEnemyMonsPatchList`](link.md#s-wSerialEnemyMonsPatchList) | `$C5D0` | 280 | [link](link.md) | RL |
-| [`wSerialExchangeNybbleReceiveData`](link.md#s-wSerialExchangeNybbleReceiveData) | `$CC3E` | 4 | [link](link.md) | RL |
-| [`wSerialExchangeNybbleSendData`](link.md#s-wSerialExchangeNybbleSendData) | `$CC42` | 5 | [link](link.md) | RL |
-| [`wSerialExchangeNybbleTempReceiveData`](link.md) | `$CC3D` | 1 | [link](link.md) | RL |
-| [`wSerialOtherGameboyRandomNumberListBlock`](link.md#s-wSerialOtherGameboyRandomNumberListBlock) | `$CD81` | 360 | [link](link.md) | RL |
-| [`wSerialPartyMonsPatchList`](link.md#s-wSerialPartyMonsPatchList) | `$C508` | 1 | [link](link.md) | RL |
-| [`wSerialPlayerDataBlock`](bag.md) | `$D152` | 1 | [bag](bag.md) | RL |
-| [`wSerialRandomNumberListBlock`](bag.md) | `$D141` | 2 | [bag](bag.md) | RL |
-| [`wSerialSyncAndExchangeNybbleReceiveData`](link.md#s-wSerialSyncAndExchangeNybbleReceiveData) | `$CC3D` | 1 | [link](link.md) | RL |
-| [`wSfxHeaderPointer`](audio.md#s-wSfxHeaderPointer) | `$C0EC` | 2 | [audio](audio.md) | RL |
-| [`wSfxTempo`](audio.md#s-wSfxTempo) | `$C0EA` | 2 | [audio](audio.md) | RL |
-| [`wSfxWaveInstrument`](audio.md#s-wSfxWaveInstrument) | `$C0E7` | 1 | [audio](audio.md) | RL |
-| [`wShadowOAM`](sprites.md) | `$C300` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMBackup`](link.md) | `$C508` | 1 | [link](link.md) | RL |
-| [`wShadowOAMBackupEnd`](sprites.md#s-wShadowOAMBackupEnd) | `$C5A8` | 40 | [sprites](sprites.md) | RL |
-| [`wShadowOAMBackupSprite00`](link.md) | `$C508` | 1 | [link](link.md) | RL |
-| [`wShadowOAMBackupSprite00Attributes`](sprites.md#s-wShadowOAMBackupSprite00Attributes) | `$C50B` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite00TileID`](sprites.md#s-wShadowOAMBackupSprite00TileID) | `$C50A` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite00XCoord`](sprites.md#s-wShadowOAMBackupSprite00XCoord) | `$C509` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite00YCoord`](link.md) | `$C508` | 1 | [link](link.md) | RL |
-| [`wShadowOAMBackupSprite01`](sprites.md) | `$C50C` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite01Attributes`](sprites.md#s-wShadowOAMBackupSprite01Attributes) | `$C50F` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite01TileID`](sprites.md#s-wShadowOAMBackupSprite01TileID) | `$C50E` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMBackupSprite01XCoord`](sprites.md#s-wShadowOAMBackupSprite01XCoord) | `$C50D` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMBackupSprite01YCoord`](sprites.md#s-wShadowOAMBackupSprite01YCoord) | `$C50C` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMEnd`](sprites.md#s-wShadowOAMEnd) | `$C3A0` | — | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite00`](sprites.md) | `$C300` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite00Attributes`](sprites.md#s-wShadowOAMSprite00Attributes) | `$C303` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMSprite00TileID`](sprites.md#s-wShadowOAMSprite00TileID) | `$C302` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite00XCoord`](sprites.md#s-wShadowOAMSprite00XCoord) | `$C301` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite00YCoord`](sprites.md#s-wShadowOAMSprite00YCoord) | `$C300` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite01`](sprites.md) | `$C304` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite01Attributes`](sprites.md#s-wShadowOAMSprite01Attributes) | `$C307` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMSprite01TileID`](sprites.md#s-wShadowOAMSprite01TileID) | `$C306` | 1 | [sprites](sprites.md) | RL |
-| [`wShadowOAMSprite01XCoord`](sprites.md#s-wShadowOAMSprite01XCoord) | `$C305` | 1 | [sprites](sprites.md) | L |
-| [`wShadowOAMSprite01YCoord`](sprites.md#s-wShadowOAMSprite01YCoord) | `$C304` | 1 | [sprites](sprites.md) | RL |
-| [`wSignCoords`](overworld.md#s-wSignCoords) | `$D4B1` | 32 | [overworld](overworld.md) | RL |
-| [`wSignTextIDs`](overworld.md#s-wSignTextIDs) | `$D4D1` | 16 | [overworld](overworld.md) | RL |
-| [`wSilphCo10FCurScript`](events.md#s-wSilphCo10FCurScript) | `$D658` | 1 | [events](events.md) | RL |
-| [`wSilphCo11FCurScript`](events.md#s-wSilphCo11FCurScript) | `$D659` | 2 | [events](events.md) | RL |
-| [`wSilphCo2FCurScript`](events.md#s-wSilphCo2FCurScript) | `$D643` | 1 | [events](events.md) | RL |
-| [`wSilphCo3FCurScript`](events.md#s-wSilphCo3FCurScript) | `$D644` | 1 | [events](events.md) | RL |
-| [`wSilphCo4FCurScript`](events.md#s-wSilphCo4FCurScript) | `$D645` | 1 | [events](events.md) | RL |
-| [`wSilphCo5FCurScript`](events.md#s-wSilphCo5FCurScript) | `$D646` | 1 | [events](events.md) | RL |
-| [`wSilphCo6FCurScript`](events.md#s-wSilphCo6FCurScript) | `$D647` | 1 | [events](events.md) | RL |
-| [`wSilphCo7FCurScript`](events.md#s-wSilphCo7FCurScript) | `$D648` | 1 | [events](events.md) | RL |
-| [`wSilphCo8FCurScript`](events.md#s-wSilphCo8FCurScript) | `$D649` | 1 | [events](events.md) | RL |
-| [`wSilphCo9FCurScript`](events.md#s-wSilphCo9FCurScript) | `$D64A` | 1 | [events](events.md) | RL |
-| [`wSimulatedJoypadStatesEnd`](battle.md) | `$CCD3` | 1 | [battle](battle.md) | RL |
-| [`wSimulatedJoypadStatesIndex`](system.md#s-wSimulatedJoypadStatesIndex) | `$CD38` | 1 | [system](system.md) | RL |
-| [`wSlideMonDelay`](scratch.md) | `$D08B` | 1 | [scratch](scratch.md) | RL |
-| [`wSlideMonUpBottomRowLeftTile`](scratch.md#s-wSlideMonUpBottomRowLeftTile) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineAllowMatchesCounter`](scratch.md#s-wSlotMachineAllowMatchesCounter) | `$D096` | 4 | [scratch](scratch.md) | RL |
-| [`wSlotMachineBet`](scratch.md) | `$CD50` | 9 | [scratch](scratch.md) | RL |
-| [`wSlotMachineFlags`](scratch.md#s-wSlotMachineFlags) | `$CD4C` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineRerollCounter`](scratch.md) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineSavedROMBank`](scratch.md#s-wSlotMachineSavedROMBank) | `$CC5E` | 27 | [scratch](scratch.md) | RL |
-| [`wSlotMachineSevenAndBarModeChance`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wSlotMachineWheel1BottomTile`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wSlotMachineWheel1MiddleTile`](scratch.md#s-wSlotMachineWheel1MiddleTile) | `$CD42` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineWheel1Offset`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineWheel1SlipCounter`](scratch.md) | `$CD4D` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineWheel1TopTile`](scratch.md#s-wSlotMachineWheel1TopTile) | `$CD43` | 1 | [scratch](scratch.md) | RL |
-| [`wSlotMachineWinningSymbol`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wSoundID`](audio.md#s-wSoundID) | `$C001` | 1 | [audio](audio.md) | RL |
-| [`wSouthConnectedMap`](overworld.md#s-wSouthConnectedMap) | `$D37C` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectedMapViewPointer`](overworld.md#s-wSouthConnectedMapViewPointer) | `$D385` | 2 | [overworld](overworld.md) | RL |
-| [`wSouthConnectedMapWidth`](overworld.md#s-wSouthConnectedMapWidth) | `$D382` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectedMapXAlignment`](overworld.md#s-wSouthConnectedMapXAlignment) | `$D384` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectedMapYAlignment`](overworld.md#s-wSouthConnectedMapYAlignment) | `$D383` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectionHeader`](overworld.md) | `$D37C` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectionStripDest`](overworld.md#s-wSouthConnectionStripDest) | `$D37F` | 2 | [overworld](overworld.md) | RL |
-| [`wSouthConnectionStripLength`](overworld.md#s-wSouthConnectionStripLength) | `$D381` | 1 | [overworld](overworld.md) | RL |
-| [`wSouthConnectionStripSrc`](overworld.md#s-wSouthConnectionStripSrc) | `$D37D` | 2 | [overworld](overworld.md) | RL |
-| [`wSpiralBallsBaseX`](scratch.md) | `$D08B` | 1 | [scratch](scratch.md) | RL |
-| [`wSpiralBallsBaseY`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wSprite01StateData1`](sprites.md) | `$C110` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1AnimFrameCounter`](sprites.md#s-wSprite01StateData1AnimFrameCounter) | `$C118` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1CollisionData`](sprites.md#s-wSprite01StateData1CollisionData) | `$C11C` | 4 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1End`](sprites.md#s-wSprite01StateData1End) | `$C120` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1FacingDirection`](sprites.md#s-wSprite01StateData1FacingDirection) | `$C119` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1ImageIndex`](sprites.md#s-wSprite01StateData1ImageIndex) | `$C112` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1IntraAnimFrameCounter`](sprites.md#s-wSprite01StateData1IntraAnimFrameCounter) | `$C117` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1MovementStatus`](sprites.md#s-wSprite01StateData1MovementStatus) | `$C111` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1PictureID`](sprites.md#s-wSprite01StateData1PictureID) | `$C110` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1XAdjusted`](sprites.md#s-wSprite01StateData1XAdjusted) | `$C11B` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1XPixels`](sprites.md#s-wSprite01StateData1XPixels) | `$C116` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1XStepVector`](sprites.md#s-wSprite01StateData1XStepVector) | `$C115` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1YAdjusted`](sprites.md#s-wSprite01StateData1YAdjusted) | `$C11A` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData1YPixels`](sprites.md#s-wSprite01StateData1YPixels) | `$C114` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData1YStepVector`](sprites.md#s-wSprite01StateData1YStepVector) | `$C113` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2GrassPriority`](sprites.md#s-wSprite01StateData2GrassPriority) | `$C217` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2ImageBaseOffset`](sprites.md#s-wSprite01StateData2ImageBaseOffset) | `$C21E` | 2 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2MapX`](sprites.md#s-wSprite01StateData2MapX) | `$C215` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2MapY`](sprites.md#s-wSprite01StateData2MapY) | `$C214` | 1 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2MovementByte1`](sprites.md#s-wSprite01StateData2MovementByte1) | `$C216` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData2MovementDelay`](sprites.md#s-wSprite01StateData2MovementDelay) | `$C218` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData2OrigFacingDirection`](sprites.md#s-wSprite01StateData2OrigFacingDirection) | `$C219` | 4 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2WalkAnimationCounter`](sprites.md#s-wSprite01StateData2WalkAnimationCounter) | `$C210` | 2 | [sprites](sprites.md) | RL |
-| [`wSprite01StateData2XDisplacement`](sprites.md#s-wSprite01StateData2XDisplacement) | `$C213` | 1 | [sprites](sprites.md) | L |
-| [`wSprite01StateData2YDisplacement`](sprites.md#s-wSprite01StateData2YDisplacement) | `$C212` | 1 | [sprites](sprites.md) | RL |
-| [`wSpriteCurPosX`](graphics.md#s-wSpriteCurPosX) | `$D0A1` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteCurPosY`](scratch.md#s-wSpriteCurPosY) | `$D0A2` | 1 | [scratch](scratch.md) | RL |
-| [`wSpriteDataEnd`](sprites.md#s-wSpriteDataEnd) | `$C300` | — | [sprites](sprites.md) | RL |
-| [`wSpriteDataStart`](sprites.md) | `$C100` | 1 | [sprites](sprites.md) | RL |
-| [`wSpriteDecodeTable0Ptr`](graphics.md#s-wSpriteDecodeTable0Ptr) | `$D0B1` | 2 | [graphics](graphics.md) | RL |
-| [`wSpriteDecodeTable1Ptr`](graphics.md#s-wSpriteDecodeTable1Ptr) | `$D0B3` | 2 | [graphics](graphics.md) | RL |
-| [`wSpriteFlipped`](graphics.md#s-wSpriteFlipped) | `$D0AA` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteHeight`](graphics.md#s-wSpriteHeight) | `$D0A4` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteIndex`](sprites.md#s-wSpriteIndex) | `$CF13` | 1 | [sprites](sprites.md) | RL |
-| [`wSpriteInputBitCounter`](graphics.md#s-wSpriteInputBitCounter) | `$D0A6` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteInputCurByte`](scratch.md#s-wSpriteInputCurByte) | `$D0A5` | 1 | [scratch](scratch.md) | RL |
-| [`wSpriteInputPtr`](graphics.md#s-wSpriteInputPtr) | `$D0AB` | 2 | [graphics](graphics.md) | RL |
-| [`wSpriteLoadFlags`](graphics.md#s-wSpriteLoadFlags) | `$D0A8` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteOutputBitOffset`](graphics.md#s-wSpriteOutputBitOffset) | `$D0A7` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteOutputPtr`](graphics.md#s-wSpriteOutputPtr) | `$D0AD` | 2 | [graphics](graphics.md) | RL |
-| [`wSpriteOutputPtrCached`](graphics.md#s-wSpriteOutputPtrCached) | `$D0AF` | 2 | [graphics](graphics.md) | RL |
-| [`wSpritePlayerStateData1`](sprites.md) | `$C100` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1AnimFrameCounter`](sprites.md#s-wSpritePlayerStateData1AnimFrameCounter) | `$C108` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1CollisionData`](sprites.md#s-wSpritePlayerStateData1CollisionData) | `$C10C` | 4 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1End`](sprites.md) | `$C110` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1FacingDirection`](sprites.md#s-wSpritePlayerStateData1FacingDirection) | `$C109` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1ImageIndex`](sprites.md#s-wSpritePlayerStateData1ImageIndex) | `$C102` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1IntraAnimFrameCounter`](sprites.md#s-wSpritePlayerStateData1IntraAnimFrameCounter) | `$C107` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1MovementStatus`](sprites.md#s-wSpritePlayerStateData1MovementStatus) | `$C101` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1PictureID`](sprites.md) | `$C100` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1XAdjusted`](sprites.md#s-wSpritePlayerStateData1XAdjusted) | `$C10B` | 1 | [sprites](sprites.md) | L |
-| [`wSpritePlayerStateData1XPixels`](sprites.md#s-wSpritePlayerStateData1XPixels) | `$C106` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1XStepVector`](sprites.md#s-wSpritePlayerStateData1XStepVector) | `$C105` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1YAdjusted`](sprites.md#s-wSpritePlayerStateData1YAdjusted) | `$C10A` | 1 | [sprites](sprites.md) | L |
-| [`wSpritePlayerStateData1YPixels`](sprites.md#s-wSpritePlayerStateData1YPixels) | `$C104` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData1YStepVector`](sprites.md#s-wSpritePlayerStateData1YStepVector) | `$C103` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2GrassPriority`](sprites.md#s-wSpritePlayerStateData2GrassPriority) | `$C207` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2ImageBaseOffset`](sprites.md#s-wSpritePlayerStateData2ImageBaseOffset) | `$C20E` | 2 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2MapX`](sprites.md#s-wSpritePlayerStateData2MapX) | `$C205` | 1 | [sprites](sprites.md) | L |
-| [`wSpritePlayerStateData2MapY`](sprites.md#s-wSpritePlayerStateData2MapY) | `$C204` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2MovementByte1`](sprites.md#s-wSpritePlayerStateData2MovementByte1) | `$C206` | 1 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2MovementDelay`](sprites.md#s-wSpritePlayerStateData2MovementDelay) | `$C208` | 1 | [sprites](sprites.md) | L |
-| [`wSpritePlayerStateData2OrigFacingDirection`](sprites.md#s-wSpritePlayerStateData2OrigFacingDirection) | `$C209` | 4 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2WalkAnimationCounter`](sprites.md#s-wSpritePlayerStateData2WalkAnimationCounter) | `$C200` | 2 | [sprites](sprites.md) | RL |
-| [`wSpritePlayerStateData2XDisplacement`](sprites.md#s-wSpritePlayerStateData2XDisplacement) | `$C203` | 1 | [sprites](sprites.md) | L |
-| [`wSpritePlayerStateData2YDisplacement`](sprites.md#s-wSpritePlayerStateData2YDisplacement) | `$C202` | 1 | [sprites](sprites.md) | L |
-| [`wSpriteSet`](overworld.md#s-wSpriteSet) | `$D39D` | 11 | [overworld](overworld.md) | RL |
-| [`wSpriteSetID`](overworld.md#s-wSpriteSetID) | `$D3A8` | 1 | [overworld](overworld.md) | RL |
-| [`wSpriteStateData1`](sprites.md#s-wSpriteStateData1) | `$C100` | 1 | [sprites](sprites.md) | RL |
-| [`wSpriteUnpackMode`](graphics.md#s-wSpriteUnpackMode) | `$D0A9` | 1 | [graphics](graphics.md) | RL |
-| [`wSpriteWidth`](graphics.md#s-wSpriteWidth) | `$D0A3` | 1 | [graphics](graphics.md) | RL |
-| [`wSquishMonCurrentDirection`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wSSAnne1FRoomsCurScript`](events.md#s-wSSAnne1FRoomsCurScript) | `$D608` | 1 | [events](events.md) | RL |
-| [`wSSAnne2FCurScript`](events.md#s-wSSAnne2FCurScript) | `$D665` | 1 | [events](events.md) | RL |
-| [`wSSAnneB1FRoomsCurScript`](events.md#s-wSSAnneB1FRoomsCurScript) | `$D629` | 1 | [events](events.md) | RL |
-| [`wSSAnneBowCurScript`](events.md#s-wSSAnneBowCurScript) | `$D617` | 1 | [events](events.md) | RL |
-| [`wSSAnneSmokeDriftAmount`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wSSAnneSmokeX`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wStack`](system.md#s-wStack) | `$DFFF` | 1 | [system](system.md) | RL |
-| [`wStandingOnWarpPadOrHole`](scratch.md) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
-| [`wStatusFlags1`](events.md#s-wStatusFlags1) | `$D728` | 2 | [events](events.md) | RL |
-| [`wStatusScreenCurrentPP`](scratch.md#s-wStatusScreenCurrentPP) | `$CD71` | 2 | [scratch](scratch.md) | RL |
-| [`wStatusScreenHPBarColor`](scratch.md#s-wStatusScreenHPBarColor) | `$CF25` | 8 | [scratch](scratch.md) | RL |
-| [`wStepCounter`](overworld.md#s-wStepCounter) | `$D13B` | 1 | [overworld](overworld.md) | RL |
-| [`wStereoPanning`](audio.md#s-wStereoPanning) | `$C004` | 1 | [audio](audio.md) | RL |
-| [`wStoppingWhichSlotMachineWheel`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wStringBuffer`](battle.md) | `$CF4B` | 2 | [battle](battle.md) | RL |
-| [`wSubAnimAddrPtr`](scratch.md#s-wSubAnimAddrPtr) | `$D094` | 2 | [scratch](scratch.md) | RL |
-| [`wSubAnimCounter`](scratch.md#s-wSubAnimCounter) | `$D087` | 1 | [scratch](scratch.md) | RL |
-| [`wSubAnimFrameDelay`](scratch.md#s-wSubAnimFrameDelay) | `$D086` | 1 | [scratch](scratch.md) | RL |
-| [`wSubAnimSubEntryAddr`](scratch.md) | `$D096` | 4 | [scratch](scratch.md) | RL |
-| [`wSubAnimTransform`](scratch.md#s-wSubAnimTransform) | `$D08B` | 1 | [scratch](scratch.md) | RL |
-| [`wSurroundingTiles`](link.md) | `$C508` | 1 | [link](link.md) | RL |
-| [`wSwappedMenuItem`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wSwitchPartyMonTempBuffer`](scratch.md) | `$CC97` | 10 | [scratch](scratch.md) | RL |
-| [`wSymmetricSpriteOAMAttributes`](scratch.md#s-wSymmetricSpriteOAMAttributes) | `$CD5C` | 1 | [scratch](scratch.md) | RL |
-| [`wTempByteValue`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wTempCoins1`](bag.md#s-wTempCoins1) | `$CD46` | 1 | [bag](bag.md) | RL |
-| [`wTempMoveNameBuffer`](scratch.md) | `$D036` | 16 | [scratch](scratch.md) | RL |
-| [`wTempObtainedBadgesBooleans`](player.md#s-wTempObtainedBadgesBooleans) | `$CD49` | 1 | [player](player.md) | RL |
-| [`wTempoModifier`](audio.md#s-wTempoModifier) | `$C0F2` | 14 | [audio](audio.md) | RL |
-| [`wTempPic`](overworld.md#s-wTempPic) | `$C6E8` | 1300 | [overworld](overworld.md) | RL |
-| [`wTempSCX`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wTempTilesetNumTiles`](scratch.md#s-wTempTilesetNumTiles) | `$D07D` | 1 | [scratch](scratch.md) | RL |
-| [`wTempTMHM`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wTestBattlePlayerSelectedMove`](scratch.md#s-wTestBattlePlayerSelectedMove) | `$CCD9` | 2 | [scratch](scratch.md) | RL |
-| [`wTextBoxID`](screen.md#s-wTextBoxID) | `$D125` | 1 | [screen](screen.md) | RL |
-| [`wTextDest`](screen.md#s-wTextDest) | `$CC3A` | 2 | [screen](screen.md) | RL |
-| [`wTextPredefFlag`](screen.md#s-wTextPredefFlag) | `$CF11` | 1 | [screen](screen.md) | RL |
-| [`wTileBehindCursor`](screen.md#s-wTileBehindCursor) | `$CC27` | 1 | [screen](screen.md) | RL |
-| [`wTileInFrontOfBoulderAndBoulderCollisionResult`](overworld.md#s-wTileInFrontOfBoulderAndBoulderCollisionResult) | `$D71C` | 1 | [overworld](overworld.md) | RL |
-| [`wTileInFrontOfPlayer`](overworld.md#s-wTileInFrontOfPlayer) | `$CFC6` | 1 | [overworld](overworld.md) | RL |
-| [`wTileMap`](screen.md#s-wTileMap) | `$C3A0` | 360 | [screen](screen.md) | RLI |
-| [`wTileMapBackup`](link.md) | `$C508` | 1 | [link](link.md) | RL |
-| [`wTileMapBackup2`](link.md) | `$CD81` | 360 | [link](link.md) | RL |
-| [`wTilePlayerStandingOn`](overworld.md#s-wTilePlayerStandingOn) | `$CF0E` | 1 | [overworld](overworld.md) | RL |
-| [`wTilesetBank`](overworld.md#s-wTilesetBank) | `$D52B` | 1 | [overworld](overworld.md) | RL |
-| [`wTilesetBlocksPtr`](overworld.md#s-wTilesetBlocksPtr) | `$D52C` | 2 | [overworld](overworld.md) | RL |
-| [`wTilesetCollisionPtr`](overworld.md#s-wTilesetCollisionPtr) | `$D530` | 2 | [overworld](overworld.md) | RL |
-| [`wTilesetGfxPtr`](overworld.md#s-wTilesetGfxPtr) | `$D52E` | 2 | [overworld](overworld.md) | RL |
-| [`wTilesetTalkingOverTiles`](overworld.md#s-wTilesetTalkingOverTiles) | `$D532` | 3 | [overworld](overworld.md) | RL |
-| [`wTitleMonSpecies`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wToggleableObjectCounter`](events.md#s-wToggleableObjectCounter) | `$D048` | 2 | [events](events.md) | RL |
-| [`wToggleableObjectFlags`](events.md#s-wToggleableObjectFlags) | `$D5A6` | 32 | [events](events.md) | RL |
-| [`wToggleableObjectFlagsEnd`](events.md#s-wToggleableObjectFlagsEnd) | `$D5C6` | 7 | [events](events.md) | L |
-| [`wToggleableObjectIndex`](events.md#s-wToggleableObjectIndex) | `$CC4D` | 1 | [events](events.md) | RL |
-| [`wToggleableObjectList`](events.md#s-wToggleableObjectList) | `$D5CE` | 34 | [events](events.md) | RL |
-| [`wTopMenuItemX`](screen.md#s-wTopMenuItemX) | `$CC25` | 1 | [screen](screen.md) | RL |
-| [`wTopMenuItemY`](screen.md#s-wTopMenuItemY) | `$CC24` | 1 | [screen](screen.md) | RL |
-| [`wTotalPayDayMoney`](battle.md#s-wTotalPayDayMoney) | `$CCE5` | 3 | [battle](battle.md) | RL |
-| [`wTownMapCoords`](scratch.md) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
-| [`wTownMapSpriteBlinkingEnabled`](scratch.md) | `$D09B` | 1 | [scratch](scratch.md) | RL |
-| [`wTownVisitedFlag`](events.md#s-wTownVisitedFlag) | `$D70B` | 2 | [events](events.md) | RL |
-| [`wTradeCenterPointerTableIndex`](link.md#s-wTradeCenterPointerTableIndex) | `$CC38` | 2 | [link](link.md) | RL |
-| [`wTradedEnemyMonOT`](link.md#s-wTradedEnemyMonOT) | `$CD4E` | 1 | [link](link.md) | RL |
-| [`wTradedEnemyMonOTID`](link.md#s-wTradedEnemyMonOTID) | `$CD59` | 2 | [link](link.md) | RL |
-| [`wTradedEnemyMonSpecies`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wTradedMonMovingRight`](scratch.md) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wTradedPlayerMonOT`](events.md) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wTradedPlayerMonOTID`](scratch.md) | `$CD4C` | 1 | [scratch](scratch.md) | RL |
-| [`wTradedPlayerMonSpecies`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wTradingWhichEnemyMon`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wTradingWhichPlayerMon`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerBaseMoney`](scratch.md#s-wTrainerBaseMoney) | `$D046` | 2 | [scratch](scratch.md) | RL |
-| [`wTrainerCardBlkPacket`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wTrainerClass`](scratch.md#s-wTrainerClass) | `$D031` | 2 | [scratch](scratch.md) | RLI |
-| [`wTrainerEngageDistance`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerFacingDirection`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerHeaderFlagBit`](events.md#s-wTrainerHeaderFlagBit) | `$CC55` | 2 | [events](events.md) | RL |
-| [`wTrainerHeaderPtr`](events.md#s-wTrainerHeaderPtr) | `$DA30` | 8 | [events](events.md) | RL |
-| [`wTrainerInfoTextBoxNextRowOffset`](scratch.md) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerInfoTextBoxWidth`](scratch.md) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerInfoTextBoxWidthPlus1`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wTrainerName`](scratch.md#s-wTrainerName) | `$D04A` | 13 | [scratch](scratch.md) | RL |
-| [`wTrainerNo`](battle.md#s-wTrainerNo) | `$D05D` | 1 | [battle](battle.md) | RL |
-| [`wTrainerPicPointer`](scratch.md#s-wTrainerPicPointer) | `$D033` | 3 | [scratch](scratch.md) | RL |
-| [`wTrainerScreenX`](events.md#s-wTrainerScreenX) | `$CD41` | 1 | [events](events.md) | RL |
-| [`wTrainerScreenY`](player.md) | `$CD40` | 1 | [player](player.md) | RL |
-| [`wTrainerSpriteOffset`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wTransformedEnemyMonOriginalDVs`](battle.md#s-wTransformedEnemyMonOriginalDVs) | `$CCEB` | 2 | [battle](battle.md) | RL |
-| [`wTwoOptionMenuID`](scratch.md#s-wTwoOptionMenuID) | `$D12C` | 1 | [scratch](scratch.md) | RL |
-| [`wTypeEffectiveness`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wUnknownSerialCounter`](scratch.md#s-wUnknownSerialCounter) | `$CC47` | 2 | [scratch](scratch.md) | RL |
-| [`wUnknownSerialCounter2`](scratch.md#s-wUnknownSerialCounter2) | `$D074` | 4 | [scratch](scratch.md) | RL |
-| [`wUnusedAlreadyOwnedFlag`](scratch.md#s-wUnusedAlreadyOwnedFlag) | `$D153` | 3 | [scratch](scratch.md) | RL |
-| [`wUnusedCardKeyGateID`](events.md#s-wUnusedCardKeyGateID) | `$D71F` | 9 | [events](events.md) | RL |
-| [`wUnusedCreditsByte`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wUnusedCurMapTilesetCopy`](scratch.md#s-wUnusedCurMapTilesetCopy) | `$D119` | 1 | [scratch](scratch.md) | RL |
-| [`wUnusedFlag`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wUnusedLastMapWidth`](overworld.md#s-wUnusedLastMapWidth) | `$D366` | 1 | [overworld](overworld.md) | RL |
-| [`wUnusedLinkMenuByte`](bag.md) | `$CD37` | 1 | [bag](bag.md) | RL |
-| [`wUnusedMapVariable`](overworld.md#s-wUnusedMapVariable) | `$D5A3` | 1 | [overworld](overworld.md) | RL |
-| [`wUnusedMoveAnimByte`](scratch.md#s-wUnusedMoveAnimByte) | `$D09B` | 1 | [scratch](scratch.md) | RL |
-| [`wUnusedMusicByte`](audio.md#s-wUnusedMusicByte) | `$C000` | 1 | [audio](audio.md) | RL |
-| [`wUnusedNamePointer`](scratch.md#s-wUnusedNamePointer) | `$CF8D` | 2 | [scratch](scratch.md) | RL |
-| [`wUnusedObtainedBadges`](player.md#s-wUnusedObtainedBadges) | `$D357` | 1 | [player](player.md) | L |
-| [`wUnusedOverrideSimulatedJoypadStatesIndex`](scratch.md#s-wUnusedOverrideSimulatedJoypadStatesIndex) | `$CD3A` | 1 | [scratch](scratch.md) | RL |
-| [`wUnusedPlayerDataByte`](overworld.md#s-wUnusedPlayerDataByte) | `$D71B` | 1 | [overworld](overworld.md) | RL |
-| [`wUnusedSimulatedJoypadStatesMask`](scratch.md#s-wUnusedSimulatedJoypadStatesMask) | `$CD39` | 1 | [scratch](scratch.md) | RL |
-| [`wUnusedWaterDropletsByte`](scratch.md#s-wUnusedWaterDropletsByte) | `$D08A` | 1 | [scratch](scratch.md) | RL |
-| [`wUpdateSpritesEnabled`](system.md#s-wUpdateSpritesEnabled) | `$CFCB` | 1 | [system](system.md) | RL |
-| [`wUsedItemOnWhichPokemon`](scratch.md#s-wUsedItemOnWhichPokemon) | `$CF06` | 1 | [scratch](scratch.md) | RL |
-| [`wUsingPPUp`](scratch.md) | `$D11E` | 1 | [scratch](scratch.md) | RL |
-| [`wVBlankSavedROMBank`](scratch.md#s-wVBlankSavedROMBank) | `$D122` | 2 | [scratch](scratch.md) | RL |
-| [`wVermilionCityCurScript`](events.md#s-wVermilionCityCurScript) | `$D62A` | 1 | [events](events.md) | RL |
-| [`wVermilionDockTileMapBuffer`](battle.md) | `$CC5B` | 1 | [battle](battle.md) | RL |
-| [`wVermilionDockTileMapBufferEnd`](battle.md) | `$CD0F` | 1 | [battle](battle.md) | RL |
-| [`wVermilionGymCurScript`](events.md#s-wVermilionGymCurScript) | `$D5FE` | 1 | [events](events.md) | RL |
-| [`wVictoryRoad1FCurScript`](events.md#s-wVictoryRoad1FCurScript) | `$D651` | 2 | [events](events.md) | RL |
-| [`wViridianCityCurScript`](events.md#s-wViridianCityCurScript) | `$D5F4` | 3 | [events](events.md) | RL |
-| [`wViridianForestCurScript`](events.md#s-wViridianForestCurScript) | `$D618` | 1 | [events](events.md) | RL |
-| [`wViridianGymCurScript`](events.md#s-wViridianGymCurScript) | `$D5FB` | 1 | [events](events.md) | RL |
-| [`wViridianMartCurScript`](events.md#s-wViridianMartCurScript) | `$D60D` | 1 | [events](events.md) | RL |
-| [`wWalkBikeSurfState`](overworld.md#s-wWalkBikeSurfState) | `$D700` | 11 | [overworld](overworld.md) | RL |
-| [`wWalkBikeSurfStateCopy`](overworld.md#s-wWalkBikeSurfStateCopy) | `$D11A` | 1 | [overworld](overworld.md) | RL |
-| [`wWalkCounter`](overworld.md#s-wWalkCounter) | `$CFC5` | 1 | [overworld](overworld.md) | RL |
-| [`wWarpedFromWhichMap`](overworld.md#s-wWarpedFromWhichMap) | `$D73C` | 3 | [overworld](overworld.md) | RL |
-| [`wWarpedFromWhichWarp`](overworld.md#s-wWarpedFromWhichWarp) | `$D73B` | 1 | [overworld](overworld.md) | RL |
-| [`wWarpEntries`](overworld.md#s-wWarpEntries) | `$D3AF` | 128 | [overworld](overworld.md) | RLI |
-| [`wWaterMons`](battle.md) | `$D8A5` | 2 | [battle](battle.md) | RL |
-| [`wWaterRate`](battle.md) | `$D8A4` | 1 | [battle](battle.md) | RL |
-| [`wWereAnyMonsAsleep`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wWestConnectedMap`](overworld.md#s-wWestConnectedMap) | `$D387` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectedMapViewPointer`](overworld.md#s-wWestConnectedMapViewPointer) | `$D390` | 2 | [overworld](overworld.md) | RL |
-| [`wWestConnectedMapWidth`](overworld.md#s-wWestConnectedMapWidth) | `$D38D` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectedMapXAlignment`](overworld.md#s-wWestConnectedMapXAlignment) | `$D38F` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectedMapYAlignment`](overworld.md#s-wWestConnectedMapYAlignment) | `$D38E` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectionHeader`](overworld.md) | `$D387` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectionStripDest`](overworld.md#s-wWestConnectionStripDest) | `$D38A` | 2 | [overworld](overworld.md) | RL |
-| [`wWestConnectionStripLength`](overworld.md#s-wWestConnectionStripLength) | `$D38C` | 1 | [overworld](overworld.md) | RL |
-| [`wWestConnectionStripSrc`](overworld.md#s-wWestConnectionStripSrc) | `$D388` | 2 | [overworld](overworld.md) | RL |
-| [`wWhichAnimationOffsets`](scratch.md) | `$CD50` | 9 | [scratch](scratch.md) | RL |
-| [`wWhichBadge`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichBattleAnimTileset`](scratch.md) | `$D09F` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichDungeonWarp`](events.md#s-wWhichDungeonWarp) | `$D71E` | 1 | [events](events.md) | RL |
-| [`wWhichEmotionBubble`](scratch.md#s-wWhichEmotionBubble) | `$CD50` | 9 | [scratch](scratch.md) | RL |
-| [`wWhichPartyMenuHPBar`](graphics.md) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
-| [`wWhichPewterGuy`](scratch.md) | `$D12F` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichPokemon`](storage.md#s-wWhichPokemon) | `$CF92` | 1 | [storage](storage.md) | RL |
-| [`wWhichPrize`](scratch.md#s-wWhichPrize) | `$D139` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichPrizeWindow`](scratch.md) | `$D12F` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichTownMapLocation`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichTrade`](scratch.md) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
-| [`wWhichTradeMonSelectionMenu`](scratch.md) | `$CC49` | 1 | [scratch](scratch.md) | RL |
-| [`wWholeScreenPaletteMonSpecies`](scratch.md#s-wWholeScreenPaletteMonSpecies) | `$CF1D` | 1 | [scratch](scratch.md) | RL |
-| [`wXBlockCoord`](overworld.md#s-wXBlockCoord) | `$D364` | 1 | [overworld](overworld.md) | RL |
-| [`wXCoord`](overworld.md#s-wXCoord) | `$D362` | 1 | [overworld](overworld.md) | RLI |
-| [`wXOffsetSinceLastSpecialWarp`](overworld.md#s-wXOffsetSinceLastSpecialWarp) | `$D4E3` | 1 | [overworld](overworld.md) | RL |
-| [`wYBlockCoord`](overworld.md#s-wYBlockCoord) | `$D363` | 1 | [overworld](overworld.md) | RL |
-| [`wYCoord`](overworld.md#s-wYCoord) | `$D361` | 1 | [overworld](overworld.md) | RLI |
-| [`wYOffsetSinceLastSpecialWarp`](overworld.md#s-wYOffsetSinceLastSpecialWarp) | `$D4E2` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-_AddPartyMon"></a>[`_AddPartyMon`](rom-data.md#s-_AddPartyMon) | `$72E5` b3 | 2405 | [rom-data](rom-data.md) | · |
+| <a id="s-AddPartyMon"></a>[`AddPartyMon`](rom-data.md#s-AddPartyMon) | `$3927` | 15 | [rom-data](rom-data.md) | · |
+| <a id="s-BaseStats"></a>[`BaseStats`](rom-data.md#s-BaseStats) | `$43DE` b14 | 5309 | [rom-data](rom-data.md) | I |
+| <a id="s-BattleHudTiles1"></a>[`BattleHudTiles1`](rom-data.md#s-BattleHudTiles1) | `$6080` b4 | 72 | [rom-data](rom-data.md) | · |
+| <a id="s-BattleRandom"></a>[`BattleRandom`](rom-data.md#s-BattleRandom) | `$6E9B` b15 | 3373 | [rom-data](rom-data.md) | · |
+| <a id="s-CalcCheckSum"></a>[`CalcCheckSum`](save.md#s-CalcCheckSum) | `$7856` b28 | 839 | [save](save.md) | · |
+| <a id="s-CalcStat"></a>[`CalcStat`](rom-data.md#s-CalcStat) | `$394A` | 1628 | [rom-data](rom-data.md) | · |
+| <a id="s-CalcStats"></a>[`CalcStats`](rom-data.md#s-CalcStats) | `$3936` | 20 | [rom-data](rom-data.md) | · |
+| <a id="s-CheckForDisobedience"></a>[`CheckForDisobedience`](rom-data.md#s-CheckForDisobedience) | `$5C88` b15 | 3705 | [rom-data](rom-data.md) | · |
+| <a id="s-EvosMovesPointerTable"></a>[`EvosMovesPointerTable`](rom-data.md#s-EvosMovesPointerTable) | `$705C` b14 | 2954 | [rom-data](rom-data.md) | · |
+| <a id="s-FontGraphics"></a>[`FontGraphics`](rom-data.md#s-FontGraphics) | `$5A80` b4 | 1056 | [rom-data](rom-data.md) | · |
+| <a id="s-GetMonHeader"></a>[`GetMonHeader`](rom-data.md#s-GetMonHeader) | `$1537` | 240 | [rom-data](rom-data.md) | · |
+| <a id="s-hAutoBGTransferDest"></a>[`hAutoBGTransferDest`](system.md#s-hAutoBGTransferDest) | `$FFBC` | 2 | [system](system.md) | RL |
+| <a id="s-hAutoBGTransferEnabled"></a>[`hAutoBGTransferEnabled`](system.md#s-hAutoBGTransferEnabled) | `$FFBA` | 1 | [system](system.md) | RL |
+| <a id="s-hAutoBGTransferPortion"></a>[`hAutoBGTransferPortion`](system.md#s-hAutoBGTransferPortion) | `$FFBB` | 1 | [system](system.md) | RL |
+| <a id="s-hBackupGymGateIndex"></a>[`hBackupGymGateIndex`](system.md#s-hBackupGymGateIndex) | `$FFE0` | 1 | [system](system.md) | R |
+| <a id="s-hBaseTileID"></a>[`hBaseTileID`](system.md#s-hBaseTileID) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hClearLetterPrintingDelayFlags"></a>[`hClearLetterPrintingDelayFlags`](system.md#s-hClearLetterPrintingDelayFlags) | `$FFF4` | 2 | [system](system.md) | R |
+| <a id="s-hCoins"></a>[`hCoins`](system.md#s-hCoins) | `$FFA0` | 2 | [system](system.md) | R |
+| <a id="s-hCollidingSpriteAdjustedDistance"></a>[`hCollidingSpriteAdjustedDistance`](system.md#s-hCollidingSpriteAdjustedDistance) | `$FF92` | 1 | [system](system.md) | R |
+| <a id="s-hCollidingSpriteOffset"></a>[`hCollidingSpriteOffset`](system.md#s-hCollidingSpriteOffset) | `$FF8F` | 1 | [system](system.md) | R |
+| <a id="s-hCollidingSpriteTempXValue"></a>[`hCollidingSpriteTempXValue`](system.md#s-hCollidingSpriteTempXValue) | `$FF91` | 1 | [system](system.md) | R |
+| <a id="s-hCollidingSpriteTempYValue"></a>[`hCollidingSpriteTempYValue`](system.md#s-hCollidingSpriteTempYValue) | `$FF90` | 1 | [system](system.md) | R |
+| <a id="s-hCoordsInFrontOfPlayerMatch"></a>[`hCoordsInFrontOfPlayerMatch`](system.md#s-hCoordsInFrontOfPlayerMatch) | `$FFEA` | 1 | [system](system.md) | R |
+| <a id="s-hCurrentSpriteOffset"></a>[`hCurrentSpriteOffset`](system.md#s-hCurrentSpriteOffset) | `$FFDA` | 1 | [system](system.md) | R |
+| <a id="s-hDexRatingNumMonsOwned"></a>[`hDexRatingNumMonsOwned`](system.md#s-hDexRatingNumMonsOwned) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hDexRatingNumMonsSeen"></a>[`hDexRatingNumMonsSeen`](system.md#s-hDexRatingNumMonsSeen) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hDexWeight"></a>[`hDexWeight`](system.md#s-hDexWeight) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hDidntFindAnyHiddenEvent"></a>[`hDidntFindAnyHiddenEvent`](system.md#s-hDidntFindAnyHiddenEvent) | `$FFEE` | 5 | [system](system.md) | R |
+| <a id="s-hDisableJoypadPolling"></a>[`hDisableJoypadPolling`](system.md#s-hDisableJoypadPolling) | `$FFF9` | 6 | [system](system.md) | RL |
+| <a id="s-hDivideBCDBuffer"></a>[`hDivideBCDBuffer`](system.md#s-hDivideBCDBuffer) | `$FFA5` | 4 | [system](system.md) | R |
+| <a id="s-hDivideBCDDivisor"></a>[`hDivideBCDDivisor`](system.md#s-hDivideBCDDivisor) | `$FFA2` | 3 | [system](system.md) | R |
+| <a id="s-hDivideBCDQuotient"></a>[`hDivideBCDQuotient`](system.md#s-hDivideBCDQuotient) | `$FFA2` | 3 | [system](system.md) | R |
+| <a id="s-hDivideBuffer"></a>[`hDivideBuffer`](system.md#s-hDivideBuffer) | `$FF9A` | 1 | [system](system.md) | R |
+| <a id="s-hDividend"></a>[`hDividend`](system.md#s-hDividend) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hDividend2"></a>[`hDividend2`](system.md#s-hDividend2) | `$FFE5` | 1 | [system](system.md) | R |
+| <a id="s-hDivisor"></a>[`hDivisor`](system.md#s-hDivisor) | `$FF99` | 1 | [system](system.md) | R |
+| <a id="s-hDivisor2"></a>[`hDivisor2`](system.md#s-hDivisor2) | `$FFE6` | 1 | [system](system.md) | R |
+| <a id="s-hDMARoutine"></a>[`hDMARoutine`](system.md#s-hDMARoutine) | `$FF80` | 10 | [system](system.md) | RL |
+| <a id="s-hDownArrowBlinkCount1"></a>[`hDownArrowBlinkCount1`](system.md#s-hDownArrowBlinkCount1) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hEastWestConnectedMapWidth"></a>[`hEastWestConnectedMapWidth`](system.md#s-hEastWestConnectedMapWidth) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hEnemySpeed"></a>[`hEnemySpeed`](system.md#s-hEnemySpeed) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hExperience"></a>[`hExperience`](system.md#s-hExperience) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hFieldMoveMonMenuTopMenuItemX"></a>[`hFieldMoveMonMenuTopMenuItemX`](system.md#s-hFieldMoveMonMenuTopMenuItemX) | `$FFF7` | 1 | [system](system.md) | R |
+| <a id="s-hFindPathFlags"></a>[`hFindPathFlags`](system.md#s-hFindPathFlags) | `$FF98` | 1 | [system](system.md) | R |
+| <a id="s-hFindPathNumSteps"></a>[`hFindPathNumSteps`](system.md#s-hFindPathNumSteps) | `$FF97` | 1 | [system](system.md) | R |
+| <a id="s-hFindPathXProgress"></a>[`hFindPathXProgress`](system.md#s-hFindPathXProgress) | `$FF9A` | 1 | [system](system.md) | R |
+| <a id="s-hFindPathYProgress"></a>[`hFindPathYProgress`](system.md#s-hFindPathYProgress) | `$FF99` | 1 | [system](system.md) | R |
+| <a id="s-hFourTileSpriteCount"></a>[`hFourTileSpriteCount`](system.md#s-hFourTileSpriteCount) | `$FF8E` | 1 | [system](system.md) | R |
+| <a id="s-hFrameCounter"></a>[`hFrameCounter`](system.md#s-hFrameCounter) | `$FFD5` | 1 | [system](system.md) | RL |
+| <a id="s-hGymGateAnswer"></a>[`hGymGateAnswer`](system.md#s-hGymGateAnswer) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hGymGateIndex"></a>[`hGymGateIndex`](system.md#s-hGymGateIndex) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hGymTrashCanRandNumMask"></a>[`hGymTrashCanRandNumMask`](system.md#s-hGymTrashCanRandNumMask) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hHalveItemPrices"></a>[`hHalveItemPrices`](system.md#s-hHalveItemPrices) | `$FF8E` | 1 | [system](system.md) | R |
+| <a id="s-hInteractedWithBookshelf"></a>[`hInteractedWithBookshelf`](system.md#s-hInteractedWithBookshelf) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hIsToggleableObjectOff"></a>[`hIsToggleableObjectOff`](system.md#s-hIsToggleableObjectOff) | `$FFE5` | 1 | [system](system.md) | R |
+| <a id="s-hItemAlreadyFound"></a>[`hItemAlreadyFound`](system.md#s-hItemAlreadyFound) | `$FFEB` | 1 | [system](system.md) | R |
+| <a id="s-hItemCounter"></a>[`hItemCounter`](system.md#s-hItemCounter) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hItemPrice"></a>[`hItemPrice`](system.md#s-hItemPrice) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hItemToRemoveID"></a>[`hItemToRemoveID`](system.md#s-hItemToRemoveID) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hItemToRemoveIndex"></a>[`hItemToRemoveIndex`](system.md#s-hItemToRemoveIndex) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hJoy5"></a>[`hJoy5`](system.md#s-hJoy5) | `$FFB5` | 1 | [system](system.md) | RL |
+| <a id="s-hJoy6"></a>[`hJoy6`](system.md#s-hJoy6) | `$FFB6` | 1 | [system](system.md) | R |
+| <a id="s-hJoy7"></a>[`hJoy7`](system.md#s-hJoy7) | `$FFB7` | 1 | [system](system.md) | R |
+| <a id="s-hJoyHeld"></a>[`hJoyHeld`](system.md#s-hJoyHeld) | `$FFB4` | 1 | [system](system.md) | RL |
+| <a id="s-hJoyInput"></a>[`hJoyInput`](system.md#s-hJoyInput) | `$FFF8` | 1 | [system](system.md) | RL |
+| <a id="s-hJoyLast"></a>[`hJoyLast`](system.md#s-hJoyLast) | `$FFB1` | 1 | [system](system.md) | RL |
+| <a id="s-hJoyPressed"></a>[`hJoyPressed`](system.md#s-hJoyPressed) | `$FFB3` | 1 | [system](system.md) | RL |
+| <a id="s-hJoyReleased"></a>[`hJoyReleased`](system.md#s-hJoyReleased) | `$FFB2` | 1 | [system](system.md) | RL |
+| <a id="s-hLoadedROMBank"></a>[`hLoadedROMBank`](system.md#s-hLoadedROMBank) | `$FFB8` | 1 | [system](system.md) | RL |
+| <a id="s-hLoadSpriteTemp1"></a>[`hLoadSpriteTemp1`](system.md#s-hLoadSpriteTemp1) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hMapROMBank"></a>[`hMapROMBank`](system.md#s-hMapROMBank) | `$FFE8` | 1 | [system](system.md) | R |
+| <a id="s-hMapStride"></a>[`hMapStride`](system.md#s-hMapStride) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hMapWidth"></a>[`hMapWidth`](system.md#s-hMapWidth) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hMoney"></a>[`hMoney`](system.md#s-hMoney) | `$FF9F` | 1 | [system](system.md) | R |
+| <a id="s-hMovingBGTilesCounter1"></a>[`hMovingBGTilesCounter1`](system.md#s-hMovingBGTilesCounter1) | `$FFD8` | 2 | [system](system.md) | R |
+| <a id="s-hMultiplicand"></a>[`hMultiplicand`](system.md#s-hMultiplicand) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hMultiplier"></a>[`hMultiplier`](system.md#s-hMultiplier) | `$FF99` | 1 | [system](system.md) | R |
+| <a id="s-hMultiplyBuffer"></a>[`hMultiplyBuffer`](system.md#s-hMultiplyBuffer) | `$FF9B` | 1 | [system](system.md) | R |
+| <a id="s-hMutateWX"></a>[`hMutateWX`](system.md#s-hMutateWX) | `$FF97` | 1 | [system](system.md) | R |
+| <a id="s-hMutateWY"></a>[`hMutateWY`](system.md#s-hMutateWY) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hNewPartyLength"></a>[`hNewPartyLength`](system.md#s-hNewPartyLength) | `$FFE4` | 1 | [system](system.md) | R |
+| <a id="s-hNorthSouthConnectedMapWidth"></a>[`hNorthSouthConnectedMapWidth`](system.md#s-hNorthSouthConnectedMapWidth) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hNorthSouthConnectionStripWidth"></a>[`hNorthSouthConnectionStripWidth`](system.md#s-hNorthSouthConnectionStripWidth) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hNPCMovementDirections2Index"></a>[`hNPCMovementDirections2Index`](system.md#s-hNPCMovementDirections2Index) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hNPCPlayerRelativePosFlags"></a>[`hNPCPlayerRelativePosFlags`](system.md#s-hNPCPlayerRelativePosFlags) | `$FF9D` | 2 | [system](system.md) | R |
+| <a id="s-hNPCPlayerRelativePosPerspective"></a>[`hNPCPlayerRelativePosPerspective`](system.md#s-hNPCPlayerRelativePosPerspective) | `$FF9B` | 1 | [system](system.md) | R |
+| <a id="s-hNPCPlayerXDistance"></a>[`hNPCPlayerXDistance`](system.md#s-hNPCPlayerXDistance) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hNPCPlayerYDistance"></a>[`hNPCPlayerYDistance`](system.md#s-hNPCPlayerYDistance) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hNPCSpriteOffset"></a>[`hNPCSpriteOffset`](system.md#s-hNPCSpriteOffset) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hNumToPrint"></a>[`hNumToPrint`](system.md#s-hNumToPrint) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hOaksAideNumMonsOwned"></a>[`hOaksAideNumMonsOwned`](system.md#s-hOaksAideNumMonsOwned) | `$FFDD` | 3 | [system](system.md) | R |
+| <a id="s-hOaksAideRequirement"></a>[`hOaksAideRequirement`](system.md#s-hOaksAideRequirement) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hOaksAideResult"></a>[`hOaksAideResult`](system.md#s-hOaksAideResult) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hOaksAideRewardItem"></a>[`hOaksAideRewardItem`](system.md#s-hOaksAideRewardItem) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hOAMBufferOffset"></a>[`hOAMBufferOffset`](system.md#s-hOAMBufferOffset) | `$FF90` | 1 | [system](system.md) | R |
+| <a id="s-hOAMTile"></a>[`hOAMTile`](system.md#s-hOAMTile) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hPartyMonIndex"></a>[`hPartyMonIndex`](system.md#s-hPartyMonIndex) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hPastLeadingZeros"></a>[`hPastLeadingZeros`](system.md#s-hPastLeadingZeros) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-HpBarAndStatusGraphics"></a>[`HpBarAndStatusGraphics`](rom-data.md#s-HpBarAndStatusGraphics) | `$5EA0` b4 | 480 | [rom-data](rom-data.md) | · |
+| <a id="s-hPlayerFacing"></a>[`hPlayerFacing`](system.md#s-hPlayerFacing) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hPlayerXCoord"></a>[`hPlayerXCoord`](system.md#s-hPlayerXCoord) | `$FFDD` | 3 | [system](system.md) | R |
+| <a id="s-hPlayerYCoord"></a>[`hPlayerYCoord`](system.md#s-hPlayerYCoord) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hPowerOf10"></a>[`hPowerOf10`](system.md#s-hPowerOf10) | `$FF99` | 1 | [system](system.md) | R |
+| <a id="s-hPreviousTileset"></a>[`hPreviousTileset`](system.md#s-hPreviousTileset) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hProduct"></a>[`hProduct`](system.md#s-hProduct) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hQuotient"></a>[`hQuotient`](system.md#s-hQuotient) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hQuotient2"></a>[`hQuotient2`](system.md#s-hQuotient2) | `$FFE7` | 1 | [system](system.md) | R |
+| <a id="s-hRandomAdd"></a>[`hRandomAdd`](rng.md#s-hRandomAdd) | `$FFD3` | 1 | [rng](rng.md) | RLI |
+| <a id="s-hRandomSub"></a>[`hRandomSub`](rng.md#s-hRandomSub) | `$FFD4` | 1 | [rng](rng.md) | RLI |
+| <a id="s-hRedrawMapViewRowOffset"></a>[`hRedrawMapViewRowOffset`](system.md#s-hRedrawMapViewRowOffset) | `$FFBE` | 1 | [system](system.md) | R |
+| <a id="s-hRedrawRowOrColumnDest"></a>[`hRedrawRowOrColumnDest`](system.md#s-hRedrawRowOrColumnDest) | `$FFD1` | 2 | [system](system.md) | R |
+| <a id="s-hRedrawRowOrColumnMode"></a>[`hRedrawRowOrColumnMode`](system.md#s-hRedrawRowOrColumnMode) | `$FFD0` | 1 | [system](system.md) | R |
+| <a id="s-hRemainder"></a>[`hRemainder`](system.md#s-hRemainder) | `$FF99` | 1 | [system](system.md) | R |
+| <a id="s-hRLEByteValue"></a>[`hRLEByteValue`](system.md#s-hRLEByteValue) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hROMBankTemp"></a>[`hROMBankTemp`](system.md#s-hROMBankTemp) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hSavedCoordIndex"></a>[`hSavedCoordIndex`](system.md#s-hSavedCoordIndex) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hSavedMapTextPtr"></a>[`hSavedMapTextPtr`](system.md#s-hSavedMapTextPtr) | `$FFEC` | 1 | [system](system.md) | R |
+| <a id="s-hSavedNumToPrint"></a>[`hSavedNumToPrint`](system.md#s-hSavedNumToPrint) | `$FF9C` | 1 | [system](system.md) | R |
+| <a id="s-hSavedROMBank"></a>[`hSavedROMBank`](system.md#s-hSavedROMBank) | `$FFB9` | 1 | [system](system.md) | RL |
+| <a id="s-hSCX"></a>[`hSCX`](system.md#s-hSCX) | `$FFAE` | 1 | [system](system.md) | RL |
+| <a id="s-hSCY"></a>[`hSCY`](system.md#s-hSCY) | `$FFAF` | 1 | [system](system.md) | RL |
+| <a id="s-hSerialConnectionStatus"></a>[`hSerialConnectionStatus`](overworld.md#s-hSerialConnectionStatus) | `$FFAA` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-hSerialIgnoringInitialData"></a>[`hSerialIgnoringInitialData`](link.md#s-hSerialIgnoringInitialData) | `$FFAB` | 1 | [link](link.md) | R |
+| <a id="s-hSerialReceiveData"></a>[`hSerialReceiveData`](link.md#s-hSerialReceiveData) | `$FFAD` | 1 | [link](link.md) | R |
+| <a id="s-hSerialReceivedNewData"></a>[`hSerialReceivedNewData`](link.md#s-hSerialReceivedNewData) | `$FFA9` | 1 | [link](link.md) | R |
+| <a id="s-hSerialSendData"></a>[`hSerialSendData`](link.md#s-hSerialSendData) | `$FFAC` | 1 | [link](link.md) | R |
+| <a id="s-hSignCoordPointer"></a>[`hSignCoordPointer`](system.md#s-hSignCoordPointer) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hSlideAmount"></a>[`hSlideAmount`](system.md#s-hSlideAmount) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hSlideDirection"></a>[`hSlideDirection`](system.md#s-hSlideDirection) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hSlidingRegionSize"></a>[`hSlidingRegionSize`](system.md#s-hSlidingRegionSize) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hSoftReset"></a>[`hSoftReset`](system.md#s-hSoftReset) | `$FF8A` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteAnimFrameCounter"></a>[`hSpriteAnimFrameCounter`](system.md#s-hSpriteAnimFrameCounter) | `$FFEA` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteDataOffset"></a>[`hSpriteDataOffset`](system.md#s-hSpriteDataOffset) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteFacingDirection"></a>[`hSpriteFacingDirection`](system.md#s-hSpriteFacingDirection) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteHeight"></a>[`hSpriteHeight`](system.md#s-hSpriteHeight) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteImageIndex"></a>[`hSpriteImageIndex`](system.md#s-hSpriteImageIndex) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteIndex"></a>[`hSpriteIndex`](system.md#s-hSpriteIndex) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteInterlaceCounter"></a>[`hSpriteInterlaceCounter`](system.md#s-hSpriteInterlaceCounter) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteMapXCoord"></a>[`hSpriteMapXCoord`](system.md#s-hSpriteMapXCoord) | `$FFEE` | 5 | [system](system.md) | R |
+| <a id="s-hSpriteMapYCoord"></a>[`hSpriteMapYCoord`](system.md#s-hSpriteMapYCoord) | `$FFED` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteMovementByte2"></a>[`hSpriteMovementByte2`](system.md#s-hSpriteMovementByte2) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteOffset"></a>[`hSpriteOffset`](system.md#s-hSpriteOffset) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hSpriteOffset2"></a>[`hSpriteOffset2`](system.md#s-hSpriteOffset2) | `$FF8F` | 1 | [system](system.md) | R |
+| <a id="s-hSpritePriority"></a>[`hSpritePriority`](system.md#s-hSpritePriority) | `$FF94` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteScreenX"></a>[`hSpriteScreenX`](system.md#s-hSpriteScreenX) | `$FF91` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteScreenXCoord"></a>[`hSpriteScreenXCoord`](system.md#s-hSpriteScreenXCoord) | `$FFEC` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteScreenY"></a>[`hSpriteScreenY`](system.md#s-hSpriteScreenY) | `$FF92` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteScreenYCoord"></a>[`hSpriteScreenYCoord`](system.md#s-hSpriteScreenYCoord) | `$FFEB` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteVRAMSlotAndFacing"></a>[`hSpriteVRAMSlotAndFacing`](system.md#s-hSpriteVRAMSlotAndFacing) | `$FFE9` | 1 | [system](system.md) | R |
+| <a id="s-hSpriteWidth"></a>[`hSpriteWidth`](system.md#s-hSpriteWidth) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hSPTemp"></a>[`hSPTemp`](system.md#s-hSPTemp) | `$FFBF` | 2 | [system](system.md) | RL |
+| <a id="s-hStartTileID"></a>[`hStartTileID`](system.md#s-hStartTileID) | `$FFE1` | 3 | [system](system.md) | R |
+| <a id="s-hSwapItemID"></a>[`hSwapItemID`](system.md#s-hSwapItemID) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hSwapItemQuantity"></a>[`hSwapItemQuantity`](system.md#s-hSwapItemQuantity) | `$FF96` | 1 | [system](system.md) | R |
+| <a id="s-hSwapTemp"></a>[`hSwapTemp`](system.md#s-hSwapTemp) | `$FF95` | 1 | [system](system.md) | R |
+| <a id="s-hTextID"></a>[`hTextID`](system.md#s-hTextID) | `$FF8C` | 1 | [system](system.md) | RL |
+| <a id="s-hTileAnimations"></a>[`hTileAnimations`](system.md#s-hTileAnimations) | `$FFD7` | 1 | [system](system.md) | R |
+| <a id="s-hTilePlayerStandingOn"></a>[`hTilePlayerStandingOn`](system.md#s-hTilePlayerStandingOn) | `$FF93` | 1 | [system](system.md) | R |
+| <a id="s-hToggleableObjectIndex"></a>[`hToggleableObjectIndex`](system.md#s-hToggleableObjectIndex) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hUILayoutFlags"></a>[`hUILayoutFlags`](system.md#s-hUILayoutFlags) | `$FFF6` | 1 | [system](system.md) | R |
+| <a id="s-hUnlockedSilphCoDoors"></a>[`hUnlockedSilphCoDoors`](system.md#s-hUnlockedSilphCoDoors) | `$FFE0` | 1 | [system](system.md) | R |
+| <a id="s-hUnusedCoinsByte"></a>[`hUnusedCoinsByte`](system.md#s-hUnusedCoinsByte) | `$FF9F` | 1 | [system](system.md) | R |
+| <a id="s-hVBlankCopyBGDest"></a>[`hVBlankCopyBGDest`](system.md#s-hVBlankCopyBGDest) | `$FFC3` | 2 | [system](system.md) | R |
+| <a id="s-hVBlankCopyBGNumRows"></a>[`hVBlankCopyBGNumRows`](system.md#s-hVBlankCopyBGNumRows) | `$FFC5` | 1 | [system](system.md) | R |
+| <a id="s-hVBlankCopyBGSource"></a>[`hVBlankCopyBGSource`](system.md#s-hVBlankCopyBGSource) | `$FFC1` | 2 | [system](system.md) | R |
+| <a id="s-hVBlankCopyDest"></a>[`hVBlankCopyDest`](system.md#s-hVBlankCopyDest) | `$FFC9` | 2 | [system](system.md) | RL |
+| <a id="s-hVBlankCopyDoubleDest"></a>[`hVBlankCopyDoubleDest`](system.md#s-hVBlankCopyDoubleDest) | `$FFCE` | 2 | [system](system.md) | RL |
+| <a id="s-hVBlankCopyDoubleSize"></a>[`hVBlankCopyDoubleSize`](system.md#s-hVBlankCopyDoubleSize) | `$FFCB` | 1 | [system](system.md) | RL |
+| <a id="s-hVBlankCopyDoubleSource"></a>[`hVBlankCopyDoubleSource`](system.md#s-hVBlankCopyDoubleSource) | `$FFCC` | 2 | [system](system.md) | RL |
+| <a id="s-hVBlankCopySize"></a>[`hVBlankCopySize`](system.md#s-hVBlankCopySize) | `$FFC6` | 1 | [system](system.md) | RL |
+| <a id="s-hVBlankCopySource"></a>[`hVBlankCopySource`](system.md#s-hVBlankCopySource) | `$FFC7` | 2 | [system](system.md) | RL |
+| <a id="s-hVBlankOccurred"></a>[`hVBlankOccurred`](system.md#s-hVBlankOccurred) | `$FFD6` | 1 | [system](system.md) | RL |
+| <a id="s-hVendingMachineItem"></a>[`hVendingMachineItem`](system.md#s-hVendingMachineItem) | `$FFDB` | 1 | [system](system.md) | R |
+| <a id="s-hVendingMachinePrice"></a>[`hVendingMachinePrice`](system.md#s-hVendingMachinePrice) | `$FFDC` | 1 | [system](system.md) | R |
+| <a id="s-hVRAMSlot"></a>[`hVRAMSlot`](system.md#s-hVRAMSlot) | `$FF8D` | 1 | [system](system.md) | RL |
+| <a id="s-hWarpDestinationMap"></a>[`hWarpDestinationMap`](system.md#s-hWarpDestinationMap) | `$FF8B` | 1 | [system](system.md) | RL |
+| <a id="s-hWhoseTurn"></a>[`hWhoseTurn`](system.md#s-hWhoseTurn) | `$FFF3` | 1 | [system](system.md) | R |
+| <a id="s-hWY"></a>[`hWY`](system.md#s-hWY) | `$FFB0` | 1 | [system](system.md) | RL |
+| <a id="s-InitBattleVariables"></a>[`InitBattleVariables`](rom-data.md#s-InitBattleVariables) | `$65AF` b20 | 196 | [rom-data](rom-data.md) | · |
+| <a id="s-ItemNames"></a>[`ItemNames`](rom-data.md#s-ItemNames) | `$472B` b1 | 13598 | [rom-data](rom-data.md) | · |
+| <a id="s-ItemPrices"></a>[`ItemPrices`](rom-data.md#s-ItemPrices) | `$4608` b1 | 291 | [rom-data](rom-data.md) | · |
+| <a id="s-ItemUseBall"></a>[`ItemUseBall`](rom-data.md#s-ItemUseBall) | `$5687` b3 | 7262 | [rom-data](rom-data.md) | · |
+| <a id="s-LoadEnemyMonData"></a>[`LoadEnemyMonData`](rom-data.md#s-LoadEnemyMonData) | `$6B01` b15 | 922 | [rom-data](rom-data.md) | · |
+| <a id="s-LoadMapHeader"></a>[`LoadMapHeader`](rom-data.md#s-LoadMapHeader) | `$107C` | 1211 | [rom-data](rom-data.md) | · |
+| <a id="s-LoadTileBlockMap"></a>[`LoadTileBlockMap`](rom-data.md#s-LoadTileBlockMap) | `$09FC` | 1664 | [rom-data](rom-data.md) | · |
+| <a id="s-MapHeaderBanks"></a>[`MapHeaderBanks`](rom-data.md#s-MapHeaderBanks) | `$423D` b3 | 1409 | [rom-data](rom-data.md) | · |
+| <a id="s-MapHeaderPointers"></a>[`MapHeaderPointers`](rom-data.md#s-MapHeaderPointers) | `$01AE` | 2126 | [rom-data](rom-data.md) | · |
+| <a id="s-MapSongBanks"></a>[`MapSongBanks`](rom-data.md#s-MapSongBanks) | `$404D` b3 | 496 | [rom-data](rom-data.md) | · |
+| <a id="s-MapSpriteSets"></a>[`MapSpriteSets`](rom-data.md#s-MapSpriteSets) | `$7A64` b5 | 195 | [rom-data](rom-data.md) | · |
+| <a id="s-MewBaseStats"></a>[`MewBaseStats`](rom-data.md#s-MewBaseStats) | `$425B` b1 | 941 | [rom-data](rom-data.md) | · |
+| <a id="s-MonPartyData"></a>[`MonPartyData`](rom-data.md#s-MonPartyData) | `$590D` b28 | 3259 | [rom-data](rom-data.md) | · |
+| <a id="s-MonsterNames"></a>[`MonsterNames`](rom-data.md#s-MonsterNames) | `$421E` b7 | 2043 | [rom-data](rom-data.md) | I |
+| <a id="s-MonsterPalettes"></a>[`MonsterPalettes`](rom-data.md#s-MonsterPalettes) | `$65C8` b28 | 4128 | [rom-data](rom-data.md) | · |
+| <a id="s-MoveNames"></a>[`MoveNames`](rom-data.md#s-MoveNames) | `$4000` b44 | 1551 | [rom-data](rom-data.md) | · |
+| <a id="s-Moves"></a>[`Moves`](rom-data.md#s-Moves) | `$4000` b14 | 990 | [rom-data](rom-data.md) | · |
+| <a id="s-NintendoCopyrightLogoGraphics"></a>[`NintendoCopyrightLogoGraphics`](rom-data.md#s-NintendoCopyrightLogoGraphics) | `$60C8` b4 | 448 | [rom-data](rom-data.md) | · |
+| <a id="s-PlaceString"></a>[`PlaceString`](rom-data.md#s-PlaceString) | `$1955` | 491 | [rom-data](rom-data.md) | · |
+| <a id="s-PokedexEntryPointers"></a>[`PokedexEntryPointers`](rom-data.md#s-PokedexEntryPointers) | `$447E` b16 | 2982 | [rom-data](rom-data.md) | · |
+| <a id="s-PokedexOrder"></a>[`PokedexOrder`](rom-data.md#s-PokedexOrder) | `$5024` b16 | 6095 | [rom-data](rom-data.md) | I |
+| <a id="s-PokemonLogoGraphics"></a>[`PokemonLogoGraphics`](rom-data.md#s-PokemonLogoGraphics) | `$5380` b4 | 1792 | [rom-data](rom-data.md) | · |
+| <a id="s-Random_"></a>[`Random_`](rom-data.md#s-Random_) | `$7A8F` b4 | 17 | [rom-data](rom-data.md) | · |
+| <a id="s-ReadTrainer"></a>[`ReadTrainer`](rom-data.md#s-ReadTrainer) | `$5C53` b14 | 232 | [rom-data](rom-data.md) | · |
+| <a id="s-RedPicFront"></a>[`RedPicFront`](rom-data.md#s-RedPicFront) | `$6EDE` b4 | 266 | [rom-data](rom-data.md) | · |
+| <a id="s-sBank2AllBoxesChecksum"></a>[`sBank2AllBoxesChecksum`](storage.md#s-sBank2AllBoxesChecksum) | `$BA4C` b2 | 1 | [storage](storage.md) | R |
+| <a id="s-sBank2IndividualBoxChecksums"></a>[`sBank2IndividualBoxChecksums`](storage.md#s-sBank2IndividualBoxChecksums) | `$BA4D` b2 | 6 | [storage](storage.md) | R |
+| <a id="s-sBank3AllBoxesChecksum"></a>[`sBank3AllBoxesChecksum`](storage.md#s-sBank3AllBoxesChecksum) | `$BA4C` b3 | 1 | [storage](storage.md) | R |
+| <a id="s-sBank3IndividualBoxChecksums"></a>[`sBank3IndividualBoxChecksums`](storage.md#s-sBank3IndividualBoxChecksums) | `$BA4D` b3 | 6 | [storage](storage.md) | R |
+| <a id="s-sBox1"></a>[`sBox1`](storage.md#s-sBox1) | `$A000` b2 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox10"></a>[`sBox10`](storage.md#s-sBox10) | `$AD26` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox11"></a>[`sBox11`](storage.md#s-sBox11) | `$B188` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox12"></a>[`sBox12`](storage.md#s-sBox12) | `$B5EA` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox7"></a>[`sBox7`](storage.md#s-sBox7) | `$A000` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox8"></a>[`sBox8`](storage.md#s-sBox8) | `$A462` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sBox9"></a>[`sBox9`](storage.md#s-sBox9) | `$A8C4` b3 | 1122 | [storage](storage.md) | R |
+| <a id="s-sCurBoxData"></a>[`sCurBoxData`](save.md#s-sCurBoxData) | `$B0C0` b1 | 1122 | [save](save.md) | R |
+| <a id="s-SFX_Headers_1"></a>[`SFX_Headers_1`](rom-data.md#s-SFX_Headers_1) | `$4000` b2 | 558 | [rom-data](rom-data.md) | · |
+| <a id="s-sGameData"></a>[`sGameData`](save.md#s-sGameData) | `$A598` b1 | 11 | [save](save.md) | R |
+| <a id="s-sGameDataEnd"></a>[`sGameDataEnd`](save.md#s-sGameDataEnd) | `$B523` b1 | 1 | [save](save.md) | R |
+| <a id="s-sHallOfFame"></a>[`sHallOfFame`](save.md#s-sHallOfFame) | `$A598` b0 | 4800 | [save](save.md) | R |
+| <a id="s-ShrinkPic1"></a>[`ShrinkPic1`](rom-data.md#s-ShrinkPic1) | `$6FE8` b4 | 90 | [rom-data](rom-data.md) | · |
+| <a id="s-sMainData"></a>[`sMainData`](save.md#s-sMainData) | `$A5A3` b1 | 1929 | [save](save.md) | R |
+| <a id="s-sMainDataCheckSum"></a>[`sMainDataCheckSum`](save.md#s-sMainDataCheckSum) | `$B523` b1 | 1 | [save](save.md) | R |
+| <a id="s-sPartyData"></a>[`sPartyData`](party.md#s-sPartyData) | `$AF2C` b1 | 404 | [party](party.md) | R |
+| <a id="s-sPlayerName"></a>[`sPlayerName`](save.md#s-sPlayerName) | `$A598` b1 | 11 | [save](save.md) | R |
+| <a id="s-SpriteSheetPointerTable"></a>[`SpriteSheetPointerTable`](rom-data.md#s-SpriteSheetPointerTable) | `$7B27` b5 | 1080 | [rom-data](rom-data.md) | · |
+| <a id="s-sSpriteBuffer0"></a>[`sSpriteBuffer0`](graphics.md#s-sSpriteBuffer0) | `$A000` b0 | 392 | [graphics](graphics.md) | R |
+| <a id="s-sSpriteBuffer1"></a>[`sSpriteBuffer1`](graphics.md#s-sSpriteBuffer1) | `$A188` b0 | 392 | [graphics](graphics.md) | R |
+| <a id="s-sSpriteBuffer2"></a>[`sSpriteBuffer2`](graphics.md#s-sSpriteBuffer2) | `$A310` b0 | 648 | [graphics](graphics.md) | R |
+| <a id="s-sSpriteData"></a>[`sSpriteData`](save.md#s-sSpriteData) | `$AD2C` b1 | 512 | [save](save.md) | R |
+| <a id="s-sTileAnimations"></a>[`sTileAnimations`](save.md#s-sTileAnimations) | `$B522` b1 | 1 | [save](save.md) | R |
+| <a id="s-TechnicalMachines"></a>[`TechnicalMachines`](rom-data.md#s-TechnicalMachines) | `$7773` b4 | 796 | [rom-data](rom-data.md) | · |
+| <a id="s-TextBoxGraphics"></a>[`TextBoxGraphics`](rom-data.md#s-TextBoxGraphics) | `$6288` b4 | 1616 | [rom-data](rom-data.md) | · |
+| <a id="s-TextCommandProcessor"></a>[`TextCommandProcessor`](rom-data.md#s-TextCommandProcessor) | `$1B40` | 2493 | [rom-data](rom-data.md) | · |
+| <a id="s-Tilesets"></a>[`Tilesets`](rom-data.md#s-Tilesets) | `$47BE` b3 | 1837 | [rom-data](rom-data.md) | · |
+| <a id="s-TrainerAIPointers"></a>[`TrainerAIPointers`](rom-data.md#s-TrainerAIPointers) | `$655C` b14 | 2816 | [rom-data](rom-data.md) | · |
+| <a id="s-TrainerClassMoveChoiceModifications"></a>[`TrainerClassMoveChoiceModifications`](rom-data.md#s-TrainerClassMoveChoiceModifications) | `$589B` b14 | 121 | [rom-data](rom-data.md) | · |
+| <a id="s-TrainerDataPointers"></a>[`TrainerDataPointers`](rom-data.md#s-TrainerDataPointers) | `$5D3B` b14 | 2081 | [rom-data](rom-data.md) | · |
+| <a id="s-TrainerNames"></a>[`TrainerNames`](rom-data.md#s-TrainerNames) | `$59FF` b14 | 596 | [rom-data](rom-data.md) | · |
+| <a id="s-TrainerPicAndMoneyPointers"></a>[`TrainerPicAndMoneyPointers`](rom-data.md#s-TrainerPicAndMoneyPointers) | `$5914` b14 | 235 | [rom-data](rom-data.md) | · |
+| <a id="s-TryLoadSaveFile"></a>[`TryLoadSaveFile`](rom-data.md#s-TryLoadSaveFile) | `$75E8` b28 | 622 | [rom-data](rom-data.md) | · |
+| <a id="s-UncompressMonSprite"></a>[`UncompressMonSprite`](rom-data.md#s-UncompressMonSprite) | `$1627` | 814 | [rom-data](rom-data.md) | · |
+| <a id="s-UncompressSpriteData"></a>[`UncompressSpriteData`](rom-data.md#s-UncompressSpriteData) | `$24FD` | 89 | [rom-data](rom-data.md) | · |
+| <a id="s-UncompressSpriteDataLoop"></a>[`UncompressSpriteDataLoop`](rom-data.md#s-UncompressSpriteDataLoop) | `$2556` | 5073 | [rom-data](rom-data.md) | · |
+| <a id="s-vBackPic"></a>[`vBackPic`](graphics.md#s-vBackPic) | `$9310` | 1264 | [graphics](graphics.md) | RL |
+| <a id="s-vBGMap0"></a>[`vBGMap0`](graphics.md#s-vBGMap0) | `$9800` | 1024 | [graphics](graphics.md) | RL |
+| <a id="s-vBGMap1"></a>[`vBGMap1`](graphics.md#s-vBGMap1) | `$9C00` | 1024 | [graphics](graphics.md) | RL |
+| <a id="s-vChars0"></a>[`vChars0`](graphics.md#s-vChars0) | `$8000` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vChars1"></a>[`vChars1`](graphics.md#s-vChars1) | `$8800` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vChars2"></a>[`vChars2`](graphics.md#s-vChars2) | `$9000` | 784 | [graphics](graphics.md) | RL |
+| <a id="s-vFont"></a>[`vFont`](graphics.md#s-vFont) | `$8800` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vFrontPic"></a>[`vFrontPic`](graphics.md#s-vFrontPic) | `$9000` | 784 | [graphics](graphics.md) | RL |
+| <a id="s-vNPCSprites"></a>[`vNPCSprites`](graphics.md#s-vNPCSprites) | `$8000` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vNPCSprites2"></a>[`vNPCSprites2`](graphics.md#s-vNPCSprites2) | `$8800` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vSprites"></a>[`vSprites`](graphics.md#s-vSprites) | `$8000` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vTileset"></a>[`vTileset`](graphics.md#s-vTileset) | `$9000` | 784 | [graphics](graphics.md) | RL |
+| <a id="s-vTitleLogo"></a>[`vTitleLogo`](graphics.md#s-vTitleLogo) | `$8800` | 2048 | [graphics](graphics.md) | RL |
+| <a id="s-vTitleLogo2"></a>[`vTitleLogo2`](graphics.md#s-vTitleLogo2) | `$9310` | 1264 | [graphics](graphics.md) | RL |
+| <a id="s-wActionResultOrTookBattleTurn"></a>[`wActionResultOrTookBattleTurn`](scratch.md#s-wActionResultOrTookBattleTurn) | `$CD6A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wAddedToParty"></a>[`wAddedToParty`](battle.md#s-wAddedToParty) | `$CCD3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAgathasRoomCurScript"></a>[`wAgathasRoomCurScript`](events.md#s-wAgathasRoomCurScript) | `$D64F` | 1 | [events](events.md) | RL |
+| <a id="s-wAICount"></a>[`wAICount`](battle.md#s-wAICount) | `$CCDF` | 3 | [battle](battle.md) | RL |
+| <a id="s-wAIItem"></a>[`wAIItem`](battle.md#s-wAIItem) | `$CF05` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAILayer2Encouragement"></a>[`wAILayer2Encouragement`](battle.md#s-wAILayer2Encouragement) | `$CCD5` | 2 | [battle](battle.md) | RL |
+| <a id="s-wAlphabetCase"></a>[`wAlphabetCase`](battle.md#s-wAlphabetCase) | `$CEEB` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAmountMoneyWon"></a>[`wAmountMoneyWon`](scratch.md#s-wAmountMoneyWon) | `$D079` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wAnimationID"></a>[`wAnimationID`](battle.md#s-wAnimationID) | `$D07C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAnimationType"></a>[`wAnimationType`](battle.md#s-wAnimationType) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAnimCounter"></a>[`wAnimCounter`](scratch.md#s-wAnimCounter) | `$D08B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wAnimPalette"></a>[`wAnimPalette`](battle.md#s-wAnimPalette) | `$CC79` | 30 | [battle](battle.md) | RL |
+| <a id="s-wAnimSoundID"></a>[`wAnimSoundID`](battle.md#s-wAnimSoundID) | `$CF07` | 1 | [battle](battle.md) | RL |
+| <a id="s-wAudioFadeOutControl"></a>[`wAudioFadeOutControl`](audio.md#s-wAudioFadeOutControl) | `$CFC7` | 1 | [audio](audio.md) | RL |
+| <a id="s-wAudioFadeOutCounter"></a>[`wAudioFadeOutCounter`](audio.md#s-wAudioFadeOutCounter) | `$CFC9` | 1 | [audio](audio.md) | RL |
+| <a id="s-wAudioFadeOutCounterReloadValue"></a>[`wAudioFadeOutCounterReloadValue`](audio.md#s-wAudioFadeOutCounterReloadValue) | `$CFC8` | 1 | [audio](audio.md) | RL |
+| <a id="s-wAudioROMBank"></a>[`wAudioROMBank`](audio.md#s-wAudioROMBank) | `$C0EF` | 1 | [audio](audio.md) | RL |
+| <a id="s-wAudioSavedROMBank"></a>[`wAudioSavedROMBank`](audio.md#s-wAudioSavedROMBank) | `$C0F0` | 1 | [audio](audio.md) | RL |
+| <a id="s-wAutoTextBoxDrawingControl"></a>[`wAutoTextBoxDrawingControl`](scratch.md#s-wAutoTextBoxDrawingControl) | `$CF0C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBadgeNameTile"></a>[`wBadgeNameTile`](scratch.md#s-wBadgeNameTile) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBadgeNumberTile"></a>[`wBadgeNumberTile`](scratch.md#s-wBadgeNumberTile) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBadgeOrFaceTiles"></a>[`wBadgeOrFaceTiles`](scratch.md#s-wBadgeOrFaceTiles) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBagItems"></a>[`wBagItems`](bag.md#s-wBagItems) | `$D31E` | 41 | [bag](bag.md) | RLI |
+| <a id="s-wBagSavedMenuItem"></a>[`wBagSavedMenuItem`](bag.md#s-wBagSavedMenuItem) | `$CC2C` | 1 | [bag](bag.md) | RL |
+| <a id="s-wBankswitchHomeSavedROMBank"></a>[`wBankswitchHomeSavedROMBank`](scratch.md#s-wBankswitchHomeSavedROMBank) | `$CF08` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBankswitchHomeTemp"></a>[`wBankswitchHomeTemp`](scratch.md#s-wBankswitchHomeTemp) | `$CF09` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBaseCoordX"></a>[`wBaseCoordX`](battle.md#s-wBaseCoordX) | `$D081` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBaseCoordY"></a>[`wBaseCoordY`](battle.md#s-wBaseCoordY) | `$D082` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleAndStartSavedMenuItem"></a>[`wBattleAndStartSavedMenuItem`](battle.md#s-wBattleAndStartSavedMenuItem) | `$CC2D` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMenuCurrentPP"></a>[`wBattleMenuCurrentPP`](battle.md#s-wBattleMenuCurrentPP) | `$CD6D` | 4 | [battle](battle.md) | RL |
+| <a id="s-wBattleMon"></a>[`wBattleMon`](battle.md#s-wBattleMon) | `$D014` | 1 | [battle](battle.md) | RLI |
+| <a id="s-wBattleMonAttack"></a>[`wBattleMonAttack`](battle.md#s-wBattleMonAttack) | `$D025` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonBoxLevel"></a>[`wBattleMonBoxLevel`](battle.md#s-wBattleMonBoxLevel) | `$D017` | 1 | [battle](battle.md) | L |
+| <a id="s-wBattleMonCatchRate"></a>[`wBattleMonCatchRate`](battle.md#s-wBattleMonCatchRate) | `$D01B` | 1 | [battle](battle.md) | L |
+| <a id="s-wBattleMonDefense"></a>[`wBattleMonDefense`](battle.md#s-wBattleMonDefense) | `$D027` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonDVs"></a>[`wBattleMonDVs`](battle.md#s-wBattleMonDVs) | `$D020` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonHP"></a>[`wBattleMonHP`](battle.md#s-wBattleMonHP) | `$D015` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonLevel"></a>[`wBattleMonLevel`](battle.md#s-wBattleMonLevel) | `$D022` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonMaxHP"></a>[`wBattleMonMaxHP`](battle.md#s-wBattleMonMaxHP) | `$D023` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonMoves"></a>[`wBattleMonMoves`](battle.md#s-wBattleMonMoves) | `$D01C` | 4 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonNick"></a>[`wBattleMonNick`](battle.md#s-wBattleMonNick) | `$D009` | 11 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonPartyPos"></a>[`wBattleMonPartyPos`](battle.md#s-wBattleMonPartyPos) | `$D017` | 1 | [battle](battle.md) | L |
+| <a id="s-wBattleMonPP"></a>[`wBattleMonPP`](battle.md#s-wBattleMonPP) | `$D02D` | 4 | [battle](battle.md) | RLI |
+| <a id="s-wBattleMonSpecial"></a>[`wBattleMonSpecial`](battle.md#s-wBattleMonSpecial) | `$D02B` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonSpecies"></a>[`wBattleMonSpecies`](battle.md#s-wBattleMonSpecies) | `$D014` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonSpecies2"></a>[`wBattleMonSpecies2`](battle.md#s-wBattleMonSpecies2) | `$CFD9` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonSpeed"></a>[`wBattleMonSpeed`](battle.md#s-wBattleMonSpeed) | `$D029` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonStats"></a>[`wBattleMonStats`](battle.md#s-wBattleMonStats) | `$D023` | 2 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonStatus"></a>[`wBattleMonStatus`](battle.md#s-wBattleMonStatus) | `$D018` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonType"></a>[`wBattleMonType`](battle.md#s-wBattleMonType) | `$D019` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonType1"></a>[`wBattleMonType1`](battle.md#s-wBattleMonType1) | `$D019` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleMonType2"></a>[`wBattleMonType2`](battle.md#s-wBattleMonType2) | `$D01A` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleResult"></a>[`wBattleResult`](battle.md#s-wBattleResult) | `$CF0B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleStatusData"></a>[`wBattleStatusData`](scratch.md#s-wBattleStatusData) | `$D060` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBattleStatusDataEnd"></a>[`wBattleStatusDataEnd`](battle.md#s-wBattleStatusDataEnd) | `$D078` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleTransitionCircleScreenQuadrantX"></a>[`wBattleTransitionCircleScreenQuadrantX`](scratch.md#s-wBattleTransitionCircleScreenQuadrantX) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBattleTransitionCircleScreenQuadrantY"></a>[`wBattleTransitionCircleScreenQuadrantY`](scratch.md#s-wBattleTransitionCircleScreenQuadrantY) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBattleTransitionCopyTilesOffset"></a>[`wBattleTransitionCopyTilesOffset`](scratch.md#s-wBattleTransitionCopyTilesOffset) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBattleTransitionSpiralDirection"></a>[`wBattleTransitionSpiralDirection`](battle.md#s-wBattleTransitionSpiralDirection) | `$CD47` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBattleType"></a>[`wBattleType`](battle.md#s-wBattleType) | `$D05A` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBeatGymFlags"></a>[`wBeatGymFlags`](events.md#s-wBeatGymFlags) | `$D72A` | 2 | [events](events.md) | RL |
+| <a id="s-wBillsHouseCurScript"></a>[`wBillsHouseCurScript`](events.md#s-wBillsHouseCurScript) | `$D661` | 1 | [events](events.md) | RL |
+| <a id="s-wBluesHouseCurScript"></a>[`wBluesHouseCurScript`](events.md#s-wBluesHouseCurScript) | `$D5F3` | 1 | [events](events.md) | RL |
+| <a id="s-wBoostExpByExpAll"></a>[`wBoostExpByExpAll`](battle.md#s-wBoostExpByExpAll) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wBoughtOrSoldItemInMart"></a>[`wBoughtOrSoldItemInMart`](scratch.md#s-wBoughtOrSoldItemInMart) | `$CF0A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBoulderSpriteIndex"></a>[`wBoulderSpriteIndex`](events.md#s-wBoulderSpriteIndex) | `$D718` | 1 | [events](events.md) | RL |
+| <a id="s-wBoxCount"></a>[`wBoxCount`](storage.md#s-wBoxCount) | `$DA80` | 1 | [storage](storage.md) | RLI |
+| <a id="s-wBoxDataEnd"></a>[`wBoxDataEnd`](storage.md#s-wBoxDataEnd) | `$DEE2` | — | [storage](storage.md) | RL |
+| <a id="s-wBoxDataStart"></a>[`wBoxDataStart`](storage.md#s-wBoxDataStart) | `$DA80` | 1 | [storage](storage.md) | RL |
+| <a id="s-wBoxItems"></a>[`wBoxItems`](bag.md#s-wBoxItems) | `$D53B` | 101 | [bag](bag.md) | LI |
+| <a id="s-wBoxMon1"></a>[`wBoxMon1`](storage.md#s-wBoxMon1) | `$DA96` | 1 | [storage](storage.md) | RLI |
+| <a id="s-wBoxMon1AttackExp"></a>[`wBoxMon1AttackExp`](storage.md#s-wBoxMon1AttackExp) | `$DAA9` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1BoxLevel"></a>[`wBoxMon1BoxLevel`](storage.md#s-wBoxMon1BoxLevel) | `$DA99` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1CatchRate"></a>[`wBoxMon1CatchRate`](storage.md#s-wBoxMon1CatchRate) | `$DA9D` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1DefenseExp"></a>[`wBoxMon1DefenseExp`](storage.md#s-wBoxMon1DefenseExp) | `$DAAB` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1DVs"></a>[`wBoxMon1DVs`](storage.md#s-wBoxMon1DVs) | `$DAB1` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Exp"></a>[`wBoxMon1Exp`](storage.md#s-wBoxMon1Exp) | `$DAA4` | 3 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1HP"></a>[`wBoxMon1HP`](storage.md#s-wBoxMon1HP) | `$DA97` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1HPExp"></a>[`wBoxMon1HPExp`](storage.md#s-wBoxMon1HPExp) | `$DAA7` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Moves"></a>[`wBoxMon1Moves`](storage.md#s-wBoxMon1Moves) | `$DA9E` | 4 | [storage](storage.md) | RL |
+| <a id="s-wBoxMon1Nick"></a>[`wBoxMon1Nick`](storage.md#s-wBoxMon1Nick) | `$DE06` | 11 | [storage](storage.md) | RL |
+| <a id="s-wBoxMon1OT"></a>[`wBoxMon1OT`](storage.md#s-wBoxMon1OT) | `$DD2A` | 11 | [storage](storage.md) | RL |
+| <a id="s-wBoxMon1OTID"></a>[`wBoxMon1OTID`](storage.md#s-wBoxMon1OTID) | `$DAA2` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1PP"></a>[`wBoxMon1PP`](storage.md#s-wBoxMon1PP) | `$DAB3` | 4 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1SpecialExp"></a>[`wBoxMon1SpecialExp`](storage.md#s-wBoxMon1SpecialExp) | `$DAAF` | 2 | [storage](storage.md) | RL |
+| <a id="s-wBoxMon1Species"></a>[`wBoxMon1Species`](storage.md#s-wBoxMon1Species) | `$DA96` | 1 | [storage](storage.md) | RL |
+| <a id="s-wBoxMon1SpeedExp"></a>[`wBoxMon1SpeedExp`](storage.md#s-wBoxMon1SpeedExp) | `$DAAD` | 2 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Status"></a>[`wBoxMon1Status`](storage.md#s-wBoxMon1Status) | `$DA9A` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Type"></a>[`wBoxMon1Type`](storage.md#s-wBoxMon1Type) | `$DA9B` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Type1"></a>[`wBoxMon1Type1`](storage.md#s-wBoxMon1Type1) | `$DA9B` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMon1Type2"></a>[`wBoxMon1Type2`](storage.md#s-wBoxMon1Type2) | `$DA9C` | 1 | [storage](storage.md) | L |
+| <a id="s-wBoxMonCounts"></a>[`wBoxMonCounts`](scratch.md#s-wBoxMonCounts) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBoxMonNicks"></a>[`wBoxMonNicks`](storage.md#s-wBoxMonNicks) | `$DE06` | 11 | [storage](storage.md) | RL |
+| <a id="s-wBoxMonNicksEnd"></a>[`wBoxMonNicksEnd`](storage.md#s-wBoxMonNicksEnd) | `$DEE2` | — | [storage](storage.md) | RL |
+| <a id="s-wBoxMonOT"></a>[`wBoxMonOT`](storage.md#s-wBoxMonOT) | `$DD2A` | 11 | [storage](storage.md) | RL |
+| <a id="s-wBoxMons"></a>[`wBoxMons`](storage.md#s-wBoxMons) | `$DA96` | 1 | [storage](storage.md) | RLI |
+| <a id="s-wBoxNumString"></a>[`wBoxNumString`](scratch.md#s-wBoxNumString) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wBoxSpecies"></a>[`wBoxSpecies`](storage.md#s-wBoxSpecies) | `$DA81` | 21 | [storage](storage.md) | RLI |
+| <a id="s-wBrunosRoomCurScript"></a>[`wBrunosRoomCurScript`](events.md#s-wBrunosRoomCurScript) | `$D64E` | 1 | [events](events.md) | RL |
+| <a id="s-wBuffer"></a>[`wBuffer`](scratch.md#s-wBuffer) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCableClubDestinationMap"></a>[`wCableClubDestinationMap`](overworld.md#s-wCableClubDestinationMap) | `$D72D` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCalculateWhoseStats"></a>[`wCalculateWhoseStats`](scratch.md#s-wCalculateWhoseStats) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCanEvolveFlags"></a>[`wCanEvolveFlags`](battle.md#s-wCanEvolveFlags) | `$CCD3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wCanPlaySlots"></a>[`wCanPlaySlots`](scratch.md#s-wCanPlaySlots) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCapturedMonSpecies"></a>[`wCapturedMonSpecies`](scratch.md#s-wCapturedMonSpecies) | `$D11C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCardKeyDoorX"></a>[`wCardKeyDoorX`](events.md#s-wCardKeyDoorX) | `$D740` | 3 | [events](events.md) | RL |
+| <a id="s-wCardKeyDoorY"></a>[`wCardKeyDoorY`](events.md#s-wCardKeyDoorY) | `$D73F` | 1 | [events](events.md) | RL |
+| <a id="s-wCeladonGymCurScript"></a>[`wCeladonGymCurScript`](events.md#s-wCeladonGymCurScript) | `$D5FF` | 1 | [events](events.md) | RL |
+| <a id="s-wCeruleanCaveB1FCurScript"></a>[`wCeruleanCaveB1FCurScript`](events.md#s-wCeruleanCaveB1FCurScript) | `$D650` | 1 | [events](events.md) | RL |
+| <a id="s-wCeruleanCityCurScript"></a>[`wCeruleanCityCurScript`](events.md#s-wCeruleanCityCurScript) | `$D60F` | 8 | [events](events.md) | RL |
+| <a id="s-wCeruleanGymCurScript"></a>[`wCeruleanGymCurScript`](events.md#s-wCeruleanGymCurScript) | `$D5FD` | 1 | [events](events.md) | RL |
+| <a id="s-wChampionsRoomCurScript"></a>[`wChampionsRoomCurScript`](events.md#s-wChampionsRoomCurScript) | `$D64C` | 1 | [events](events.md) | RL |
+| <a id="s-wChangeBoxSavedMapTextPointer"></a>[`wChangeBoxSavedMapTextPointer`](scratch.md#s-wChangeBoxSavedMapTextPointer) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wChangeMonPicEnemyTurnSpecies"></a>[`wChangeMonPicEnemyTurnSpecies`](scratch.md#s-wChangeMonPicEnemyTurnSpecies) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wChangeMonPicPlayerTurnSpecies"></a>[`wChangeMonPicPlayerTurnSpecies`](scratch.md#s-wChangeMonPicPlayerTurnSpecies) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wChannelCommandPointers"></a>[`wChannelCommandPointers`](audio.md#s-wChannelCommandPointers) | `$C006` | 16 | [audio](audio.md) | RL |
+| <a id="s-wChannelDutyCyclePatterns"></a>[`wChannelDutyCyclePatterns`](audio.md#s-wChannelDutyCyclePatterns) | `$C046` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelDutyCycles"></a>[`wChannelDutyCycles`](audio.md#s-wChannelDutyCycles) | `$C03E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelFlags1"></a>[`wChannelFlags1`](audio.md#s-wChannelFlags1) | `$C02E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelFrequencyLowBytes"></a>[`wChannelFrequencyLowBytes`](audio.md#s-wChannelFrequencyLowBytes) | `$C066` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelLoopCounters"></a>[`wChannelLoopCounters`](audio.md#s-wChannelLoopCounters) | `$C0BE` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelNoteDelayCounters"></a>[`wChannelNoteDelayCounters`](audio.md#s-wChannelNoteDelayCounters) | `$C0B6` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelNoteDelayCountersFractionalPart"></a>[`wChannelNoteDelayCountersFractionalPart`](audio.md#s-wChannelNoteDelayCountersFractionalPart) | `$C0CE` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelNoteSpeeds"></a>[`wChannelNoteSpeeds`](audio.md#s-wChannelNoteSpeeds) | `$C0C6` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelOctaves"></a>[`wChannelOctaves`](audio.md#s-wChannelOctaves) | `$C0D6` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideCurrentFrequencyFractionalPart"></a>[`wChannelPitchSlideCurrentFrequencyFractionalPart`](audio.md#s-wChannelPitchSlideCurrentFrequencyFractionalPart) | `$C08E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideCurrentFrequencyHighBytes"></a>[`wChannelPitchSlideCurrentFrequencyHighBytes`](audio.md#s-wChannelPitchSlideCurrentFrequencyHighBytes) | `$C096` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideCurrentFrequencyLowBytes"></a>[`wChannelPitchSlideCurrentFrequencyLowBytes`](audio.md#s-wChannelPitchSlideCurrentFrequencyLowBytes) | `$C09E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideFrequencySteps"></a>[`wChannelPitchSlideFrequencySteps`](audio.md#s-wChannelPitchSlideFrequencySteps) | `$C07E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideFrequencyStepsFractionalPart"></a>[`wChannelPitchSlideFrequencyStepsFractionalPart`](audio.md#s-wChannelPitchSlideFrequencyStepsFractionalPart) | `$C086` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideLengthModifiers"></a>[`wChannelPitchSlideLengthModifiers`](audio.md#s-wChannelPitchSlideLengthModifiers) | `$C076` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideTargetFrequencyHighBytes"></a>[`wChannelPitchSlideTargetFrequencyHighBytes`](audio.md#s-wChannelPitchSlideTargetFrequencyHighBytes) | `$C0A6` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelPitchSlideTargetFrequencyLowBytes"></a>[`wChannelPitchSlideTargetFrequencyLowBytes`](audio.md#s-wChannelPitchSlideTargetFrequencyLowBytes) | `$C0AE` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelReturnAddresses"></a>[`wChannelReturnAddresses`](audio.md#s-wChannelReturnAddresses) | `$C016` | 16 | [audio](audio.md) | RL |
+| <a id="s-wChannelSoundIDs"></a>[`wChannelSoundIDs`](audio.md#s-wChannelSoundIDs) | `$C026` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelVibratoDelayCounterReloadValues"></a>[`wChannelVibratoDelayCounterReloadValues`](audio.md#s-wChannelVibratoDelayCounterReloadValues) | `$C06E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelVibratoDelayCounters"></a>[`wChannelVibratoDelayCounters`](audio.md#s-wChannelVibratoDelayCounters) | `$C04E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelVibratoExtents"></a>[`wChannelVibratoExtents`](audio.md#s-wChannelVibratoExtents) | `$C056` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelVibratoRates"></a>[`wChannelVibratoRates`](audio.md#s-wChannelVibratoRates) | `$C05E` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChannelVolumes"></a>[`wChannelVolumes`](audio.md#s-wChannelVolumes) | `$C0DE` | 8 | [audio](audio.md) | RL |
+| <a id="s-wChargeMoveNum"></a>[`wChargeMoveNum`](scratch.md#s-wChargeMoveNum) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCheckFor180DegreeTurn"></a>[`wCheckFor180DegreeTurn`](scratch.md#s-wCheckFor180DegreeTurn) | `$CC4B` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wChosenMenuItem"></a>[`wChosenMenuItem`](scratch.md#s-wChosenMenuItem) | `$D12D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCinnabarGymCurScript"></a>[`wCinnabarGymCurScript`](events.md#s-wCinnabarGymCurScript) | `$D65E` | 1 | [events](events.md) | RL |
+| <a id="s-wCinnabarIslandCurScript"></a>[`wCinnabarIslandCurScript`](events.md#s-wCinnabarIslandCurScript) | `$D639` | 1 | [events](events.md) | RL |
+| <a id="s-wCompletedInGameTradeFlags"></a>[`wCompletedInGameTradeFlags`](events.md#s-wCompletedInGameTradeFlags) | `$D737` | 4 | [events](events.md) | RL |
+| <a id="s-wCoordAdjustmentAmount"></a>[`wCoordAdjustmentAmount`](scratch.md#s-wCoordAdjustmentAmount) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCoordIndex"></a>[`wCoordIndex`](scratch.md#s-wCoordIndex) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCopyingSGBTileData"></a>[`wCopyingSGBTileData`](graphics.md#s-wCopyingSGBTileData) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wCriticalHitOrOHKO"></a>[`wCriticalHitOrOHKO`](battle.md#s-wCriticalHitOrOHKO) | `$D05E` | 1 | [battle](battle.md) | RL |
+| <a id="s-wCurEnemyLevel"></a>[`wCurEnemyLevel`](battle.md#s-wCurEnemyLevel) | `$D127` | 1 | [battle](battle.md) | RL |
+| <a id="s-wCurItem"></a>[`wCurItem`](scratch.md#s-wCurItem) | `$CF91` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCurListMenuItem"></a>[`wCurListMenuItem`](scratch.md#s-wCurListMenuItem) | `$CF91` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCurMap"></a>[`wCurMap`](overworld.md#s-wCurMap) | `$D35E` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wCurMapConnections"></a>[`wCurMapConnections`](overworld.md#s-wCurMapConnections) | `$D370` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapDataPtr"></a>[`wCurMapDataPtr`](overworld.md#s-wCurMapDataPtr) | `$D36A` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapHeader"></a>[`wCurMapHeader`](overworld.md#s-wCurMapHeader) | `$D367` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapHeaderEnd"></a>[`wCurMapHeaderEnd`](overworld.md#s-wCurMapHeaderEnd) | `$D371` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapHeight"></a>[`wCurMapHeight`](overworld.md#s-wCurMapHeight) | `$D368` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wCurMapScript"></a>[`wCurMapScript`](events.md#s-wCurMapScript) | `$DA39` | 8 | [events](events.md) | RL |
+| <a id="s-wCurMapScriptPtr"></a>[`wCurMapScriptPtr`](events.md#s-wCurMapScriptPtr) | `$D36E` | 2 | [events](events.md) | RL |
+| <a id="s-wCurMapTextPtr"></a>[`wCurMapTextPtr`](overworld.md#s-wCurMapTextPtr) | `$D36C` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapTileset"></a>[`wCurMapTileset`](overworld.md#s-wCurMapTileset) | `$D367` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurMapWidth"></a>[`wCurMapWidth`](overworld.md#s-wCurMapWidth) | `$D369` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wCurOpponent"></a>[`wCurOpponent`](battle.md#s-wCurOpponent) | `$D059` | 1 | [battle](battle.md) | RL |
+| <a id="s-wCurPartySpecies"></a>[`wCurPartySpecies`](scratch.md#s-wCurPartySpecies) | `$CF91` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCurrentBoxNum"></a>[`wCurrentBoxNum`](storage.md#s-wCurrentBoxNum) | `$D5A0` | 2 | [storage](storage.md) | RLI |
+| <a id="s-wCurrentMapHeight2"></a>[`wCurrentMapHeight2`](overworld.md#s-wCurrentMapHeight2) | `$D524` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurrentMapScriptFlags"></a>[`wCurrentMapScriptFlags`](overworld.md#s-wCurrentMapScriptFlags) | `$D126` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurrentMapWidth2"></a>[`wCurrentMapWidth2`](overworld.md#s-wCurrentMapWidth2) | `$D525` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wCurrentMenuItem"></a>[`wCurrentMenuItem`](screen.md#s-wCurrentMenuItem) | `$CC26` | 1 | [screen](screen.md) | RL |
+| <a id="s-wCurrentTileBlockMapViewPointer"></a>[`wCurrentTileBlockMapViewPointer`](overworld.md#s-wCurrentTileBlockMapViewPointer) | `$D35F` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wCurSpecies"></a>[`wCurSpecies`](scratch.md#s-wCurSpecies) | `$D0B5` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wCurSpriteMovement2"></a>[`wCurSpriteMovement2`](scratch.md#s-wCurSpriteMovement2) | `$CF14` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wCutTile"></a>[`wCutTile`](scratch.md#s-wCutTile) | `$CD4D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDamage"></a>[`wDamage`](battle.md#s-wDamage) | `$D0D7` | 4 | [battle](battle.md) | RL |
+| <a id="s-wDamageMultipliers"></a>[`wDamageMultipliers`](battle.md#s-wDamageMultipliers) | `$D05B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wDayCareInUse"></a>[`wDayCareInUse`](storage.md#s-wDayCareInUse) | `$DA48` | 1 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMon"></a>[`wDayCareMon`](storage.md#s-wDayCareMon) | `$DA5F` | 1 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonAttackExp"></a>[`wDayCareMonAttackExp`](storage.md#s-wDayCareMonAttackExp) | `$DA72` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonBoxLevel"></a>[`wDayCareMonBoxLevel`](storage.md#s-wDayCareMonBoxLevel) | `$DA62` | 1 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonCatchRate"></a>[`wDayCareMonCatchRate`](storage.md#s-wDayCareMonCatchRate) | `$DA66` | 1 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonDefenseExp"></a>[`wDayCareMonDefenseExp`](storage.md#s-wDayCareMonDefenseExp) | `$DA74` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonDVs"></a>[`wDayCareMonDVs`](storage.md#s-wDayCareMonDVs) | `$DA7A` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonExp"></a>[`wDayCareMonExp`](storage.md#s-wDayCareMonExp) | `$DA6D` | 3 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonHP"></a>[`wDayCareMonHP`](storage.md#s-wDayCareMonHP) | `$DA60` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonHPExp"></a>[`wDayCareMonHPExp`](storage.md#s-wDayCareMonHPExp) | `$DA70` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonMoves"></a>[`wDayCareMonMoves`](storage.md#s-wDayCareMonMoves) | `$DA67` | 4 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonName"></a>[`wDayCareMonName`](storage.md#s-wDayCareMonName) | `$DA49` | 11 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonOT"></a>[`wDayCareMonOT`](storage.md#s-wDayCareMonOT) | `$DA54` | 11 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonOTID"></a>[`wDayCareMonOTID`](storage.md#s-wDayCareMonOTID) | `$DA6B` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonPP"></a>[`wDayCareMonPP`](storage.md#s-wDayCareMonPP) | `$DA7C` | 4 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonSpecialExp"></a>[`wDayCareMonSpecialExp`](storage.md#s-wDayCareMonSpecialExp) | `$DA78` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonSpecies"></a>[`wDayCareMonSpecies`](storage.md#s-wDayCareMonSpecies) | `$DA5F` | 1 | [storage](storage.md) | RL |
+| <a id="s-wDayCareMonSpeedExp"></a>[`wDayCareMonSpeedExp`](storage.md#s-wDayCareMonSpeedExp) | `$DA76` | 2 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonStatus"></a>[`wDayCareMonStatus`](storage.md#s-wDayCareMonStatus) | `$DA63` | 1 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonType"></a>[`wDayCareMonType`](storage.md#s-wDayCareMonType) | `$DA64` | 1 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonType1"></a>[`wDayCareMonType1`](storage.md#s-wDayCareMonType1) | `$DA64` | 1 | [storage](storage.md) | L |
+| <a id="s-wDayCareMonType2"></a>[`wDayCareMonType2`](storage.md#s-wDayCareMonType2) | `$DA65` | 1 | [storage](storage.md) | L |
+| <a id="s-wDayCareNumLevelsGrown"></a>[`wDayCareNumLevelsGrown`](scratch.md#s-wDayCareNumLevelsGrown) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDayCarePerLevelCost"></a>[`wDayCarePerLevelCost`](events.md#s-wDayCarePerLevelCost) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wDayCareStartLevel"></a>[`wDayCareStartLevel`](scratch.md#s-wDayCareStartLevel) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDayCareTotalCost"></a>[`wDayCareTotalCost`](scratch.md#s-wDayCareTotalCost) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDefaultMap"></a>[`wDefaultMap`](battle.md#s-wDefaultMap) | `$D07C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wDefaultPaletteCommand"></a>[`wDefaultPaletteCommand`](scratch.md#s-wDefaultPaletteCommand) | `$CF1C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDestinationMap"></a>[`wDestinationMap`](overworld.md#s-wDestinationMap) | `$D71A` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wDestinationWarpID"></a>[`wDestinationWarpID`](overworld.md#s-wDestinationWarpID) | `$D42F` | 129 | [overworld](overworld.md) | RL |
+| <a id="s-wDexMaxSeenMon"></a>[`wDexMaxSeenMon`](scratch.md#s-wDexMaxSeenMon) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDexRatingNumMonsOwned"></a>[`wDexRatingNumMonsOwned`](pokedex.md#s-wDexRatingNumMonsOwned) | `$CC5C` | 1 | [pokedex](pokedex.md) | L |
+| <a id="s-wDexRatingNumMonsSeen"></a>[`wDexRatingNumMonsSeen`](battle.md#s-wDexRatingNumMonsSeen) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wDexRatingText"></a>[`wDexRatingText`](pokedex.md#s-wDexRatingText) | `$CC5D` | 1 | [pokedex](pokedex.md) | RL |
+| <a id="s-wDisableChannelOutputWhenSfxEnds"></a>[`wDisableChannelOutputWhenSfxEnds`](audio.md#s-wDisableChannelOutputWhenSfxEnds) | `$C003` | 1 | [audio](audio.md) | RL |
+| <a id="s-wDisableVBlankWYUpdate"></a>[`wDisableVBlankWYUpdate`](scratch.md#s-wDisableVBlankWYUpdate) | `$D0A0` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDoNotWaitForButtonPressAfterDisplayingText"></a>[`wDoNotWaitForButtonPressAfterDisplayingText`](screen.md#s-wDoNotWaitForButtonPressAfterDisplayingText) | `$CC3C` | 1 | [screen](screen.md) | RL |
+| <a id="s-wDownscaledMonSize"></a>[`wDownscaledMonSize`](scratch.md#s-wDownscaledMonSize) | `$CD6C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDropletTile"></a>[`wDropletTile`](scratch.md#s-wDropletTile) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDungeonWarpDataEntrySize"></a>[`wDungeonWarpDataEntrySize`](scratch.md#s-wDungeonWarpDataEntrySize) | `$D12F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wDungeonWarpDestinationMap"></a>[`wDungeonWarpDestinationMap`](overworld.md#s-wDungeonWarpDestinationMap) | `$D71D` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectedMap"></a>[`wEastConnectedMap`](overworld.md#s-wEastConnectedMap) | `$D392` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectedMapViewPointer"></a>[`wEastConnectedMapViewPointer`](overworld.md#s-wEastConnectedMapViewPointer) | `$D39B` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectedMapWidth"></a>[`wEastConnectedMapWidth`](overworld.md#s-wEastConnectedMapWidth) | `$D398` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectedMapXAlignment"></a>[`wEastConnectedMapXAlignment`](overworld.md#s-wEastConnectedMapXAlignment) | `$D39A` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectedMapYAlignment"></a>[`wEastConnectedMapYAlignment`](overworld.md#s-wEastConnectedMapYAlignment) | `$D399` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectionHeader"></a>[`wEastConnectionHeader`](overworld.md#s-wEastConnectionHeader) | `$D392` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectionStripDest"></a>[`wEastConnectionStripDest`](overworld.md#s-wEastConnectionStripDest) | `$D395` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectionStripLength"></a>[`wEastConnectionStripLength`](overworld.md#s-wEastConnectionStripLength) | `$D397` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wEastConnectionStripSrc"></a>[`wEastConnectionStripSrc`](overworld.md#s-wEastConnectionStripSrc) | `$D393` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wElevatorWarpMaps"></a>[`wElevatorWarpMaps`](battle.md#s-wElevatorWarpMaps) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wElite4Flags"></a>[`wElite4Flags`](events.md#s-wElite4Flags) | `$D734` | 2 | [events](events.md) | RL |
+| <a id="s-wEmotionBubbleSpriteIndex"></a>[`wEmotionBubbleSpriteIndex`](scratch.md#s-wEmotionBubbleSpriteIndex) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEndBattleLoseTextPointer"></a>[`wEndBattleLoseTextPointer`](scratch.md#s-wEndBattleLoseTextPointer) | `$D08E` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wEndBattleTextRomBank"></a>[`wEndBattleTextRomBank`](scratch.md#s-wEndBattleTextRomBank) | `$D092` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wEndBattleWinTextPointer"></a>[`wEndBattleWinTextPointer`](scratch.md#s-wEndBattleWinTextPointer) | `$D08C` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyBattleStatus1"></a>[`wEnemyBattleStatus1`](battle.md#s-wEnemyBattleStatus1) | `$D067` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyBattleStatus2"></a>[`wEnemyBattleStatus2`](battle.md#s-wEnemyBattleStatus2) | `$D068` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyBattleStatus3"></a>[`wEnemyBattleStatus3`](battle.md#s-wEnemyBattleStatus3) | `$D069` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyBideAccumulatedDamage"></a>[`wEnemyBideAccumulatedDamage`](scratch.md#s-wEnemyBideAccumulatedDamage) | `$CD05` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyConfusedCounter"></a>[`wEnemyConfusedCounter`](scratch.md#s-wEnemyConfusedCounter) | `$D070` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyDisabledMove"></a>[`wEnemyDisabledMove`](battle.md#s-wEnemyDisabledMove) | `$D072` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyDisabledMoveNumber"></a>[`wEnemyDisabledMoveNumber`](battle.md#s-wEnemyDisabledMoveNumber) | `$CCEF` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyHPBarColor"></a>[`wEnemyHPBarColor`](scratch.md#s-wEnemyHPBarColor) | `$CF1E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyMon"></a>[`wEnemyMon`](battle.md#s-wEnemyMon) | `$CFE5` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1"></a>[`wEnemyMon1`](battle.md#s-wEnemyMon1) | `$D8A4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Attack"></a>[`wEnemyMon1Attack`](battle.md#s-wEnemyMon1Attack) | `$D8C8` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1AttackExp"></a>[`wEnemyMon1AttackExp`](battle.md#s-wEnemyMon1AttackExp) | `$D8B7` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1BoxLevel"></a>[`wEnemyMon1BoxLevel`](battle.md#s-wEnemyMon1BoxLevel) | `$D8A7` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1CatchRate"></a>[`wEnemyMon1CatchRate`](battle.md#s-wEnemyMon1CatchRate) | `$D8AB` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Defense"></a>[`wEnemyMon1Defense`](battle.md#s-wEnemyMon1Defense) | `$D8CA` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1DefenseExp"></a>[`wEnemyMon1DefenseExp`](battle.md#s-wEnemyMon1DefenseExp) | `$D8B9` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1DVs"></a>[`wEnemyMon1DVs`](battle.md#s-wEnemyMon1DVs) | `$D8BF` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Exp"></a>[`wEnemyMon1Exp`](battle.md#s-wEnemyMon1Exp) | `$D8B2` | 3 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1HP"></a>[`wEnemyMon1HP`](battle.md#s-wEnemyMon1HP) | `$D8A5` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1HPExp"></a>[`wEnemyMon1HPExp`](battle.md#s-wEnemyMon1HPExp) | `$D8B5` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Level"></a>[`wEnemyMon1Level`](battle.md#s-wEnemyMon1Level) | `$D8C5` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1MaxHP"></a>[`wEnemyMon1MaxHP`](battle.md#s-wEnemyMon1MaxHP) | `$D8C6` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Moves"></a>[`wEnemyMon1Moves`](battle.md#s-wEnemyMon1Moves) | `$D8AC` | 4 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Nick"></a>[`wEnemyMon1Nick`](battle.md#s-wEnemyMon1Nick) | `$D9EE` | 11 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1OT"></a>[`wEnemyMon1OT`](battle.md#s-wEnemyMon1OT) | `$D9AC` | 11 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1OTID"></a>[`wEnemyMon1OTID`](battle.md#s-wEnemyMon1OTID) | `$D8B0` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1PP"></a>[`wEnemyMon1PP`](battle.md#s-wEnemyMon1PP) | `$D8C1` | 4 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Special"></a>[`wEnemyMon1Special`](battle.md#s-wEnemyMon1Special) | `$D8CE` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1SpecialExp"></a>[`wEnemyMon1SpecialExp`](battle.md#s-wEnemyMon1SpecialExp) | `$D8BD` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Species"></a>[`wEnemyMon1Species`](battle.md#s-wEnemyMon1Species) | `$D8A4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Speed"></a>[`wEnemyMon1Speed`](battle.md#s-wEnemyMon1Speed) | `$D8CC` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1SpeedExp"></a>[`wEnemyMon1SpeedExp`](battle.md#s-wEnemyMon1SpeedExp) | `$D8BB` | 2 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Stats"></a>[`wEnemyMon1Stats`](battle.md#s-wEnemyMon1Stats) | `$D8C6` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Status"></a>[`wEnemyMon1Status`](battle.md#s-wEnemyMon1Status) | `$D8A8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMon1Type"></a>[`wEnemyMon1Type`](battle.md#s-wEnemyMon1Type) | `$D8A9` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMon1Type1"></a>[`wEnemyMon1Type1`](battle.md#s-wEnemyMon1Type1) | `$D8A9` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonAccuracyMod"></a>[`wEnemyMonAccuracyMod`](battle.md#s-wEnemyMonAccuracyMod) | `$CD32` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonActualCatchRate"></a>[`wEnemyMonActualCatchRate`](battle.md#s-wEnemyMonActualCatchRate) | `$D007` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonAttack"></a>[`wEnemyMonAttack`](battle.md#s-wEnemyMonAttack) | `$CFF6` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonAttackMod"></a>[`wEnemyMonAttackMod`](battle.md#s-wEnemyMonAttackMod) | `$CD2E` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonBaseExp"></a>[`wEnemyMonBaseExp`](battle.md#s-wEnemyMonBaseExp) | `$D008` | 1 | [battle](battle.md) | R |
+| <a id="s-wEnemyMonBaseStats"></a>[`wEnemyMonBaseStats`](battle.md#s-wEnemyMonBaseStats) | `$D002` | 5 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonBoxLevel"></a>[`wEnemyMonBoxLevel`](battle.md#s-wEnemyMonBoxLevel) | `$CFE8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonCatchRate"></a>[`wEnemyMonCatchRate`](battle.md#s-wEnemyMonCatchRate) | `$CFEC` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonDefense"></a>[`wEnemyMonDefense`](battle.md#s-wEnemyMonDefense) | `$CFF8` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonDefenseMod"></a>[`wEnemyMonDefenseMod`](battle.md#s-wEnemyMonDefenseMod) | `$CD2F` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonDVs"></a>[`wEnemyMonDVs`](battle.md#s-wEnemyMonDVs) | `$CFF1` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonEvasionMod"></a>[`wEnemyMonEvasionMod`](battle.md#s-wEnemyMonEvasionMod) | `$CD33` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonHP"></a>[`wEnemyMonHP`](battle.md#s-wEnemyMonHP) | `$CFE6` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonLevel"></a>[`wEnemyMonLevel`](battle.md#s-wEnemyMonLevel) | `$CFF3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonMaxHP"></a>[`wEnemyMonMaxHP`](battle.md#s-wEnemyMonMaxHP) | `$CFF4` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonMinimized"></a>[`wEnemyMonMinimized`](battle.md#s-wEnemyMonMinimized) | `$CCF3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonMoves"></a>[`wEnemyMonMoves`](battle.md#s-wEnemyMonMoves) | `$CFED` | 4 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonNick"></a>[`wEnemyMonNick`](battle.md#s-wEnemyMonNick) | `$CFDA` | 11 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonNicks"></a>[`wEnemyMonNicks`](battle.md#s-wEnemyMonNicks) | `$D9EE` | 11 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonOrTrainerClass"></a>[`wEnemyMonOrTrainerClass`](battle.md#s-wEnemyMonOrTrainerClass) | `$D713` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonOT"></a>[`wEnemyMonOT`](battle.md#s-wEnemyMonOT) | `$D9AC` | 11 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonPartyPos"></a>[`wEnemyMonPartyPos`](battle.md#s-wEnemyMonPartyPos) | `$CFE8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonPP"></a>[`wEnemyMonPP`](battle.md#s-wEnemyMonPP) | `$CFFE` | 4 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMons"></a>[`wEnemyMons`](battle.md#s-wEnemyMons) | `$D8A4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpecial"></a>[`wEnemyMonSpecial`](battle.md#s-wEnemyMonSpecial) | `$CFFC` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpecialMod"></a>[`wEnemyMonSpecialMod`](battle.md#s-wEnemyMonSpecialMod) | `$CD31` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpecies"></a>[`wEnemyMonSpecies`](battle.md#s-wEnemyMonSpecies) | `$CFE5` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpecies2"></a>[`wEnemyMonSpecies2`](battle.md#s-wEnemyMonSpecies2) | `$CFD8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpeed"></a>[`wEnemyMonSpeed`](battle.md#s-wEnemyMonSpeed) | `$CFFA` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonSpeedMod"></a>[`wEnemyMonSpeedMod`](battle.md#s-wEnemyMonSpeedMod) | `$CD30` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonStatMods"></a>[`wEnemyMonStatMods`](battle.md#s-wEnemyMonStatMods) | `$CD2E` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonStatModsEnd"></a>[`wEnemyMonStatModsEnd`](battle.md#s-wEnemyMonStatModsEnd) | `$CD36` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonStats"></a>[`wEnemyMonStats`](battle.md#s-wEnemyMonStats) | `$CFF4` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonStatus"></a>[`wEnemyMonStatus`](battle.md#s-wEnemyMonStatus) | `$CFE9` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonType"></a>[`wEnemyMonType`](battle.md#s-wEnemyMonType) | `$CFEA` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonType1"></a>[`wEnemyMonType1`](battle.md#s-wEnemyMonType1) | `$CFEA` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonType2"></a>[`wEnemyMonType2`](battle.md#s-wEnemyMonType2) | `$CFEB` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonUnmodifiedAttack"></a>[`wEnemyMonUnmodifiedAttack`](battle.md#s-wEnemyMonUnmodifiedAttack) | `$CD26` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonUnmodifiedDefense"></a>[`wEnemyMonUnmodifiedDefense`](battle.md#s-wEnemyMonUnmodifiedDefense) | `$CD28` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonUnmodifiedLevel"></a>[`wEnemyMonUnmodifiedLevel`](battle.md#s-wEnemyMonUnmodifiedLevel) | `$CD23` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonUnmodifiedMaxHP"></a>[`wEnemyMonUnmodifiedMaxHP`](battle.md#s-wEnemyMonUnmodifiedMaxHP) | `$CD24` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMonUnmodifiedSpecial"></a>[`wEnemyMonUnmodifiedSpecial`](battle.md#s-wEnemyMonUnmodifiedSpecial) | `$CD2C` | 1 | [battle](battle.md) | L |
+| <a id="s-wEnemyMonUnmodifiedSpeed"></a>[`wEnemyMonUnmodifiedSpeed`](battle.md#s-wEnemyMonUnmodifiedSpeed) | `$CD2A` | 2 | [battle](battle.md) | RL |
+| <a id="s-wEnemyMoveAccuracy"></a>[`wEnemyMoveAccuracy`](scratch.md#s-wEnemyMoveAccuracy) | `$CFD0` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyMoveEffect"></a>[`wEnemyMoveEffect`](scratch.md#s-wEnemyMoveEffect) | `$CFCD` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyMoveListIndex"></a>[`wEnemyMoveListIndex`](scratch.md#s-wEnemyMoveListIndex) | `$CCE2` | 1 | [scratch](scratch.md) | R |
+| <a id="s-wEnemyMoveMaxPP"></a>[`wEnemyMoveMaxPP`](scratch.md#s-wEnemyMoveMaxPP) | `$CFD1` | 1 | [scratch](scratch.md) | · |
+| <a id="s-wEnemyMoveNum"></a>[`wEnemyMoveNum`](scratch.md#s-wEnemyMoveNum) | `$CFCC` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyMovePower"></a>[`wEnemyMovePower`](scratch.md#s-wEnemyMovePower) | `$CFCE` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyMoveType"></a>[`wEnemyMoveType`](scratch.md#s-wEnemyMoveType) | `$CFCF` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyNumAttacksLeft"></a>[`wEnemyNumAttacksLeft`](battle.md#s-wEnemyNumAttacksLeft) | `$D06F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyNumHits"></a>[`wEnemyNumHits`](scratch.md#s-wEnemyNumHits) | `$CD05` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyPartyCount"></a>[`wEnemyPartyCount`](battle.md#s-wEnemyPartyCount) | `$D89C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyPartySpecies"></a>[`wEnemyPartySpecies`](battle.md#s-wEnemyPartySpecies) | `$D89D` | 7 | [battle](battle.md) | RL |
+| <a id="s-wEnemySelectedMove"></a>[`wEnemySelectedMove`](battle.md#s-wEnemySelectedMove) | `$CCDD` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyStatsToDouble"></a>[`wEnemyStatsToDouble`](scratch.md#s-wEnemyStatsToDouble) | `$D065` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyStatsToHalve"></a>[`wEnemyStatsToHalve`](scratch.md#s-wEnemyStatsToHalve) | `$D066` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemySubstituteHP"></a>[`wEnemySubstituteHP`](battle.md#s-wEnemySubstituteHP) | `$CCD8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnemyToxicCounter"></a>[`wEnemyToxicCounter`](scratch.md#s-wEnemyToxicCounter) | `$D071` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEnemyUsedMove"></a>[`wEnemyUsedMove`](battle.md#s-wEnemyUsedMove) | `$CCF2` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEngagedTrainerClass"></a>[`wEngagedTrainerClass`](battle.md#s-wEngagedTrainerClass) | `$CD2D` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEngagedTrainerSet"></a>[`wEngagedTrainerSet`](battle.md#s-wEngagedTrainerSet) | `$CD2E` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEnteringCableClub"></a>[`wEnteringCableClub`](scratch.md#s-wEnteringCableClub) | `$CC47` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wEscapedFromBattle"></a>[`wEscapedFromBattle`](battle.md#s-wEscapedFromBattle) | `$D078` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEventFlags"></a>[`wEventFlags`](events.md#s-wEventFlags) | `$D747` | 320 | [events](events.md) | RL |
+| <a id="s-wEvoCancelled"></a>[`wEvoCancelled`](scratch.md#s-wEvoCancelled) | `$CEEC` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEvoDataBuffer"></a>[`wEvoDataBuffer`](battle.md#s-wEvoDataBuffer) | `$CD6D` | 4 | [battle](battle.md) | RL |
+| <a id="s-wEvoDataBufferEnd"></a>[`wEvoDataBufferEnd`](scratch.md#s-wEvoDataBufferEnd) | `$CD7A` | 7 | [scratch](scratch.md) | RL |
+| <a id="s-wEvolutionOccurred"></a>[`wEvolutionOccurred`](scratch.md#s-wEvolutionOccurred) | `$D121` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEvoMonTileOffset"></a>[`wEvoMonTileOffset`](battle.md#s-wEvoMonTileOffset) | `$CEEB` | 1 | [battle](battle.md) | RL |
+| <a id="s-wEvoNewSpecies"></a>[`wEvoNewSpecies`](scratch.md#s-wEvoNewSpecies) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEvoOldSpecies"></a>[`wEvoOldSpecies`](scratch.md#s-wEvoOldSpecies) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wEvoStoneItemID"></a>[`wEvoStoneItemID`](battle.md#s-wEvoStoneItemID) | `$D156` | 1 | [battle](battle.md) | RL |
+| <a id="s-wExpAmountGained"></a>[`wExpAmountGained`](battle.md#s-wExpAmountGained) | `$CF4B` | 2 | [battle](battle.md) | RL |
+| <a id="s-wFacingDirectionList"></a>[`wFacingDirectionList`](scratch.md#s-wFacingDirectionList) | `$CD48` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFallingObjectMovementByte"></a>[`wFallingObjectMovementByte`](scratch.md#s-wFallingObjectMovementByte) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFallingObjectsMovementData"></a>[`wFallingObjectsMovementData`](scratch.md#s-wFallingObjectsMovementData) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFBDestAddr"></a>[`wFBDestAddr`](battle.md#s-wFBDestAddr) | `$D09C` | 2 | [battle](battle.md) | RL |
+| <a id="s-wFBMode"></a>[`wFBMode`](battle.md#s-wFBMode) | `$D09E` | 1 | [battle](battle.md) | RL |
+| <a id="s-wFBTileCounter"></a>[`wFBTileCounter`](battle.md#s-wFBTileCounter) | `$D084` | 1 | [battle](battle.md) | RL |
+| <a id="s-wFieldMoves"></a>[`wFieldMoves`](scratch.md#s-wFieldMoves) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFieldMovesLeftmostXCoord"></a>[`wFieldMovesLeftmostXCoord`](scratch.md#s-wFieldMovesLeftmostXCoord) | `$CD42` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFightingDojoCurScript"></a>[`wFightingDojoCurScript`](events.md#s-wFightingDojoCurScript) | `$D642` | 1 | [events](events.md) | RL |
+| <a id="s-wFilteredBagItems"></a>[`wFilteredBagItems`](battle.md#s-wFilteredBagItems) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wFilteredBagItemsCount"></a>[`wFilteredBagItemsCount`](bag.md#s-wFilteredBagItemsCount) | `$CD37` | 1 | [bag](bag.md) | RL |
+| <a id="s-wFirstLockTrashCanIndex"></a>[`wFirstLockTrashCanIndex`](events.md#s-wFirstLockTrashCanIndex) | `$D743` | 1 | [events](events.md) | RL |
+| <a id="s-wFirstMonsNotOutYet"></a>[`wFirstMonsNotOutYet`](scratch.md#s-wFirstMonsNotOutYet) | `$D11D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFlashScreenLongCounter"></a>[`wFlashScreenLongCounter`](scratch.md#s-wFlashScreenLongCounter) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFlyAnimBirdSpriteImageIndex"></a>[`wFlyAnimBirdSpriteImageIndex`](scratch.md#s-wFlyAnimBirdSpriteImageIndex) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFlyAnimCounter"></a>[`wFlyAnimCounter`](scratch.md#s-wFlyAnimCounter) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFlyAnimUsingCoordList"></a>[`wFlyAnimUsingCoordList`](scratch.md#s-wFlyAnimUsingCoordList) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFlyLocationsList"></a>[`wFlyLocationsList`](scratch.md#s-wFlyLocationsList) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFontLoaded"></a>[`wFontLoaded`](screen.md#s-wFontLoaded) | `$CFC4` | 1 | [screen](screen.md) | RL |
+| <a id="s-wForceEvolution"></a>[`wForceEvolution`](battle.md#s-wForceEvolution) | `$CCD4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wForcePlayerToChooseMon"></a>[`wForcePlayerToChooseMon`](scratch.md#s-wForcePlayerToChooseMon) | `$D11F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wFossilItem"></a>[`wFossilItem`](events.md#s-wFossilItem) | `$D70F` | 1 | [events](events.md) | RL |
+| <a id="s-wFossilMon"></a>[`wFossilMon`](events.md#s-wFossilMon) | `$D710` | 3 | [events](events.md) | RL |
+| <a id="s-wFrequencyModifier"></a>[`wFrequencyModifier`](audio.md#s-wFrequencyModifier) | `$C0F1` | 1 | [audio](audio.md) | RL |
+| <a id="s-wFuchsiaGymCurScript"></a>[`wFuchsiaGymCurScript`](events.md#s-wFuchsiaGymCurScript) | `$D65B` | 1 | [events](events.md) | RL |
+| <a id="s-wGainBoostedExp"></a>[`wGainBoostedExp`](scratch.md#s-wGainBoostedExp) | `$CF4D` | 18 | [scratch](scratch.md) | RL |
+| <a id="s-wGameCornerCurScript"></a>[`wGameCornerCurScript`](events.md#s-wGameCornerCurScript) | `$D65F` | 1 | [events](events.md) | RL |
+| <a id="s-wGameProgressFlags"></a>[`wGameProgressFlags`](events.md#s-wGameProgressFlags) | `$D5F0` | 1 | [events](events.md) | RL |
+| <a id="s-wGameProgressFlagsEnd"></a>[`wGameProgressFlagsEnd`](events.md#s-wGameProgressFlagsEnd) | `$D6B8` | 56 | [events](events.md) | L |
+| <a id="s-wGrassMons"></a>[`wGrassMons`](overworld.md#s-wGrassMons) | `$D888` | 11 | [overworld](overworld.md) | RL |
+| <a id="s-wGrassRate"></a>[`wGrassRate`](link.md#s-wGrassRate) | `$D887` | 1 | [link](link.md) | RL |
+| <a id="s-wGrassTile"></a>[`wGrassTile`](overworld.md#s-wGrassTile) | `$D535` | 5 | [overworld](overworld.md) | RL |
+| <a id="s-wGymCityName"></a>[`wGymCityName`](scratch.md#s-wGymCityName) | `$CF5F` | 17 | [scratch](scratch.md) | RL |
+| <a id="s-wGymGateTileBlock"></a>[`wGymGateTileBlock`](scratch.md#s-wGymGateTileBlock) | `$D12F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wGymLeaderName"></a>[`wGymLeaderName`](scratch.md#s-wGymLeaderName) | `$CF70` | 11 | [scratch](scratch.md) | RL |
+| <a id="s-wGymLeaderNo"></a>[`wGymLeaderNo`](battle.md#s-wGymLeaderNo) | `$D05C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wGymTrashCanIndex"></a>[`wGymTrashCanIndex`](scratch.md#s-wGymTrashCanIndex) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHallOfFame"></a>[`wHallOfFame`](battle.md#s-wHallOfFame) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wHallOfFameCurScript"></a>[`wHallOfFameCurScript`](events.md#s-wHallOfFameCurScript) | `$D64B` | 1 | [events](events.md) | RL |
+| <a id="s-wHiddenEventFunctionArgument"></a>[`wHiddenEventFunctionArgument`](scratch.md#s-wHiddenEventFunctionArgument) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHiddenEventFunctionRomBank"></a>[`wHiddenEventFunctionRomBank`](scratch.md#s-wHiddenEventFunctionRomBank) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHiddenEventIndex"></a>[`wHiddenEventIndex`](scratch.md#s-wHiddenEventIndex) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHiddenEventX"></a>[`wHiddenEventX`](events.md#s-wHiddenEventX) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wHiddenEventY"></a>[`wHiddenEventY`](player.md#s-wHiddenEventY) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wHiddenItemOrCoinsIndex"></a>[`wHiddenItemOrCoinsIndex`](events.md#s-wHiddenItemOrCoinsIndex) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wHoFMonLevel"></a>[`wHoFMonLevel`](scratch.md#s-wHoFMonLevel) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHoFMonOrPlayer"></a>[`wHoFMonOrPlayer`](player.md#s-wHoFMonOrPlayer) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wHoFMonSpecies"></a>[`wHoFMonSpecies`](scratch.md#s-wHoFMonSpecies) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHoFPartyMonIndex"></a>[`wHoFPartyMonIndex`](scratch.md#s-wHoFPartyMonIndex) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHoFTeamIndex"></a>[`wHoFTeamIndex`](scratch.md#s-wHoFTeamIndex) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHoFTeamIndex2"></a>[`wHoFTeamIndex2`](events.md#s-wHoFTeamIndex2) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wHoFTeamNo"></a>[`wHoFTeamNo`](scratch.md#s-wHoFTeamNo) | `$CD42` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHPBarDelta"></a>[`wHPBarDelta`](battle.md#s-wHPBarDelta) | `$CEEF` | 1 | [battle](battle.md) | RL |
+| <a id="s-wHPBarHPDifference"></a>[`wHPBarHPDifference`](battle.md#s-wHPBarHPDifference) | `$CEFD` | 8 | [battle](battle.md) | RL |
+| <a id="s-wHPBarMaxHP"></a>[`wHPBarMaxHP`](scratch.md#s-wHPBarMaxHP) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHPBarNewHP"></a>[`wHPBarNewHP`](battle.md#s-wHPBarNewHP) | `$CEED` | 2 | [battle](battle.md) | RL |
+| <a id="s-wHPBarOldHP"></a>[`wHPBarOldHP`](battle.md#s-wHPBarOldHP) | `$CEEB` | 1 | [battle](battle.md) | RL |
+| <a id="s-wHPBarTempHP"></a>[`wHPBarTempHP`](battle.md#s-wHPBarTempHP) | `$CEF0` | 13 | [battle](battle.md) | RL |
+| <a id="s-wHPBarType"></a>[`wHPBarType`](screen.md#s-wHPBarType) | `$CF94` | 1 | [screen](screen.md) | RL |
+| <a id="s-wHUDCornerTile"></a>[`wHUDCornerTile`](player.md#s-wHUDCornerTile) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wHUDGraphicsTiles"></a>[`wHUDGraphicsTiles`](scratch.md#s-wHUDGraphicsTiles) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHUDGraphicsTilesEnd"></a>[`wHUDGraphicsTilesEnd`](scratch.md#s-wHUDGraphicsTilesEnd) | `$CD42` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHUDPokeballGfxOffsetX"></a>[`wHUDPokeballGfxOffsetX`](scratch.md#s-wHUDPokeballGfxOffsetX) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wHUDTriangleTile"></a>[`wHUDTriangleTile`](events.md#s-wHUDTriangleTile) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wHUDUnusedTopTile"></a>[`wHUDUnusedTopTile`](scratch.md#s-wHUDUnusedTopTile) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wIgnoreInputCounter"></a>[`wIgnoreInputCounter`](scratch.md#s-wIgnoreInputCounter) | `$D13A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-WildDataPointers"></a>[`WildDataPointers`](rom-data.md#s-WildDataPointers) | `$4EEB` b3 | 1948 | [rom-data](rom-data.md) | · |
+| <a id="s-wInGameTradeGiveMonName"></a>[`wInGameTradeGiveMonName`](scratch.md#s-wInGameTradeGiveMonName) | `$CD13` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wInGameTradeGiveMonSpecies"></a>[`wInGameTradeGiveMonSpecies`](battle.md#s-wInGameTradeGiveMonSpecies) | `$CD0F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wInGameTradeMonNick"></a>[`wInGameTradeMonNick`](scratch.md#s-wInGameTradeMonNick) | `$CD29` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wInGameTradeReceiveMonName"></a>[`wInGameTradeReceiveMonName`](battle.md#s-wInGameTradeReceiveMonName) | `$CD1E` | 1 | [battle](battle.md) | R |
+| <a id="s-wInGameTradeReceiveMonSpecies"></a>[`wInGameTradeReceiveMonSpecies`](scratch.md#s-wInGameTradeReceiveMonSpecies) | `$CD34` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wInGameTradeTextPointerTableIndex"></a>[`wInGameTradeTextPointerTableIndex`](battle.md#s-wInGameTradeTextPointerTableIndex) | `$CD12` | 1 | [battle](battle.md) | RL |
+| <a id="s-wInGameTradeTextPointerTablePointer"></a>[`wInGameTradeTextPointerTablePointer`](battle.md#s-wInGameTradeTextPointerTablePointer) | `$CD10` | 2 | [battle](battle.md) | RL |
+| <a id="s-wInHandlePlayerMonFainted"></a>[`wInHandlePlayerMonFainted`](battle.md#s-wInHandlePlayerMonFainted) | `$CCF0` | 1 | [battle](battle.md) | RL |
+| <a id="s-wInitListType"></a>[`wInitListType`](scratch.md#s-wInitListType) | `$D11B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wIntroNidorinoBaseTile"></a>[`wIntroNidorinoBaseTile`](scratch.md#s-wIntroNidorinoBaseTile) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wInwardSpiralUpdateScreenCounter"></a>[`wInwardSpiralUpdateScreenCounter`](scratch.md#s-wInwardSpiralUpdateScreenCounter) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wIsInBattle"></a>[`wIsInBattle`](battle.md#s-wIsInBattle) | `$D057` | 1 | [battle](battle.md) | RL |
+| <a id="s-wIsKeyItem"></a>[`wIsKeyItem`](system.md#s-wIsKeyItem) | `$D124` | 1 | [system](system.md) | RL |
+| <a id="s-wItemList"></a>[`wItemList`](scratch.md#s-wItemList) | `$CF7B` | 16 | [scratch](scratch.md) | RL |
+| <a id="s-wItemListPointer"></a>[`wItemListPointer`](scratch.md#s-wItemListPointer) | `$D128` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wItemPrices"></a>[`wItemPrices`](bag.md#s-wItemPrices) | `$CF8F` | 2 | [bag](bag.md) | RL |
+| <a id="s-wItemQuantity"></a>[`wItemQuantity`](bag.md#s-wItemQuantity) | `$CF96` | 1 | [bag](bag.md) | RL |
+| <a id="s-wJigglypuffFacingDirections"></a>[`wJigglypuffFacingDirections`](scratch.md#s-wJigglypuffFacingDirections) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wJoyIgnore"></a>[`wJoyIgnore`](system.md#s-wJoyIgnore) | `$CD6B` | 1 | [system](system.md) | RL |
+| <a id="s-wLancesRoomCurScript"></a>[`wLancesRoomCurScript`](events.md#s-wLancesRoomCurScript) | `$D653` | 5 | [events](events.md) | RL |
+| <a id="s-wLastBlackoutMap"></a>[`wLastBlackoutMap`](overworld.md#s-wLastBlackoutMap) | `$D719` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wLastFieldMoveID"></a>[`wLastFieldMoveID`](scratch.md#s-wLastFieldMoveID) | `$CD43` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLastMap"></a>[`wLastMap`](overworld.md#s-wLastMap) | `$D365` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wLastMenuItem"></a>[`wLastMenuItem`](screen.md#s-wLastMenuItem) | `$CC2A` | 1 | [screen](screen.md) | RL |
+| <a id="s-wLastMusicSoundID"></a>[`wLastMusicSoundID`](audio.md#s-wLastMusicSoundID) | `$CFCA` | 1 | [audio](audio.md) | RL |
+| <a id="s-wLastSwitchInEnemyMonHP"></a>[`wLastSwitchInEnemyMonHP`](battle.md#s-wLastSwitchInEnemyMonHP) | `$CCE3` | 2 | [battle](battle.md) | RL |
+| <a id="s-wLearningMovesFromDayCare"></a>[`wLearningMovesFromDayCare`](scratch.md#s-wLearningMovesFromDayCare) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLearnMoveMonName"></a>[`wLearnMoveMonName`](scratch.md#s-wLearnMoveMonName) | `$D036` | 16 | [scratch](scratch.md) | RL |
+| <a id="s-wLeftGBMonSpecies"></a>[`wLeftGBMonSpecies`](scratch.md#s-wLeftGBMonSpecies) | `$CD5E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLetterPrintingDelayFlags"></a>[`wLetterPrintingDelayFlags`](player.md#s-wLetterPrintingDelayFlags) | `$D358` | 1 | [player](player.md) | RL |
+| <a id="s-wLinkBattleRandomNumberList"></a>[`wLinkBattleRandomNumberList`](rng.md#s-wLinkBattleRandomNumberList) | `$D148` | 10 | [rng](rng.md) | RL |
+| <a id="s-wLinkBattleRandomNumberListIndex"></a>[`wLinkBattleRandomNumberListIndex`](rng.md#s-wLinkBattleRandomNumberListIndex) | `$CCDE` | 1 | [rng](rng.md) | RL |
+| <a id="s-wLinkCableAnimBulgeToggle"></a>[`wLinkCableAnimBulgeToggle`](scratch.md#s-wLinkCableAnimBulgeToggle) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLinkEnemyTrainerName"></a>[`wLinkEnemyTrainerName`](link.md#s-wLinkEnemyTrainerName) | `$D887` | 1 | [link](link.md) | RL |
+| <a id="s-wLinkMenuSelectionReceiveBuffer"></a>[`wLinkMenuSelectionReceiveBuffer`](link.md#s-wLinkMenuSelectionReceiveBuffer) | `$CC3D` | 1 | [link](link.md) | RL |
+| <a id="s-wLinkMenuSelectionSendBuffer"></a>[`wLinkMenuSelectionSendBuffer`](link.md#s-wLinkMenuSelectionSendBuffer) | `$CC42` | 5 | [link](link.md) | RL |
+| <a id="s-wLinkState"></a>[`wLinkState`](link.md#s-wLinkState) | `$D12B` | 1 | [link](link.md) | RL |
+| <a id="s-wLinkTimeoutCounter"></a>[`wLinkTimeoutCounter`](scratch.md#s-wLinkTimeoutCounter) | `$CC47` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wListCount"></a>[`wListCount`](screen.md#s-wListCount) | `$D12A` | 1 | [screen](screen.md) | RL |
+| <a id="s-wListMenuID"></a>[`wListMenuID`](screen.md#s-wListMenuID) | `$CF94` | 1 | [screen](screen.md) | RL |
+| <a id="s-wListPointer"></a>[`wListPointer`](screen.md#s-wListPointer) | `$CF8B` | 2 | [screen](screen.md) | RL |
+| <a id="s-wListScrollOffset"></a>[`wListScrollOffset`](screen.md#s-wListScrollOffset) | `$CC36` | 1 | [screen](screen.md) | RL |
+| <a id="s-wLoadedMon"></a>[`wLoadedMon`](scratch.md#s-wLoadedMon) | `$CF98` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonAttack"></a>[`wLoadedMonAttack`](scratch.md#s-wLoadedMonAttack) | `$CFBC` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonAttackExp"></a>[`wLoadedMonAttackExp`](scratch.md#s-wLoadedMonAttackExp) | `$CFAB` | 2 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonBoxLevel"></a>[`wLoadedMonBoxLevel`](scratch.md#s-wLoadedMonBoxLevel) | `$CF9B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonCatchRate"></a>[`wLoadedMonCatchRate`](scratch.md#s-wLoadedMonCatchRate) | `$CF9F` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonDefense"></a>[`wLoadedMonDefense`](scratch.md#s-wLoadedMonDefense) | `$CFBE` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonDefenseExp"></a>[`wLoadedMonDefenseExp`](scratch.md#s-wLoadedMonDefenseExp) | `$CFAD` | 2 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonDVs"></a>[`wLoadedMonDVs`](scratch.md#s-wLoadedMonDVs) | `$CFB3` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonExp"></a>[`wLoadedMonExp`](scratch.md#s-wLoadedMonExp) | `$CFA6` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonHP"></a>[`wLoadedMonHP`](scratch.md#s-wLoadedMonHP) | `$CF99` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonHPExp"></a>[`wLoadedMonHPExp`](scratch.md#s-wLoadedMonHPExp) | `$CFA9` | 2 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonLevel"></a>[`wLoadedMonLevel`](scratch.md#s-wLoadedMonLevel) | `$CFB9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonMaxHP"></a>[`wLoadedMonMaxHP`](scratch.md#s-wLoadedMonMaxHP) | `$CFBA` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonMoves"></a>[`wLoadedMonMoves`](scratch.md#s-wLoadedMonMoves) | `$CFA0` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonOTID"></a>[`wLoadedMonOTID`](scratch.md#s-wLoadedMonOTID) | `$CFA4` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonPP"></a>[`wLoadedMonPP`](scratch.md#s-wLoadedMonPP) | `$CFB5` | 4 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonSpecial"></a>[`wLoadedMonSpecial`](scratch.md#s-wLoadedMonSpecial) | `$CFC2` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonSpecialExp"></a>[`wLoadedMonSpecialExp`](scratch.md#s-wLoadedMonSpecialExp) | `$CFB1` | 2 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonSpecies"></a>[`wLoadedMonSpecies`](scratch.md#s-wLoadedMonSpecies) | `$CF98` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonSpeed"></a>[`wLoadedMonSpeed`](scratch.md#s-wLoadedMonSpeed) | `$CFC0` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonSpeedExp"></a>[`wLoadedMonSpeedExp`](scratch.md#s-wLoadedMonSpeedExp) | `$CFAF` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonStats"></a>[`wLoadedMonStats`](scratch.md#s-wLoadedMonStats) | `$CFBA` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonStatus"></a>[`wLoadedMonStatus`](scratch.md#s-wLoadedMonStatus) | `$CF9C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wLoadedMonType"></a>[`wLoadedMonType`](scratch.md#s-wLoadedMonType) | `$CF9D` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wLoadedMonType1"></a>[`wLoadedMonType1`](scratch.md#s-wLoadedMonType1) | `$CF9D` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wLoneAttackNo"></a>[`wLoneAttackNo`](battle.md#s-wLoneAttackNo) | `$D05C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wLoreleisRoomCurScript"></a>[`wLoreleisRoomCurScript`](events.md#s-wLoreleisRoomCurScript) | `$D64D` | 1 | [events](events.md) | RL |
+| <a id="s-wLowHealthAlarm"></a>[`wLowHealthAlarm`](battle.md#s-wLowHealthAlarm) | `$D083` | 1 | [battle](battle.md) | RL |
+| <a id="s-wLowHealthAlarmDisabled"></a>[`wLowHealthAlarmDisabled`](battle.md#s-wLowHealthAlarmDisabled) | `$CCF6` | 1 | [battle](battle.md) | RL |
+| <a id="s-wLuckySlotHiddenEventIndex"></a>[`wLuckySlotHiddenEventIndex`](scratch.md#s-wLuckySlotHiddenEventIndex) | `$CD05` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wMainDataEnd"></a>[`wMainDataEnd`](save.md#s-wMainDataEnd) | `$DA80` | — | [save](save.md) | RL |
+| <a id="s-wMainDataStart"></a>[`wMainDataStart`](pokedex.md#s-wMainDataStart) | `$D2F7` | 19 | [pokedex](pokedex.md) | RL |
+| <a id="s-wMapBackgroundTile"></a>[`wMapBackgroundTile`](overworld.md#s-wMapBackgroundTile) | `$D3AD` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wMapMusicROMBank"></a>[`wMapMusicROMBank`](overworld.md#s-wMapMusicROMBank) | `$D35C` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wMapMusicSoundID"></a>[`wMapMusicSoundID`](overworld.md#s-wMapMusicSoundID) | `$D35B` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wMapPalOffset"></a>[`wMapPalOffset`](overworld.md#s-wMapPalOffset) | `$D35D` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wMapSpriteData"></a>[`wMapSpriteData`](overworld.md#s-wMapSpriteData) | `$D4E4` | 32 | [overworld](overworld.md) | RL |
+| <a id="s-wMapSpriteExtraData"></a>[`wMapSpriteExtraData`](overworld.md#s-wMapSpriteExtraData) | `$D504` | 32 | [overworld](overworld.md) | RL |
+| <a id="s-wMapViewVRAMPointer"></a>[`wMapViewVRAMPointer`](overworld.md#s-wMapViewVRAMPointer) | `$D526` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wMaxItemQuantity"></a>[`wMaxItemQuantity`](scratch.md#s-wMaxItemQuantity) | `$CF97` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMaxMenuItem"></a>[`wMaxMenuItem`](screen.md#s-wMaxMenuItem) | `$CC28` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMaxPP"></a>[`wMaxPP`](scratch.md#s-wMaxPP) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMenuCursorLocation"></a>[`wMenuCursorLocation`](screen.md#s-wMenuCursorLocation) | `$CC30` | 4 | [screen](screen.md) | RL |
+| <a id="s-wMenuExitMethod"></a>[`wMenuExitMethod`](screen.md#s-wMenuExitMethod) | `$D12E` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMenuItemOffset"></a>[`wMenuItemOffset`](battle.md#s-wMenuItemOffset) | `$D07C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMenuItemToSwap"></a>[`wMenuItemToSwap`](screen.md#s-wMenuItemToSwap) | `$CC35` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMenuJoypadPollCount"></a>[`wMenuJoypadPollCount`](screen.md#s-wMenuJoypadPollCount) | `$CC34` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMenuWatchedKeys"></a>[`wMenuWatchedKeys`](screen.md#s-wMenuWatchedKeys) | `$CC29` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMenuWatchMovingOutOfBounds"></a>[`wMenuWatchMovingOutOfBounds`](screen.md#s-wMenuWatchMovingOutOfBounds) | `$CC37` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMenuWrappingEnabled"></a>[`wMenuWrappingEnabled`](screen.md#s-wMenuWrappingEnabled) | `$CC4A` | 1 | [screen](screen.md) | RL |
+| <a id="s-wMiscBattleData"></a>[`wMiscBattleData`](battle.md#s-wMiscBattleData) | `$CCD3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMiscBattleDataEnd"></a>[`wMiscBattleDataEnd`](battle.md#s-wMiscBattleDataEnd) | `$CD0F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMiscFlags"></a>[`wMiscFlags`](scratch.md#s-wMiscFlags) | `$CD60` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wMonDataLocation"></a>[`wMonDataLocation`](scratch.md#s-wMonDataLocation) | `$CC49` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHBackSprite"></a>[`wMonHBackSprite`](scratch.md#s-wMonHBackSprite) | `$D0C5` | 2 | [scratch](scratch.md) | L |
+| <a id="s-wMonHBaseAttack"></a>[`wMonHBaseAttack`](scratch.md#s-wMonHBaseAttack) | `$D0BA` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wMonHBaseDefense"></a>[`wMonHBaseDefense`](scratch.md#s-wMonHBaseDefense) | `$D0BB` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wMonHBaseEXP"></a>[`wMonHBaseEXP`](scratch.md#s-wMonHBaseEXP) | `$D0C1` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wMonHBaseHP"></a>[`wMonHBaseHP`](scratch.md#s-wMonHBaseHP) | `$D0B9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHBaseSpecial"></a>[`wMonHBaseSpecial`](scratch.md#s-wMonHBaseSpecial) | `$D0BD` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wMonHBaseSpeed"></a>[`wMonHBaseSpeed`](scratch.md#s-wMonHBaseSpeed) | `$D0BC` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHBaseStats"></a>[`wMonHBaseStats`](scratch.md#s-wMonHBaseStats) | `$D0B9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHCatchRate"></a>[`wMonHCatchRate`](scratch.md#s-wMonHCatchRate) | `$D0C0` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHeader"></a>[`wMonHeader`](scratch.md#s-wMonHeader) | `$D0B8` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHeaderEnd"></a>[`wMonHeaderEnd`](scratch.md#s-wMonHeaderEnd) | `$D0D4` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHFrontSprite"></a>[`wMonHFrontSprite`](scratch.md#s-wMonHFrontSprite) | `$D0C3` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHGrowthRate"></a>[`wMonHGrowthRate`](scratch.md#s-wMonHGrowthRate) | `$D0CB` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHIndex"></a>[`wMonHIndex`](scratch.md#s-wMonHIndex) | `$D0B8` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHLearnset"></a>[`wMonHLearnset`](scratch.md#s-wMonHLearnset) | `$D0CC` | 8 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHMoves"></a>[`wMonHMoves`](scratch.md#s-wMonHMoves) | `$D0C7` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHSpriteDim"></a>[`wMonHSpriteDim`](scratch.md#s-wMonHSpriteDim) | `$D0C2` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHType1"></a>[`wMonHType1`](scratch.md#s-wMonHType1) | `$D0BE` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonHTypes"></a>[`wMonHTypes`](scratch.md#s-wMonHTypes) | `$D0BE` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonIsDisobedient"></a>[`wMonIsDisobedient`](battle.md#s-wMonIsDisobedient) | `$CCED` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMonPartySpriteSpecies"></a>[`wMonPartySpriteSpecies`](scratch.md#s-wMonPartySpriteSpecies) | `$CD5D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMonPartySpritesSavedOAM"></a>[`wMonPartySpritesSavedOAM`](battle.md#s-wMonPartySpritesSavedOAM) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMoveData"></a>[`wMoveData`](battle.md#s-wMoveData) | `$CD6D` | 4 | [battle](battle.md) | RL |
+| <a id="s-wMoveDidntMiss"></a>[`wMoveDidntMiss`](battle.md#s-wMoveDidntMiss) | `$CCF4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMoveDownSmallStarsOAMCount"></a>[`wMoveDownSmallStarsOAMCount`](scratch.md#s-wMoveDownSmallStarsOAMCount) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMoveGrammar"></a>[`wMoveGrammar`](scratch.md#s-wMoveGrammar) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMovementFlags"></a>[`wMovementFlags`](events.md#s-wMovementFlags) | `$D736` | 1 | [events](events.md) | RL |
+| <a id="s-wMoveMenuType"></a>[`wMoveMenuType`](battle.md#s-wMoveMenuType) | `$CCDB` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMoveMissed"></a>[`wMoveMissed`](battle.md#s-wMoveMissed) | `$D05F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wMoveMonType"></a>[`wMoveMonType`](scratch.md#s-wMoveMonType) | `$CF95` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMoveNum"></a>[`wMoveNum`](scratch.md#s-wMoveNum) | `$D0E0` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMoves"></a>[`wMoves`](scratch.md#s-wMoves) | `$D0DC` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wMovesString"></a>[`wMovesString`](scratch.md#s-wMovesString) | `$D0E1` | 56 | [scratch](scratch.md) | RL |
+| <a id="s-wMoveType"></a>[`wMoveType`](scratch.md#s-wMoveType) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMovingBGTilesCounter2"></a>[`wMovingBGTilesCounter2`](scratch.md#s-wMovingBGTilesCounter2) | `$D085` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wMtMoon1FCurScript"></a>[`wMtMoon1FCurScript`](events.md#s-wMtMoon1FCurScript) | `$D606` | 1 | [events](events.md) | RL |
+| <a id="s-wMtMoonB2FCurScript"></a>[`wMtMoonB2FCurScript`](events.md#s-wMtMoonB2FCurScript) | `$D607` | 1 | [events](events.md) | RL |
+| <a id="s-wMuseum1FCurScript"></a>[`wMuseum1FCurScript`](events.md#s-wMuseum1FCurScript) | `$D619` | 1 | [events](events.md) | RL |
+| <a id="s-wMusicTempo"></a>[`wMusicTempo`](audio.md#s-wMusicTempo) | `$C0E8` | 2 | [audio](audio.md) | RL |
+| <a id="s-wMusicWaveInstrument"></a>[`wMusicWaveInstrument`](audio.md#s-wMusicWaveInstrument) | `$C0E6` | 1 | [audio](audio.md) | RL |
+| <a id="s-wMuteAudioAndPauseMusic"></a>[`wMuteAudioAndPauseMusic`](audio.md#s-wMuteAudioAndPauseMusic) | `$C002` | 1 | [audio](audio.md) | RL |
+| <a id="s-wNameBuffer"></a>[`wNameBuffer`](battle.md#s-wNameBuffer) | `$CD6D` | 4 | [battle](battle.md) | RL |
+| <a id="s-wNamedObjectIndex"></a>[`wNamedObjectIndex`](scratch.md#s-wNamedObjectIndex) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNameListIndex"></a>[`wNameListIndex`](scratch.md#s-wNameListIndex) | `$D0B5` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNameListType"></a>[`wNameListType`](scratch.md#s-wNameListType) | `$D0B6` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNameOfPlayerMonToBeTraded"></a>[`wNameOfPlayerMonToBeTraded`](scratch.md#s-wNameOfPlayerMonToBeTraded) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNamingScreenLetter"></a>[`wNamingScreenLetter`](battle.md#s-wNamingScreenLetter) | `$CEED` | 2 | [battle](battle.md) | RL |
+| <a id="s-wNamingScreenNameLength"></a>[`wNamingScreenNameLength`](scratch.md#s-wNamingScreenNameLength) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNamingScreenSubmitName"></a>[`wNamingScreenSubmitName`](scratch.md#s-wNamingScreenSubmitName) | `$CEEA` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNamingScreenType"></a>[`wNamingScreenType`](scratch.md#s-wNamingScreenType) | `$D07D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNewSlotMachineBallTile"></a>[`wNewSlotMachineBallTile`](scratch.md#s-wNewSlotMachineBallTile) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNewSoundID"></a>[`wNewSoundID`](audio.md#s-wNewSoundID) | `$C0EE` | 1 | [audio](audio.md) | RL |
+| <a id="s-wNewTileBlockID"></a>[`wNewTileBlockID`](scratch.md#s-wNewTileBlockID) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNextSafariZoneGateScript"></a>[`wNextSafariZoneGateScript`](scratch.md#s-wNextSafariZoneGateScript) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNormalMaxPPList"></a>[`wNormalMaxPPList`](scratch.md#s-wNormalMaxPPList) | `$CD78` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wNorthConnectedMap"></a>[`wNorthConnectedMap`](overworld.md#s-wNorthConnectedMap) | `$D371` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectedMapViewPointer"></a>[`wNorthConnectedMapViewPointer`](overworld.md#s-wNorthConnectedMapViewPointer) | `$D37A` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectedMapWidth"></a>[`wNorthConnectedMapWidth`](overworld.md#s-wNorthConnectedMapWidth) | `$D377` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectedMapXAlignment"></a>[`wNorthConnectedMapXAlignment`](overworld.md#s-wNorthConnectedMapXAlignment) | `$D379` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectedMapYAlignment"></a>[`wNorthConnectedMapYAlignment`](overworld.md#s-wNorthConnectedMapYAlignment) | `$D378` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectionHeader"></a>[`wNorthConnectionHeader`](overworld.md#s-wNorthConnectionHeader) | `$D371` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectionStripDest"></a>[`wNorthConnectionStripDest`](overworld.md#s-wNorthConnectionStripDest) | `$D374` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectionStripLength"></a>[`wNorthConnectionStripLength`](overworld.md#s-wNorthConnectionStripLength) | `$D376` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNorthConnectionStripSrc"></a>[`wNorthConnectionStripSrc`](overworld.md#s-wNorthConnectionStripSrc) | `$D372` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wNPCMovementDirections"></a>[`wNPCMovementDirections`](battle.md#s-wNPCMovementDirections) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wNPCMovementDirections2"></a>[`wNPCMovementDirections2`](scratch.md#s-wNPCMovementDirections2) | `$CC97` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wNPCMovementDirections2Index"></a>[`wNPCMovementDirections2Index`](bag.md#s-wNPCMovementDirections2Index) | `$CD37` | 1 | [bag](bag.md) | RL |
+| <a id="s-wNPCMovementScriptBank"></a>[`wNPCMovementScriptBank`](events.md#s-wNPCMovementScriptBank) | `$CC58` | 3 | [events](events.md) | RL |
+| <a id="s-wNPCMovementScriptFunctionNum"></a>[`wNPCMovementScriptFunctionNum`](events.md#s-wNPCMovementScriptFunctionNum) | `$CF10` | 1 | [events](events.md) | RL |
+| <a id="s-wNPCMovementScriptPointerTableNum"></a>[`wNPCMovementScriptPointerTableNum`](events.md#s-wNPCMovementScriptPointerTableNum) | `$CC57` | 1 | [events](events.md) | RL |
+| <a id="s-wNPCMovementScriptSpriteOffset"></a>[`wNPCMovementScriptSpriteOffset`](events.md#s-wNPCMovementScriptSpriteOffset) | `$CF17` | 1 | [events](events.md) | RL |
+| <a id="s-wNPCNumScriptedSteps"></a>[`wNPCNumScriptedSteps`](scratch.md#s-wNPCNumScriptedSteps) | `$CF0F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumBagItems"></a>[`wNumBagItems`](bag.md#s-wNumBagItems) | `$D31D` | 1 | [bag](bag.md) | RLI |
+| <a id="s-wNumberOfNoRandomBattleStepsLeft"></a>[`wNumberOfNoRandomBattleStepsLeft`](scratch.md#s-wNumberOfNoRandomBattleStepsLeft) | `$D13C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumberOfWarps"></a>[`wNumberOfWarps`](overworld.md#s-wNumberOfWarps) | `$D3AE` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wNumBoxItems"></a>[`wNumBoxItems`](bag.md#s-wNumBoxItems) | `$D53A` | 1 | [bag](bag.md) | RLI |
+| <a id="s-wNumCreditsMonsDisplayed"></a>[`wNumCreditsMonsDisplayed`](scratch.md#s-wNumCreditsMonsDisplayed) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumFallingObjects"></a>[`wNumFallingObjects`](scratch.md#s-wNumFallingObjects) | `$D08B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumFBTiles"></a>[`wNumFBTiles`](scratch.md#s-wNumFBTiles) | `$D089` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumFieldMoves"></a>[`wNumFieldMoves`](events.md#s-wNumFieldMoves) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wNumHoFTeams"></a>[`wNumHoFTeams`](player.md#s-wNumHoFTeams) | `$D5A2` | 1 | [player](player.md) | RL |
+| <a id="s-wNumMovesMinusOne"></a>[`wNumMovesMinusOne`](scratch.md#s-wNumMovesMinusOne) | `$CD6C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumRunAttempts"></a>[`wNumRunAttempts`](battle.md#s-wNumRunAttempts) | `$D120` | 1 | [battle](battle.md) | RL |
+| <a id="s-wNumSafariBalls"></a>[`wNumSafariBalls`](bag.md#s-wNumSafariBalls) | `$DA47` | 1 | [bag](bag.md) | RL |
+| <a id="s-wNumSetBits"></a>[`wNumSetBits`](scratch.md#s-wNumSetBits) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumShakes"></a>[`wNumShakes`](scratch.md#s-wNumShakes) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumShootingBalls"></a>[`wNumShootingBalls`](scratch.md#s-wNumShootingBalls) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wNumSigns"></a>[`wNumSigns`](overworld.md#s-wNumSigns) | `$D4B0` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wNumSprites"></a>[`wNumSprites`](sprites.md#s-wNumSprites) | `$D4E1` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wNumStepsToTake"></a>[`wNumStepsToTake`](overworld.md#s-wNumStepsToTake) | `$CCA1` | 49 | [overworld](overworld.md) | RL |
+| <a id="s-wOaksAideRewardItemName"></a>[`wOaksAideRewardItemName`](battle.md#s-wOaksAideRewardItemName) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wOaksLabCurScript"></a>[`wOaksLabCurScript`](events.md#s-wOaksLabCurScript) | `$D5F0` | 1 | [events](events.md) | RL |
+| <a id="s-wOakWalkedToPlayer"></a>[`wOakWalkedToPlayer`](scratch.md#s-wOakWalkedToPlayer) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOAMBaseTile"></a>[`wOAMBaseTile`](scratch.md#s-wOAMBaseTile) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wObjectDataPointerTemp"></a>[`wObjectDataPointerTemp`](overworld.md#s-wObjectDataPointerTemp) | `$D3A9` | 4 | [overworld](overworld.md) | RL |
+| <a id="s-wObjectToHide"></a>[`wObjectToHide`](scratch.md#s-wObjectToHide) | `$D079` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wObjectToShow"></a>[`wObjectToShow`](scratch.md#s-wObjectToShow) | `$D07A` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wObtainedBadges"></a>[`wObtainedBadges`](player.md#s-wObtainedBadges) | `$D356` | 1 | [player](player.md) | RLI |
+| <a id="s-wObtainedHiddenCoinsFlags"></a>[`wObtainedHiddenCoinsFlags`](events.md#s-wObtainedHiddenCoinsFlags) | `$D6FE` | 2 | [events](events.md) | RL |
+| <a id="s-wObtainedHiddenItemsFlags"></a>[`wObtainedHiddenItemsFlags`](events.md#s-wObtainedHiddenItemsFlags) | `$D6F0` | 14 | [events](events.md) | RL |
+| <a id="s-wOnCGB"></a>[`wOnCGB`](scratch.md#s-wOnCGB) | `$CF1A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOnSGB"></a>[`wOnSGB`](scratch.md#s-wOnSGB) | `$CF1B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOpponentAfterWrongAnswer"></a>[`wOpponentAfterWrongAnswer`](events.md#s-wOpponentAfterWrongAnswer) | `$DA38` | 1 | [events](events.md) | RL |
+| <a id="s-wOptions"></a>[`wOptions`](player.md#s-wOptions) | `$D355` | 1 | [player](player.md) | RL |
+| <a id="s-wOptionsBattleAnimCursorX"></a>[`wOptionsBattleAnimCursorX`](scratch.md#s-wOptionsBattleAnimCursorX) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOptionsBattleStyleCursorX"></a>[`wOptionsBattleStyleCursorX`](scratch.md#s-wOptionsBattleStyleCursorX) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOptionsCancelCursorX"></a>[`wOptionsCancelCursorX`](player.md#s-wOptionsCancelCursorX) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wOptionsInitialized"></a>[`wOptionsInitialized`](scratch.md#s-wOptionsInitialized) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOptionsTextSpeedCursorX"></a>[`wOptionsTextSpeedCursorX`](scratch.md#s-wOptionsTextSpeedCursorX) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOutOfBattleBlackout"></a>[`wOutOfBattleBlackout`](scratch.md#s-wOutOfBattleBlackout) | `$D12D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOutwardSpiralCurrentDirection"></a>[`wOutwardSpiralCurrentDirection`](scratch.md#s-wOutwardSpiralCurrentDirection) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOutwardSpiralTileMapPointer"></a>[`wOutwardSpiralTileMapPointer`](scratch.md#s-wOutwardSpiralTileMapPointer) | `$D09A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wOverrideSimulatedJoypadStatesMask"></a>[`wOverrideSimulatedJoypadStatesMask`](system.md#s-wOverrideSimulatedJoypadStatesMask) | `$CD3B` | 2 | [system](system.md) | RL |
+| <a id="s-wOverworldMap"></a>[`wOverworldMap`](overworld.md#s-wOverworldMap) | `$C6E8` | 1300 | [overworld](overworld.md) | RL |
+| <a id="s-wOverworldMapEnd"></a>[`wOverworldMapEnd`](overworld.md#s-wOverworldMapEnd) | `$CBFC` | — | [overworld](overworld.md) | RL |
+| <a id="s-wPalletTownCurScript"></a>[`wPalletTownCurScript`](events.md#s-wPalletTownCurScript) | `$D5F1` | 2 | [events](events.md) | RL |
+| <a id="s-wPalPacket"></a>[`wPalPacket`](graphics.md#s-wPalPacket) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wParentMenuItem"></a>[`wParentMenuItem`](battle.md#s-wParentMenuItem) | `$CCD3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPartyAndBillsPCSavedMenuItem"></a>[`wPartyAndBillsPCSavedMenuItem`](party.md#s-wPartyAndBillsPCSavedMenuItem) | `$CC2B` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyCount"></a>[`wPartyCount`](party.md#s-wPartyCount) | `$D163` | 1 | [party](party.md) | RLI |
+| <a id="s-wPartyDataEnd"></a>[`wPartyDataEnd`](party.md#s-wPartyDataEnd) | `$D2F7` | — | [party](party.md) | RL |
+| <a id="s-wPartyDataStart"></a>[`wPartyDataStart`](party.md#s-wPartyDataStart) | `$D163` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyFoughtCurrentEnemyFlags"></a>[`wPartyFoughtCurrentEnemyFlags`](party.md#s-wPartyFoughtCurrentEnemyFlags) | `$CCF5` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyGainExpFlags"></a>[`wPartyGainExpFlags`](party.md#s-wPartyGainExpFlags) | `$D058` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyMenuAnimMonEnabled"></a>[`wPartyMenuAnimMonEnabled`](scratch.md#s-wPartyMenuAnimMonEnabled) | `$D09B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPartyMenuBlkPacket"></a>[`wPartyMenuBlkPacket`](graphics.md#s-wPartyMenuBlkPacket) | `$CF2E` | 29 | [graphics](graphics.md) | RL |
+| <a id="s-wPartyMenuHPBarColors"></a>[`wPartyMenuHPBarColors`](scratch.md#s-wPartyMenuHPBarColors) | `$CF1F` | 6 | [scratch](scratch.md) | RL |
+| <a id="s-wPartyMenuTypeOrMessageID"></a>[`wPartyMenuTypeOrMessageID`](scratch.md#s-wPartyMenuTypeOrMessageID) | `$D07D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPartyMon1"></a>[`wPartyMon1`](party.md#s-wPartyMon1) | `$D16B` | 1 | [party](party.md) | RLI |
+| <a id="s-wPartyMon1Attack"></a>[`wPartyMon1Attack`](party.md#s-wPartyMon1Attack) | `$D18F` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1AttackExp"></a>[`wPartyMon1AttackExp`](party.md#s-wPartyMon1AttackExp) | `$D17E` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1BoxLevel"></a>[`wPartyMon1BoxLevel`](party.md#s-wPartyMon1BoxLevel) | `$D16E` | 1 | [party](party.md) | L |
+| <a id="s-wPartyMon1CatchRate"></a>[`wPartyMon1CatchRate`](party.md#s-wPartyMon1CatchRate) | `$D172` | 1 | [party](party.md) | L |
+| <a id="s-wPartyMon1Defense"></a>[`wPartyMon1Defense`](party.md#s-wPartyMon1Defense) | `$D191` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1DefenseExp"></a>[`wPartyMon1DefenseExp`](party.md#s-wPartyMon1DefenseExp) | `$D180` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1DVs"></a>[`wPartyMon1DVs`](party.md#s-wPartyMon1DVs) | `$D186` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1Exp"></a>[`wPartyMon1Exp`](party.md#s-wPartyMon1Exp) | `$D179` | 3 | [party](party.md) | L |
+| <a id="s-wPartyMon1HP"></a>[`wPartyMon1HP`](party.md#s-wPartyMon1HP) | `$D16C` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1HPExp"></a>[`wPartyMon1HPExp`](party.md#s-wPartyMon1HPExp) | `$D17C` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1Level"></a>[`wPartyMon1Level`](party.md#s-wPartyMon1Level) | `$D18C` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyMon1MaxHP"></a>[`wPartyMon1MaxHP`](party.md#s-wPartyMon1MaxHP) | `$D18D` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Moves"></a>[`wPartyMon1Moves`](party.md#s-wPartyMon1Moves) | `$D173` | 4 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Nick"></a>[`wPartyMon1Nick`](party.md#s-wPartyMon1Nick) | `$D2B5` | 11 | [party](party.md) | RL |
+| <a id="s-wPartyMon1OT"></a>[`wPartyMon1OT`](party.md#s-wPartyMon1OT) | `$D273` | 11 | [party](party.md) | RL |
+| <a id="s-wPartyMon1OTID"></a>[`wPartyMon1OTID`](party.md#s-wPartyMon1OTID) | `$D177` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1PP"></a>[`wPartyMon1PP`](party.md#s-wPartyMon1PP) | `$D188` | 4 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Special"></a>[`wPartyMon1Special`](party.md#s-wPartyMon1Special) | `$D195` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1SpecialExp"></a>[`wPartyMon1SpecialExp`](party.md#s-wPartyMon1SpecialExp) | `$D184` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1Species"></a>[`wPartyMon1Species`](party.md#s-wPartyMon1Species) | `$D16B` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Speed"></a>[`wPartyMon1Speed`](party.md#s-wPartyMon1Speed) | `$D193` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1SpeedExp"></a>[`wPartyMon1SpeedExp`](party.md#s-wPartyMon1SpeedExp) | `$D182` | 2 | [party](party.md) | L |
+| <a id="s-wPartyMon1Stats"></a>[`wPartyMon1Stats`](party.md#s-wPartyMon1Stats) | `$D18D` | 2 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Status"></a>[`wPartyMon1Status`](party.md#s-wPartyMon1Status) | `$D16F` | 1 | [party](party.md) | RL |
+| <a id="s-wPartyMon1Type"></a>[`wPartyMon1Type`](party.md#s-wPartyMon1Type) | `$D170` | 1 | [party](party.md) | L |
+| <a id="s-wPartyMon1Type1"></a>[`wPartyMon1Type1`](party.md#s-wPartyMon1Type1) | `$D170` | 1 | [party](party.md) | L |
+| <a id="s-wPartyMon1Type2"></a>[`wPartyMon1Type2`](party.md#s-wPartyMon1Type2) | `$D171` | 1 | [party](party.md) | L |
+| <a id="s-wPartyMonNicks"></a>[`wPartyMonNicks`](party.md#s-wPartyMonNicks) | `$D2B5` | 11 | [party](party.md) | RLI |
+| <a id="s-wPartyMonNicksEnd"></a>[`wPartyMonNicksEnd`](pokedex.md#s-wPartyMonNicksEnd) | `$D2F7` | — | [pokedex](pokedex.md) | RL |
+| <a id="s-wPartyMonOT"></a>[`wPartyMonOT`](party.md#s-wPartyMonOT) | `$D273` | 11 | [party](party.md) | RLI |
+| <a id="s-wPartyMons"></a>[`wPartyMons`](party.md#s-wPartyMons) | `$D16B` | 1 | [party](party.md) | RLI |
+| <a id="s-wPartySpecies"></a>[`wPartySpecies`](party.md#s-wPartySpecies) | `$D164` | 7 | [party](party.md) | RLI |
+| <a id="s-wPayDayMoney"></a>[`wPayDayMoney`](battle.md#s-wPayDayMoney) | `$CD6D` | 4 | [battle](battle.md) | RL |
+| <a id="s-wPayoutCoins"></a>[`wPayoutCoins`](bag.md#s-wPayoutCoins) | `$CD4A` | 2 | [bag](bag.md) | RL |
+| <a id="s-wPewterCityCurScript"></a>[`wPewterCityCurScript`](events.md#s-wPewterCityCurScript) | `$D5F7` | 1 | [events](events.md) | RL |
+| <a id="s-wPewterGymCurScript"></a>[`wPewterGymCurScript`](events.md#s-wPewterGymCurScript) | `$D5FC` | 1 | [events](events.md) | RL |
+| <a id="s-wPlayerBattleStatus1"></a>[`wPlayerBattleStatus1`](battle.md#s-wPlayerBattleStatus1) | `$D062` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerBattleStatus2"></a>[`wPlayerBattleStatus2`](battle.md#s-wPlayerBattleStatus2) | `$D063` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerBattleStatus3"></a>[`wPlayerBattleStatus3`](battle.md#s-wPlayerBattleStatus3) | `$D064` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerBideAccumulatedDamage"></a>[`wPlayerBideAccumulatedDamage`](scratch.md#s-wPlayerBideAccumulatedDamage) | `$D074` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerCharacterOAMTile"></a>[`wPlayerCharacterOAMTile`](scratch.md#s-wPlayerCharacterOAMTile) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerCoins"></a>[`wPlayerCoins`](player.md#s-wPlayerCoins) | `$D5A4` | 2 | [player](player.md) | RL |
+| <a id="s-wPlayerConfusedCounter"></a>[`wPlayerConfusedCounter`](scratch.md#s-wPlayerConfusedCounter) | `$D06B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerDirection"></a>[`wPlayerDirection`](overworld.md#s-wPlayerDirection) | `$D52A` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wPlayerDisabledMove"></a>[`wPlayerDisabledMove`](battle.md#s-wPlayerDisabledMove) | `$D06D` | 2 | [battle](battle.md) | RL |
+| <a id="s-wPlayerDisabledMoveNumber"></a>[`wPlayerDisabledMoveNumber`](battle.md#s-wPlayerDisabledMoveNumber) | `$CCEE` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerHPBarColor"></a>[`wPlayerHPBarColor`](scratch.md#s-wPlayerHPBarColor) | `$CF1D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerID"></a>[`wPlayerID`](player.md#s-wPlayerID) | `$D359` | 2 | [player](player.md) | RL |
+| <a id="s-wPlayerJumpingYScreenCoordsIndex"></a>[`wPlayerJumpingYScreenCoordsIndex`](overworld.md#s-wPlayerJumpingYScreenCoordsIndex) | `$D714` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wPlayerLastStopDirection"></a>[`wPlayerLastStopDirection`](overworld.md#s-wPlayerLastStopDirection) | `$D529` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wPlayerMonAccuracyMod"></a>[`wPlayerMonAccuracyMod`](battle.md#s-wPlayerMonAccuracyMod) | `$CD1E` | 1 | [battle](battle.md) | R |
+| <a id="s-wPlayerMonAttackMod"></a>[`wPlayerMonAttackMod`](battle.md#s-wPlayerMonAttackMod) | `$CD1A` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonDefenseMod"></a>[`wPlayerMonDefenseMod`](battle.md#s-wPlayerMonDefenseMod) | `$CD1B` | 1 | [battle](battle.md) | L |
+| <a id="s-wPlayerMonEvasionMod"></a>[`wPlayerMonEvasionMod`](battle.md#s-wPlayerMonEvasionMod) | `$CD1F` | 3 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMoney"></a>[`wPlayerMoney`](player.md#s-wPlayerMoney) | `$D347` | 3 | [player](player.md) | RLI |
+| <a id="s-wPlayerMonMinimized"></a>[`wPlayerMonMinimized`](battle.md#s-wPlayerMonMinimized) | `$CCF7` | 14 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonNumber"></a>[`wPlayerMonNumber`](battle.md#s-wPlayerMonNumber) | `$CC2F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonSpecialMod"></a>[`wPlayerMonSpecialMod`](battle.md#s-wPlayerMonSpecialMod) | `$CD1D` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonSpeedMod"></a>[`wPlayerMonSpeedMod`](battle.md#s-wPlayerMonSpeedMod) | `$CD1C` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonStatMods"></a>[`wPlayerMonStatMods`](battle.md#s-wPlayerMonStatMods) | `$CD1A` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonStatModsEnd"></a>[`wPlayerMonStatModsEnd`](battle.md#s-wPlayerMonStatModsEnd) | `$CD22` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedAttack"></a>[`wPlayerMonUnmodifiedAttack`](battle.md#s-wPlayerMonUnmodifiedAttack) | `$CD12` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedDefense"></a>[`wPlayerMonUnmodifiedDefense`](battle.md#s-wPlayerMonUnmodifiedDefense) | `$CD14` | 2 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedLevel"></a>[`wPlayerMonUnmodifiedLevel`](battle.md#s-wPlayerMonUnmodifiedLevel) | `$CD0F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedMaxHP"></a>[`wPlayerMonUnmodifiedMaxHP`](battle.md#s-wPlayerMonUnmodifiedMaxHP) | `$CD10` | 2 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedSpecial"></a>[`wPlayerMonUnmodifiedSpecial`](battle.md#s-wPlayerMonUnmodifiedSpecial) | `$CD18` | 2 | [battle](battle.md) | RL |
+| <a id="s-wPlayerMonUnmodifiedSpeed"></a>[`wPlayerMonUnmodifiedSpeed`](battle.md#s-wPlayerMonUnmodifiedSpeed) | `$CD16` | 2 | [battle](battle.md) | L |
+| <a id="s-wPlayerMoveAccuracy"></a>[`wPlayerMoveAccuracy`](scratch.md#s-wPlayerMoveAccuracy) | `$CFD6` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMoveEffect"></a>[`wPlayerMoveEffect`](scratch.md#s-wPlayerMoveEffect) | `$CFD3` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMoveListIndex"></a>[`wPlayerMoveListIndex`](scratch.md#s-wPlayerMoveListIndex) | `$CC2E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMoveMaxPP"></a>[`wPlayerMoveMaxPP`](scratch.md#s-wPlayerMoveMaxPP) | `$CFD7` | 1 | [scratch](scratch.md) | L |
+| <a id="s-wPlayerMoveNum"></a>[`wPlayerMoveNum`](scratch.md#s-wPlayerMoveNum) | `$CFD2` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMovePower"></a>[`wPlayerMovePower`](scratch.md#s-wPlayerMovePower) | `$CFD4` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMoveType"></a>[`wPlayerMoveType`](scratch.md#s-wPlayerMoveType) | `$CFD5` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerMovingDirection"></a>[`wPlayerMovingDirection`](overworld.md#s-wPlayerMovingDirection) | `$D528` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wPlayerName"></a>[`wPlayerName`](player.md#s-wPlayerName) | `$D158` | 11 | [player](player.md) | RLI |
+| <a id="s-wPlayerNumAttacksLeft"></a>[`wPlayerNumAttacksLeft`](battle.md#s-wPlayerNumAttacksLeft) | `$D06A` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerNumHits"></a>[`wPlayerNumHits`](scratch.md#s-wPlayerNumHits) | `$D074` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSelectedMove"></a>[`wPlayerSelectedMove`](battle.md#s-wPlayerSelectedMove) | `$CCDC` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerSpinInPlaceAnimFrameDelay"></a>[`wPlayerSpinInPlaceAnimFrameDelay`](scratch.md#s-wPlayerSpinInPlaceAnimFrameDelay) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSpinInPlaceAnimFrameDelayDelta"></a>[`wPlayerSpinInPlaceAnimFrameDelayDelta`](scratch.md#s-wPlayerSpinInPlaceAnimFrameDelayDelta) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSpinInPlaceAnimFrameDelayEndValue"></a>[`wPlayerSpinInPlaceAnimFrameDelayEndValue`](scratch.md#s-wPlayerSpinInPlaceAnimFrameDelayEndValue) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSpinInPlaceAnimSoundID"></a>[`wPlayerSpinInPlaceAnimSoundID`](player.md#s-wPlayerSpinInPlaceAnimSoundID) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wPlayerSpinWhileMovingUpOrDownAnimDeltaY"></a>[`wPlayerSpinWhileMovingUpOrDownAnimDeltaY`](scratch.md#s-wPlayerSpinWhileMovingUpOrDownAnimDeltaY) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSpinWhileMovingUpOrDownAnimFrameDelay"></a>[`wPlayerSpinWhileMovingUpOrDownAnimFrameDelay`](scratch.md#s-wPlayerSpinWhileMovingUpOrDownAnimFrameDelay) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSpinWhileMovingUpOrDownAnimMaxY"></a>[`wPlayerSpinWhileMovingUpOrDownAnimMaxY`](scratch.md#s-wPlayerSpinWhileMovingUpOrDownAnimMaxY) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerStarter"></a>[`wPlayerStarter`](events.md#s-wPlayerStarter) | `$D717` | 1 | [events](events.md) | RL |
+| <a id="s-wPlayerStatsToDouble"></a>[`wPlayerStatsToDouble`](scratch.md#s-wPlayerStatsToDouble) | `$D060` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerStatsToHalve"></a>[`wPlayerStatsToHalve`](scratch.md#s-wPlayerStatsToHalve) | `$D061` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerSubstituteHP"></a>[`wPlayerSubstituteHP`](battle.md#s-wPlayerSubstituteHP) | `$CCD7` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayerToxicCounter"></a>[`wPlayerToxicCounter`](scratch.md#s-wPlayerToxicCounter) | `$D06C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPlayerUsedMove"></a>[`wPlayerUsedMove`](battle.md#s-wPlayerUsedMove) | `$CCF1` | 1 | [battle](battle.md) | RL |
+| <a id="s-wPlayTimeFrames"></a>[`wPlayTimeFrames`](player.md#s-wPlayTimeFrames) | `$DA45` | 1 | [player](player.md) | RL |
+| <a id="s-wPlayTimeHours"></a>[`wPlayTimeHours`](player.md#s-wPlayTimeHours) | `$DA41` | 1 | [player](player.md) | RL |
+| <a id="s-wPlayTimeMaxed"></a>[`wPlayTimeMaxed`](player.md#s-wPlayTimeMaxed) | `$DA42` | 1 | [player](player.md) | RL |
+| <a id="s-wPlayTimeMinutes"></a>[`wPlayTimeMinutes`](player.md#s-wPlayTimeMinutes) | `$DA43` | 1 | [player](player.md) | RL |
+| <a id="s-wPlayTimeSeconds"></a>[`wPlayTimeSeconds`](player.md#s-wPlayTimeSeconds) | `$DA44` | 1 | [player](player.md) | RL |
+| <a id="s-wPokeBallAnimData"></a>[`wPokeBallAnimData`](scratch.md#s-wPokeBallAnimData) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPokeBallCaptureCalcTemp"></a>[`wPokeBallCaptureCalcTemp`](scratch.md#s-wPokeBallCaptureCalcTemp) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPokedexNum"></a>[`wPokedexNum`](scratch.md#s-wPokedexNum) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPokedexOwned"></a>[`wPokedexOwned`](pokedex.md#s-wPokedexOwned) | `$D2F7` | 19 | [pokedex](pokedex.md) | RLI |
+| <a id="s-wPokedexOwnedEnd"></a>[`wPokedexOwnedEnd`](pokedex.md#s-wPokedexOwnedEnd) | `$D30A` | 19 | [pokedex](pokedex.md) | RL |
+| <a id="s-wPokedexSeen"></a>[`wPokedexSeen`](pokedex.md#s-wPokedexSeen) | `$D30A` | 19 | [pokedex](pokedex.md) | RLI |
+| <a id="s-wPokedexSeenEnd"></a>[`wPokedexSeenEnd`](bag.md#s-wPokedexSeenEnd) | `$D31D` | 1 | [bag](bag.md) | RL |
+| <a id="s-wPokemonMansion1FCurScript"></a>[`wPokemonMansion1FCurScript`](events.md#s-wPokemonMansion1FCurScript) | `$D63A` | 2 | [events](events.md) | RL |
+| <a id="s-wPokemonMansionB1FCurScript"></a>[`wPokemonMansionB1FCurScript`](events.md#s-wPokemonMansionB1FCurScript) | `$D63E` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower2FCurScript"></a>[`wPokemonTower2FCurScript`](events.md#s-wPokemonTower2FCurScript) | `$D62B` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower3FCurScript"></a>[`wPokemonTower3FCurScript`](events.md#s-wPokemonTower3FCurScript) | `$D62C` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower4FCurScript"></a>[`wPokemonTower4FCurScript`](events.md#s-wPokemonTower4FCurScript) | `$D62D` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower5FCurScript"></a>[`wPokemonTower5FCurScript`](events.md#s-wPokemonTower5FCurScript) | `$D62E` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower6FCurScript"></a>[`wPokemonTower6FCurScript`](events.md#s-wPokemonTower6FCurScript) | `$D62F` | 1 | [events](events.md) | RL |
+| <a id="s-wPokemonTower7FCurScript"></a>[`wPokemonTower7FCurScript`](events.md#s-wPokemonTower7FCurScript) | `$D630` | 1 | [events](events.md) | RL |
+| <a id="s-wPowerPlantCurScript"></a>[`wPowerPlantCurScript`](events.md#s-wPowerPlantCurScript) | `$D663` | 2 | [events](events.md) | RL |
+| <a id="s-wPPRestoreItem"></a>[`wPPRestoreItem`](scratch.md#s-wPPRestoreItem) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPPUpCountAndMaxPP"></a>[`wPPUpCountAndMaxPP`](scratch.md#s-wPPUpCountAndMaxPP) | `$CD73` | 5 | [scratch](scratch.md) | L |
+| <a id="s-wPredefBank"></a>[`wPredefBank`](system.md#s-wPredefBank) | `$D0B7` | 1 | [system](system.md) | RL |
+| <a id="s-wPredefBC"></a>[`wPredefBC`](system.md#s-wPredefBC) | `$CC53` | 2 | [system](system.md) | RL |
+| <a id="s-wPredefDE"></a>[`wPredefDE`](system.md#s-wPredefDE) | `$CC51` | 2 | [system](system.md) | RL |
+| <a id="s-wPredefHL"></a>[`wPredefHL`](system.md#s-wPredefHL) | `$CC4F` | 2 | [system](system.md) | RL |
+| <a id="s-wPredefID"></a>[`wPredefID`](system.md#s-wPredefID) | `$CC4E` | 1 | [system](system.md) | RL |
+| <a id="s-wPredefParentBank"></a>[`wPredefParentBank`](system.md#s-wPredefParentBank) | `$CF12` | 1 | [system](system.md) | RL |
+| <a id="s-wPriceTemp"></a>[`wPriceTemp`](scratch.md#s-wPriceTemp) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPrintItemPrices"></a>[`wPrintItemPrices`](scratch.md#s-wPrintItemPrices) | `$CF93` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wPrize1"></a>[`wPrize1`](bag.md#s-wPrize1) | `$D13D` | 1 | [bag](bag.md) | RL |
+| <a id="s-wPrize1Price"></a>[`wPrize1Price`](bag.md#s-wPrize1Price) | `$D141` | 2 | [bag](bag.md) | RL |
+| <a id="s-wPseudoItemID"></a>[`wPseudoItemID`](bag.md#s-wPseudoItemID) | `$D152` | 1 | [bag](bag.md) | RL |
+| <a id="s-wRedrawRowOrColumnSrcTiles"></a>[`wRedrawRowOrColumnSrcTiles`](overworld.md#s-wRedrawRowOrColumnSrcTiles) | `$CBFC` | 40 | [overworld](overworld.md) | RL |
+| <a id="s-wRedsHouse2FCurScript"></a>[`wRedsHouse2FCurScript`](events.md#s-wRedsHouse2FCurScript) | `$D60C` | 1 | [events](events.md) | RL |
+| <a id="s-wRemoveMonFromBox"></a>[`wRemoveMonFromBox`](scratch.md#s-wRemoveMonFromBox) | `$CF95` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRepelRemainingSteps"></a>[`wRepelRemainingSteps`](scratch.md#s-wRepelRemainingSteps) | `$D0DB` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRightGBMonSpecies"></a>[`wRightGBMonSpecies`](scratch.md#s-wRightGBMonSpecies) | `$CD5F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRivalName"></a>[`wRivalName`](player.md#s-wRivalName) | `$D34A` | 11 | [player](player.md) | RLI |
+| <a id="s-wRivalStarter"></a>[`wRivalStarter`](events.md#s-wRivalStarter) | `$D715` | 2 | [events](events.md) | RL |
+| <a id="s-wRivalStarterBallSpriteIndex"></a>[`wRivalStarterBallSpriteIndex`](scratch.md#s-wRivalStarterBallSpriteIndex) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRivalStarterTemp"></a>[`wRivalStarterTemp`](scratch.md#s-wRivalStarterTemp) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRLEByteCount"></a>[`wRLEByteCount`](scratch.md#s-wRLEByteCount) | `$CCD2` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRocketHideoutB1FCurScript"></a>[`wRocketHideoutB1FCurScript`](events.md#s-wRocketHideoutB1FCurScript) | `$D631` | 1 | [events](events.md) | RL |
+| <a id="s-wRockTunnel1FCurScript"></a>[`wRockTunnel1FCurScript`](events.md#s-wRockTunnel1FCurScript) | `$D621` | 2 | [events](events.md) | RL |
+| <a id="s-wRockTunnelB1FCurScript"></a>[`wRockTunnelB1FCurScript`](events.md#s-wRockTunnelB1FCurScript) | `$D620` | 1 | [events](events.md) | RL |
+| <a id="s-wRodResponse"></a>[`wRodResponse`](scratch.md#s-wRodResponse) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wRoute10CurScript"></a>[`wRoute10CurScript`](events.md#s-wRoute10CurScript) | `$D605` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute11CurScript"></a>[`wRoute11CurScript`](events.md#s-wRoute11CurScript) | `$D623` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute12CurScript"></a>[`wRoute12CurScript`](events.md#s-wRoute12CurScript) | `$D624` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute13CurScript"></a>[`wRoute13CurScript`](events.md#s-wRoute13CurScript) | `$D61A` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute14CurScript"></a>[`wRoute14CurScript`](events.md#s-wRoute14CurScript) | `$D61B` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute15CurScript"></a>[`wRoute15CurScript`](events.md#s-wRoute15CurScript) | `$D625` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute16CurScript"></a>[`wRoute16CurScript`](events.md#s-wRoute16CurScript) | `$D626` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute16Gate1FCurScript"></a>[`wRoute16Gate1FCurScript`](events.md#s-wRoute16Gate1FCurScript) | `$D660` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute17CurScript"></a>[`wRoute17CurScript`](events.md#s-wRoute17CurScript) | `$D61C` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute18CurScript"></a>[`wRoute18CurScript`](events.md#s-wRoute18CurScript) | `$D627` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute18Gate1FCurScript"></a>[`wRoute18Gate1FCurScript`](events.md#s-wRoute18Gate1FCurScript) | `$D669` | 79 | [events](events.md) | RL |
+| <a id="s-wRoute19CurScript"></a>[`wRoute19CurScript`](events.md#s-wRoute19CurScript) | `$D61D` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute20CurScript"></a>[`wRoute20CurScript`](events.md#s-wRoute20CurScript) | `$D628` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute21CurScript"></a>[`wRoute21CurScript`](events.md#s-wRoute21CurScript) | `$D61E` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute22CurScript"></a>[`wRoute22CurScript`](events.md#s-wRoute22CurScript) | `$D60A` | 2 | [events](events.md) | RL |
+| <a id="s-wRoute22GateCurScript"></a>[`wRoute22GateCurScript`](events.md#s-wRoute22GateCurScript) | `$D60E` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute23CurScript"></a>[`wRoute23CurScript`](events.md#s-wRoute23CurScript) | `$D667` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute24CurScript"></a>[`wRoute24CurScript`](events.md#s-wRoute24CurScript) | `$D602` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute25CurScript"></a>[`wRoute25CurScript`](events.md#s-wRoute25CurScript) | `$D603` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute3CurScript"></a>[`wRoute3CurScript`](events.md#s-wRoute3CurScript) | `$D5F8` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute4CurScript"></a>[`wRoute4CurScript`](events.md#s-wRoute4CurScript) | `$D5F9` | 2 | [events](events.md) | RL |
+| <a id="s-wRoute5GateCurScript"></a>[`wRoute5GateCurScript`](events.md#s-wRoute5GateCurScript) | `$D662` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute6CurScript"></a>[`wRoute6CurScript`](events.md#s-wRoute6CurScript) | `$D600` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute6GateCurScript"></a>[`wRoute6GateCurScript`](events.md#s-wRoute6GateCurScript) | `$D636` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute7GateCurScript"></a>[`wRoute7GateCurScript`](events.md#s-wRoute7GateCurScript) | `$D663` | 2 | [events](events.md) | RL |
+| <a id="s-wRoute8CurScript"></a>[`wRoute8CurScript`](events.md#s-wRoute8CurScript) | `$D601` | 1 | [events](events.md) | RL |
+| <a id="s-wRoute8GateCurScript"></a>[`wRoute8GateCurScript`](events.md#s-wRoute8GateCurScript) | `$D637` | 2 | [events](events.md) | RL |
+| <a id="s-wRoute9CurScript"></a>[`wRoute9CurScript`](events.md#s-wRoute9CurScript) | `$D604` | 1 | [events](events.md) | RL |
+| <a id="s-wSafariBaitFactor"></a>[`wSafariBaitFactor`](battle.md#s-wSafariBaitFactor) | `$CCE9` | 2 | [battle](battle.md) | RL |
+| <a id="s-wSafariEscapeFactor"></a>[`wSafariEscapeFactor`](battle.md#s-wSafariEscapeFactor) | `$CCE8` | 1 | [battle](battle.md) | RL |
+| <a id="s-wSafariSteps"></a>[`wSafariSteps`](battle.md#s-wSafariSteps) | `$D70D` | 2 | [battle](battle.md) | RL |
+| <a id="s-wSafariZoneGameOver"></a>[`wSafariZoneGameOver`](battle.md#s-wSafariZoneGameOver) | `$DA46` | 1 | [battle](battle.md) | RL |
+| <a id="s-wSafariZoneGateCurScript"></a>[`wSafariZoneGateCurScript`](battle.md#s-wSafariZoneGateCurScript) | `$D61F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wSaffronGymCurScript"></a>[`wSaffronGymCurScript`](events.md#s-wSaffronGymCurScript) | `$D65C` | 2 | [events](events.md) | RL |
+| <a id="s-wSavedCoordIndex"></a>[`wSavedCoordIndex`](scratch.md#s-wSavedCoordIndex) | `$CF0D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedListScrollOffset"></a>[`wSavedListScrollOffset`](scratch.md#s-wSavedListScrollOffset) | `$D07E` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedNPCMovementDirections2Index"></a>[`wSavedNPCMovementDirections2Index`](scratch.md#s-wSavedNPCMovementDirections2Index) | `$D157` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedPlayerFacingDirection"></a>[`wSavedPlayerFacingDirection`](scratch.md#s-wSavedPlayerFacingDirection) | `$CD50` | 9 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedPlayerScreenY"></a>[`wSavedPlayerScreenY`](scratch.md#s-wSavedPlayerScreenY) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedSpriteImageIndex"></a>[`wSavedSpriteImageIndex`](events.md#s-wSavedSpriteImageIndex) | `$D5CD` | 1 | [events](events.md) | RL |
+| <a id="s-wSavedSpriteMapX"></a>[`wSavedSpriteMapX`](scratch.md#s-wSavedSpriteMapX) | `$D133` | 6 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedSpriteMapY"></a>[`wSavedSpriteMapY`](scratch.md#s-wSavedSpriteMapY) | `$D132` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedSpriteScreenX"></a>[`wSavedSpriteScreenX`](scratch.md#s-wSavedSpriteScreenX) | `$D131` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedSpriteScreenY"></a>[`wSavedSpriteScreenY`](scratch.md#s-wSavedSpriteScreenY) | `$D130` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedTileAnimations"></a>[`wSavedTileAnimations`](scratch.md#s-wSavedTileAnimations) | `$D0D4` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wSavedVolume"></a>[`wSavedVolume`](audio.md#s-wSavedVolume) | `$C005` | 1 | [audio](audio.md) | RL |
+| <a id="s-wSavedY"></a>[`wSavedY`](scratch.md#s-wSavedY) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSaveFileStatus"></a>[`wSaveFileStatus`](scratch.md#s-wSaveFileStatus) | `$D088` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wScriptedNPCWalkCounter"></a>[`wScriptedNPCWalkCounter`](events.md#s-wScriptedNPCWalkCounter) | `$CF18` | 2 | [events](events.md) | RL |
+| <a id="s-wSeafoamIslandsB3FCurScript"></a>[`wSeafoamIslandsB3FCurScript`](events.md#s-wSeafoamIslandsB3FCurScript) | `$D666` | 1 | [events](events.md) | RL |
+| <a id="s-wSeafoamIslandsB4FCurScript"></a>[`wSeafoamIslandsB4FCurScript`](events.md#s-wSeafoamIslandsB4FCurScript) | `$D668` | 1 | [events](events.md) | RL |
+| <a id="s-wSecondLockTrashCanIndex"></a>[`wSecondLockTrashCanIndex`](events.md#s-wSecondLockTrashCanIndex) | `$D744` | 3 | [events](events.md) | RL |
+| <a id="s-wSerialEnemyDataBlock"></a>[`wSerialEnemyDataBlock`](link.md#s-wSerialEnemyDataBlock) | `$D893` | 9 | [link](link.md) | RL |
+| <a id="s-wSerialEnemyMonsPatchList"></a>[`wSerialEnemyMonsPatchList`](link.md#s-wSerialEnemyMonsPatchList) | `$C5D0` | 280 | [link](link.md) | RL |
+| <a id="s-wSerialExchangeNybbleReceiveData"></a>[`wSerialExchangeNybbleReceiveData`](link.md#s-wSerialExchangeNybbleReceiveData) | `$CC3E` | 4 | [link](link.md) | RL |
+| <a id="s-wSerialExchangeNybbleSendData"></a>[`wSerialExchangeNybbleSendData`](link.md#s-wSerialExchangeNybbleSendData) | `$CC42` | 5 | [link](link.md) | RL |
+| <a id="s-wSerialExchangeNybbleTempReceiveData"></a>[`wSerialExchangeNybbleTempReceiveData`](link.md#s-wSerialExchangeNybbleTempReceiveData) | `$CC3D` | 1 | [link](link.md) | RL |
+| <a id="s-wSerialOtherGameboyRandomNumberListBlock"></a>[`wSerialOtherGameboyRandomNumberListBlock`](link.md#s-wSerialOtherGameboyRandomNumberListBlock) | `$CD81` | 360 | [link](link.md) | RL |
+| <a id="s-wSerialPartyMonsPatchList"></a>[`wSerialPartyMonsPatchList`](link.md#s-wSerialPartyMonsPatchList) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wSerialPlayerDataBlock"></a>[`wSerialPlayerDataBlock`](bag.md#s-wSerialPlayerDataBlock) | `$D152` | 1 | [bag](bag.md) | RL |
+| <a id="s-wSerialRandomNumberListBlock"></a>[`wSerialRandomNumberListBlock`](bag.md#s-wSerialRandomNumberListBlock) | `$D141` | 2 | [bag](bag.md) | RL |
+| <a id="s-wSerialSyncAndExchangeNybbleReceiveData"></a>[`wSerialSyncAndExchangeNybbleReceiveData`](link.md#s-wSerialSyncAndExchangeNybbleReceiveData) | `$CC3D` | 1 | [link](link.md) | RL |
+| <a id="s-wSfxHeaderPointer"></a>[`wSfxHeaderPointer`](audio.md#s-wSfxHeaderPointer) | `$C0EC` | 2 | [audio](audio.md) | RL |
+| <a id="s-wSfxTempo"></a>[`wSfxTempo`](audio.md#s-wSfxTempo) | `$C0EA` | 2 | [audio](audio.md) | RL |
+| <a id="s-wSfxWaveInstrument"></a>[`wSfxWaveInstrument`](audio.md#s-wSfxWaveInstrument) | `$C0E7` | 1 | [audio](audio.md) | RL |
+| <a id="s-wShadowOAM"></a>[`wShadowOAM`](sprites.md#s-wShadowOAM) | `$C300` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMBackup"></a>[`wShadowOAMBackup`](link.md#s-wShadowOAMBackup) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wShadowOAMBackupEnd"></a>[`wShadowOAMBackupEnd`](sprites.md#s-wShadowOAMBackupEnd) | `$C5A8` | 40 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMBackupSprite00"></a>[`wShadowOAMBackupSprite00`](link.md#s-wShadowOAMBackupSprite00) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wShadowOAMBackupSprite00Attributes"></a>[`wShadowOAMBackupSprite00Attributes`](sprites.md#s-wShadowOAMBackupSprite00Attributes) | `$C50B` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite00TileID"></a>[`wShadowOAMBackupSprite00TileID`](sprites.md#s-wShadowOAMBackupSprite00TileID) | `$C50A` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite00XCoord"></a>[`wShadowOAMBackupSprite00XCoord`](sprites.md#s-wShadowOAMBackupSprite00XCoord) | `$C509` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite00YCoord"></a>[`wShadowOAMBackupSprite00YCoord`](link.md#s-wShadowOAMBackupSprite00YCoord) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wShadowOAMBackupSprite01"></a>[`wShadowOAMBackupSprite01`](sprites.md#s-wShadowOAMBackupSprite01) | `$C50C` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite01Attributes"></a>[`wShadowOAMBackupSprite01Attributes`](sprites.md#s-wShadowOAMBackupSprite01Attributes) | `$C50F` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite01TileID"></a>[`wShadowOAMBackupSprite01TileID`](sprites.md#s-wShadowOAMBackupSprite01TileID) | `$C50E` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMBackupSprite01XCoord"></a>[`wShadowOAMBackupSprite01XCoord`](sprites.md#s-wShadowOAMBackupSprite01XCoord) | `$C50D` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMBackupSprite01YCoord"></a>[`wShadowOAMBackupSprite01YCoord`](sprites.md#s-wShadowOAMBackupSprite01YCoord) | `$C50C` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMEnd"></a>[`wShadowOAMEnd`](sprites.md#s-wShadowOAMEnd) | `$C3A0` | — | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite00"></a>[`wShadowOAMSprite00`](sprites.md#s-wShadowOAMSprite00) | `$C300` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite00Attributes"></a>[`wShadowOAMSprite00Attributes`](sprites.md#s-wShadowOAMSprite00Attributes) | `$C303` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMSprite00TileID"></a>[`wShadowOAMSprite00TileID`](sprites.md#s-wShadowOAMSprite00TileID) | `$C302` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite00XCoord"></a>[`wShadowOAMSprite00XCoord`](sprites.md#s-wShadowOAMSprite00XCoord) | `$C301` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite00YCoord"></a>[`wShadowOAMSprite00YCoord`](sprites.md#s-wShadowOAMSprite00YCoord) | `$C300` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite01"></a>[`wShadowOAMSprite01`](sprites.md#s-wShadowOAMSprite01) | `$C304` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite01Attributes"></a>[`wShadowOAMSprite01Attributes`](sprites.md#s-wShadowOAMSprite01Attributes) | `$C307` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMSprite01TileID"></a>[`wShadowOAMSprite01TileID`](sprites.md#s-wShadowOAMSprite01TileID) | `$C306` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wShadowOAMSprite01XCoord"></a>[`wShadowOAMSprite01XCoord`](sprites.md#s-wShadowOAMSprite01XCoord) | `$C305` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wShadowOAMSprite01YCoord"></a>[`wShadowOAMSprite01YCoord`](sprites.md#s-wShadowOAMSprite01YCoord) | `$C304` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSignCoords"></a>[`wSignCoords`](overworld.md#s-wSignCoords) | `$D4B1` | 32 | [overworld](overworld.md) | RL |
+| <a id="s-wSignTextIDs"></a>[`wSignTextIDs`](overworld.md#s-wSignTextIDs) | `$D4D1` | 16 | [overworld](overworld.md) | RL |
+| <a id="s-wSilphCo10FCurScript"></a>[`wSilphCo10FCurScript`](events.md#s-wSilphCo10FCurScript) | `$D658` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo11FCurScript"></a>[`wSilphCo11FCurScript`](events.md#s-wSilphCo11FCurScript) | `$D659` | 2 | [events](events.md) | RL |
+| <a id="s-wSilphCo2FCurScript"></a>[`wSilphCo2FCurScript`](events.md#s-wSilphCo2FCurScript) | `$D643` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo3FCurScript"></a>[`wSilphCo3FCurScript`](events.md#s-wSilphCo3FCurScript) | `$D644` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo4FCurScript"></a>[`wSilphCo4FCurScript`](events.md#s-wSilphCo4FCurScript) | `$D645` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo5FCurScript"></a>[`wSilphCo5FCurScript`](events.md#s-wSilphCo5FCurScript) | `$D646` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo6FCurScript"></a>[`wSilphCo6FCurScript`](events.md#s-wSilphCo6FCurScript) | `$D647` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo7FCurScript"></a>[`wSilphCo7FCurScript`](events.md#s-wSilphCo7FCurScript) | `$D648` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo8FCurScript"></a>[`wSilphCo8FCurScript`](events.md#s-wSilphCo8FCurScript) | `$D649` | 1 | [events](events.md) | RL |
+| <a id="s-wSilphCo9FCurScript"></a>[`wSilphCo9FCurScript`](events.md#s-wSilphCo9FCurScript) | `$D64A` | 1 | [events](events.md) | RL |
+| <a id="s-wSimulatedJoypadStatesEnd"></a>[`wSimulatedJoypadStatesEnd`](battle.md#s-wSimulatedJoypadStatesEnd) | `$CCD3` | 1 | [battle](battle.md) | RL |
+| <a id="s-wSimulatedJoypadStatesIndex"></a>[`wSimulatedJoypadStatesIndex`](system.md#s-wSimulatedJoypadStatesIndex) | `$CD38` | 1 | [system](system.md) | RL |
+| <a id="s-wSlideMonDelay"></a>[`wSlideMonDelay`](scratch.md#s-wSlideMonDelay) | `$D08B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlideMonUpBottomRowLeftTile"></a>[`wSlideMonUpBottomRowLeftTile`](scratch.md#s-wSlideMonUpBottomRowLeftTile) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineAllowMatchesCounter"></a>[`wSlotMachineAllowMatchesCounter`](scratch.md#s-wSlotMachineAllowMatchesCounter) | `$D096` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineBet"></a>[`wSlotMachineBet`](scratch.md#s-wSlotMachineBet) | `$CD50` | 9 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineFlags"></a>[`wSlotMachineFlags`](scratch.md#s-wSlotMachineFlags) | `$CD4C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineRerollCounter"></a>[`wSlotMachineRerollCounter`](scratch.md#s-wSlotMachineRerollCounter) | `$CD4F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineSavedROMBank"></a>[`wSlotMachineSavedROMBank`](scratch.md#s-wSlotMachineSavedROMBank) | `$CC5E` | 27 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineSevenAndBarModeChance"></a>[`wSlotMachineSevenAndBarModeChance`](battle.md#s-wSlotMachineSevenAndBarModeChance) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wSlotMachineWheel1BottomTile"></a>[`wSlotMachineWheel1BottomTile`](events.md#s-wSlotMachineWheel1BottomTile) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wSlotMachineWheel1MiddleTile"></a>[`wSlotMachineWheel1MiddleTile`](scratch.md#s-wSlotMachineWheel1MiddleTile) | `$CD42` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineWheel1Offset"></a>[`wSlotMachineWheel1Offset`](scratch.md#s-wSlotMachineWheel1Offset) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineWheel1SlipCounter"></a>[`wSlotMachineWheel1SlipCounter`](scratch.md#s-wSlotMachineWheel1SlipCounter) | `$CD4D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineWheel1TopTile"></a>[`wSlotMachineWheel1TopTile`](scratch.md#s-wSlotMachineWheel1TopTile) | `$CD43` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSlotMachineWinningSymbol"></a>[`wSlotMachineWinningSymbol`](events.md#s-wSlotMachineWinningSymbol) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wSoundID"></a>[`wSoundID`](audio.md#s-wSoundID) | `$C001` | 1 | [audio](audio.md) | RL |
+| <a id="s-wSouthConnectedMap"></a>[`wSouthConnectedMap`](overworld.md#s-wSouthConnectedMap) | `$D37C` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectedMapViewPointer"></a>[`wSouthConnectedMapViewPointer`](overworld.md#s-wSouthConnectedMapViewPointer) | `$D385` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectedMapWidth"></a>[`wSouthConnectedMapWidth`](overworld.md#s-wSouthConnectedMapWidth) | `$D382` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectedMapXAlignment"></a>[`wSouthConnectedMapXAlignment`](overworld.md#s-wSouthConnectedMapXAlignment) | `$D384` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectedMapYAlignment"></a>[`wSouthConnectedMapYAlignment`](overworld.md#s-wSouthConnectedMapYAlignment) | `$D383` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectionHeader"></a>[`wSouthConnectionHeader`](overworld.md#s-wSouthConnectionHeader) | `$D37C` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectionStripDest"></a>[`wSouthConnectionStripDest`](overworld.md#s-wSouthConnectionStripDest) | `$D37F` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectionStripLength"></a>[`wSouthConnectionStripLength`](overworld.md#s-wSouthConnectionStripLength) | `$D381` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSouthConnectionStripSrc"></a>[`wSouthConnectionStripSrc`](overworld.md#s-wSouthConnectionStripSrc) | `$D37D` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wSpiralBallsBaseX"></a>[`wSpiralBallsBaseX`](scratch.md#s-wSpiralBallsBaseX) | `$D08B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSpiralBallsBaseY"></a>[`wSpiralBallsBaseY`](scratch.md#s-wSpiralBallsBaseY) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSprite01StateData1"></a>[`wSprite01StateData1`](sprites.md#s-wSprite01StateData1) | `$C110` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1AnimFrameCounter"></a>[`wSprite01StateData1AnimFrameCounter`](sprites.md#s-wSprite01StateData1AnimFrameCounter) | `$C118` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1CollisionData"></a>[`wSprite01StateData1CollisionData`](sprites.md#s-wSprite01StateData1CollisionData) | `$C11C` | 4 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1End"></a>[`wSprite01StateData1End`](sprites.md#s-wSprite01StateData1End) | `$C120` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1FacingDirection"></a>[`wSprite01StateData1FacingDirection`](sprites.md#s-wSprite01StateData1FacingDirection) | `$C119` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1ImageIndex"></a>[`wSprite01StateData1ImageIndex`](sprites.md#s-wSprite01StateData1ImageIndex) | `$C112` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1IntraAnimFrameCounter"></a>[`wSprite01StateData1IntraAnimFrameCounter`](sprites.md#s-wSprite01StateData1IntraAnimFrameCounter) | `$C117` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1MovementStatus"></a>[`wSprite01StateData1MovementStatus`](sprites.md#s-wSprite01StateData1MovementStatus) | `$C111` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1PictureID"></a>[`wSprite01StateData1PictureID`](sprites.md#s-wSprite01StateData1PictureID) | `$C110` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1XAdjusted"></a>[`wSprite01StateData1XAdjusted`](sprites.md#s-wSprite01StateData1XAdjusted) | `$C11B` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1XPixels"></a>[`wSprite01StateData1XPixels`](sprites.md#s-wSprite01StateData1XPixels) | `$C116` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1XStepVector"></a>[`wSprite01StateData1XStepVector`](sprites.md#s-wSprite01StateData1XStepVector) | `$C115` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1YAdjusted"></a>[`wSprite01StateData1YAdjusted`](sprites.md#s-wSprite01StateData1YAdjusted) | `$C11A` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData1YPixels"></a>[`wSprite01StateData1YPixels`](sprites.md#s-wSprite01StateData1YPixels) | `$C114` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData1YStepVector"></a>[`wSprite01StateData1YStepVector`](sprites.md#s-wSprite01StateData1YStepVector) | `$C113` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2GrassPriority"></a>[`wSprite01StateData2GrassPriority`](sprites.md#s-wSprite01StateData2GrassPriority) | `$C217` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2ImageBaseOffset"></a>[`wSprite01StateData2ImageBaseOffset`](sprites.md#s-wSprite01StateData2ImageBaseOffset) | `$C21E` | 2 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2MapX"></a>[`wSprite01StateData2MapX`](sprites.md#s-wSprite01StateData2MapX) | `$C215` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2MapY"></a>[`wSprite01StateData2MapY`](sprites.md#s-wSprite01StateData2MapY) | `$C214` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2MovementByte1"></a>[`wSprite01StateData2MovementByte1`](sprites.md#s-wSprite01StateData2MovementByte1) | `$C216` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData2MovementDelay"></a>[`wSprite01StateData2MovementDelay`](sprites.md#s-wSprite01StateData2MovementDelay) | `$C218` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData2OrigFacingDirection"></a>[`wSprite01StateData2OrigFacingDirection`](sprites.md#s-wSprite01StateData2OrigFacingDirection) | `$C219` | 4 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2WalkAnimationCounter"></a>[`wSprite01StateData2WalkAnimationCounter`](sprites.md#s-wSprite01StateData2WalkAnimationCounter) | `$C210` | 2 | [sprites](sprites.md) | RL |
+| <a id="s-wSprite01StateData2XDisplacement"></a>[`wSprite01StateData2XDisplacement`](sprites.md#s-wSprite01StateData2XDisplacement) | `$C213` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSprite01StateData2YDisplacement"></a>[`wSprite01StateData2YDisplacement`](sprites.md#s-wSprite01StateData2YDisplacement) | `$C212` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteCurPosX"></a>[`wSpriteCurPosX`](graphics.md#s-wSpriteCurPosX) | `$D0A1` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteCurPosY"></a>[`wSpriteCurPosY`](scratch.md#s-wSpriteCurPosY) | `$D0A2` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSpriteDataEnd"></a>[`wSpriteDataEnd`](sprites.md#s-wSpriteDataEnd) | `$C300` | — | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteDataStart"></a>[`wSpriteDataStart`](sprites.md#s-wSpriteDataStart) | `$C100` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteDecodeTable0Ptr"></a>[`wSpriteDecodeTable0Ptr`](graphics.md#s-wSpriteDecodeTable0Ptr) | `$D0B1` | 2 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteDecodeTable1Ptr"></a>[`wSpriteDecodeTable1Ptr`](graphics.md#s-wSpriteDecodeTable1Ptr) | `$D0B3` | 2 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteFlipped"></a>[`wSpriteFlipped`](graphics.md#s-wSpriteFlipped) | `$D0AA` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteHeight"></a>[`wSpriteHeight`](graphics.md#s-wSpriteHeight) | `$D0A4` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteIndex"></a>[`wSpriteIndex`](sprites.md#s-wSpriteIndex) | `$CF13` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteInputBitCounter"></a>[`wSpriteInputBitCounter`](graphics.md#s-wSpriteInputBitCounter) | `$D0A6` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteInputCurByte"></a>[`wSpriteInputCurByte`](scratch.md#s-wSpriteInputCurByte) | `$D0A5` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSpriteInputPtr"></a>[`wSpriteInputPtr`](graphics.md#s-wSpriteInputPtr) | `$D0AB` | 2 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteLoadFlags"></a>[`wSpriteLoadFlags`](graphics.md#s-wSpriteLoadFlags) | `$D0A8` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteOutputBitOffset"></a>[`wSpriteOutputBitOffset`](graphics.md#s-wSpriteOutputBitOffset) | `$D0A7` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteOutputPtr"></a>[`wSpriteOutputPtr`](graphics.md#s-wSpriteOutputPtr) | `$D0AD` | 2 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteOutputPtrCached"></a>[`wSpriteOutputPtrCached`](graphics.md#s-wSpriteOutputPtrCached) | `$D0AF` | 2 | [graphics](graphics.md) | RL |
+| <a id="s-wSpritePlayerStateData1"></a>[`wSpritePlayerStateData1`](sprites.md#s-wSpritePlayerStateData1) | `$C100` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1AnimFrameCounter"></a>[`wSpritePlayerStateData1AnimFrameCounter`](sprites.md#s-wSpritePlayerStateData1AnimFrameCounter) | `$C108` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1CollisionData"></a>[`wSpritePlayerStateData1CollisionData`](sprites.md#s-wSpritePlayerStateData1CollisionData) | `$C10C` | 4 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1End"></a>[`wSpritePlayerStateData1End`](sprites.md#s-wSpritePlayerStateData1End) | `$C110` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1FacingDirection"></a>[`wSpritePlayerStateData1FacingDirection`](sprites.md#s-wSpritePlayerStateData1FacingDirection) | `$C109` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1ImageIndex"></a>[`wSpritePlayerStateData1ImageIndex`](sprites.md#s-wSpritePlayerStateData1ImageIndex) | `$C102` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1IntraAnimFrameCounter"></a>[`wSpritePlayerStateData1IntraAnimFrameCounter`](sprites.md#s-wSpritePlayerStateData1IntraAnimFrameCounter) | `$C107` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1MovementStatus"></a>[`wSpritePlayerStateData1MovementStatus`](sprites.md#s-wSpritePlayerStateData1MovementStatus) | `$C101` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1PictureID"></a>[`wSpritePlayerStateData1PictureID`](sprites.md#s-wSpritePlayerStateData1PictureID) | `$C100` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1XAdjusted"></a>[`wSpritePlayerStateData1XAdjusted`](sprites.md#s-wSpritePlayerStateData1XAdjusted) | `$C10B` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpritePlayerStateData1XPixels"></a>[`wSpritePlayerStateData1XPixels`](sprites.md#s-wSpritePlayerStateData1XPixels) | `$C106` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1XStepVector"></a>[`wSpritePlayerStateData1XStepVector`](sprites.md#s-wSpritePlayerStateData1XStepVector) | `$C105` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1YAdjusted"></a>[`wSpritePlayerStateData1YAdjusted`](sprites.md#s-wSpritePlayerStateData1YAdjusted) | `$C10A` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpritePlayerStateData1YPixels"></a>[`wSpritePlayerStateData1YPixels`](sprites.md#s-wSpritePlayerStateData1YPixels) | `$C104` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData1YStepVector"></a>[`wSpritePlayerStateData1YStepVector`](sprites.md#s-wSpritePlayerStateData1YStepVector) | `$C103` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2GrassPriority"></a>[`wSpritePlayerStateData2GrassPriority`](sprites.md#s-wSpritePlayerStateData2GrassPriority) | `$C207` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2ImageBaseOffset"></a>[`wSpritePlayerStateData2ImageBaseOffset`](sprites.md#s-wSpritePlayerStateData2ImageBaseOffset) | `$C20E` | 2 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2MapX"></a>[`wSpritePlayerStateData2MapX`](sprites.md#s-wSpritePlayerStateData2MapX) | `$C205` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpritePlayerStateData2MapY"></a>[`wSpritePlayerStateData2MapY`](sprites.md#s-wSpritePlayerStateData2MapY) | `$C204` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2MovementByte1"></a>[`wSpritePlayerStateData2MovementByte1`](sprites.md#s-wSpritePlayerStateData2MovementByte1) | `$C206` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2MovementDelay"></a>[`wSpritePlayerStateData2MovementDelay`](sprites.md#s-wSpritePlayerStateData2MovementDelay) | `$C208` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpritePlayerStateData2OrigFacingDirection"></a>[`wSpritePlayerStateData2OrigFacingDirection`](sprites.md#s-wSpritePlayerStateData2OrigFacingDirection) | `$C209` | 4 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2WalkAnimationCounter"></a>[`wSpritePlayerStateData2WalkAnimationCounter`](sprites.md#s-wSpritePlayerStateData2WalkAnimationCounter) | `$C200` | 2 | [sprites](sprites.md) | RL |
+| <a id="s-wSpritePlayerStateData2XDisplacement"></a>[`wSpritePlayerStateData2XDisplacement`](sprites.md#s-wSpritePlayerStateData2XDisplacement) | `$C203` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpritePlayerStateData2YDisplacement"></a>[`wSpritePlayerStateData2YDisplacement`](sprites.md#s-wSpritePlayerStateData2YDisplacement) | `$C202` | 1 | [sprites](sprites.md) | L |
+| <a id="s-wSpriteSet"></a>[`wSpriteSet`](overworld.md#s-wSpriteSet) | `$D39D` | 11 | [overworld](overworld.md) | RL |
+| <a id="s-wSpriteSetID"></a>[`wSpriteSetID`](overworld.md#s-wSpriteSetID) | `$D3A8` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wSpriteStateData1"></a>[`wSpriteStateData1`](sprites.md#s-wSpriteStateData1) | `$C100` | 1 | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteStateData2"></a>[`wSpriteStateData2`](sprites.md#s-wSpriteStateData2) | `$C200` | 2 | [sprites](sprites.md) | RL |
+| <a id="s-wSpriteUnpackMode"></a>[`wSpriteUnpackMode`](graphics.md#s-wSpriteUnpackMode) | `$D0A9` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSpriteWidth"></a>[`wSpriteWidth`](graphics.md#s-wSpriteWidth) | `$D0A3` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wSquishMonCurrentDirection"></a>[`wSquishMonCurrentDirection`](scratch.md#s-wSquishMonCurrentDirection) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSSAnne1FRoomsCurScript"></a>[`wSSAnne1FRoomsCurScript`](events.md#s-wSSAnne1FRoomsCurScript) | `$D608` | 1 | [events](events.md) | RL |
+| <a id="s-wSSAnne2FCurScript"></a>[`wSSAnne2FCurScript`](events.md#s-wSSAnne2FCurScript) | `$D665` | 1 | [events](events.md) | RL |
+| <a id="s-wSSAnneB1FRoomsCurScript"></a>[`wSSAnneB1FRoomsCurScript`](events.md#s-wSSAnneB1FRoomsCurScript) | `$D629` | 1 | [events](events.md) | RL |
+| <a id="s-wSSAnneBowCurScript"></a>[`wSSAnneBowCurScript`](events.md#s-wSSAnneBowCurScript) | `$D617` | 1 | [events](events.md) | RL |
+| <a id="s-wSSAnneSmokeDriftAmount"></a>[`wSSAnneSmokeDriftAmount`](scratch.md#s-wSSAnneSmokeDriftAmount) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSSAnneSmokeX"></a>[`wSSAnneSmokeX`](scratch.md#s-wSSAnneSmokeX) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wStack"></a>[`wStack`](system.md#s-wStack) | `$DFFF` | 1 | [system](system.md) | RL |
+| <a id="s-wStandingOnWarpPadOrHole"></a>[`wStandingOnWarpPadOrHole`](scratch.md#s-wStandingOnWarpPadOrHole) | `$CD5B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wStatusFlags1"></a>[`wStatusFlags1`](events.md#s-wStatusFlags1) | `$D728` | 2 | [events](events.md) | RL |
+| <a id="s-wStatusFlags2"></a>[`wStatusFlags2`](events.md#s-wStatusFlags2) | `$D72C` | 1 | [events](events.md) | RL |
+| <a id="s-wStatusFlags3"></a>[`wStatusFlags3`](events.md#s-wStatusFlags3) | `$D72D` | 1 | [events](events.md) | RL |
+| <a id="s-wStatusFlags4"></a>[`wStatusFlags4`](events.md#s-wStatusFlags4) | `$D72E` | 2 | [events](events.md) | RL |
+| <a id="s-wStatusFlags5"></a>[`wStatusFlags5`](events.md#s-wStatusFlags5) | `$D730` | 2 | [events](events.md) | RL |
+| <a id="s-wStatusFlags6"></a>[`wStatusFlags6`](events.md#s-wStatusFlags6) | `$D732` | 1 | [events](events.md) | RL |
+| <a id="s-wStatusFlags7"></a>[`wStatusFlags7`](events.md#s-wStatusFlags7) | `$D733` | 1 | [events](events.md) | RL |
+| <a id="s-wStatusScreenCurrentPP"></a>[`wStatusScreenCurrentPP`](scratch.md#s-wStatusScreenCurrentPP) | `$CD71` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wStatusScreenHPBarColor"></a>[`wStatusScreenHPBarColor`](scratch.md#s-wStatusScreenHPBarColor) | `$CF25` | 8 | [scratch](scratch.md) | RL |
+| <a id="s-wStepCounter"></a>[`wStepCounter`](overworld.md#s-wStepCounter) | `$D13B` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wStereoPanning"></a>[`wStereoPanning`](audio.md#s-wStereoPanning) | `$C004` | 1 | [audio](audio.md) | RL |
+| <a id="s-wStoppingWhichSlotMachineWheel"></a>[`wStoppingWhichSlotMachineWheel`](scratch.md#s-wStoppingWhichSlotMachineWheel) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wStringBuffer"></a>[`wStringBuffer`](battle.md#s-wStringBuffer) | `$CF4B` | 2 | [battle](battle.md) | RL |
+| <a id="s-wSubAnimAddrPtr"></a>[`wSubAnimAddrPtr`](scratch.md#s-wSubAnimAddrPtr) | `$D094` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wSubAnimCounter"></a>[`wSubAnimCounter`](scratch.md#s-wSubAnimCounter) | `$D087` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSubAnimFrameDelay"></a>[`wSubAnimFrameDelay`](scratch.md#s-wSubAnimFrameDelay) | `$D086` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSubAnimSubEntryAddr"></a>[`wSubAnimSubEntryAddr`](scratch.md#s-wSubAnimSubEntryAddr) | `$D096` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wSubAnimTransform"></a>[`wSubAnimTransform`](scratch.md#s-wSubAnimTransform) | `$D08B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSurroundingTiles"></a>[`wSurroundingTiles`](link.md#s-wSurroundingTiles) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wSwappedMenuItem"></a>[`wSwappedMenuItem`](scratch.md#s-wSwappedMenuItem) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wSwitchPartyMonTempBuffer"></a>[`wSwitchPartyMonTempBuffer`](scratch.md#s-wSwitchPartyMonTempBuffer) | `$CC97` | 10 | [scratch](scratch.md) | RL |
+| <a id="s-wSymmetricSpriteOAMAttributes"></a>[`wSymmetricSpriteOAMAttributes`](scratch.md#s-wSymmetricSpriteOAMAttributes) | `$CD5C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTempByteValue"></a>[`wTempByteValue`](scratch.md#s-wTempByteValue) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTempCoins1"></a>[`wTempCoins1`](bag.md#s-wTempCoins1) | `$CD46` | 1 | [bag](bag.md) | RL |
+| <a id="s-wTempMoveNameBuffer"></a>[`wTempMoveNameBuffer`](scratch.md#s-wTempMoveNameBuffer) | `$D036` | 16 | [scratch](scratch.md) | RL |
+| <a id="s-wTempObtainedBadgesBooleans"></a>[`wTempObtainedBadgesBooleans`](player.md#s-wTempObtainedBadgesBooleans) | `$CD49` | 1 | [player](player.md) | RL |
+| <a id="s-wTempoModifier"></a>[`wTempoModifier`](audio.md#s-wTempoModifier) | `$C0F2` | 14 | [audio](audio.md) | RL |
+| <a id="s-wTempPic"></a>[`wTempPic`](overworld.md#s-wTempPic) | `$C6E8` | 1300 | [overworld](overworld.md) | RL |
+| <a id="s-wTempSCX"></a>[`wTempSCX`](scratch.md#s-wTempSCX) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTempTilesetNumTiles"></a>[`wTempTilesetNumTiles`](scratch.md#s-wTempTilesetNumTiles) | `$D07D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTempTMHM"></a>[`wTempTMHM`](scratch.md#s-wTempTMHM) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTestBattlePlayerSelectedMove"></a>[`wTestBattlePlayerSelectedMove`](scratch.md#s-wTestBattlePlayerSelectedMove) | `$CCD9` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wTextBoxID"></a>[`wTextBoxID`](screen.md#s-wTextBoxID) | `$D125` | 1 | [screen](screen.md) | RL |
+| <a id="s-wTextDest"></a>[`wTextDest`](screen.md#s-wTextDest) | `$CC3A` | 2 | [screen](screen.md) | RL |
+| <a id="s-wTextPredefFlag"></a>[`wTextPredefFlag`](screen.md#s-wTextPredefFlag) | `$CF11` | 1 | [screen](screen.md) | RL |
+| <a id="s-wTileBehindCursor"></a>[`wTileBehindCursor`](screen.md#s-wTileBehindCursor) | `$CC27` | 1 | [screen](screen.md) | RL |
+| <a id="s-wTileInFrontOfBoulderAndBoulderCollisionResult"></a>[`wTileInFrontOfBoulderAndBoulderCollisionResult`](overworld.md#s-wTileInFrontOfBoulderAndBoulderCollisionResult) | `$D71C` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wTileInFrontOfPlayer"></a>[`wTileInFrontOfPlayer`](overworld.md#s-wTileInFrontOfPlayer) | `$CFC6` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wTileMap"></a>[`wTileMap`](screen.md#s-wTileMap) | `$C3A0` | 360 | [screen](screen.md) | RLI |
+| <a id="s-wTileMapBackup"></a>[`wTileMapBackup`](link.md#s-wTileMapBackup) | `$C508` | 1 | [link](link.md) | RL |
+| <a id="s-wTileMapBackup2"></a>[`wTileMapBackup2`](link.md#s-wTileMapBackup2) | `$CD81` | 360 | [link](link.md) | RL |
+| <a id="s-wTilePlayerStandingOn"></a>[`wTilePlayerStandingOn`](overworld.md#s-wTilePlayerStandingOn) | `$CF0E` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wTilesetBank"></a>[`wTilesetBank`](overworld.md#s-wTilesetBank) | `$D52B` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wTilesetBlocksPtr"></a>[`wTilesetBlocksPtr`](overworld.md#s-wTilesetBlocksPtr) | `$D52C` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wTilesetCollisionPtr"></a>[`wTilesetCollisionPtr`](overworld.md#s-wTilesetCollisionPtr) | `$D530` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wTilesetGfxPtr"></a>[`wTilesetGfxPtr`](overworld.md#s-wTilesetGfxPtr) | `$D52E` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wTilesetTalkingOverTiles"></a>[`wTilesetTalkingOverTiles`](overworld.md#s-wTilesetTalkingOverTiles) | `$D532` | 3 | [overworld](overworld.md) | RL |
+| <a id="s-wTitleMonSpecies"></a>[`wTitleMonSpecies`](scratch.md#s-wTitleMonSpecies) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wToggleableObjectCounter"></a>[`wToggleableObjectCounter`](events.md#s-wToggleableObjectCounter) | `$D048` | 2 | [events](events.md) | RL |
+| <a id="s-wToggleableObjectFlags"></a>[`wToggleableObjectFlags`](events.md#s-wToggleableObjectFlags) | `$D5A6` | 32 | [events](events.md) | RL |
+| <a id="s-wToggleableObjectFlagsEnd"></a>[`wToggleableObjectFlagsEnd`](events.md#s-wToggleableObjectFlagsEnd) | `$D5C6` | 7 | [events](events.md) | L |
+| <a id="s-wToggleableObjectIndex"></a>[`wToggleableObjectIndex`](events.md#s-wToggleableObjectIndex) | `$CC4D` | 1 | [events](events.md) | RL |
+| <a id="s-wToggleableObjectList"></a>[`wToggleableObjectList`](events.md#s-wToggleableObjectList) | `$D5CE` | 34 | [events](events.md) | RL |
+| <a id="s-wTopMenuItemX"></a>[`wTopMenuItemX`](screen.md#s-wTopMenuItemX) | `$CC25` | 1 | [screen](screen.md) | RL |
+| <a id="s-wTopMenuItemY"></a>[`wTopMenuItemY`](screen.md#s-wTopMenuItemY) | `$CC24` | 1 | [screen](screen.md) | RL |
+| <a id="s-wTotalPayDayMoney"></a>[`wTotalPayDayMoney`](battle.md#s-wTotalPayDayMoney) | `$CCE5` | 3 | [battle](battle.md) | RL |
+| <a id="s-wTownMapCoords"></a>[`wTownMapCoords`](scratch.md#s-wTownMapCoords) | `$CEE9` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTownMapSpriteBlinkingEnabled"></a>[`wTownMapSpriteBlinkingEnabled`](scratch.md#s-wTownMapSpriteBlinkingEnabled) | `$D09B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTownVisitedFlag"></a>[`wTownVisitedFlag`](events.md#s-wTownVisitedFlag) | `$D70B` | 2 | [events](events.md) | RL |
+| <a id="s-wTradeCenterPointerTableIndex"></a>[`wTradeCenterPointerTableIndex`](link.md#s-wTradeCenterPointerTableIndex) | `$CC38` | 2 | [link](link.md) | RL |
+| <a id="s-wTradedEnemyMonOT"></a>[`wTradedEnemyMonOT`](link.md#s-wTradedEnemyMonOT) | `$CD4E` | 1 | [link](link.md) | RL |
+| <a id="s-wTradedEnemyMonOTID"></a>[`wTradedEnemyMonOTID`](link.md#s-wTradedEnemyMonOTID) | `$CD59` | 2 | [link](link.md) | RL |
+| <a id="s-wTradedEnemyMonSpecies"></a>[`wTradedEnemyMonSpecies`](scratch.md#s-wTradedEnemyMonSpecies) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTradedMonMovingRight"></a>[`wTradedMonMovingRight`](scratch.md#s-wTradedMonMovingRight) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTradedPlayerMonOT"></a>[`wTradedPlayerMonOT`](events.md#s-wTradedPlayerMonOT) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wTradedPlayerMonOTID"></a>[`wTradedPlayerMonOTID`](scratch.md#s-wTradedPlayerMonOTID) | `$CD4C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTradedPlayerMonSpecies"></a>[`wTradedPlayerMonSpecies`](scratch.md#s-wTradedPlayerMonSpecies) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTradingWhichEnemyMon"></a>[`wTradingWhichEnemyMon`](scratch.md#s-wTradingWhichEnemyMon) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTradingWhichPlayerMon"></a>[`wTradingWhichPlayerMon`](scratch.md#s-wTradingWhichPlayerMon) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerBaseMoney"></a>[`wTrainerBaseMoney`](scratch.md#s-wTrainerBaseMoney) | `$D046` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerCardBlkPacket"></a>[`wTrainerCardBlkPacket`](battle.md#s-wTrainerCardBlkPacket) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wTrainerClass"></a>[`wTrainerClass`](scratch.md#s-wTrainerClass) | `$D031` | 2 | [scratch](scratch.md) | RLI |
+| <a id="s-wTrainerEngageDistance"></a>[`wTrainerEngageDistance`](scratch.md#s-wTrainerEngageDistance) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerFacingDirection"></a>[`wTrainerFacingDirection`](scratch.md#s-wTrainerFacingDirection) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerHeaderFlagBit"></a>[`wTrainerHeaderFlagBit`](events.md#s-wTrainerHeaderFlagBit) | `$CC55` | 2 | [events](events.md) | RL |
+| <a id="s-wTrainerHeaderPtr"></a>[`wTrainerHeaderPtr`](events.md#s-wTrainerHeaderPtr) | `$DA30` | 8 | [events](events.md) | RL |
+| <a id="s-wTrainerInfoTextBoxNextRowOffset"></a>[`wTrainerInfoTextBoxNextRowOffset`](scratch.md#s-wTrainerInfoTextBoxNextRowOffset) | `$CD3F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerInfoTextBoxWidth"></a>[`wTrainerInfoTextBoxWidth`](scratch.md#s-wTrainerInfoTextBoxWidth) | `$CD3E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerInfoTextBoxWidthPlus1"></a>[`wTrainerInfoTextBoxWidthPlus1`](scratch.md#s-wTrainerInfoTextBoxWidthPlus1) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerName"></a>[`wTrainerName`](scratch.md#s-wTrainerName) | `$D04A` | 13 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerNo"></a>[`wTrainerNo`](battle.md#s-wTrainerNo) | `$D05D` | 1 | [battle](battle.md) | RL |
+| <a id="s-wTrainerPicPointer"></a>[`wTrainerPicPointer`](scratch.md#s-wTrainerPicPointer) | `$D033` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wTrainerScreenX"></a>[`wTrainerScreenX`](events.md#s-wTrainerScreenX) | `$CD41` | 1 | [events](events.md) | RL |
+| <a id="s-wTrainerScreenY"></a>[`wTrainerScreenY`](player.md#s-wTrainerScreenY) | `$CD40` | 1 | [player](player.md) | RL |
+| <a id="s-wTrainerSpriteOffset"></a>[`wTrainerSpriteOffset`](scratch.md#s-wTrainerSpriteOffset) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTransformedEnemyMonOriginalDVs"></a>[`wTransformedEnemyMonOriginalDVs`](battle.md#s-wTransformedEnemyMonOriginalDVs) | `$CCEB` | 2 | [battle](battle.md) | RL |
+| <a id="s-wTwoOptionMenuID"></a>[`wTwoOptionMenuID`](scratch.md#s-wTwoOptionMenuID) | `$D12C` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wTypeEffectiveness"></a>[`wTypeEffectiveness`](scratch.md#s-wTypeEffectiveness) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnknownSerialCounter"></a>[`wUnknownSerialCounter`](scratch.md#s-wUnknownSerialCounter) | `$CC47` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wUnknownSerialCounter2"></a>[`wUnknownSerialCounter2`](scratch.md#s-wUnknownSerialCounter2) | `$D074` | 4 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedAlreadyOwnedFlag"></a>[`wUnusedAlreadyOwnedFlag`](scratch.md#s-wUnusedAlreadyOwnedFlag) | `$D153` | 3 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedCardKeyGateID"></a>[`wUnusedCardKeyGateID`](events.md#s-wUnusedCardKeyGateID) | `$D71F` | 9 | [events](events.md) | RL |
+| <a id="s-wUnusedCreditsByte"></a>[`wUnusedCreditsByte`](scratch.md#s-wUnusedCreditsByte) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedCurMapTilesetCopy"></a>[`wUnusedCurMapTilesetCopy`](scratch.md#s-wUnusedCurMapTilesetCopy) | `$D119` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedFlag"></a>[`wUnusedFlag`](battle.md#s-wUnusedFlag) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wUnusedLastMapWidth"></a>[`wUnusedLastMapWidth`](overworld.md#s-wUnusedLastMapWidth) | `$D366` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wUnusedLinkMenuByte"></a>[`wUnusedLinkMenuByte`](bag.md#s-wUnusedLinkMenuByte) | `$CD37` | 1 | [bag](bag.md) | RL |
+| <a id="s-wUnusedMapVariable"></a>[`wUnusedMapVariable`](overworld.md#s-wUnusedMapVariable) | `$D5A3` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wUnusedMoveAnimByte"></a>[`wUnusedMoveAnimByte`](scratch.md#s-wUnusedMoveAnimByte) | `$D09B` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedMusicByte"></a>[`wUnusedMusicByte`](audio.md#s-wUnusedMusicByte) | `$C000` | 1 | [audio](audio.md) | RL |
+| <a id="s-wUnusedNamePointer"></a>[`wUnusedNamePointer`](scratch.md#s-wUnusedNamePointer) | `$CF8D` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedObtainedBadges"></a>[`wUnusedObtainedBadges`](player.md#s-wUnusedObtainedBadges) | `$D357` | 1 | [player](player.md) | L |
+| <a id="s-wUnusedOverrideSimulatedJoypadStatesIndex"></a>[`wUnusedOverrideSimulatedJoypadStatesIndex`](scratch.md#s-wUnusedOverrideSimulatedJoypadStatesIndex) | `$CD3A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedPlayerDataByte"></a>[`wUnusedPlayerDataByte`](overworld.md#s-wUnusedPlayerDataByte) | `$D71B` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wUnusedSimulatedJoypadStatesMask"></a>[`wUnusedSimulatedJoypadStatesMask`](scratch.md#s-wUnusedSimulatedJoypadStatesMask) | `$CD39` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUnusedWaterDropletsByte"></a>[`wUnusedWaterDropletsByte`](scratch.md#s-wUnusedWaterDropletsByte) | `$D08A` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUpdateSpritesEnabled"></a>[`wUpdateSpritesEnabled`](system.md#s-wUpdateSpritesEnabled) | `$CFCB` | 1 | [system](system.md) | RL |
+| <a id="s-wUsedItemOnWhichPokemon"></a>[`wUsedItemOnWhichPokemon`](scratch.md#s-wUsedItemOnWhichPokemon) | `$CF06` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wUsingPPUp"></a>[`wUsingPPUp`](scratch.md#s-wUsingPPUp) | `$D11E` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wVBlankSavedROMBank"></a>[`wVBlankSavedROMBank`](scratch.md#s-wVBlankSavedROMBank) | `$D122` | 2 | [scratch](scratch.md) | RL |
+| <a id="s-wVermilionCityCurScript"></a>[`wVermilionCityCurScript`](events.md#s-wVermilionCityCurScript) | `$D62A` | 1 | [events](events.md) | RL |
+| <a id="s-wVermilionDockTileMapBuffer"></a>[`wVermilionDockTileMapBuffer`](battle.md#s-wVermilionDockTileMapBuffer) | `$CC5B` | 1 | [battle](battle.md) | RL |
+| <a id="s-wVermilionDockTileMapBufferEnd"></a>[`wVermilionDockTileMapBufferEnd`](battle.md#s-wVermilionDockTileMapBufferEnd) | `$CD0F` | 1 | [battle](battle.md) | RL |
+| <a id="s-wVermilionGymCurScript"></a>[`wVermilionGymCurScript`](events.md#s-wVermilionGymCurScript) | `$D5FE` | 1 | [events](events.md) | RL |
+| <a id="s-wVictoryRoad1FCurScript"></a>[`wVictoryRoad1FCurScript`](events.md#s-wVictoryRoad1FCurScript) | `$D651` | 2 | [events](events.md) | RL |
+| <a id="s-wViridianCityCurScript"></a>[`wViridianCityCurScript`](events.md#s-wViridianCityCurScript) | `$D5F4` | 3 | [events](events.md) | RL |
+| <a id="s-wViridianForestCurScript"></a>[`wViridianForestCurScript`](events.md#s-wViridianForestCurScript) | `$D618` | 1 | [events](events.md) | RL |
+| <a id="s-wViridianGymCurScript"></a>[`wViridianGymCurScript`](events.md#s-wViridianGymCurScript) | `$D5FB` | 1 | [events](events.md) | RL |
+| <a id="s-wViridianMartCurScript"></a>[`wViridianMartCurScript`](events.md#s-wViridianMartCurScript) | `$D60D` | 1 | [events](events.md) | RL |
+| <a id="s-wWalkBikeSurfState"></a>[`wWalkBikeSurfState`](overworld.md#s-wWalkBikeSurfState) | `$D700` | 11 | [overworld](overworld.md) | RL |
+| <a id="s-wWalkBikeSurfStateCopy"></a>[`wWalkBikeSurfStateCopy`](overworld.md#s-wWalkBikeSurfStateCopy) | `$D11A` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWalkCounter"></a>[`wWalkCounter`](overworld.md#s-wWalkCounter) | `$CFC5` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWarpedFromWhichMap"></a>[`wWarpedFromWhichMap`](overworld.md#s-wWarpedFromWhichMap) | `$D73C` | 3 | [overworld](overworld.md) | RL |
+| <a id="s-wWarpedFromWhichWarp"></a>[`wWarpedFromWhichWarp`](overworld.md#s-wWarpedFromWhichWarp) | `$D73B` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWarpEntries"></a>[`wWarpEntries`](overworld.md#s-wWarpEntries) | `$D3AF` | 128 | [overworld](overworld.md) | RLI |
+| <a id="s-wWaterMons"></a>[`wWaterMons`](battle.md#s-wWaterMons) | `$D8A5` | 2 | [battle](battle.md) | RL |
+| <a id="s-wWaterRate"></a>[`wWaterRate`](battle.md#s-wWaterRate) | `$D8A4` | 1 | [battle](battle.md) | RL |
+| <a id="s-wWereAnyMonsAsleep"></a>[`wWereAnyMonsAsleep`](scratch.md#s-wWereAnyMonsAsleep) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWestConnectedMap"></a>[`wWestConnectedMap`](overworld.md#s-wWestConnectedMap) | `$D387` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectedMapViewPointer"></a>[`wWestConnectedMapViewPointer`](overworld.md#s-wWestConnectedMapViewPointer) | `$D390` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectedMapWidth"></a>[`wWestConnectedMapWidth`](overworld.md#s-wWestConnectedMapWidth) | `$D38D` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectedMapXAlignment"></a>[`wWestConnectedMapXAlignment`](overworld.md#s-wWestConnectedMapXAlignment) | `$D38F` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectedMapYAlignment"></a>[`wWestConnectedMapYAlignment`](overworld.md#s-wWestConnectedMapYAlignment) | `$D38E` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectionHeader"></a>[`wWestConnectionHeader`](overworld.md#s-wWestConnectionHeader) | `$D387` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectionStripDest"></a>[`wWestConnectionStripDest`](overworld.md#s-wWestConnectionStripDest) | `$D38A` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectionStripLength"></a>[`wWestConnectionStripLength`](overworld.md#s-wWestConnectionStripLength) | `$D38C` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wWestConnectionStripSrc"></a>[`wWestConnectionStripSrc`](overworld.md#s-wWestConnectionStripSrc) | `$D388` | 2 | [overworld](overworld.md) | RL |
+| <a id="s-wWhichAnimationOffsets"></a>[`wWhichAnimationOffsets`](scratch.md#s-wWhichAnimationOffsets) | `$CD50` | 9 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichBadge"></a>[`wWhichBadge`](scratch.md#s-wWhichBadge) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichBattleAnimTileset"></a>[`wWhichBattleAnimTileset`](scratch.md#s-wWhichBattleAnimTileset) | `$D09F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichDungeonWarp"></a>[`wWhichDungeonWarp`](events.md#s-wWhichDungeonWarp) | `$D71E` | 1 | [events](events.md) | RL |
+| <a id="s-wWhichEmotionBubble"></a>[`wWhichEmotionBubble`](scratch.md#s-wWhichEmotionBubble) | `$CD50` | 9 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichPartyMenuHPBar"></a>[`wWhichPartyMenuHPBar`](graphics.md#s-wWhichPartyMenuHPBar) | `$CF2D` | 1 | [graphics](graphics.md) | RL |
+| <a id="s-wWhichPewterGuy"></a>[`wWhichPewterGuy`](scratch.md#s-wWhichPewterGuy) | `$D12F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichPokemon"></a>[`wWhichPokemon`](storage.md#s-wWhichPokemon) | `$CF92` | 1 | [storage](storage.md) | RL |
+| <a id="s-wWhichPrize"></a>[`wWhichPrize`](scratch.md#s-wWhichPrize) | `$D139` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichPrizeWindow"></a>[`wWhichPrizeWindow`](scratch.md#s-wWhichPrizeWindow) | `$D12F` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichTownMapLocation"></a>[`wWhichTownMapLocation`](scratch.md#s-wWhichTownMapLocation) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichTrade"></a>[`wWhichTrade`](scratch.md#s-wWhichTrade) | `$CD3D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWhichTradeMonSelectionMenu"></a>[`wWhichTradeMonSelectionMenu`](scratch.md#s-wWhichTradeMonSelectionMenu) | `$CC49` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wWholeScreenPaletteMonSpecies"></a>[`wWholeScreenPaletteMonSpecies`](scratch.md#s-wWholeScreenPaletteMonSpecies) | `$CF1D` | 1 | [scratch](scratch.md) | RL |
+| <a id="s-wXBlockCoord"></a>[`wXBlockCoord`](overworld.md#s-wXBlockCoord) | `$D364` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wXCoord"></a>[`wXCoord`](overworld.md#s-wXCoord) | `$D362` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wXOffsetSinceLastSpecialWarp"></a>[`wXOffsetSinceLastSpecialWarp`](overworld.md#s-wXOffsetSinceLastSpecialWarp) | `$D4E3` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wYBlockCoord"></a>[`wYBlockCoord`](overworld.md#s-wYBlockCoord) | `$D363` | 1 | [overworld](overworld.md) | RL |
+| <a id="s-wYCoord"></a>[`wYCoord`](overworld.md#s-wYCoord) | `$D361` | 1 | [overworld](overworld.md) | RLI |
+| <a id="s-wYOffsetSinceLastSpecialWarp"></a>[`wYOffsetSinceLastSpecialWarp`](overworld.md#s-wYOffsetSinceLastSpecialWarp) | `$D4E2` | 1 | [overworld](overworld.md) | RL |
 
 <!-- atlas:end (names) -->

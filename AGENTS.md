@@ -89,6 +89,39 @@ case-insensitively, so `#s-wPartyCount` is the form to publish and it works — 
 browser, not assumed. The consequence is that two symbols differing only in case would
 collide on one anchor, so `tools/validate.py` fails if one ever appears.
 
+**`by-name.md` carries `#s-<symbol>` too, and that is not redundant.** An outside project
+linking into an index by name will guess the index page, because an index is the page you can
+guess — TerminalGB's discovery record links fourteen symbols to `by-name.md#s-<symbol>`, and
+until those anchors existed every one of them silently landed at the top of the page. A
+fragment that resolves nowhere fails quietly; nothing in either repository could have caught
+it. The same rule is why `name_index_block` links **aliases** to their `#s-` fragment as well:
+they have carried anchors on the chapter pages for as long as they have been listed, and
+sending `wPartyMons` to the top of a 105-row page is a worse answer than the row it asked for.
+
+### An entry may carry a description; a symbol name is not a source
+
+`desc` is the column that says what an address is *for*, and it is written from a source: what
+the disassembly says the symbol is (cited by symbol name, never by bare address), what
+TerminalGB measured on the retail cartridge, or a structure this atlas already documents whose
+sibling field or slot 1 is described here. **A symbol name on its own is not a source** — the
+atlas already shows the symbol name, and a plausible sentence derived from it is exactly the
+thing this project exists as a reaction to. That is why ninety `w<Map>CurScript` bytes are
+blank and one is not: only Oak's laboratory has been driven and watched.
+
+The reasoning behind a finding does **not** go in the cell. `desc` is exported verbatim into
+`atlas.json`, vendored into other repositories and read by tools that never asked for a
+hyperlink, so a URL there ages badly in places nobody is looking. The fact goes on the entry;
+the story goes in the chapter page's prose, in a `### Findings behind these bytes` table
+linking to `docs/gen1/discoveries.md#<slug>` in TerminalGB. Those slugs are a published
+contract at the other end — read the page for them, never invent one — and `make check` only
+resolves external links under `make links`, so a rotted one will not turn CI red.
+
+`tools/render.py` folds `instance` rows onto slot 1, **except where the row has a description**.
+`wPlayerBattleStatus1`..`3` are consecutive one-byte symbols and so read as a repeated
+structure to the extractor, but they hold different bits; a written description is the signal
+that a slot means something of its own, and folding it away would hide the thing that was
+written down.
+
 ### Two licences, and the boundary is a path
 
 **Content is CC BY-SA 4.0; code is MIT.** `atlases/**`, `docs/**.md`, `docs/brand/**` and

@@ -30,7 +30,7 @@ discards it and offers you a new game over the top of it.
 | `$AD2C` b1 | 512 | <a id="s-sSpriteData"></a>`sSpriteData` | R |  |
 | `$B0C0` b1 | 1122 | <a id="s-sCurBoxData"></a>`sCurBoxData` | R |  |
 | `$B522` b1 | 1 | <a id="s-sTileAnimations"></a>`sTileAnimations` | R |  |
-| `$B523` b1 | 1 | <a id="s-sMainDataCheckSum"></a>`sMainDataCheckSum`<br><a id="s-sGameDataEnd"></a>`sGameDataEnd` | R | The checksum over `sMainData`. Edit a save by hand and this has to be fixed, or the game discards it. |
+| `$B523` b1 | 1 | <a id="s-sMainDataCheckSum"></a>`sMainDataCheckSum`<br><a id="s-sGameDataEnd"></a>`sGameDataEnd` | R | **`sMainDataCheckSum`** — The checksum over `sMainData`. Edit a save by hand and this has to be fixed, or the game discards it. **`sGameDataEnd`** — One past the run `CalcCheckSum` covers — numerically the same address as `sMainDataCheckSum`, which is where the complement of that byte sum is stored. |
 | `$DA80` | — | <a id="s-wMainDataEnd"></a>`wMainDataEnd` | RL | One past the saved block. |
 | `$7856` b28 | 839 | <a id="s-CalcCheckSum"></a>`CalcCheckSum` | · | The save checksum: the complement of a byte sum. Edit a save by hand and this is what has to be recomputed. |
 

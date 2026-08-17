@@ -27,7 +27,7 @@ SRAM	1	$AF2C	404	sPartyData	entry	Save Data	party	rom	The saved party, the same 
 SRAM	1	$B0C0	1122	sCurBoxData	entry	Save Data	save	rom	
 SRAM	1	$B522	1	sTileAnimations	entry	Save Data	save	rom	
 SRAM	1	$B523	1	sMainDataCheckSum	entry	Save Data	save	rom	The checksum over `sMainData`. Edit a save by hand and this has to be fixed, or the game discards it.
-SRAM	1	$B523	1	sGameDataEnd	alias	Save Data	save	rom	
+SRAM	1	$B523	1	sGameDataEnd	alias	Save Data	save	rom	One past the run `CalcCheckSum` covers — numerically the same address as `sMainDataCheckSum`, which is where the complement of that byte sum is stored.
 SRAM	1	$B524	2780	free:SRAM1:$B524	free	(unallocated)	system		
 SRAM	2	$A000	1122	sBox1	entry	Saved Boxes 1	storage	rom	Stored box 1. Boxes 1-6 live in cartridge RAM bank 2 and boxes 7-12 in bank 3; each occupies `$462` bytes, which is the stride between consecutive `sBoxN` labels.
 SRAM	2	$A462	1122	sBox2	instance	Saved Boxes 1	storage	rom	
@@ -35,16 +35,16 @@ SRAM	2	$A8C4	1122	sBox3	instance	Saved Boxes 1	storage	rom
 SRAM	2	$AD26	1122	sBox4	instance	Saved Boxes 1	storage	rom	
 SRAM	2	$B188	1122	sBox5	instance	Saved Boxes 1	storage	rom	
 SRAM	2	$B5EA	1122	sBox6	instance	Saved Boxes 1	storage	rom	
-SRAM	2	$BA4C	1	sBank2AllBoxesChecksum	entry	Saved Boxes 1	storage	rom	
+SRAM	2	$BA4C	1	sBank2AllBoxesChecksum	entry	Saved Boxes 1	storage	rom	One checksum over all six of this bank's boxes, sitting immediately after them at `$A000 + 6 x $462`. The per-box bytes follow it.
 SRAM	2	$BA4D	6	sBank2IndividualBoxChecksums	entry	Saved Boxes 1	storage	rom	Six checksum bytes, one per box in this bank. A box that fails its checksum is not decoded; the trainer plugin refuses it with a note rather than showing wrong data.
 SRAM	2	$BA53	1453	free:SRAM2:$BA53	free	(unallocated)	system		
 SRAM	3	$A000	1122	sBox7	entry	Saved Boxes 2	storage	rom	Stored box 7, the first in cartridge RAM bank 3.
-SRAM	3	$A462	1122	sBox8	entry	Saved Boxes 2	storage	rom	
-SRAM	3	$A8C4	1122	sBox9	entry	Saved Boxes 2	storage	rom	
-SRAM	3	$AD26	1122	sBox10	entry	Saved Boxes 2	storage	rom	
-SRAM	3	$B188	1122	sBox11	entry	Saved Boxes 2	storage	rom	
-SRAM	3	$B5EA	1122	sBox12	entry	Saved Boxes 2	storage	rom	
-SRAM	3	$BA4C	1	sBank3AllBoxesChecksum	entry	Saved Boxes 2	storage	rom	
+SRAM	3	$A462	1122	sBox8	entry	Saved Boxes 2	storage	rom	Stored box 8, in cartridge RAM bank 3.
+SRAM	3	$A8C4	1122	sBox9	entry	Saved Boxes 2	storage	rom	Stored box 9.
+SRAM	3	$AD26	1122	sBox10	entry	Saved Boxes 2	storage	rom	Stored box 10.
+SRAM	3	$B188	1122	sBox11	entry	Saved Boxes 2	storage	rom	Stored box 11.
+SRAM	3	$B5EA	1122	sBox12	entry	Saved Boxes 2	storage	rom	Stored box 12, the last in bank 3.
+SRAM	3	$BA4C	1	sBank3AllBoxesChecksum	entry	Saved Boxes 2	storage	rom	The same for bank 3's six boxes.
 SRAM	3	$BA4D	6	sBank3IndividualBoxChecksums	entry	Saved Boxes 2	storage	rom	Six checksum bytes, one per box in this bank.
 SRAM	3	$BA53	1453	free:SRAM3:$BA53	free	(unallocated)	system		
 WRAM0	-	$C000	1	wUnusedMusicByte	entry	Audio RAM	audio	rom,live	Declared and never read. Kept because removing it would move everything below it.
@@ -105,22 +105,22 @@ WRAM0	-	$C109	1	wSpritePlayerStateData1FacingDirection	entry	Sprite State Data	s
 WRAM0	-	$C10A	1	wSpritePlayerStateData1YAdjusted	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C10B	1	wSpritePlayerStateData1XAdjusted	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C10C	4	wSpritePlayerStateData1CollisionData	entry	Sprite State Data	sprites	rom,live	Which of the four directions are blocked for this slot.
-WRAM0	-	$C110	1	wSprite01StateData1PictureID	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C110	1	wSprite01StateData1	alias	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C110	1	wSpritePlayerStateData1End	alias	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C111	1	wSprite01StateData1MovementStatus	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C112	1	wSprite01StateData1ImageIndex	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C113	1	wSprite01StateData1YStepVector	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C114	1	wSprite01StateData1YPixels	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C115	1	wSprite01StateData1XStepVector	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C116	1	wSprite01StateData1XPixels	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C110	1	wSprite01StateData1PictureID	entry	Sprite State Data	sprites	rom,live	Which sprite sheet map object 1 draws from; 0 means the slot is unused, and it is the only thing `PrepareOAMData` checks before drawing the slot.
+WRAM0	-	$C110	1	wSprite01StateData1	alias	Sprite State Data	sprites	rom,live	Map object 1's first-bank structure.
+WRAM0	-	$C110	1	wSpritePlayerStateData1End	alias	Sprite State Data	sprites	rom,live	One past the player slot's first-bank structure.
+WRAM0	-	$C111	1	wSprite01StateData1MovementStatus	entry	Sprite State Data	sprites	rom,live	What map object 1 is doing: standing, walking, or being scripted.
+WRAM0	-	$C112	1	wSprite01StateData1ImageIndex	entry	Sprite State Data	sprites	rom,live	Which frame is showing: the high nybble picks the video-RAM pattern slot and the low nybble indexes the facing-and-animation table. `$FF` means off screen, do not draw.
+WRAM0	-	$C113	1	wSprite01StateData1YStepVector	entry	Sprite State Data	sprites	rom,live	How far map object 1 moves vertically per frame of a step.
+WRAM0	-	$C114	1	wSprite01StateData1YPixels	entry	Sprite State Data	sprites	rom,live	Screen position of map object 1, vertical. The engine owns it while a step is in progress — that is what `wWalkCounter` being non-zero means.
+WRAM0	-	$C115	1	wSprite01StateData1XStepVector	entry	Sprite State Data	sprites	live	How far map object 1 moves horizontally per frame of a step.
+WRAM0	-	$C116	1	wSprite01StateData1XPixels	entry	Sprite State Data	sprites	rom,live	Screen position of map object 1, horizontal.
 WRAM0	-	$C117	1	wSprite01StateData1IntraAnimFrameCounter	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C118	1	wSprite01StateData1AnimFrameCounter	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C119	1	wSprite01StateData1FacingDirection	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C119	1	wSprite01StateData1FacingDirection	entry	Sprite State Data	sprites	rom,live	Which way map object 1 faces: 0 down, 4 up, 8 left, 12 right.
 WRAM0	-	$C11A	1	wSprite01StateData1YAdjusted	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C11B	1	wSprite01StateData1XAdjusted	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C11C	4	wSprite01StateData1CollisionData	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C120	1	wSprite01StateData1End	entry	Sprite State Data	sprites	live	
+WRAM0	-	$C11C	4	wSprite01StateData1CollisionData	entry	Sprite State Data	sprites	live	Which of the four directions are blocked for map object 1.
+WRAM0	-	$C120	1	wSprite01StateData1End	entry	Sprite State Data	sprites	live	One past map object 1's first-bank structure.
 WRAM0	-	$C120	1	wSprite02StateData1	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C120	1	wSprite02StateData1PictureID	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C121	1	wSprite02StateData1MovementStatus	instance	Sprite State Data	sprites	rom,live	
@@ -349,14 +349,14 @@ WRAM0	-	$C210	2	wSprite01StateData2	instance	Sprite State Data	sprites	rom,live
 WRAM0	-	$C210	2	wSpritePlayerStateData2End	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C212	1	wSprite01StateData2YDisplacement	entry	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C213	1	wSprite01StateData2XDisplacement	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C214	1	wSprite01StateData2MapY	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C215	1	wSprite01StateData2MapX	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C214	1	wSprite01StateData2MapY	entry	Sprite State Data	sprites	rom,live	Map position of map object 1, vertical, offset by 4 — the map's object list stores the coordinate plus four, and the border blocks are what the four counts.
+WRAM0	-	$C215	1	wSprite01StateData2MapX	entry	Sprite State Data	sprites	rom,live	Map position of map object 1, horizontal, offset by 4.
 WRAM0	-	$C216	1	wSprite01StateData2MovementByte1	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C217	1	wSprite01StateData2GrassPriority	entry	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C218	1	wSprite01StateData2MovementDelay	entry	Sprite State Data	sprites	live	
 WRAM0	-	$C219	4	wSprite01StateData2OrigFacingDirection	entry	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C21D	1	wSprite01StateData2PictureID	instance	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C21E	2	wSprite01StateData2ImageBaseOffset	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C21E	2	wSprite01StateData2ImageBaseOffset	entry	Sprite State Data	sprites	rom,live	Where in video RAM map object 1's tiles were loaded. **Zero makes the engine skip the slot's movement handling entirely** — no walking, no visibility cull — while the drawing pass, which looks only at `PictureID`, still puts it on screen.
 WRAM0	-	$C220	2	wSprite01StateData2End	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C220	2	wSprite02StateData2	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C220	2	wSprite02StateData2WalkAnimationCounter	instance	Sprite State Data	sprites	rom,live	
@@ -539,19 +539,19 @@ WRAM0	-	$C2F8	1	wSprite15StateData2MovementDelay	instance	Sprite State Data	spri
 WRAM0	-	$C2F9	4	wSprite15StateData2OrigFacingDirection	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C2FD	1	wSprite15StateData2PictureID	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C2FE	2	wSprite15StateData2ImageBaseOffset	instance	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C300	1	wShadowOAMSprite00YCoord	entry	OAM Buffer	sprites	rom,live	
+WRAM0	-	$C300	1	wShadowOAMSprite00YCoord	entry	OAM Buffer	sprites	rom,live	Screen y of object entry 0, offset by 16. `$A0` parks an entry off the bottom of the screen, and it is the byte that floods `wTileMap` when the buffer overruns.
 WRAM0	-	$C300	0	wSpriteDataEnd	entry	Sprite State Data	sprites	rom,live	One past the sprite state.
-WRAM0	-	$C300	1	wShadowOAM	alias	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C300	1	wShadowOAMSprite00	alias	OAM Buffer	sprites	rom,live	
+WRAM0	-	$C300	1	wShadowOAM	alias	OAM Buffer	sprites	rom,live	The 40-entry object buffer the game rebuilds every frame and copies to the hardware — four bytes each: y, x, tile id, attributes. **Never write it directly**; the sprite structures above are where a change belongs. Its end is `wTileMap`, and the two being adjacent is a fault the cartridge can fall through.
+WRAM0	-	$C300	1	wShadowOAMSprite00	alias	OAM Buffer	sprites	rom,live	Object entry 0: the four bytes y, x, tile id, attributes.
 WRAM0	-	$C300	0	wSprite15StateData2End	instance	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C301	1	wShadowOAMSprite00XCoord	entry	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C302	1	wShadowOAMSprite00TileID	entry	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C303	1	wShadowOAMSprite00Attributes	entry	OAM Buffer	sprites	live	
-WRAM0	-	$C304	1	wShadowOAMSprite01YCoord	entry	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C304	1	wShadowOAMSprite01	alias	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C305	1	wShadowOAMSprite01XCoord	entry	OAM Buffer	sprites	live	
-WRAM0	-	$C306	1	wShadowOAMSprite01TileID	entry	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C307	1	wShadowOAMSprite01Attributes	entry	OAM Buffer	sprites	live	
+WRAM0	-	$C301	1	wShadowOAMSprite00XCoord	entry	OAM Buffer	sprites	rom,live	Screen x of object entry 0, offset by 8.
+WRAM0	-	$C302	1	wShadowOAMSprite00TileID	entry	OAM Buffer	sprites	rom,live	Which tile object entry 0 draws.
+WRAM0	-	$C303	1	wShadowOAMSprite00Attributes	entry	OAM Buffer	sprites	live	Palette, flip and priority bits for object entry 0.
+WRAM0	-	$C304	1	wShadowOAMSprite01YCoord	entry	OAM Buffer	sprites	rom,live	Screen y of object entry 1.
+WRAM0	-	$C304	1	wShadowOAMSprite01	alias	OAM Buffer	sprites	rom,live	Object entry 1, the same four bytes.
+WRAM0	-	$C305	1	wShadowOAMSprite01XCoord	entry	OAM Buffer	sprites	live	Screen x of object entry 1.
+WRAM0	-	$C306	1	wShadowOAMSprite01TileID	entry	OAM Buffer	sprites	rom,live	Which tile object entry 1 draws.
+WRAM0	-	$C307	1	wShadowOAMSprite01Attributes	entry	OAM Buffer	sprites	live	Attributes for object entry 1.
 WRAM0	-	$C308	1	wShadowOAMSprite02	instance	OAM Buffer	sprites	rom,live	
 WRAM0	-	$C308	1	wShadowOAMSprite02YCoord	instance	OAM Buffer	sprites	rom,live	
 WRAM0	-	$C309	1	wShadowOAMSprite02XCoord	instance	OAM Buffer	sprites	rom,live	
@@ -742,9 +742,9 @@ WRAM0	-	$C39C	1	wShadowOAMSprite39YCoord	instance	OAM Buffer	sprites	rom,live
 WRAM0	-	$C39D	1	wShadowOAMSprite39XCoord	instance	OAM Buffer	sprites	rom,live	
 WRAM0	-	$C39E	1	wShadowOAMSprite39TileID	instance	OAM Buffer	sprites	live	
 WRAM0	-	$C39F	1	wShadowOAMSprite39Attributes	instance	OAM Buffer	sprites	rom,live	
-WRAM0	-	$C3A0	0	wShadowOAMEnd	entry	OAM Buffer	sprites	rom,live	
+WRAM0	-	$C3A0	0	wShadowOAMEnd	entry	OAM Buffer	sprites	rom,live	One past the object buffer — **and it is `wTileMap`'s first byte**. `PrepareOAMData` bounds its clear loop only by comparing the low byte of its write pointer against this address, and nothing bounds the pointer at 40 entries, so a map fielding more than forty sprites walks straight past here and stamps `$A0` into the screen buffer every fourth byte for 256 bytes. A stamped tile is not walkable in any direction.
 WRAM0	-	$C3A0	360	wTileMap	entry	Tilemap	screen	rom,live,inv	**The screen, and it reads back as text.** 20x18 tile ids. Gen 1 loads its font so that a tile id *is* the character code of the glyph it draws, and `PlaceString` writes character codes straight in here — so decoding this buffer with the Gen 1 charmap prints exactly what a player can see. That single property is what lets a headless test navigate menus. **Verified live**: the harness decodes it mid-play and counts letters and spaces.
-WRAM0	-	$C508	1	wSerialPartyMonsPatchList	entry	Tilemap	link	rom,live	
+WRAM0	-	$C508	1	wSerialPartyMonsPatchList	entry	Tilemap	link	rom,live	The third of the three blocks a trade exchanges: the offsets inside the party block where a byte had to be substituted, because the preamble byte `$FD` cannot appear in the data. The list is split at offset 252, which is `$FD - 1`, into one part for the Pokemon region and one for the rest.
 WRAM0	-	$C508	1	wShadowOAMBackup	alias	Tilemap	link	rom,live	A copy of the shadow OAM taken before something borrows the sprite hardware, so the overworld can be restored.
 WRAM0	-	$C508	1	wShadowOAMBackupSprite00	alias	Tilemap	link	rom,live	
 WRAM0	-	$C508	1	wShadowOAMBackupSprite00YCoord	alias	Tilemap	link	rom,live	
@@ -949,14 +949,14 @@ WRAM0	-	$C5A5	1	wShadowOAMBackupSprite39XCoord	instance	Tilemap	sprites	live
 WRAM0	-	$C5A6	1	wShadowOAMBackupSprite39TileID	instance	Tilemap	sprites	live	
 WRAM0	-	$C5A7	1	wShadowOAMBackupSprite39Attributes	instance	Tilemap	sprites	rom,live	
 WRAM0	-	$C5A8	40	wShadowOAMBackupEnd	entry	Tilemap	sprites	rom,live	
-WRAM0	-	$C5D0	280	wSerialEnemyMonsPatchList	entry	Tilemap	link	rom,live	
+WRAM0	-	$C5D0	280	wSerialEnemyMonsPatchList	entry	Tilemap	link	rom,live	The same list for the party the other console sent.
 WRAM0	-	$C6E8	1300	wTempPic	entry	Overworld Map	overworld	rom,live	
 WRAM0	-	$C6E8	1300	wOverworldMap	alias	Overworld Map	overworld	rom,live	The live block map: the room the engine is actually drawing, with a three-block border. 1,300 bytes, which is the size of the largest map in the game.
-WRAM0	-	$CBFC	0	wOverworldMapEnd	entry	Overworld Map	overworld	rom,live	
+WRAM0	-	$CBFC	0	wOverworldMapEnd	entry	Overworld Map	overworld	rom,live	One past the live block map. The 1,300 bytes in front of it, with the three-block border the loader leaves on every side, are the rule a map has to obey: `(width + 6) x (height + 6)` blocks must fit. The game's own largest map is 10x72 blocks, which comes to 1,248.
 WRAM0	-	$CBFC	40	wRedrawRowOrColumnSrcTiles	entry	WRAM	overworld	rom,live	
 WRAM0	-	$CC24	1	wTopMenuItemY	entry	WRAM	screen	rom,live	Row of the first item in the open menu, in screen tiles.
 WRAM0	-	$CC25	1	wTopMenuItemX	entry	WRAM	screen	rom,live	Column of the first item in the open menu.
-WRAM0	-	$CC26	1	wCurrentMenuItem	entry	WRAM	screen	rom,live	Which item the cursor is on, counted from the top item.
+WRAM0	-	$CC26	1	wCurrentMenuItem	entry	WRAM	screen	rom,live	Which item the cursor is on, counted from the top item — **except in a battle's move list**, where `MoveSelectionMenu` writes `wPlayerMoveListIndex + 1`, so the first move reads 1 and every other menu in the game reads 0. Getting it wrong is silent: the cursor already equals the target, A fires on the wrong move, and nothing anywhere says so.
 WRAM0	-	$CC27	1	wTileBehindCursor	entry	WRAM	screen	rom,live	The tile the cursor is covering, so it can be put back.
 WRAM0	-	$CC28	1	wMaxMenuItem	entry	WRAM	screen	rom,live	The last selectable index in the open menu.
 WRAM0	-	$CC29	1	wMenuWatchedKeys	entry	WRAM	screen	rom,live	Which buttons the menu handler will act on. A menu that ignores B sets it here.
@@ -975,11 +975,11 @@ WRAM0	-	$CC38	2	wTradeCenterPointerTableIndex	entry	WRAM	link	rom,live	Which sta
 WRAM0	-	$CC3A	2	wTextDest	entry	WRAM	screen	rom,live	Where the text engine is writing to, usually inside `wTileMap`.
 WRAM0	-	$CC3C	1	wDoNotWaitForButtonPressAfterDisplayingText	entry	WRAM	screen	rom,live	Set when a message should not stop for the player.
 WRAM0	-	$CC3D	1	wSerialSyncAndExchangeNybbleReceiveData	entry	WRAM	link	rom,live	The nybble received by the combined sync-and-exchange round.
-WRAM0	-	$CC3D	1	wLinkMenuSelectionReceiveBuffer	alias	WRAM	link	rom,live	
+WRAM0	-	$CC3D	1	wLinkMenuSelectionReceiveBuffer	alias	WRAM	link	rom,live	The other console's link-menu selection, in the same encoding.
 WRAM0	-	$CC3D	1	wSerialExchangeNybbleTempReceiveData	alias	WRAM	link	rom,live	
 WRAM0	-	$CC3E	4	wSerialExchangeNybbleReceiveData	entry	WRAM	link	rom,live	The nybble the other console offered.
 WRAM0	-	$CC42	5	wSerialExchangeNybbleSendData	entry	WRAM	link	rom,live	The nybble this console is offering in a synchronisation round. It is a **latch**: it keeps being sent until something resets it, which is why cancelling a trade has to be answered from every phase, not just the one it was pressed in.
-WRAM0	-	$CC42	5	wLinkMenuSelectionSendBuffer	alias	WRAM	link	rom,live	
+WRAM0	-	$CC42	5	wLinkMenuSelectionSendBuffer	alias	WRAM	link	rom,live	The link menu's own use of this byte: `$D0` or'ed with the menu item and the button shifted left twice, so `$D4` is A pressed on TRADE CENTER.
 WRAM0	-	$CC47	2	wUnknownSerialCounter	entry	WRAM	scratch	rom,live	A counter the link code keeps; what it is for is **not established here**.
 WRAM0	-	$CC47	2	wEnteringCableClub	alias	WRAM	scratch	rom,live	Set while the attendant is checking the cable.
 WRAM0	-	$CC47	2	wLinkTimeoutCounter	alias	WRAM	scratch	rom,live	Counts down while waiting for the other console. Running out is what produces the Cable Club's failure message rather than a hang.
@@ -1023,8 +1023,8 @@ WRAM0	-	$CCD3	1	wParentMenuItem	alias	WRAM	battle	rom,live
 WRAM0	-	$CCD3	1	wSimulatedJoypadStatesEnd	alias	WRAM	battle	rom,live	One past the canned button sequence.
 WRAM0	-	$CCD4	1	wForceEvolution	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCD5	2	wAILayer2Encouragement	entry	WRAM	battle	rom,live	
-WRAM0	-	$CCD7	1	wPlayerSubstituteHP	entry	WRAM	battle	rom,live	
-WRAM0	-	$CCD8	1	wEnemySubstituteHP	entry	WRAM	battle	rom,live	
+WRAM0	-	$CCD7	1	wPlayerSubstituteHP	entry	WRAM	battle	rom,live	The substitute's remaining hit points on your side. A whole byte, so a substitute is a quantity and not a two-state flag.
+WRAM0	-	$CCD8	1	wEnemySubstituteHP	entry	WRAM	battle	rom,live	The same for the opponent's substitute.
 WRAM0	-	$CCD9	2	wTestBattlePlayerSelectedMove	entry	WRAM	scratch	rom,live	Used by the game's own debug battle, not by ordinary play.
 WRAM0	-	$CCDB	1	wMoveMenuType	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCDC	1	wPlayerSelectedMove	entry	WRAM	battle	rom,live	The move you chose this turn.
@@ -1043,11 +1043,11 @@ WRAM0	-	$CCEF	1	wEnemyDisabledMoveNumber	entry	WRAM	battle	rom,live
 WRAM0	-	$CCF0	1	wInHandlePlayerMonFainted	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCF1	1	wPlayerUsedMove	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCF2	1	wEnemyUsedMove	entry	WRAM	battle	rom,live	
-WRAM0	-	$CCF3	1	wEnemyMonMinimized	entry	WRAM	battle	rom,live	
+WRAM0	-	$CCF3	1	wEnemyMonMinimized	entry	WRAM	battle	rom,live	The same for the opponent.
 WRAM0	-	$CCF4	1	wMoveDidntMiss	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCF5	1	wPartyFoughtCurrentEnemyFlags	entry	WRAM	party	rom,live	One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split.
 WRAM0	-	$CCF6	1	wLowHealthAlarmDisabled	entry	WRAM	battle	rom,live	
-WRAM0	-	$CCF7	14	wPlayerMonMinimized	entry	WRAM	battle	rom,live	
+WRAM0	-	$CCF7	14	wPlayerMonMinimized	entry	WRAM	battle	rom,live	Set once your active Pokemon has used MINIMIZE. **Cosmetic in Generation 1**: it only changes how the sprite is drawn. Nothing doubles a stomping move's damage against it until a later generation.
 WRAM0	-	$CD05	10	wEnemyNumHits	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD05	10	wEnemyBideAccumulatedDamage	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD05	10	wLuckySlotHiddenEventIndex	alias	WRAM	scratch	rom,live	
@@ -1057,39 +1057,39 @@ WRAM0	-	$CD0F	1	wMiscBattleDataEnd	alias	WRAM	battle	rom,live
 WRAM0	-	$CD0F	1	wVermilionDockTileMapBufferEnd	alias	WRAM	battle	rom,live	
 WRAM0	-	$CD10	2	wPlayerMonUnmodifiedMaxHP	entry	WRAM	battle	rom,live	Your maximum HP before any stat stage was applied. The stages are applied to a copy, so the original has to be kept.
 WRAM0	-	$CD10	2	wInGameTradeTextPointerTablePointer	alias	WRAM	battle	rom,live	
-WRAM0	-	$CD12	1	wPlayerMonUnmodifiedAttack	entry	WRAM	battle	rom,live	
+WRAM0	-	$CD12	1	wPlayerMonUnmodifiedAttack	entry	WRAM	battle	rom,live	Attack for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD12	1	wInGameTradeTextPointerTableIndex	alias	WRAM	battle	rom,live	
 WRAM0	-	$CD13	1	wInGameTradeGiveMonName	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD14	2	wPlayerMonUnmodifiedDefense	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD16	2	wPlayerMonUnmodifiedSpeed	entry	WRAM	battle	live	
-WRAM0	-	$CD18	2	wPlayerMonUnmodifiedSpecial	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD1A	1	wPlayerMonAttackMod	entry	WRAM	battle	rom,live	
+WRAM0	-	$CD14	2	wPlayerMonUnmodifiedDefense	entry	WRAM	battle	rom,live	Defense for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
+WRAM0	-	$CD16	2	wPlayerMonUnmodifiedSpeed	entry	WRAM	battle	live	Speed for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
+WRAM0	-	$CD18	2	wPlayerMonUnmodifiedSpecial	entry	WRAM	battle	rom,live	Special for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
+WRAM0	-	$CD1A	1	wPlayerMonAttackMod	entry	WRAM	battle	rom,live	Attack stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
 WRAM0	-	$CD1A	1	wPlayerMonStatMods	alias	WRAM	battle	rom,live	In-battle stat stages for your side. **7 is neutral, not 0**: the block is zeroed work RAM until `InitBattleVariables` writes the sevens, so a sample taken on the first frames of a battle reads zero everywhere and looks like -6 on everything.
-WRAM0	-	$CD1B	1	wPlayerMonDefenseMod	entry	WRAM	battle	live	
-WRAM0	-	$CD1C	1	wPlayerMonSpeedMod	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD1D	1	wPlayerMonSpecialMod	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD1E	1	wPlayerMonAccuracyMod	entry	WRAM	battle	rom	
+WRAM0	-	$CD1B	1	wPlayerMonDefenseMod	entry	WRAM	battle	live	Defense stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
+WRAM0	-	$CD1C	1	wPlayerMonSpeedMod	entry	WRAM	battle	rom,live	Speed stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
+WRAM0	-	$CD1D	1	wPlayerMonSpecialMod	entry	WRAM	battle	rom,live	Special stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
+WRAM0	-	$CD1E	1	wPlayerMonAccuracyMod	entry	WRAM	battle	rom	Accuracy stage for your side, biased by 7. **There is no accuracy value anywhere** — only this stage: `MoveHitTest` scales the move table's accuracy byte by it and by the inverse of the defender's evasion stage, so the number in the move table stops being true the first time a SAND-ATTACK lands. Measured on the cartridge: TACKLE's 242/255 becomes 159/255 after one stage down and 121/255 after two.
 WRAM0	-	$CD1E	1	wInGameTradeReceiveMonName	alias	WRAM	battle	rom	
-WRAM0	-	$CD1F	3	wPlayerMonEvasionMod	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD22	1	wPlayerMonStatModsEnd	entry	WRAM	battle	rom,live	
+WRAM0	-	$CD1F	3	wPlayerMonEvasionMod	entry	WRAM	battle	rom,live	Evasion stage for your side, biased by 7, and the other half of `MoveHitTest`'s scaling.
+WRAM0	-	$CD22	1	wPlayerMonStatModsEnd	entry	WRAM	battle	rom,live	One past your side's six stat stages.
 WRAM0	-	$CD23	1	wEnemyMonUnmodifiedLevel	entry	WRAM	battle	rom,live	
 WRAM0	-	$CD24	2	wEnemyMonUnmodifiedMaxHP	entry	WRAM	battle	rom,live	The opponent's maximum HP before stat stages.
-WRAM0	-	$CD26	2	wEnemyMonUnmodifiedAttack	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD28	1	wEnemyMonUnmodifiedDefense	entry	WRAM	battle	live	
+WRAM0	-	$CD26	2	wEnemyMonUnmodifiedAttack	entry	WRAM	battle	rom,live	Attack for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
+WRAM0	-	$CD28	1	wEnemyMonUnmodifiedDefense	entry	WRAM	battle	live	Defense for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD29	1	wInGameTradeMonNick	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD2A	2	wEnemyMonUnmodifiedSpeed	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD2C	1	wEnemyMonUnmodifiedSpecial	entry	WRAM	battle	live	
+WRAM0	-	$CD2A	2	wEnemyMonUnmodifiedSpeed	entry	WRAM	battle	rom,live	Speed for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
+WRAM0	-	$CD2C	1	wEnemyMonUnmodifiedSpecial	entry	WRAM	battle	live	Special for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD2D	1	wEngagedTrainerClass	entry	WRAM	battle	rom,live	
 WRAM0	-	$CD2E	1	wEngagedTrainerSet	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD2E	1	wEnemyMonAttackMod	alias	WRAM	battle	rom,live	
+WRAM0	-	$CD2E	1	wEnemyMonAttackMod	alias	WRAM	battle	rom,live	Attack stage for the opponent, same bias.
 WRAM0	-	$CD2E	1	wEnemyMonStatMods	alias	WRAM	battle	rom,live	In-battle stat stages for the opponent, same 1-13 range with 7 neutral.
-WRAM0	-	$CD2F	1	wEnemyMonDefenseMod	entry	WRAM	battle	live	
-WRAM0	-	$CD30	1	wEnemyMonSpeedMod	entry	WRAM	battle	live	
-WRAM0	-	$CD31	1	wEnemyMonSpecialMod	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD32	1	wEnemyMonAccuracyMod	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD33	1	wEnemyMonEvasionMod	entry	WRAM	battle	rom,live	
+WRAM0	-	$CD2F	1	wEnemyMonDefenseMod	entry	WRAM	battle	live	Defense stage for the opponent, same bias.
+WRAM0	-	$CD30	1	wEnemyMonSpeedMod	entry	WRAM	battle	live	Speed stage for the opponent, same bias.
+WRAM0	-	$CD31	1	wEnemyMonSpecialMod	entry	WRAM	battle	rom,live	Special stage for the opponent, same bias.
+WRAM0	-	$CD32	1	wEnemyMonAccuracyMod	entry	WRAM	battle	rom,live	Accuracy stage for the opponent, same bias.
+WRAM0	-	$CD33	1	wEnemyMonEvasionMod	entry	WRAM	battle	rom,live	Evasion stage for the opponent, same bias.
 WRAM0	-	$CD34	2	wInGameTradeReceiveMonSpecies	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD36	1	wEnemyMonStatModsEnd	entry	WRAM	battle	live	
+WRAM0	-	$CD36	1	wEnemyMonStatModsEnd	entry	WRAM	battle	live	One past the opponent's six.
 WRAM0	-	$CD37	1	wFilteredBagItemsCount	entry	WRAM	bag	rom,live	How many items are in that filtered view.
 WRAM0	-	$CD37	1	wNPCMovementDirections2Index	alias	WRAM	bag	rom,live	
 WRAM0	-	$CD37	1	wUnusedLinkMenuByte	alias	WRAM	bag	rom,live	
@@ -1309,7 +1309,7 @@ WRAM0	-	$CF8F	2	wItemPrices	entry	WRAM	bag	rom,live
 WRAM0	-	$CF91	1	wCurListMenuItem	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF91	1	wCurItem	alias	WRAM	scratch	rom,live	Which item the current operation is about.
 WRAM0	-	$CF91	1	wCurPartySpecies	alias	WRAM	scratch	rom,live	The species the current operation is about — set by `InitOpponent`, and reused by the party menus.
-WRAM0	-	$CF92	1	wWhichPokemon	entry	WRAM	storage	rom,live	
+WRAM0	-	$CF92	1	wWhichPokemon	entry	WRAM	storage	rom,live	Which party slot a menu or a link rendezvous picked. **`EnemySendOutFirstMon` computes it as the received byte minus 4 with no bounds check**, so answering the after-a-faint rendezvous with a move index instead of a slot underflows it to slot 252 and the game fields a glitch Pokemon whose name changes every turn.
 WRAM0	-	$CF93	1	wPrintItemPrices	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF94	1	wListMenuID	entry	WRAM	screen	rom,live	
 WRAM0	-	$CF94	1	wHPBarType	alias	WRAM	screen	rom,live	
@@ -1332,7 +1332,7 @@ WRAM0	-	$CFA6	3	wLoadedMonExp	entry	WRAM	scratch	rom,live
 WRAM0	-	$CFA9	2	wLoadedMonHPExp	entry	WRAM	scratch	live	
 WRAM0	-	$CFAB	2	wLoadedMonAttackExp	entry	WRAM	scratch	live	
 WRAM0	-	$CFAD	2	wLoadedMonDefenseExp	entry	WRAM	scratch	live	
-WRAM0	-	$CFAF	2	wLoadedMonSpeedExp	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CFAF	2	wLoadedMonSpeedExp	entry	WRAM	scratch	rom,live	A base address `CalcStat` is pointed at so its stat-experience lookup lands on a byte pair holding only DVs. That is how the engine recomputes a stat from base stats, DVs and level **with zero stat experience** — which is why a recomputed stat and a stored one can disagree.
 WRAM0	-	$CFB1	2	wLoadedMonSpecialExp	entry	WRAM	scratch	live	
 WRAM0	-	$CFB3	2	wLoadedMonDVs	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFB5	4	wLoadedMonPP	entry	WRAM	scratch	live	
@@ -1373,7 +1373,7 @@ WRAM0	-	$CFE8	1	wEnemyMonBoxLevel	entry	WRAM	battle	rom,live	The level as stored
 WRAM0	-	$CFE8	1	wEnemyMonPartyPos	alias	WRAM	battle	rom,live	Which party slot this battler came from. Occupies the byte a party structure uses for `BoxLevel`.
 WRAM0	-	$CFE9	1	wEnemyMonStatus	entry	WRAM	battle	rom,live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
 WRAM0	-	$CFEA	1	wEnemyMonType1	entry	WRAM	battle	rom,live	First type.
-WRAM0	-	$CFEA	1	wEnemyMonType	alias	WRAM	battle	rom,live	
+WRAM0	-	$CFEA	1	wEnemyMonType	alias	WRAM	battle	rom,live	The opponent's two type bytes as a pair, `Type1` then `Type2`.
 WRAM0	-	$CFEB	1	wEnemyMonType2	instance	WRAM	battle	rom,live	Second type; equal to `Type1` for a single-typed Pokemon.
 WRAM0	-	$CFEC	1	wEnemyMonCatchRate	entry	WRAM	battle	live	The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths.
 WRAM0	-	$CFED	4	wEnemyMonMoves	entry	WRAM	battle	rom,live	Four move ids, 0 for an empty slot.
@@ -1391,13 +1391,13 @@ WRAM0	-	$D007	1	wEnemyMonActualCatchRate	entry	WRAM	battle	rom,live	The catch ra
 WRAM0	-	$D008	1	wEnemyMonBaseExp	entry	WRAM	battle	rom	
 WRAM0	-	$D009	11	wBattleMonNick	entry	WRAM	battle	rom,live	The nickname shown above your side of the battle.
 WRAM0	-	$D014	1	wBattleMonSpecies	entry	WRAM	battle	rom,live	Species **internal index** — not the Pokedex number. `PokedexOrder` converts.
-WRAM0	-	$D014	1	wBattleMon	alias	WRAM	battle	rom,live,inv	Your active Pokemon as the battle engine sees it: a 29-byte `battle_struct`, **not** the 44-byte party shape. Original trainer, experience and stat experience are gone, so the level and the five stats are at different offsets. **Verified**: the harness derives the size from the atlas and requires `wTrainerClass` to follow immediately.
+WRAM0	-	$D014	1	wBattleMon	alias	WRAM	battle	rom,live,inv	Your active Pokemon as the battle engine sees it: a 29-byte `battle_struct`, **not** the 44-byte party shape. Original trainer, experience and stat experience are gone, so the level and the five stats sit at different offsets — confusing the two is the classic way to produce a level 6,400 Pokemon. The level here is also what a critical hit doubles: Generation 1 substitutes twice the level into the damage formula, so the worst critical outcome is above the best ordinary one.
 WRAM0	-	$D015	2	wBattleMonHP	entry	WRAM	battle	rom,live	Current HP, **big-endian**.
 WRAM0	-	$D017	1	wBattleMonBoxLevel	entry	WRAM	battle	live	The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is.
 WRAM0	-	$D017	1	wBattleMonPartyPos	alias	WRAM	battle	live	Which party slot this battler came from. Occupies the byte a party structure uses for `BoxLevel`.
 WRAM0	-	$D018	1	wBattleMonStatus	entry	WRAM	battle	rom,live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
 WRAM0	-	$D019	1	wBattleMonType1	entry	WRAM	battle	rom,live	First type.
-WRAM0	-	$D019	1	wBattleMonType	alias	WRAM	battle	rom,live	
+WRAM0	-	$D019	1	wBattleMonType	alias	WRAM	battle	rom,live	Your active Pokemon's two type bytes as a pair.
 WRAM0	-	$D01A	1	wBattleMonType2	instance	WRAM	battle	rom,live	Second type; equal to `Type1` for a single-typed Pokemon.
 WRAM0	-	$D01B	1	wBattleMonCatchRate	entry	WRAM	battle	live	The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths.
 WRAM0	-	$D01C	4	wBattleMonMoves	entry	WRAM	battle	rom,live	Four move ids, 0 for an empty slot.
@@ -1427,25 +1427,25 @@ WRAM0	-	$D05C	1	wLoneAttackNo	alias	WRAM	battle	rom,live
 WRAM0	-	$D05D	1	wTrainerNo	entry	WRAM	battle	rom,live	Which roster of the trainer class to build, once `wCurOpponent` has named the class.
 WRAM0	-	$D05E	1	wCriticalHitOrOHKO	entry	WRAM	battle	rom,live	Whether the damage calculation produced a critical hit or a one-hit knockout.
 WRAM0	-	$D05F	1	wMoveMissed	entry	WRAM	battle	rom,live	Set when the accuracy check failed. Gen 1 gives even a 100%-accuracy move a 1-in-256 chance of landing here.
-WRAM0	-	$D060	1	wPlayerStatsToDouble	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D060	1	wPlayerStatsToDouble	entry	WRAM	scratch	rom,live	First of the five bytes `SendOutMon` zeroes when a Pokemon comes out — `$D060` to `$D064`, which takes in all three of your side's battle-status bytes. That is what makes a Generation 1 screen belong to the Pokemon rather than to the side.
 WRAM0	-	$D060	1	wBattleStatusData	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D061	1	wPlayerStatsToHalve	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D062	1	wPlayerBattleStatus1	entry	WRAM	battle	rom,live	Volatile battle state for your side: confusion, trapping, flinching and the rest, one bit each.
-WRAM0	-	$D063	1	wPlayerBattleStatus2	instance	WRAM	battle	rom,live	
-WRAM0	-	$D064	1	wPlayerBattleStatus3	instance	WRAM	battle	rom,live	
-WRAM0	-	$D065	1	wEnemyStatsToDouble	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D063	1	wPlayerBattleStatus2	instance	WRAM	battle	rom,live	The second volatile byte for your side. It carries `GETTING_PUMPED`, the FOCUS ENERGY bit, with no counter beside it — and in Generation 1 that bit **quarters** the critical-hit rate instead of raising it, because `CriticalHitTest` shifts the wrong way. Measured for a base-Speed-140 Electrode: 0.2604 of 960 attacks crit without it, 0.0612 of 588 with.
+WRAM0	-	$D064	1	wPlayerBattleStatus3	instance	WRAM	battle	rom,live	The third volatile byte for your side. Bit 1 is LIGHT SCREEN and bit 2 is REFLECT, and in Generation 1 **both belong to the Pokemon, not to the side**: `SendOutMon` zeroes this byte, so a screen does not survive a switch. Measured driving a real voluntary switch: `$04` with REFLECT up, `$00` immediately afterwards, with the opponent's copy at `$00` throughout.
+WRAM0	-	$D065	1	wEnemyStatsToDouble	entry	WRAM	scratch	rom,live	The opponent's copy, `$D065` to `$D069`; `EnemySendOut` and `EnemySendOutFirstMon` zero it the same way.
 WRAM0	-	$D066	1	wEnemyStatsToHalve	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D067	1	wEnemyBattleStatus1	entry	WRAM	battle	rom,live	The same volatile state for the opponent.
-WRAM0	-	$D068	1	wEnemyBattleStatus2	instance	WRAM	battle	rom,live	
-WRAM0	-	$D069	1	wEnemyBattleStatus3	instance	WRAM	battle	rom,live	
-WRAM0	-	$D06A	1	wPlayerNumAttacksLeft	entry	WRAM	battle	rom,live	Turns left on a multi-turn move.
-WRAM0	-	$D06B	1	wPlayerConfusedCounter	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D06C	1	wPlayerToxicCounter	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D06D	2	wPlayerDisabledMove	entry	WRAM	battle	rom,live	
-WRAM0	-	$D06F	1	wEnemyNumAttacksLeft	entry	WRAM	battle	rom,live	
-WRAM0	-	$D070	1	wEnemyConfusedCounter	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D071	1	wEnemyToxicCounter	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D072	2	wEnemyDisabledMove	entry	WRAM	battle	rom,live	
+WRAM0	-	$D068	1	wEnemyBattleStatus2	instance	WRAM	battle	rom,live	The opponent's copy of the second volatile byte.
+WRAM0	-	$D069	1	wEnemyBattleStatus3	instance	WRAM	battle	rom,live	The opponent's copy of the third volatile byte, screens included.
+WRAM0	-	$D06A	1	wPlayerNumAttacksLeft	entry	WRAM	battle	rom,live	Turns left on a multi-turn move. **A trapping move that misses leaves this standing**: `TrappingEffect` runs before the hit test and `MoveHitTest`'s miss path clears the status flag without clearing the counter, so the next roll looks exactly like a decrement of the old one. Key a measurement on the flag, not on this byte.
+WRAM0	-	$D06B	1	wPlayerConfusedCounter	entry	WRAM	scratch	rom,live	Turns of confusion left on your side. **Measured over 97 applications**: the byte holds 2 to 5 when freshly applied and steps down by one a turn, so the Pokemon acts confused on one fewer turn than the number rolled and is clear again on the turn it reaches zero.
+WRAM0	-	$D06C	1	wPlayerToxicCounter	entry	WRAM	scratch	rom,live	How many times the badly-poisoned drain has ticked on your side. The residual is `max(1, maxHP/16)` multiplied by this, so it grows every turn. **Nothing in the game bounds it** — the byte is incremented and never compared — and it is not one of the bytes a switch clears, so switching out downgrades TOXIC to ordinary poison and leaves the count standing. Measured: 5 in a plain battle, 10 against a target healing itself.
+WRAM0	-	$D06D	2	wPlayerDisabledMove	entry	WRAM	battle	rom,live	Which of your moves DISABLE has locked, and for how long, packed into one byte: the move slot 1-4 in the high nybble and the countdown in the low one. **Measured over 136 applications**: the countdown is drawn uniformly from 1 to 8, and the move menu refuses the slot for as long as the byte is non-zero.
+WRAM0	-	$D06F	1	wEnemyNumAttacksLeft	entry	WRAM	battle	rom,live	Turns left on the opponent's multi-turn move, and it carries the same trap as your side's copy: a trapping move that misses clears the flag and leaves this standing.
+WRAM0	-	$D070	1	wEnemyConfusedCounter	entry	WRAM	scratch	rom,live	The same for the opponent.
+WRAM0	-	$D071	1	wEnemyToxicCounter	entry	WRAM	scratch	rom,live	The same for the opponent.
+WRAM0	-	$D072	2	wEnemyDisabledMove	entry	WRAM	battle	rom,live	The same for the opponent.
 WRAM0	-	$D074	4	wUnknownSerialCounter2	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D074	4	wPlayerBideAccumulatedDamage	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D074	4	wPlayerNumHits	alias	WRAM	scratch	rom,live	
@@ -1530,7 +1530,7 @@ WRAM0	-	$D0B9	1	wMonHBaseHP	entry	WRAM	scratch	rom,live
 WRAM0	-	$D0B9	1	wMonHBaseStats	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D0BA	1	wMonHBaseAttack	entry	WRAM	scratch	live	
 WRAM0	-	$D0BB	1	wMonHBaseDefense	entry	WRAM	scratch	live	
-WRAM0	-	$D0BC	1	wMonHBaseSpeed	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D0BC	1	wMonHBaseSpeed	entry	WRAM	scratch	rom,live	The species' **base** Speed, as `GetMonHeader` loaded it. `CriticalHitTest` reads it here and not the in-battle stat, so the critical-hit rate is half the base Speed out of 256 and neither a SWORDS DANCE nor a paralysis moves it. Measured for a base-Speed-140 Electrode: 250 crits in 960 attacks.
 WRAM0	-	$D0BD	1	wMonHBaseSpecial	entry	WRAM	scratch	live	
 WRAM0	-	$D0BE	1	wMonHType1	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0BE	1	wMonHTypes	alias	WRAM	scratch	rom,live	
@@ -1555,7 +1555,7 @@ WRAM0	-	$D11A	1	wWalkBikeSurfStateCopy	entry	WRAM	overworld	rom,live
 WRAM0	-	$D11B	1	wInitListType	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D11C	1	wCapturedMonSpecies	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D11D	1	wFirstMonsNotOutYet	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D11E	1	wPokeBallAnimData	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D11E	1	wPokeBallAnimData	entry	WRAM	scratch	rom,live	What the ball animation is going to show. **The shake count is cosmetic**: everything that computes it runs after the capture has already been decided, so three shakes is not a near miss — the miss happened earlier.
 WRAM0	-	$D11E	1	wCalculateWhoseStats	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D11E	1	wMaxPP	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D11E	1	wMoveGrammar	alias	WRAM	scratch	rom,live	
@@ -1613,13 +1613,13 @@ WRAM0	-	$D163	1	wPartyCount	entry	Party Data	party	rom,live,inv	How many Pokemon
 WRAM0	-	$D163	1	wPartyDataStart	alias	Party Data	party	rom,live	Label for the first byte of the party block; the same address as `wPartyCount`.
 WRAM0	-	$D164	7	wPartySpecies	entry	Party Data	party	rom,live,inv	Six species indices and an `$FF` terminator — a flat list beside the structures, written at a different moment from the copy inside each `party_struct`. The two agreeing is what makes both addresses trustworthy.
 WRAM0	-	$D16B	1	wPartyMon1Species	entry	Party Data	party	rom,live	Species **internal index** — not the Pokedex number. `PokedexOrder` converts.
-WRAM0	-	$D16B	1	wPartyMon1	alias	Party Data	party	rom,live,inv	
+WRAM0	-	$D16B	1	wPartyMon1	alias	Party Data	party	rom,live,inv	Party slot 1, the whole 44-byte `party_struct`.
 WRAM0	-	$D16B	1	wPartyMons	alias	Party Data	party	rom,live,inv	Six 44-byte `party_struct`s. See [the structures](structures.md). The species here is the **internal index**, not the Pokedex number.
 WRAM0	-	$D16C	2	wPartyMon1HP	entry	Party Data	party	rom,live	Current HP, **big-endian**.
 WRAM0	-	$D16E	1	wPartyMon1BoxLevel	entry	Party Data	party	live	The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is.
 WRAM0	-	$D16F	1	wPartyMon1Status	entry	Party Data	party	rom,live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
 WRAM0	-	$D170	1	wPartyMon1Type1	entry	Party Data	party	live	First type.
-WRAM0	-	$D170	1	wPartyMon1Type	alias	Party Data	party	live	
+WRAM0	-	$D170	1	wPartyMon1Type	alias	Party Data	party	live	The two type bytes as a pair, `Type1` then `Type2`.
 WRAM0	-	$D171	1	wPartyMon1Type2	instance	Party Data	party	live	Second type; equal to `Type1` for a single-typed Pokemon.
 WRAM0	-	$D172	1	wPartyMon1CatchRate	entry	Party Data	party	live	The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths.
 WRAM0	-	$D173	4	wPartyMon1Moves	entry	Party Data	party	rom,live	Four move ids, 0 for an empty slot.
@@ -1769,14 +1769,14 @@ WRAM0	-	$D26B	2	wPartyMon6Attack	instance	Party Data	party	live
 WRAM0	-	$D26D	2	wPartyMon6Defense	instance	Party Data	party	live	
 WRAM0	-	$D26F	2	wPartyMon6Speed	instance	Party Data	party	live	
 WRAM0	-	$D271	2	wPartyMon6Special	instance	Party Data	party	rom,live	
-WRAM0	-	$D273	11	wPartyMon1OT	entry	Party Data	party	rom,live	
+WRAM0	-	$D273	11	wPartyMon1OT	entry	Party Data	party	rom,live	Party slot 1's original-trainer name, 11 bytes.
 WRAM0	-	$D273	11	wPartyMonOT	alias	Party Data	party	rom,live,inv	Six 11-byte original-trainer names, one per party slot. Kept outside the structure because the trade protocol sends them as their own block.
 WRAM0	-	$D27E	11	wPartyMon2OT	instance	Party Data	party	live	
 WRAM0	-	$D289	11	wPartyMon3OT	instance	Party Data	party	live	
 WRAM0	-	$D294	11	wPartyMon4OT	instance	Party Data	party	rom,live	
 WRAM0	-	$D29F	11	wPartyMon5OT	instance	Party Data	party	live	
 WRAM0	-	$D2AA	11	wPartyMon6OT	instance	Party Data	party	live	
-WRAM0	-	$D2B5	11	wPartyMon1Nick	entry	Party Data	party	rom,live	
+WRAM0	-	$D2B5	11	wPartyMon1Nick	entry	Party Data	party	rom,live	Party slot 1's nickname, 11 bytes.
 WRAM0	-	$D2B5	11	wPartyMonNicks	alias	Party Data	party	rom,live,inv	Six 11-byte nicknames. A Pokemon with no nickname carries its species name here, which is why renaming and evolving both have to rewrite it.
 WRAM0	-	$D2C0	11	wPartyMon2Nick	instance	Party Data	party	live	
 WRAM0	-	$D2CB	11	wPartyMon3Nick	instance	Party Data	party	live	
@@ -1786,7 +1786,7 @@ WRAM0	-	$D2EC	11	wPartyMon6Nick	instance	Party Data	party	live
 WRAM0	-	$D2F7	0	wPartyDataEnd	entry	Party Data	party	rom,live	One past the party block. Numerically the same address as `wMainDataStart`, which is why the party is saved: it sits immediately below the block a save writes out.
 WRAM0	-	$D2F7	19	wPokedexOwned	entry	Main Data	pokedex	rom,live,inv	One bit per Pokedex number, 19 bytes for 151 species: caught. **Verified live** — every owned bit must also be set in `wPokedexSeen`, which is a claim about both addresses at once and far stronger than either alone.
 WRAM0	-	$D2F7	19	wMainDataStart	alias	Main Data	pokedex	rom,live	**The save boundary.** Everything from here to `wMainDataEnd` is what a save writes into cartridge RAM. A tool that writes only below this address cannot corrupt a `.sav` however wrong it is, which is the guarantee battle control is built on.
-WRAM0	-	$D2F7	0	wPartyMonNicksEnd	alias	Party Data	pokedex	rom,live	
+WRAM0	-	$D2F7	0	wPartyMonNicksEnd	alias	Party Data	pokedex	rom,live	One past the party nicknames — and numerically the save boundary, which is why the same address is also `wMainDataStart`.
 WRAM0	-	$D30A	19	wPokedexSeen	entry	Main Data	pokedex	rom,live,inv	One bit per Pokedex number: encountered. Set by the battle engine the first time a species appears, whether or not you catch it.
 WRAM0	-	$D30A	19	wPokedexOwnedEnd	alias	Main Data	pokedex	rom,live	One past the owned array.
 WRAM0	-	$D31D	1	wNumBagItems	entry	Main Data	bag	rom,live,inv	How many *kinds* of item are in the bag, 0 to 20. **Verified live** against the terminator.
@@ -1802,7 +1802,7 @@ WRAM0	-	$D359	2	wPlayerID	entry	Main Data	player	rom,live	Your trainer ID, **big
 WRAM0	-	$D35B	1	wMapMusicSoundID	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D35C	1	wMapMusicROMBank	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D35D	1	wMapPalOffset	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D35E	1	wCurMap	entry	Main Data	overworld	rom,live,inv	The map you are standing on. **The trap**: this is saved state, and a continued game restores it together with the whole map header below it, so writing a different map id without the matching header makes the engine read the new map's blocks through the old map's pointers — observed as an illegal opcode within a second.
+WRAM0	-	$D35E	1	wCurMap	entry	Main Data	overworld	rom,live,inv	The map you are standing on — but **not a test for that map being loaded**. `LoadMapData` opens with a wait for VBlank, so this byte changes a whole frame before `LoadMapHeader` runs; `TryLoadSaveFile` fills it at the top of the main menu, long before CONTINUE is chosen; and for one frame after a warp it names the destination while `wXCoord`/`wYCoord` still name the door you left by. **The other trap**: it is saved state, restored together with the whole map header below it, so writing a different map id without the matching header makes the engine read the new map's blocks through the old map's pointers — observed as an illegal opcode within a second.
 WRAM0	-	$D35F	2	wCurrentTileBlockMapViewPointer	entry	Main Data	overworld	rom,live	Where the camera is inside `wOverworldMap`.
 WRAM0	-	$D361	1	wYCoord	entry	Main Data	overworld	rom,live,inv	Player position, in 16x16 tiles from the top of the map.
 WRAM0	-	$D362	1	wXCoord	entry	Main Data	overworld	rom,live,inv	Player position, in tiles from the left.
@@ -1811,16 +1811,16 @@ WRAM0	-	$D364	1	wXBlockCoord	entry	Main Data	overworld	rom,live	Which half of th
 WRAM0	-	$D365	1	wLastMap	entry	Main Data	overworld	rom,live	The map you came from, for a warp that returns you.
 WRAM0	-	$D366	1	wUnusedLastMapWidth	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D367	1	wCurMapTileset	entry	Main Data	overworld	rom,live	Which tileset the map uses. **Bit 7 is a latch**, not part of the id: `LoadSAV` sets it and `LoadMapHeader` returns without loading anything when it sees it, which is the whole reason a continued game trusts the saved header.
-WRAM0	-	$D367	1	wCurMapHeader	alias	Main Data	overworld	rom,live	
+WRAM0	-	$D367	1	wCurMapHeader	alias	Main Data	overworld	rom,live	The whole nine-byte block `LoadMapHeader` copies verbatim out of the map's ROM header, starting at this byte: tileset, height, width, block pointer, text pointer, script pointer, connection bitfield. All of it lives inside `sMainData`, which is why it is the save and not the ROM that a continued game reads a room out of.
 WRAM0	-	$D368	1	wCurMapHeight	entry	Main Data	overworld	rom,live,inv	Map height in **32x32 blocks**. Coordinates are in 16x16 tiles, so a map is twice this many tiles tall — report the raw number to anything that thinks in coordinates and it will conclude the player is outside the map.
-WRAM0	-	$D369	1	wCurMapWidth	entry	Main Data	overworld	rom,live,inv	Map width in 32x32 blocks. Twice this in tiles.
+WRAM0	-	$D369	1	wCurMapWidth	entry	Main Data	overworld	rom,live,inv	Map width in 32x32 blocks. Twice this in tiles. With `wCurMapHeight` it is the cleanest test there is for whether the player is actually standing on a map: `LoadMapHeader` fills both, no real map is 0x0, and measured on the cartridge they read 0 for the first several thousand frames of a new game while `wCurMap` already names the bedroom.
 WRAM0	-	$D36A	2	wCurMapDataPtr	entry	Main Data	overworld	rom,live	Where the map's block data lives, in the bank named by the map header.
 WRAM0	-	$D36C	2	wCurMapTextPtr	entry	Main Data	overworld	rom,live	The map's text pointer table.
 WRAM0	-	$D36E	2	wCurMapScriptPtr	entry	Main Data	events	rom,live	The map's script pointer table.
 WRAM0	-	$D370	1	wCurMapConnections	entry	Main Data	overworld	rom,live	Which edges of this map join another, one bit each.
-WRAM0	-	$D371	1	wNorthConnectedMap	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D371	1	wCurMapHeaderEnd	alias	Main Data	overworld	rom,live	
-WRAM0	-	$D371	1	wNorthConnectionHeader	alias	Main Data	overworld	rom,live	
+WRAM0	-	$D371	1	wNorthConnectedMap	entry	Main Data	overworld	rom,live	Which map lies north, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; north is bit 3.
+WRAM0	-	$D371	1	wCurMapHeaderEnd	alias	Main Data	overworld	rom,live	One past the copied map header, and literally the copy loop's own bound — so the block's length is not inferred.
+WRAM0	-	$D371	1	wNorthConnectionHeader	alias	Main Data	overworld	rom,live	The northern connection header as a whole: 11 bytes, present only when bit 3 of `wCurMapConnections` is set.
 WRAM0	-	$D372	2	wNorthConnectionStripSrc	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D374	2	wNorthConnectionStripDest	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D376	1	wNorthConnectionStripLength	entry	Main Data	overworld	rom,live	
@@ -1828,8 +1828,8 @@ WRAM0	-	$D377	1	wNorthConnectedMapWidth	entry	Main Data	overworld	rom,live
 WRAM0	-	$D378	1	wNorthConnectedMapYAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D379	1	wNorthConnectedMapXAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D37A	2	wNorthConnectedMapViewPointer	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D37C	1	wSouthConnectedMap	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D37C	1	wSouthConnectionHeader	alias	Main Data	overworld	rom,live	
+WRAM0	-	$D37C	1	wSouthConnectedMap	entry	Main Data	overworld	rom,live	Which map lies south, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; south is bit 2.
+WRAM0	-	$D37C	1	wSouthConnectionHeader	alias	Main Data	overworld	rom,live	The southern connection header as a whole: 11 bytes, present only when bit 2 of `wCurMapConnections` is set.
 WRAM0	-	$D37D	2	wSouthConnectionStripSrc	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D37F	2	wSouthConnectionStripDest	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D381	1	wSouthConnectionStripLength	entry	Main Data	overworld	rom,live	
@@ -1837,8 +1837,8 @@ WRAM0	-	$D382	1	wSouthConnectedMapWidth	entry	Main Data	overworld	rom,live
 WRAM0	-	$D383	1	wSouthConnectedMapYAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D384	1	wSouthConnectedMapXAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D385	2	wSouthConnectedMapViewPointer	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D387	1	wWestConnectedMap	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D387	1	wWestConnectionHeader	alias	Main Data	overworld	rom,live	
+WRAM0	-	$D387	1	wWestConnectedMap	entry	Main Data	overworld	rom,live	Which map lies west, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; west is bit 1.
+WRAM0	-	$D387	1	wWestConnectionHeader	alias	Main Data	overworld	rom,live	The western connection header as a whole: 11 bytes, present only when bit 1 of `wCurMapConnections` is set.
 WRAM0	-	$D388	2	wWestConnectionStripSrc	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D38A	2	wWestConnectionStripDest	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D38C	1	wWestConnectionStripLength	entry	Main Data	overworld	rom,live	
@@ -1846,8 +1846,8 @@ WRAM0	-	$D38D	1	wWestConnectedMapWidth	entry	Main Data	overworld	rom,live
 WRAM0	-	$D38E	1	wWestConnectedMapYAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D38F	1	wWestConnectedMapXAlignment	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D390	2	wWestConnectedMapViewPointer	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D392	1	wEastConnectedMap	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D392	1	wEastConnectionHeader	alias	Main Data	overworld	rom,live	
+WRAM0	-	$D392	1	wEastConnectedMap	entry	Main Data	overworld	rom,live	Which map lies east, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; east is bit 0.
+WRAM0	-	$D392	1	wEastConnectionHeader	alias	Main Data	overworld	rom,live	The eastern connection header as a whole: 11 bytes, present only when bit 0 of `wCurMapConnections` is set.
 WRAM0	-	$D393	2	wEastConnectionStripSrc	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D395	2	wEastConnectionStripDest	entry	Main Data	overworld	rom,live	
 WRAM0	-	$D397	1	wEastConnectionStripLength	entry	Main Data	overworld	rom,live	
@@ -1892,7 +1892,7 @@ WRAM0	-	$D5A6	32	wToggleableObjectFlags	entry	Main Data	events	rom,live	One bit 
 WRAM0	-	$D5C6	7	wToggleableObjectFlagsEnd	entry	Main Data	events	live	
 WRAM0	-	$D5CD	1	wSavedSpriteImageIndex	entry	Main Data	events	rom,live	
 WRAM0	-	$D5CE	34	wToggleableObjectList	entry	Main Data	events	rom,live	Which map objects are currently hidden, rebuilt whenever a map loads.
-WRAM0	-	$D5F0	1	wOaksLabCurScript	entry	Main Data	events	rom,live	
+WRAM0	-	$D5F0	1	wOaksLabCurScript	entry	Main Data	events	rom,live	Which step of Oak's laboratory's map script the game is on. **Measured**: losing the starter battle to the rival leaves it at `SCRIPT_OAKSLAB_RIVAL_STARTS_EXIT`, which is exactly where winning leaves it — `HandlePlayerBlackOut` returns without blacking the player out when `wCurOpponent` is `OPP_RIVAL1` and `wCurMap` is `OAKS_LAB`, and the map script heals the party on its next tick.
 WRAM0	-	$D5F0	1	wGameProgressFlags	alias	Main Data	events	rom,live	
 WRAM0	-	$D5F1	2	wPalletTownCurScript	entry	Main Data	events	rom,live	
 WRAM0	-	$D5F3	1	wBluesHouseCurScript	entry	Main Data	events	rom,live	
@@ -2036,35 +2036,35 @@ WRAM0	-	$D888	11	wGrassMons	entry	Main Data	overworld	rom,live	The map's wild en
 WRAM0	-	$D893	9	wSerialEnemyDataBlock	entry	Main Data	link	rom,live	The other console's party block as it arrives.
 WRAM0	-	$D89C	1	wEnemyPartyCount	entry	Main Data	battle	rom,live	How many Pokemon the opposing trainer has.
 WRAM0	-	$D89D	7	wEnemyPartySpecies	entry	Main Data	battle	rom,live	The opposing team's species list, `$FF`-terminated, mirroring `wPartySpecies`.
-WRAM0	-	$D8A4	1	wEnemyMon1Species	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8A4	1	wEnemyMon1	alias	Main Data	battle	rom,live	
+WRAM0	-	$D8A4	1	wEnemyMon1Species	entry	Main Data	battle	rom,live	Species **internal index** — not the Pokedex number.
+WRAM0	-	$D8A4	1	wEnemyMon1	alias	Main Data	battle	rom,live	The opposing trainer's first Pokemon, a whole 44-byte `party_struct` — the *party* shape, not the 29-byte battle shape. Shares its storage with the map's wild encounter tables, so it only means anything once `wIsInBattle` says a trainer battle is running.
 WRAM0	-	$D8A4	1	wEnemyMons	alias	Main Data	battle	rom,live	The opposing team as six 44-byte `party_struct`s — the *party* shape, not the battle shape. Shares storage with the map's wild encounter tables.
 WRAM0	-	$D8A4	1	wWaterRate	alias	Main Data	battle	rom,live	How often surfing rolls an encounter.
-WRAM0	-	$D8A5	2	wEnemyMon1HP	entry	Main Data	battle	rom,live	
+WRAM0	-	$D8A5	2	wEnemyMon1HP	entry	Main Data	battle	rom,live	Current HP, **big-endian**.
 WRAM0	-	$D8A5	2	wWaterMons	alias	Main Data	battle	rom,live	The map's wild encounter table for water.
-WRAM0	-	$D8A7	1	wEnemyMon1BoxLevel	entry	Main Data	battle	live	
-WRAM0	-	$D8A8	1	wEnemyMon1Status	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8A9	1	wEnemyMon1Type1	entry	Main Data	battle	live	
-WRAM0	-	$D8A9	1	wEnemyMon1Type	alias	Main Data	battle	live	
+WRAM0	-	$D8A7	1	wEnemyMon1BoxLevel	entry	Main Data	battle	live	The level as stored, kept in step with `Level`.
+WRAM0	-	$D8A8	1	wEnemyMon1Status	entry	Main Data	battle	rom,live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
+WRAM0	-	$D8A9	1	wEnemyMon1Type1	entry	Main Data	battle	live	First type.
+WRAM0	-	$D8A9	1	wEnemyMon1Type	alias	Main Data	battle	live	The two type bytes as a pair.
 WRAM0	-	$D8AA	1	wEnemyMon1Type2	instance	Main Data	battle	live	
-WRAM0	-	$D8AB	1	wEnemyMon1CatchRate	entry	Main Data	battle	live	
-WRAM0	-	$D8AC	4	wEnemyMon1Moves	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8B0	2	wEnemyMon1OTID	entry	Main Data	battle	live	
-WRAM0	-	$D8B2	3	wEnemyMon1Exp	entry	Main Data	battle	live	
-WRAM0	-	$D8B5	2	wEnemyMon1HPExp	entry	Main Data	battle	live	
-WRAM0	-	$D8B7	2	wEnemyMon1AttackExp	entry	Main Data	battle	live	
-WRAM0	-	$D8B9	2	wEnemyMon1DefenseExp	entry	Main Data	battle	live	
-WRAM0	-	$D8BB	2	wEnemyMon1SpeedExp	entry	Main Data	battle	live	
-WRAM0	-	$D8BD	2	wEnemyMon1SpecialExp	entry	Main Data	battle	live	
-WRAM0	-	$D8BF	2	wEnemyMon1DVs	entry	Main Data	battle	live	
-WRAM0	-	$D8C1	4	wEnemyMon1PP	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8C5	1	wEnemyMon1Level	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8C6	2	wEnemyMon1MaxHP	entry	Main Data	battle	rom,live	
-WRAM0	-	$D8C6	2	wEnemyMon1Stats	alias	Main Data	battle	rom,live	
-WRAM0	-	$D8C8	2	wEnemyMon1Attack	entry	Main Data	battle	live	
-WRAM0	-	$D8CA	2	wEnemyMon1Defense	entry	Main Data	battle	live	
-WRAM0	-	$D8CC	2	wEnemyMon1Speed	entry	Main Data	battle	live	
-WRAM0	-	$D8CE	2	wEnemyMon1Special	entry	Main Data	battle	live	
+WRAM0	-	$D8AB	1	wEnemyMon1CatchRate	entry	Main Data	battle	live	The species' base catch rate, carried in the structure. Fixed for a trainer's Pokemon, which is one of the things that makes a trainer battle different from a wild one.
+WRAM0	-	$D8AC	4	wEnemyMon1Moves	entry	Main Data	battle	rom,live	Four move ids, 0 for an empty slot.
+WRAM0	-	$D8B0	2	wEnemyMon1OTID	entry	Main Data	battle	live	The original trainer's ID, **big-endian**.
+WRAM0	-	$D8B2	3	wEnemyMon1Exp	entry	Main Data	battle	live	Experience, **three bytes big-endian**.
+WRAM0	-	$D8B5	2	wEnemyMon1HPExp	entry	Main Data	battle	live	Stat experience for HP, big-endian.
+WRAM0	-	$D8B7	2	wEnemyMon1AttackExp	entry	Main Data	battle	live	Stat experience for Attack, big-endian.
+WRAM0	-	$D8B9	2	wEnemyMon1DefenseExp	entry	Main Data	battle	live	Stat experience for Defense, big-endian.
+WRAM0	-	$D8BB	2	wEnemyMon1SpeedExp	entry	Main Data	battle	live	Stat experience for Speed, big-endian.
+WRAM0	-	$D8BD	2	wEnemyMon1SpecialExp	entry	Main Data	battle	live	Stat experience for Special, big-endian.
+WRAM0	-	$D8BF	2	wEnemyMon1DVs	entry	Main Data	battle	live	Two bytes, four nybbles: attack, defense, speed, special. **A trainer's Pokemon has fixed DVs** — `LoadEnemyMonData` writes the same two bytes into every one of them — so anything that draws a conclusion from DVs has to exclude trainer battles or it will report the same answer forever.
+WRAM0	-	$D8C1	4	wEnemyMon1PP	entry	Main Data	battle	rom,live	Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2.
+WRAM0	-	$D8C5	1	wEnemyMon1Level	entry	Main Data	battle	rom,live	The level the stats below were computed at.
+WRAM0	-	$D8C6	2	wEnemyMon1MaxHP	entry	Main Data	battle	rom,live	Computed maximum HP, big-endian.
+WRAM0	-	$D8C6	2	wEnemyMon1Stats	alias	Main Data	battle	rom,live	The five computed stats, in order, big-endian.
+WRAM0	-	$D8C8	2	wEnemyMon1Attack	entry	Main Data	battle	live	Computed Attack, big-endian.
+WRAM0	-	$D8CA	2	wEnemyMon1Defense	entry	Main Data	battle	live	Computed Defense, big-endian.
+WRAM0	-	$D8CC	2	wEnemyMon1Speed	entry	Main Data	battle	live	Computed Speed, big-endian.
+WRAM0	-	$D8CE	2	wEnemyMon1Special	entry	Main Data	battle	live	Computed Special, big-endian.
 WRAM0	-	$D8D0	1	wEnemyMon2	instance	Main Data	battle	live	
 WRAM0	-	$D8D0	1	wEnemyMon2Species	instance	Main Data	battle	live	
 WRAM0	-	$D8D1	2	wEnemyMon2HP	instance	Main Data	battle	live	
@@ -2195,14 +2195,14 @@ WRAM0	-	$D9A4	2	wEnemyMon6Attack	instance	Main Data	battle	live
 WRAM0	-	$D9A6	2	wEnemyMon6Defense	instance	Main Data	battle	live	
 WRAM0	-	$D9A8	2	wEnemyMon6Speed	instance	Main Data	battle	rom,live	
 WRAM0	-	$D9AA	2	wEnemyMon6Special	instance	Main Data	battle	live	
-WRAM0	-	$D9AC	11	wEnemyMon1OT	entry	Main Data	battle	rom,live	
+WRAM0	-	$D9AC	11	wEnemyMon1OT	entry	Main Data	battle	rom,live	Slot 1's original-trainer name, 11 bytes.
 WRAM0	-	$D9AC	11	wEnemyMonOT	alias	Main Data	battle	rom,live	The opposing team's original-trainer names.
 WRAM0	-	$D9B7	11	wEnemyMon2OT	instance	Main Data	battle	live	
 WRAM0	-	$D9C2	11	wEnemyMon3OT	instance	Main Data	battle	live	
 WRAM0	-	$D9CD	11	wEnemyMon4OT	instance	Main Data	battle	rom,live	
 WRAM0	-	$D9D8	11	wEnemyMon5OT	instance	Main Data	battle	live	
 WRAM0	-	$D9E3	11	wEnemyMon6OT	instance	Main Data	battle	live	
-WRAM0	-	$D9EE	11	wEnemyMon1Nick	entry	Main Data	battle	rom,live	
+WRAM0	-	$D9EE	11	wEnemyMon1Nick	entry	Main Data	battle	rom,live	Slot 1's nickname, 11 bytes.
 WRAM0	-	$D9EE	11	wEnemyMonNicks	alias	Main Data	battle	rom,live	The opposing team's nicknames.
 WRAM0	-	$D9F9	11	wEnemyMon2Nick	instance	Main Data	battle	live	
 WRAM0	-	$DA04	11	wEnemyMon3Nick	instance	Main Data	battle	live	
@@ -2228,7 +2228,7 @@ WRAM0	-	$DA60	2	wDayCareMonHP	entry	Main Data	storage	live	Current HP, **big-end
 WRAM0	-	$DA62	1	wDayCareMonBoxLevel	entry	Main Data	storage	rom,live	The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is.
 WRAM0	-	$DA63	1	wDayCareMonStatus	entry	Main Data	storage	live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
 WRAM0	-	$DA64	1	wDayCareMonType1	entry	Main Data	storage	live	First type.
-WRAM0	-	$DA64	1	wDayCareMonType	alias	Main Data	storage	live	
+WRAM0	-	$DA64	1	wDayCareMonType	alias	Main Data	storage	live	The two type bytes as a pair.
 WRAM0	-	$DA65	1	wDayCareMonType2	instance	Main Data	storage	live	Second type; equal to `Type1` for a single-typed Pokemon.
 WRAM0	-	$DA66	1	wDayCareMonCatchRate	entry	Main Data	storage	live	The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths.
 WRAM0	-	$DA67	4	wDayCareMonMoves	entry	Main Data	storage	rom,live	Four move ids, 0 for an empty slot.
@@ -2246,13 +2246,13 @@ WRAM0	-	$DA80	0	wMainDataEnd	entry	Main Data	save	rom,live	One past the saved bl
 WRAM0	-	$DA80	1	wBoxDataStart	alias	Current Box Data	storage	rom,live	The start of the **live** PC box in work RAM. One of twelve boxes is open at a time and this is where it lives; the other eleven sit in cartridge RAM.
 WRAM0	-	$DA81	21	wBoxSpecies	entry	Current Box Data	storage	rom,live,inv	Twenty species indices and an `$FF` terminator, the box's answer to `wPartySpecies`. **Verified live** against the copy inside each `box_struct`.
 WRAM0	-	$DA96	1	wBoxMon1Species	entry	Current Box Data	storage	rom,live	Species **internal index** — not the Pokedex number. `PokedexOrder` converts.
-WRAM0	-	$DA96	1	wBoxMon1	alias	Current Box Data	storage	rom,live,inv	
+WRAM0	-	$DA96	1	wBoxMon1	alias	Current Box Data	storage	rom,live,inv	The first stored Pokemon, a whole 33-byte `box_struct`.
 WRAM0	-	$DA96	1	wBoxMons	alias	Current Box Data	storage	rom,live,inv	Twenty 33-byte `box_struct`s. Eleven bytes shorter than a `party_struct` because a stored Pokemon keeps no level and no computed stats — both are recalculated from its experience and DVs when it is withdrawn.
 WRAM0	-	$DA97	2	wBoxMon1HP	entry	Current Box Data	storage	live	Current HP, **big-endian**.
 WRAM0	-	$DA99	1	wBoxMon1BoxLevel	entry	Current Box Data	storage	live	The level as stored. Kept in step with `Level` for a party Pokemon; for a stored one it is the only level there is.
 WRAM0	-	$DA9A	1	wBoxMon1Status	entry	Current Box Data	storage	live	Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.
 WRAM0	-	$DA9B	1	wBoxMon1Type1	entry	Current Box Data	storage	live	First type.
-WRAM0	-	$DA9B	1	wBoxMon1Type	alias	Current Box Data	storage	live	
+WRAM0	-	$DA9B	1	wBoxMon1Type	alias	Current Box Data	storage	live	The two type bytes as a pair.
 WRAM0	-	$DA9C	1	wBoxMon1Type2	instance	Current Box Data	storage	live	Second type; equal to `Type1` for a single-typed Pokemon.
 WRAM0	-	$DA9D	1	wBoxMon1CatchRate	entry	Current Box Data	storage	live	The species' base catch rate, copied in at capture. Held item in later generations; here it is the ball maths.
 WRAM0	-	$DA9E	4	wBoxMon1Moves	entry	Current Box Data	storage	rom,live	Four move ids, 0 for an empty slot.
@@ -2626,7 +2626,7 @@ WRAM0	-	$DD20	2	wBoxMon20SpeedExp	instance	Current Box Data	storage	rom,live
 WRAM0	-	$DD22	2	wBoxMon20SpecialExp	instance	Current Box Data	storage	live	
 WRAM0	-	$DD24	2	wBoxMon20DVs	instance	Current Box Data	storage	live	
 WRAM0	-	$DD26	4	wBoxMon20PP	instance	Current Box Data	storage	live	
-WRAM0	-	$DD2A	11	wBoxMon1OT	entry	Current Box Data	storage	rom,live	
+WRAM0	-	$DD2A	11	wBoxMon1OT	entry	Current Box Data	storage	rom,live	Box slot 1's original-trainer name, 11 bytes.
 WRAM0	-	$DD2A	11	wBoxMonOT	alias	Current Box Data	storage	rom,live	Twenty 11-byte original-trainer names.
 WRAM0	-	$DD35	11	wBoxMon2OT	instance	Current Box Data	storage	live	
 WRAM0	-	$DD40	11	wBoxMon3OT	instance	Current Box Data	storage	live	
@@ -2647,7 +2647,7 @@ WRAM0	-	$DDDA	11	wBoxMon17OT	instance	Current Box Data	storage	live
 WRAM0	-	$DDE5	11	wBoxMon18OT	instance	Current Box Data	storage	live	
 WRAM0	-	$DDF0	11	wBoxMon19OT	instance	Current Box Data	storage	live	
 WRAM0	-	$DDFB	11	wBoxMon20OT	instance	Current Box Data	storage	live	
-WRAM0	-	$DE06	11	wBoxMon1Nick	entry	Current Box Data	storage	rom,live	
+WRAM0	-	$DE06	11	wBoxMon1Nick	entry	Current Box Data	storage	rom,live	Box slot 1's nickname, 11 bytes.
 WRAM0	-	$DE06	11	wBoxMonNicks	alias	Current Box Data	storage	rom,live	Twenty 11-byte nicknames.
 WRAM0	-	$DE11	11	wBoxMon2Nick	instance	Current Box Data	storage	rom,live	
 WRAM0	-	$DE1C	11	wBoxMon3Nick	instance	Current Box Data	storage	live	
@@ -2670,7 +2670,7 @@ WRAM0	-	$DECC	11	wBoxMon19Nick	instance	Current Box Data	storage	live
 WRAM0	-	$DED7	11	wBoxMon20Nick	instance	Current Box Data	storage	live	
 WRAM0	-	$DEE2	30	free:WRAM00:$DEE2	free	(unallocated)	system	rom,live	
 WRAM0	-	$DEE2	0	wBoxDataEnd	entry	Current Box Data	storage	rom,live	One past the live box.
-WRAM0	-	$DEE2	0	wBoxMonNicksEnd	alias	Current Box Data	storage	rom,live	
+WRAM0	-	$DEE2	0	wBoxMonNicksEnd	alias	Current Box Data	storage	rom,live	One past the box block. `wBoxDataEnd - wBoxDataStart` is `$462`, which is also the stride between consecutive `sBoxN` in cartridge RAM.
 WRAM0	-	$DF00	255	gap:WRAM00:$DF00	gap	Stack	system	live	
 WRAM0	-	$DFFF	1	wStack	entry	Stack	system	rom,live	The **top** of the stack. The Stack section is `$DF00-$DFFF` and this label sits at its last byte because the stack pointer starts here and grows downwards through all 256 bytes — which is why the atlas records the 255 bytes below it as reached by no label rather than as a hole.
 HRAM	-	$FF80	10	hDMARoutine	entry	OAM DMA	system	rom,live	The OAM DMA routine, copied into high RAM at boot. It has to run from here: the CPU cannot read the cartridge or work RAM while a DMA is in progress, so the loop that waits for it must live somewhere that stays readable.
@@ -2684,7 +2684,7 @@ HRAM	-	$FF8B	1	hItemPrice	alias	HRAM	system	rom,live
 HRAM	-	$FF8B	1	hMapStride	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hNorthSouthConnectionStripWidth	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hOAMTile	alias	HRAM	system	rom,live	
-HRAM	-	$FF8B	1	hPreviousTileset	alias	HRAM	system	rom,live	
+HRAM	-	$FF8B	1	hPreviousTileset	alias	HRAM	system	rom,live	The tileset id `LoadMapHeader` saw on entry, with bit 7 already cleared. It is written **before** the skip test, so it is set even on the frame the header load returns without having loaded anything.
 HRAM	-	$FF8B	1	hRLEByteValue	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hROMBankTemp	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hSlideAmount	alias	HRAM	system	rom,live	
@@ -2713,7 +2713,7 @@ HRAM	-	$FF8E	1	hLoadSpriteTemp2	instance	HRAM	system	rom
 HRAM	-	$FF8F	1	hCollidingSpriteOffset	entry	HRAM	system	rom	
 HRAM	-	$FF8F	1	hSpriteOffset2	alias	HRAM	system	rom	
 HRAM	-	$FF90	1	hCollidingSpriteTempYValue	entry	HRAM	system	rom	
-HRAM	-	$FF90	1	hOAMBufferOffset	alias	HRAM	system	rom	
+HRAM	-	$FF90	1	hOAMBufferOffset	alias	HRAM	system	rom	How far `PrepareOAMData` has got through `wShadowOAM`, in bytes. It is eight bits and **nothing bounds it at the buffer's 160**, which is how sixteen drawable sprites can run the clear loop past `wShadowOAMEnd` and into the screen buffer behind it.
 HRAM	-	$FF91	1	hCollidingSpriteTempXValue	entry	HRAM	system	rom	
 HRAM	-	$FF91	1	hSpriteScreenX	alias	HRAM	system	rom	
 HRAM	-	$FF92	1	hCollidingSpriteAdjustedDistance	entry	HRAM	system	rom	
@@ -2758,7 +2758,7 @@ HRAM	-	$FFA2	3	hDivideBCDDivisor	alias	HRAM	system	rom
 HRAM	-	$FFA5	4	hDivideBCDBuffer	entry	HRAM	system	rom	
 HRAM	-	$FFA9	1	hSerialReceivedNewData	entry	HRAM	link	rom	
 HRAM	-	$FFAA	1	hSerialConnectionStatus	entry	HRAM	overworld	rom,live	Which end of the cable this console is: `$01` external clock, `$02` internal. The Cable Club attendant seats you according to this, so pressing A at the wrong console is a silent no-op that looks exactly like a broken link.
-HRAM	-	$FFAB	1	hSerialIgnoringInitialData	entry	HRAM	link	rom	
+HRAM	-	$FFAB	1	hSerialIgnoringInitialData	entry	HRAM	link	rom	Set at the start of every block exchange. `Serial_ExchangeBytes` re-sends its first byte until a preamble byte comes back and only then starts storing, so a block of N bytes costs **N + 1** transfers and anything speaking this protocol has to lead each block with one extra preamble byte. Getting it off by one shifts the whole party block.
 HRAM	-	$FFAC	1	hSerialSendData	entry	HRAM	link	rom	
 HRAM	-	$FFAD	1	hSerialReceiveData	entry	HRAM	link	rom	
 HRAM	-	$FFAE	1	hSCX	entry	HRAM	system	rom,live	The background's horizontal scroll as the game wants it, copied to the hardware in the vertical blank.
@@ -2792,7 +2792,7 @@ HRAM	-	$FFD1	2	hRedrawRowOrColumnDest	entry	HRAM	system	rom
 HRAM	-	$FFD3	1	hRandomAdd	entry	HRAM	rng	rom,live,inv	High byte of the 16-bit seed. `Random_` mixes the hardware divider register `rDIV` in on **every** call, which is why a Gen 1 roll is not reproducible from the seed alone. **Verified live**: the harness requires both bytes to move within a second of ordinary play.
 HRAM	-	$FFD4	1	hRandomSub	entry	HRAM	rng	rom,live,inv	Low byte of the seed, advanced by a subtract where the high byte is advanced by an add.
 HRAM	-	$FFD5	1	hFrameCounter	entry	HRAM	system	rom,live	
-HRAM	-	$FFD6	1	hVBlankOccurred	entry	HRAM	system	rom,live	
+HRAM	-	$FFD6	1	hVBlankOccurred	entry	HRAM	system	rom,live	Set by `DelayFrame` and cleared by the VBlank handler; the game spins here until it clears. **A machine parked in that loop is usually healthy** — a Game Boy spends most of every frame in it — so finding the CPU here proves nothing on its own. What distinguishes a real hang is interrupts: stuck reads `IME` low with the VBlank bit set in both `IE` and `IF`.
 HRAM	-	$FFD7	1	hTileAnimations	entry	HRAM	system	rom	
 HRAM	-	$FFD8	2	hMovingBGTilesCounter1	entry	HRAM	system	rom	
 HRAM	-	$FFDA	1	hCurrentSpriteOffset	entry	HRAM	system	rom	

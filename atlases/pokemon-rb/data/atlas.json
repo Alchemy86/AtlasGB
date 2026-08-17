@@ -499,7 +499,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "One past the run `CalcCheckSum` covers — numerically the same address as `sMainDataCheckSum`, which is where the complement of that byte sum is stored.",
    "addr_int": 46371
   },
   {
@@ -617,7 +617,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "One checksum over all six of this bank's boxes, sitting immediately after them at `$A000 + 6 x $462`. The per-box bytes follow it.",
    "addr_int": 47692
   },
   {
@@ -675,7 +675,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Stored box 8, in cartridge RAM bank 3.",
    "addr_int": 42082
   },
   {
@@ -690,7 +690,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Stored box 9.",
    "addr_int": 43204
   },
   {
@@ -705,7 +705,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Stored box 10.",
    "addr_int": 44326
   },
   {
@@ -720,7 +720,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Stored box 11.",
    "addr_int": 45448
   },
   {
@@ -735,7 +735,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Stored box 12, the last in bank 3.",
    "addr_int": 46570
   },
   {
@@ -750,7 +750,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The same for bank 3's six boxes.",
    "addr_int": 47692
   },
   {
@@ -1720,7 +1720,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which sprite sheet map object 1 draws from; 0 means the slot is unused, and it is the only thing `PrepareOAMData` checks before drawing the slot.",
    "addr_int": 49424
   },
   {
@@ -1736,7 +1736,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Map object 1's first-bank structure.",
    "addr_int": 49424
   },
   {
@@ -1752,7 +1752,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the player slot's first-bank structure.",
    "addr_int": 49424
   },
   {
@@ -1768,7 +1768,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "What map object 1 is doing: standing, walking, or being scripted.",
    "addr_int": 49425
   },
   {
@@ -1784,7 +1784,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which frame is showing: the high nybble picks the video-RAM pattern slot and the low nybble indexes the facing-and-animation table. `$FF` means off screen, do not draw.",
    "addr_int": 49426
   },
   {
@@ -1800,7 +1800,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far map object 1 moves vertically per frame of a step.",
    "addr_int": 49427
   },
   {
@@ -1816,7 +1816,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen position of map object 1, vertical. The engine owns it while a step is in progress — that is what `wWalkCounter` being non-zero means.",
    "addr_int": 49428
   },
   {
@@ -1831,7 +1831,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "How far map object 1 moves horizontally per frame of a step.",
    "addr_int": 49429
   },
   {
@@ -1847,7 +1847,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen position of map object 1, horizontal.",
    "addr_int": 49430
   },
   {
@@ -1894,7 +1894,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which way map object 1 faces: 0 down, 4 up, 8 left, 12 right.",
    "addr_int": 49433
   },
   {
@@ -1939,7 +1939,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Which of the four directions are blocked for map object 1.",
    "addr_int": 49436
   },
   {
@@ -1954,7 +1954,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "One past map object 1's first-bank structure.",
    "addr_int": 49440
   },
   {
@@ -5453,7 +5453,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Map position of map object 1, vertical, offset by 4 — the map's object list stores the coordinate plus four, and the border blocks are what the four counts.",
    "addr_int": 49684
   },
   {
@@ -5469,7 +5469,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Map position of map object 1, horizontal, offset by 4.",
    "addr_int": 49685
   },
   {
@@ -5563,7 +5563,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Where in video RAM map object 1's tiles were loaded. **Zero makes the engine skip the slot's movement handling entirely** — no walking, no visibility cull — while the drawing pass, which looks only at `PictureID`, still puts it on screen.",
    "addr_int": 49694
   },
   {
@@ -8358,7 +8358,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen y of object entry 0, offset by 16. `$A0` parks an entry off the bottom of the screen, and it is the byte that floods `wTileMap` when the buffer overruns.",
    "addr_int": 49920
   },
   {
@@ -8390,7 +8390,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The 40-entry object buffer the game rebuilds every frame and copies to the hardware — four bytes each: y, x, tile id, attributes. **Never write it directly**; the sprite structures above are where a change belongs. Its end is `wTileMap`, and the two being adjacent is a fault the cartridge can fall through.",
    "addr_int": 49920
   },
   {
@@ -8406,7 +8406,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Object entry 0: the four bytes y, x, tile id, attributes.",
    "addr_int": 49920
   },
   {
@@ -8438,7 +8438,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen x of object entry 0, offset by 8.",
    "addr_int": 49921
   },
   {
@@ -8454,7 +8454,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which tile object entry 0 draws.",
    "addr_int": 49922
   },
   {
@@ -8469,7 +8469,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Palette, flip and priority bits for object entry 0.",
    "addr_int": 49923
   },
   {
@@ -8485,7 +8485,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen y of object entry 1.",
    "addr_int": 49924
   },
   {
@@ -8501,7 +8501,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Object entry 1, the same four bytes.",
    "addr_int": 49924
   },
   {
@@ -8516,7 +8516,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Screen x of object entry 1.",
    "addr_int": 49925
   },
   {
@@ -8532,7 +8532,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which tile object entry 1 draws.",
    "addr_int": 49926
   },
   {
@@ -8547,7 +8547,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Attributes for object entry 1.",
    "addr_int": 49927
   },
   {
@@ -11503,7 +11503,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the object buffer — **and it is `wTileMap`'s first byte**. `PrepareOAMData` bounds its clear loop only by comparing the low byte of its write pointer against this address, and nothing bounds the pointer at 40 entries, so a map fielding more than forty sprites walks straight past here and stamps `$A0` into the screen buffer every fourth byte for 256 bytes. A stamped tile is not walkable in any direction.",
    "addr_int": 50080
   },
   {
@@ -11536,7 +11536,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The third of the three blocks a trade exchanges: the offsets inside the party block where a byte had to be substituted, because the preamble byte `$FD` cannot appear in the data. The list is split at offset 252, which is `$FD - 1`, into one part for the Pokemon region and one for the rest.",
    "addr_int": 50440
   },
   {
@@ -14655,7 +14655,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same list for the party the other console sent.",
    "addr_int": 50640
   },
   {
@@ -14703,7 +14703,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the live block map. The 1,300 bytes in front of it, with the three-block border the loader leaves on every side, are the rule a map has to obey: `(width + 6) x (height + 6)` blocks must fit. The game's own largest map is 10x72 blocks, which comes to 1,248.",
    "addr_int": 52220
   },
   {
@@ -14767,7 +14767,7 @@
     "rom",
     "live"
    ],
-   "desc": "Which item the cursor is on, counted from the top item.",
+   "desc": "Which item the cursor is on, counted from the top item — **except in a battle's move list**, where `MoveSelectionMenu` writes `wPlayerMoveListIndex + 1`, so the first move reads 1 and every other menu in the game reads 0. Getting it wrong is silent: the cursor already equals the target, A fires on the wrong move, and nothing anywhere says so.",
    "addr_int": 52262
   },
   {
@@ -15071,7 +15071,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The other console's link-menu selection, in the same encoding.",
    "addr_int": 52285
   },
   {
@@ -15135,7 +15135,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The link menu's own use of this byte: `$D0` or'ed with the menu item and the button shifted left twice, so `$D4` is A pressed on TRADE CENTER.",
    "addr_int": 52290
   },
   {
@@ -15838,7 +15838,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The substitute's remaining hit points on your side. A whole byte, so a substitute is a quantity and not a two-state flag.",
    "addr_int": 52439
   },
   {
@@ -15854,7 +15854,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same for the opponent's substitute.",
    "addr_int": 52440
   },
   {
@@ -16157,7 +16157,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same for the opponent.",
    "addr_int": 52467
   },
   {
@@ -16221,7 +16221,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set once your active Pokemon has used MINIMIZE. **Cosmetic in Generation 1**: it only changes how the sprite is drawn. Nothing doubles a stomping move's damage against it until a later generation.",
    "addr_int": 52471
   },
   {
@@ -16381,7 +16381,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Attack for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52498
   },
   {
@@ -16429,7 +16429,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Defense for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52500
   },
   {
@@ -16444,7 +16444,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Speed for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52502
   },
   {
@@ -16460,7 +16460,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Special for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52504
   },
   {
@@ -16476,7 +16476,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Attack stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.",
    "addr_int": 52506
   },
   {
@@ -16507,7 +16507,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Defense stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.",
    "addr_int": 52507
   },
   {
@@ -16523,7 +16523,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Speed stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.",
    "addr_int": 52508
   },
   {
@@ -16539,7 +16539,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Special stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.",
    "addr_int": 52509
   },
   {
@@ -16554,7 +16554,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Accuracy stage for your side, biased by 7. **There is no accuracy value anywhere** — only this stage: `MoveHitTest` scales the move table's accuracy byte by it and by the inverse of the defender's evasion stage, so the number in the move table stops being true the first time a SAND-ATTACK lands. Measured on the cartridge: TACKLE's 242/255 becomes 159/255 after one stage down and 121/255 after two.",
    "addr_int": 52510
   },
   {
@@ -16585,7 +16585,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Evasion stage for your side, biased by 7, and the other half of `MoveHitTest`'s scaling.",
    "addr_int": 52511
   },
   {
@@ -16601,7 +16601,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past your side's six stat stages.",
    "addr_int": 52514
   },
   {
@@ -16649,7 +16649,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Attack for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52518
   },
   {
@@ -16664,7 +16664,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Defense for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52520
   },
   {
@@ -16696,7 +16696,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Speed for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52522
   },
   {
@@ -16711,7 +16711,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Special for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.",
    "addr_int": 52524
   },
   {
@@ -16759,7 +16759,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Attack stage for the opponent, same bias.",
    "addr_int": 52526
   },
   {
@@ -16790,7 +16790,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Defense stage for the opponent, same bias.",
    "addr_int": 52527
   },
   {
@@ -16805,7 +16805,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Speed stage for the opponent, same bias.",
    "addr_int": 52528
   },
   {
@@ -16821,7 +16821,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Special stage for the opponent, same bias.",
    "addr_int": 52529
   },
   {
@@ -16837,7 +16837,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Accuracy stage for the opponent, same bias.",
    "addr_int": 52530
   },
   {
@@ -16853,7 +16853,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Evasion stage for the opponent, same bias.",
    "addr_int": 52531
   },
   {
@@ -16884,7 +16884,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "One past the opponent's six.",
    "addr_int": 52534
   },
   {
@@ -20403,7 +20403,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which party slot a menu or a link rendezvous picked. **`EnemySendOutFirstMon` computes it as the received byte minus 4 with no bounds check**, so answering the after-a-faint rendezvous with a move index instead of a slot underflows it to slot 252 and the game fields a glitch Pokemon whose name changes every turn.",
    "addr_int": 53138
   },
   {
@@ -20764,7 +20764,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A base address `CalcStat` is pointed at so its stat-experience lookup lands on a byte pair holding only DVs. That is how the engine recomputes a stat from base stats, DVs and level **with zero stat experience** — which is why a recomputed stat and a stored one can disagree.",
    "addr_int": 53167
   },
   {
@@ -21414,7 +21414,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's two type bytes as a pair, `Type1` then `Type2`.",
    "addr_int": 53226
   },
   {
@@ -21701,7 +21701,7 @@
     "live",
     "inv"
    ],
-   "desc": "Your active Pokemon as the battle engine sees it: a 29-byte `battle_struct`, **not** the 44-byte party shape. Original trainer, experience and stat experience are gone, so the level and the five stats are at different offsets. **Verified**: the harness derives the size from the atlas and requires `wTrainerClass` to follow immediately.",
+   "desc": "Your active Pokemon as the battle engine sees it: a 29-byte `battle_struct`, **not** the 44-byte party shape. Original trainer, experience and stat experience are gone, so the level and the five stats sit at different offsets — confusing the two is the classic way to produce a level 6,400 Pokemon. The level here is also what a critical hit doubles: Generation 1 substitutes twice the level into the damage formula, so the worst critical outcome is above the best ordinary one.",
    "addr_int": 53268
   },
   {
@@ -21795,7 +21795,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Your active Pokemon's two type bytes as a pair.",
    "addr_int": 53273
   },
   {
@@ -22276,7 +22276,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "First of the five bytes `SendOutMon` zeroes when a Pokemon comes out — `$D060` to `$D064`, which takes in all three of your side's battle-status bytes. That is what makes a Generation 1 screen belong to the Pokemon rather than to the side.",
    "addr_int": 53344
   },
   {
@@ -22340,7 +22340,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The second volatile byte for your side. It carries `GETTING_PUMPED`, the FOCUS ENERGY bit, with no counter beside it — and in Generation 1 that bit **quarters** the critical-hit rate instead of raising it, because `CriticalHitTest` shifts the wrong way. Measured for a base-Speed-140 Electrode: 0.2604 of 960 attacks crit without it, 0.0612 of 588 with.",
    "addr_int": 53347
   },
   {
@@ -22356,7 +22356,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The third volatile byte for your side. Bit 1 is LIGHT SCREEN and bit 2 is REFLECT, and in Generation 1 **both belong to the Pokemon, not to the side**: `SendOutMon` zeroes this byte, so a screen does not survive a switch. Measured driving a real voluntary switch: `$04` with REFLECT up, `$00` immediately afterwards, with the opponent's copy at `$00` throughout.",
    "addr_int": 53348
   },
   {
@@ -22372,7 +22372,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's copy, `$D065` to `$D069`; `EnemySendOut` and `EnemySendOutFirstMon` zero it the same way.",
    "addr_int": 53349
   },
   {
@@ -22420,7 +22420,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's copy of the second volatile byte.",
    "addr_int": 53352
   },
   {
@@ -22436,7 +22436,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's copy of the third volatile byte, screens included.",
    "addr_int": 53353
   },
   {
@@ -22452,7 +22452,7 @@
     "rom",
     "live"
    ],
-   "desc": "Turns left on a multi-turn move.",
+   "desc": "Turns left on a multi-turn move. **A trapping move that misses leaves this standing**: `TrappingEffect` runs before the hit test and `MoveHitTest`'s miss path clears the status flag without clearing the counter, so the next roll looks exactly like a decrement of the old one. Key a measurement on the flag, not on this byte.",
    "addr_int": 53354
   },
   {
@@ -22468,7 +22468,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Turns of confusion left on your side. **Measured over 97 applications**: the byte holds 2 to 5 when freshly applied and steps down by one a turn, so the Pokemon acts confused on one fewer turn than the number rolled and is clear again on the turn it reaches zero.",
    "addr_int": 53355
   },
   {
@@ -22484,7 +22484,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many times the badly-poisoned drain has ticked on your side. The residual is `max(1, maxHP/16)` multiplied by this, so it grows every turn. **Nothing in the game bounds it** — the byte is incremented and never compared — and it is not one of the bytes a switch clears, so switching out downgrades TOXIC to ordinary poison and leaves the count standing. Measured: 5 in a plain battle, 10 against a target healing itself.",
    "addr_int": 53356
   },
   {
@@ -22500,7 +22500,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which of your moves DISABLE has locked, and for how long, packed into one byte: the move slot 1-4 in the high nybble and the countdown in the low one. **Measured over 136 applications**: the countdown is drawn uniformly from 1 to 8, and the move menu refuses the slot for as long as the byte is non-zero.",
    "addr_int": 53357
   },
   {
@@ -22516,7 +22516,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Turns left on the opponent's multi-turn move, and it carries the same trap as your side's copy: a trapping move that misses clears the flag and leaves this standing.",
    "addr_int": 53359
   },
   {
@@ -22532,7 +22532,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same for the opponent.",
    "addr_int": 53360
   },
   {
@@ -22548,7 +22548,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same for the opponent.",
    "addr_int": 53361
   },
   {
@@ -22564,7 +22564,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The same for the opponent.",
    "addr_int": 53362
   },
   {
@@ -23922,7 +23922,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The species' **base** Speed, as `GetMonHeader` loaded it. `CriticalHitTest` reads it here and not the in-battle stat, so the critical-hit rate is half the base Speed out of 256 and neither a SWORDS DANCE nor a paralysis moves it. Measured for a base-Speed-140 Electrode: 250 crits in 960 attacks.",
    "addr_int": 53436
   },
   {
@@ -24319,7 +24319,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "What the ball animation is going to show. **The shake count is cosmetic**: everything that computes it runs after the capture has already been decided, so three shakes is not a near miss — the miss happened earlier.",
    "addr_int": 53534
   },
   {
@@ -25251,7 +25251,7 @@
     "live",
     "inv"
    ],
-   "desc": "",
+   "desc": "Party slot 1, the whole 44-byte `party_struct`.",
    "addr_int": 53611
   },
   {
@@ -25345,7 +25345,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The two type bytes as a pair, `Type1` then `Type2`.",
    "addr_int": 53616
   },
   {
@@ -27633,7 +27633,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Party slot 1's original-trainer name, 11 bytes.",
    "addr_int": 53875
   },
   {
@@ -27742,7 +27742,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Party slot 1's nickname, 11 bytes.",
    "addr_int": 53941
   },
   {
@@ -27899,7 +27899,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the party nicknames — and numerically the save boundary, which is why the same address is also `wMainDataStart`.",
    "addr_int": 54007
   },
   {
@@ -28161,7 +28161,7 @@
     "live",
     "inv"
    ],
-   "desc": "The map you are standing on. **The trap**: this is saved state, and a continued game restores it together with the whole map header below it, so writing a different map id without the matching header makes the engine read the new map's blocks through the old map's pointers — observed as an illegal opcode within a second.",
+   "desc": "The map you are standing on — but **not a test for that map being loaded**. `LoadMapData` opens with a wait for VBlank, so this byte changes a whole frame before `LoadMapHeader` runs; `TryLoadSaveFile` fills it at the top of the main menu, long before CONTINUE is chosen; and for one frame after a warp it names the destination while `wXCoord`/`wYCoord` still name the door you left by. **The other trap**: it is saved state, restored together with the whole map header below it, so writing a different map id without the matching header makes the engine read the new map's blocks through the old map's pointers — observed as an illegal opcode within a second.",
    "addr_int": 54110
   },
   {
@@ -28307,7 +28307,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The whole nine-byte block `LoadMapHeader` copies verbatim out of the map's ROM header, starting at this byte: tileset, height, width, block pointer, text pointer, script pointer, connection bitfield. All of it lives inside `sMainData`, which is why it is the save and not the ROM that a continued game reads a room out of.",
    "addr_int": 54119
   },
   {
@@ -28341,7 +28341,7 @@
     "live",
     "inv"
    ],
-   "desc": "Map width in 32x32 blocks. Twice this in tiles.",
+   "desc": "Map width in 32x32 blocks. Twice this in tiles. With `wCurMapHeight` it is the cleanest test there is for whether the player is actually standing on a map: `LoadMapHeader` fills both, no real map is 0x0, and measured on the cartridge they read 0 for the first several thousand frames of a new game while `wCurMap` already names the bedroom.",
    "addr_int": 54121
   },
   {
@@ -28421,7 +28421,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which map lies north, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; north is bit 3.",
    "addr_int": 54129
   },
   {
@@ -28437,7 +28437,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the copied map header, and literally the copy loop's own bound — so the block's length is not inferred.",
    "addr_int": 54129
   },
   {
@@ -28453,7 +28453,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The northern connection header as a whole: 11 bytes, present only when bit 3 of `wCurMapConnections` is set.",
    "addr_int": 54129
   },
   {
@@ -28581,7 +28581,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which map lies south, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; south is bit 2.",
    "addr_int": 54140
   },
   {
@@ -28597,7 +28597,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The southern connection header as a whole: 11 bytes, present only when bit 2 of `wCurMapConnections` is set.",
    "addr_int": 54140
   },
   {
@@ -28725,7 +28725,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which map lies west, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; west is bit 1.",
    "addr_int": 54151
   },
   {
@@ -28741,7 +28741,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The western connection header as a whole: 11 bytes, present only when bit 1 of `wCurMapConnections` is set.",
    "addr_int": 54151
   },
   {
@@ -28869,7 +28869,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which map lies east, and the first byte of that direction's 11-byte connection header. `LoadMapHeader` copies one such header per set bit of `wCurMapConnections`; east is bit 0.",
    "addr_int": 54162
   },
   {
@@ -28885,7 +28885,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The eastern connection header as a whole: 11 bytes, present only when bit 0 of `wCurMapConnections` is set.",
    "addr_int": 54162
   },
   {
@@ -29608,7 +29608,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which step of Oak's laboratory's map script the game is on. **Measured**: losing the starter battle to the rival leaves it at `SCRIPT_OAKSLAB_RIVAL_STARTS_EXIT`, which is exactly where winning leaves it — `HandlePlayerBlackOut` returns without blacking the player out when `wCurOpponent` is `OPP_RIVAL1` and `wCurMap` is `OAKS_LAB`, and the map script heals the party on its next tick.",
    "addr_int": 54768
   },
   {
@@ -31911,7 +31911,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Species **internal index** — not the Pokedex number.",
    "addr_int": 55460
   },
   {
@@ -31927,7 +31927,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opposing trainer's first Pokemon, a whole 44-byte `party_struct` — the *party* shape, not the 29-byte battle shape. Shares its storage with the map's wild encounter tables, so it only means anything once `wIsInBattle` says a trainer battle is running.",
    "addr_int": 55460
   },
   {
@@ -31975,7 +31975,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Current HP, **big-endian**.",
    "addr_int": 55461
   },
   {
@@ -32006,7 +32006,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The level as stored, kept in step with `Level`.",
    "addr_int": 55463
   },
   {
@@ -32022,7 +32022,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Sleep, poison, burn, freeze, paralysis, as one byte of flags and a sleep counter.",
    "addr_int": 55464
   },
   {
@@ -32037,7 +32037,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "First type.",
    "addr_int": 55465
   },
   {
@@ -32052,7 +32052,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The two type bytes as a pair.",
    "addr_int": 55465
   },
   {
@@ -32082,7 +32082,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The species' base catch rate, carried in the structure. Fixed for a trainer's Pokemon, which is one of the things that makes a trainer battle different from a wild one.",
    "addr_int": 55467
   },
   {
@@ -32098,7 +32098,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Four move ids, 0 for an empty slot.",
    "addr_int": 55468
   },
   {
@@ -32113,7 +32113,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The original trainer's ID, **big-endian**.",
    "addr_int": 55472
   },
   {
@@ -32128,7 +32128,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Experience, **three bytes big-endian**.",
    "addr_int": 55474
   },
   {
@@ -32143,7 +32143,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Stat experience for HP, big-endian.",
    "addr_int": 55477
   },
   {
@@ -32158,7 +32158,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Stat experience for Attack, big-endian.",
    "addr_int": 55479
   },
   {
@@ -32173,7 +32173,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Stat experience for Defense, big-endian.",
    "addr_int": 55481
   },
   {
@@ -32188,7 +32188,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Stat experience for Speed, big-endian.",
    "addr_int": 55483
   },
   {
@@ -32203,7 +32203,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Stat experience for Special, big-endian.",
    "addr_int": 55485
   },
   {
@@ -32218,7 +32218,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Two bytes, four nybbles: attack, defense, speed, special. **A trainer's Pokemon has fixed DVs** — `LoadEnemyMonData` writes the same two bytes into every one of them — so anything that draws a conclusion from DVs has to exclude trainer battles or it will report the same answer forever.",
    "addr_int": 55487
   },
   {
@@ -32234,7 +32234,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2.",
    "addr_int": 55489
   },
   {
@@ -32250,7 +32250,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The level the stats below were computed at.",
    "addr_int": 55493
   },
   {
@@ -32266,7 +32266,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Computed maximum HP, big-endian.",
    "addr_int": 55494
   },
   {
@@ -32282,7 +32282,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The five computed stats, in order, big-endian.",
    "addr_int": 55494
   },
   {
@@ -32297,7 +32297,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Computed Attack, big-endian.",
    "addr_int": 55496
   },
   {
@@ -32312,7 +32312,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Computed Defense, big-endian.",
    "addr_int": 55498
   },
   {
@@ -32327,7 +32327,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Computed Speed, big-endian.",
    "addr_int": 55500
   },
   {
@@ -32342,7 +32342,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Computed Special, big-endian.",
    "addr_int": 55502
   },
   {
@@ -34319,7 +34319,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's original-trainer name, 11 bytes.",
    "addr_int": 55724
   },
   {
@@ -34427,7 +34427,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's nickname, 11 bytes.",
    "addr_int": 55790
   },
   {
@@ -34834,7 +34834,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The two type bytes as a pair.",
    "addr_int": 55908
   },
   {
@@ -35115,7 +35115,7 @@
     "live",
     "inv"
    ],
-   "desc": "",
+   "desc": "The first stored Pokemon, a whole 33-byte `box_struct`.",
    "addr_int": 55958
   },
   {
@@ -35207,7 +35207,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The two type bytes as a pair.",
    "addr_int": 55963
   },
   {
@@ -40876,7 +40876,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Box slot 1's original-trainer name, 11 bytes.",
    "addr_int": 56618
   },
   {
@@ -41193,7 +41193,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Box slot 1's nickname, 11 bytes.",
    "addr_int": 56838
   },
   {
@@ -41543,7 +41543,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the box block. `wBoxDataEnd - wBoxDataStart` is `$462`, which is also the stride between consecutive `sBoxN` in cartridge RAM.",
    "addr_int": 57058
   },
   {
@@ -41766,7 +41766,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The tileset id `LoadMapHeader` saw on entry, with bit 7 already cleared. It is written **before** the skip test, so it is set even on the frame the header load returns without having loaded anything.",
    "addr_int": 65419
   },
   {
@@ -42223,7 +42223,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "How far `PrepareOAMData` has got through `wShadowOAM`, in bytes. It is eight bits and **nothing bounds it at the buffer's 160**, which is how sixteen drawable sprites can run the clear loop past `wShadowOAMEnd` and into the screen buffer behind it.",
    "addr_int": 65424
   },
   {
@@ -42899,7 +42899,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Set at the start of every block exchange. `Serial_ExchangeBytes` re-sends its first byte until a preamble byte comes back and only then starts storing, so a block of N bytes costs **N + 1** transfers and anything speaking this protocol has to lead each block with one extra preamble byte. Getting it off by one shifts the whole party block.",
    "addr_int": 65451
   },
   {
@@ -43435,7 +43435,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set by `DelayFrame` and cleared by the VBlank handler; the game spins here until it clears. **A machine parked in that loop is usually healthy** — a Game Boy spends most of every frame in it — so finding the CPU here proves nothing on its own. What distinguishes a real hang is interrupts: stuck reads `IME` low with the VBlank bit set in both `IE` and `IF`.",
    "addr_int": 65494
   },
   {

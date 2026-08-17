@@ -281,12 +281,20 @@ def chapter_table(rows, chapter: str) -> str:
         if r["role"] == "alias":
             aliases.setdefault((r["region"], r["bank"], r["addr_i"]), []).append(r)
     for r in mine:
-        if r["role"] in ("alias", "instance"):
+        if r["role"] == "alias":
+            continue
+        # An instance is folded onto slot 1 — *unless somebody has written a
+        # description on it*. `wPlayerBattleStatus1`..`3` are consecutive
+        # one-byte symbols and so read as a repeated structure, but they hold
+        # different bits and only one of them clears on a switch. A written
+        # description is the signal that a slot carries its own meaning, and
+        # folding it away would hide the very thing that was written down.
+        if r["role"] == "instance" and not r["desc"]:
             continue
         key = (r["region"], r["bank"], r["addr_i"])
         also = aliases.get(key, [])
         sym = display_symbol(r)
-        if r["role"] == "entry":
+        if r["role"] in ("entry", "instance"):
             sym = f'<a id="s-{r["symbol"]}"></a>`{r["symbol"]}`'
         if also:
             # Aliases get their own anchor too: the indexes link every name to
@@ -343,14 +351,28 @@ def name_index_block(rows) -> str:
     # an index. Their slot-1 row carries the count and the stride, and
     # `atlas.tsv` remains the exhaustive, greppable list — which is how anyone
     # actually looks up a name like that.
-    listed = [r for r in rows if r["role"] not in ("gap", "free", "instance")]
+    listed = [
+        r
+        for r in rows
+        if r["role"] not in ("gap", "free")
+        and (r["role"] != "instance" or r["desc"])
+    ]
     listed.sort(key=lambda r: (r["symbol"].lower(), r["addr_i"]))
     out = ["| symbol | address | bytes | chapter | ev |", "|---|---|---:|---|:--:|"]
     for r in listed:
         bank = "" if r["bank"] == "-" else f" b{r['bank']}"
-        target = f"{r['group']}.md#s-{r['symbol']}" if r["role"] == "entry" else f"{r['group']}.md"
+        # Every listed name gets `#s-NAME` *here* as well as on its chapter
+        # page. Outside projects link into the index by name — the whole point
+        # of an index is that it is the page you can guess — and a fragment
+        # that resolves nowhere lands the reader silently at the top.
+        # Aliases get the fragment in the link too: they have carried anchors
+        # on the chapter pages since they were given them, and sending
+        # `wPartyMons` to the top of a 105-row page is a worse answer than the
+        # row it is asking for. `tools/checklinks.py` proves both on every push.
+        target = f"{r['group']}.md#s-{r['symbol']}"
         out.append(
-            f"| [`{r['symbol']}`]({target}) | `{r['addr']}`{bank} | {size(r['len_i'])} "
+            f'| <a id="s-{r["symbol"]}"></a>[`{r["symbol"]}`]({target}) '
+            f"| `{r['addr']}`{bank} | {size(r['len_i'])} "
             f"| [{r['group']}]({r['group']}.md) | {evidence(r['verify'])} |"
         )
     return block("names", out)

@@ -35,7 +35,7 @@ gets [its own atlas](../../docs/adding-an-atlas.md), never a merge into this one
 
 Storage entries in total: **2,842**.
 
-Written descriptions cover **370 of the 1,012 distinct addresses** (36%). The rest carry their symbol name and their evidence and nothing more, which is the honest state of them — every chapter page reports its own figure at the top of its table.
+Written descriptions cover **475 of the 1,012 distinct addresses** (46%). The rest carry their symbol name and their evidence and nothing more, which is the honest state of them — every chapter page reports its own figure at the top of its table.
 
 <!-- atlas:end (evidence) -->
 

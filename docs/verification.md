@@ -80,6 +80,67 @@ Seven storage entries carry no evidence at all. They are listed by name in
 honesty is the product: a map you cannot audit from the inside is the thing this
 repository exists not to be.
 
+**Counting every entry, not only storage, 60 carry no `verify` token at all** —
+`atlases/pokemon-rb/data/atlas.json`, filtered on an empty `verify` array. That number is
+worth pulling apart, because most of it is not a gap in the *running* of the checks; it is a
+gap in what the checks are built to look at:
+
+| what | count | why it has nothing |
+|---|---:|---|
+| ROM routines and data tables (`region` is `ROM0` or `ROMX`) | 53 | **Tier R (operand scan) is deliberately scoped to RAM addresses only** — it asks "does the game load *this address* as data", which is the right question for a byte of storage and the wrong one for a routine's own entry point. Tier L (live) cannot apply either: a ROM byte never changes. Three of these 53 (`MonsterNames`, `BaseStats`, `PokedexOrder`) *are* checked, by a fourth, unrelated method — a byte-signature "this table's first few bytes are what it claims" content check — and correctly show `inv`. **The other 50 have no method wired up at all**, and the honest fact is: the harness's content-check mechanism already exists and generalises (it is one match arm per symbol, see `testharness/gen1atlas.rs`'s `rom_checks`); nobody has extended it past the three tables the party/Pokédex invariants happened to need. |
+| Storage bytes never touched by the fixed script (`wSprite11StateData2MapX`, `wEnemyMoveMaxPP`, `wBoxMon15Status`) | 3 | These are real WRAM addresses; the [live sweep](#l--observed-live)'s fixed script plays the opening and then walks the overworld, and never reaches a battle (`wEnemyMoveMaxPP`), a full sprite roster (`wSprite11...`), or storage (`wBoxMon15Status`). Extending the script — see below — is what closes these, not a new method. |
+| Cartridge-RAM `free` markers (`sGameDataEnd`'s bank companions in the three unused SRAM banks) | 4 | These rows exist to keep the WRAM/HRAM-completeness invariant honest for cartridge RAM's structure — they assert "this byte is unallocated", not a fact about what the game stores there. A `free` row is not a claim a cartridge run can confirm or deny; there is nothing to check. |
+
+**So of the 60, roughly 50 are "a method exists and nobody has pointed it at this symbol
+yet" (the ROM content-check), 3 are "the standing method exists and hasn't reached this
+byte yet" (extend the script), and 4 are not really unverified claims at all.** None of the
+60 needed a new *kind* of check invented — see [the ranked hand-off](#ranked-hand-off-for-the-next-round)
+below for where this sits against everything else outstanding.
+
+---
+
+## Confirmed against the cartridge, independently, on 2026-08-25
+
+The tiers above are not a description of a run from the project's early days — they were
+re-produced from scratch, this round, against a **second, independent boot** of the
+captain's own retail Pokémon Blue cartridge and save, run twice for determinism, on
+TerminalGB commit `5f61061f0565178152b93f47a0bd8d70cc3c0a15`. Both runs of the fixed
+script produced byte-identical results, and both agreed with the previously-published
+2026-08-15 run: **zero entries moved tier, and every invariant that had a save to check
+against passed** (this run supplied one, so none were skipped for want of one, unlike a
+cold-boot-only run).
+
+That is itself the finding this round's audit was asked to produce: **the atlas's current
+2,898 claims disagree with the cartridge in zero places.** `data/evidence.json`'s
+`produced_by.commit` and `run.date` now record this run rather than the original one, since
+it is the more recent confirmation of the same, unchanged evidence.
+
+### Running it yourself
+
+```bash
+# from a checkout of TerminalGB (Alchemy86/TerminalGB), never edited by this project
+export POKE_ROM=~/roms/pokeblue.gb          # your own cartridge; none is distributed here
+export ATLAS_EVIDENCE_OUT=report.json       # optional — only if you intend to land a run
+export ATLAS_EVIDENCE_DATE=$(date +%F)      # optional — dates the report by when it ran
+
+# `--release` intermittently fails with "requires panic strategy abort" — a known,
+# documented build-cache collision (docs/pitfalls/builds.md in TerminalGB), not a real
+# error. `--profile quick` sidesteps it outright (panic=unwind, no LTO) and produces the
+# same pass/fail/tier results — only wall-clock time differs, and no number this project
+# publishes is a timing number.
+cargo test --profile quick --test gen1atlas -- --nocapture
+
+# then, back in a checkout of AtlasGB, only if the run found something new:
+tools/apply-evidence.py report.json --atlas pokemon-rb && make docs data
+```
+
+Nothing about this needs a network call or a change to TerminalGB — it is exactly the
+loop [above](#the-loop), run by hand instead of by a producer's own CI, which TerminalGB
+does not currently schedule on a timer. **Making that scheduled** — a periodic re-run
+rather than one triggered by a human remembering to — is the highest-leverage thing that
+would turn this from a check anyone *can* run into a check that always has run recently;
+see the hand-off.
+
 ---
 
 ## The loop

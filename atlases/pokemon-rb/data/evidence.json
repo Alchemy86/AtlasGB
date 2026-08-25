@@ -4,22 +4,22 @@
  "title": "Pokémon Red and Blue",
  "produced_by": {
   "repo": "Alchemy86/TerminalGB",
-  "commit": "109f98d69ab9a222e84d90f2292d98de9321d7c3",
-  "harness": "testharness/gen1atlas.rs",
-  "note": "the run that produced the tiers the atlas was first published with, before the split"
+  "commit": "5f61061f0565178152b93f47a0bd8d70cc3c0a15",
+  "harness": "testharness/gen1atlas.rs"
  },
  "cartridge": {
   "title": "POKEMON BLUE",
   "region": "USA/Europe",
-  "sha1": "d7037c83e1ae5b39bde3c30787637ba1d4c48ce2"
+  "sha1": "d7037c83e1ae5b39bde3c30787637ba1d4c48ce2",
+  "bytes": 1048576
  },
  "script": {
   "name": "opening+overworld",
   "frames": 3600,
-  "save": "none (cold boot)"
+  "save": "none (cold boot); a save was supplied to the invariants"
  },
  "run": {
-  "date": "2026-08-15"
+  "date": "2026-08-25"
  },
  "entries": 2898,
  "storage_entries": 2842,

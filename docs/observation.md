@@ -379,6 +379,19 @@ a different menu path than a flat A-mash reliably lands on. The well-scoped next
 `probe_menu`-style cursor cycling (already built and used elsewhere in `lib.rs`) pointed at
 whatever screen the battle is actually stuck on, not another blind, longer mash.
 
+**A correction this raised, checked rather than left implied: phase 5's own JR.TRAINER battle
+likely never concluded either.** Re-reading `investigate_levelup`'s own trace (used for hand-off
+item 3, above) against `run_script`'s frame budget for phase 5: `wIsInBattle` reaches `2` at
+frame 4,180 and is still `2` at frame 4,878, the exact frame phase 6's own forced writes begin
+— meaning phase 5's entire remaining mash budget (697 more frames) ran with the JR.TRAINER
+fight still open, and phase 6 interrupted it rather than following a natural end. Round three
+and four's "trainer-battle" phase tag was never a claim that the fight concluded — same as the
+"wild-battle" tag discussed above, it names *when*, not an outcome — so no existing description
+is called into question by this. What it does mean: **blind A-mashing reliably starts a forced
+trainer battle in this script but has not been shown to reliably finish one**, gym leader or
+plain trainer alike, within the budgets tried so far. Worth knowing before the next round
+assumes a battle "worked" from `wIsInBattle` alone.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in

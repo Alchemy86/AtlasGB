@@ -39,8 +39,30 @@ const WATCH: &[(u16, &str)] = &[
 
 fn main() {
     let rom_path = std::env::var("POKE_ROM").expect("set POKE_ROM");
+    let save_path = std::env::var("POKE_SAVE").ok();
     let rom = std::fs::read(&rom_path).expect("read rom");
-    let mut gb = Gameboy::new(rom, None);
+    // Round eight found that every earlier round's own coverage numbers were
+    // produced with POKE_SAVE set (a real, already-progressed save reaches
+    // far more of the game than a from-scratch new game does) -- this
+    // session's own investigate_* binaries had been passing None instead,
+    // which is a second, larger reason a forced battle might behave
+    // differently from what main.rs's own production runs saw. Same staging
+    // pattern main.rs already uses (Gameboy::new wants a path alongside the
+    // ROM bytes when a save is present, not just the save bytes themselves).
+    let mut gb = match save_path {
+        Some(ref p) => {
+            let staged_rom = "target/gym-staged.gb";
+            let staged_sav = "target/gym-staged.sav";
+            std::fs::create_dir_all("target").ok();
+            std::fs::copy(&rom_path, staged_rom).unwrap();
+            std::fs::copy(p, staged_sav).unwrap();
+            Gameboy::new(
+                std::fs::read(staged_rom).unwrap(),
+                Some(std::path::PathBuf::from(staged_rom)),
+            )
+        }
+        None => Gameboy::new(rom, None),
+    };
 
     // Phase 1: title -> continue, identical to lib.rs's run_script.
     for frame in 0..1400u32 {

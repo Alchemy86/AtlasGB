@@ -427,6 +427,57 @@ at this exact stuck window, to see whether the CPU is genuinely looping in place
 still drawing new frames nobody is reading the right addresses for — not a fourth input pattern
 guessed at without new instrumentation.
 
+## Round eight: the gym battle resolves — the missing piece was a real save
+
+Two threads from this round, landed together because the second explains the first.
+
+**A deeper look at the START menu.** `lib.rs` gained two appended phases (11 and 12 — appended
+after phase 10, not inserted, so every existing phase's frame numbers stay exactly what they
+were): phase 11 opens each of the START menu's seven positions and, instead of `probe_menu`'s
+glance-and-back-out, scrolls up and down inside whatever opens (`Driver::scroll_probe_menu`) —
+built because a Pokédex or a bag only shows its second entry onward to something that actually
+scrolls. Phase 12 is a short walk back to ordinary play, so the run still ends off-menu. Run
+against a fresh new game, this added no newly-touched atlas addresses (911 touched either way)
+— the finding just below explains why a fresh game is the wrong baseline to have measured this
+against in the first place.
+
+**The real finding: every one-off investigation this session (`investigate_levelup.rs`,
+`investigate_gym.rs`) had been starting a brand-new game, not loading the real save `main.rs`
+has always used.** Comparing coverage confirmed the two are not interchangeable: a fresh
+game's own run touches 911 of 936 watchable addresses, a save-loaded run touches 908, and the
+two lists of *which* addresses are not the same list — a fresh game reaches some things
+(plausibly menu/state paths a new game's own setup exercises that a mid-game save does not)
+a save-loaded run does not, and vice versa. Neither is "more correct" for coverage as such,
+but round six and seven's *negative* finding about the stuck Misty battle was measured
+entirely on the fresh-game path, and that turned out to matter enormously.
+
+**Re-run with `POKE_SAVE` set to the real save, `investigate_gym`'s identical code — same
+forced writes, same `B, Up, A, A` sequence round seven tried and watched fail — produced a
+complete, real gym battle.** `wTrainerClass` loads to `35`, `wEnemyMonHP` settles at STARYU's
+documented `41`; real damage moves both directions (`wEnemyMonHP` `41→40→39`, `wBattleMonHP`
+`20→7→0`); the player's forced-to-1-HP lead faints and a *second* party member is sent out
+automatically; that one also takes damage and faints; and the battle ends in a genuine
+black-out — `wIsInBattle` becomes `$FF`, exactly the value its own atlas description already
+says a black-out produces. Hand-off item 4 is answered in full: a real, losing gym battle,
+played to its actual end, is now something this tool can reliably produce.
+
+**What is not fully pinned down: whether the save or the navigation sequence was the decisive
+factor, since round seven's failing run had neither.** A third data point narrows it, though:
+re-running `investigate_levelup` — `run_script`'s own phases, `run_script`'s own blind A-mash —
+*with* the save loaded still leaves the wild battle phase 6 eventually triggers (late, at
+frame 6,236, well past that phase's own budget) never concluding for the rest of the run. **So
+blind A-mashing fails to conclude a battle whether or not a save is loaded — round seven's
+finding on that specific point stands, corrected only in scope, not reversed.** What changed
+the outcome was save-plus-navigation together; the mostly likely explanation, not confirmed
+further this round, is that a fresh game's own party — pushed through Oak's intro by blind
+mashing rather than real confirmations — ends up malformed in some way default battle logic
+does not need to have a battle *start*, but that a smart navigation sequence exposes once it
+tries to actually select and use a move.
+
+**Standing lesson, recorded in AGENTS.md**: any future one-off investigation binary must load
+`POKE_SAVE` be default, the same way `main.rs` always has — a negative result from a fresh game
+is a finding about fresh games, not about the technique, the emulator, or the atlas.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in

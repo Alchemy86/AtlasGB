@@ -321,6 +321,22 @@ extending it, not one-off fixes:
   them itself, outside any frame, well before either was ever diffed. Any address the script
   directly `debug_write()`s must be excluded from writer-grouping and co-occurrence analysis
   entirely, not merely have its first event distrusted.
+- **A one-off investigation binary must load a real save (`POKE_SAVE`), the same way
+  `main.rs`/pass 1 always has, or its negative findings about game *mechanics* are not
+  trustworthy.** Two small investigation tools built to answer specific hand-off questions
+  (`investigate_levelup.rs`, `investigate_gym.rs`) were first written passing `None` for the
+  save, starting a brand-new game each run — and a from-scratch game reaches a measurably
+  different, more limited state (908-911 of 936 addresses touched either way, but not the
+  *same* 908-911: a fresh game's party is plausibly malformed by being pushed through Oak's
+  intro via blind button-mashing rather than a real playthrough's own confirmations). Under
+  that condition, a forced trainer battle against MISTY started correctly but never
+  progressed past its first menu regardless of the input pattern tried. Loading the real save
+  (`~/roms/pokeblue.sav`, the same file `main.rs` has always used) and retrying the *identical*
+  code produced a complete, real battle — damage dealt both directions, a second party member
+  sent out after the first fainted, ending in a genuine black-out (`wIsInBattle = $FF`,
+  exactly what that byte's own description says the value means). The lesson: a negative
+  result from a fresh game is a finding about *fresh games*, not about the technique, the
+  emulator, or the atlas — always load a save before trusting one.
 
 Grouping addresses by their **writing routine** — not by naive frame- or instruction-level
 co-occurrence, which mostly surfaces things that already change every frame regardless of

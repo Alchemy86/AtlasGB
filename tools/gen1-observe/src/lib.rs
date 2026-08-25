@@ -56,6 +56,29 @@ impl<'a> Driver<'a> {
             self.press(KeypadKey::Down, 4, 8);
         }
     }
+
+    /// Like `probe_menu`, but scrolls inside whatever opens rather than just
+    /// glancing at it and backing straight out — for a list-shaped screen
+    /// (the Pokédex, the bag) a plain probe only ever touches its first
+    /// entry. Same "visit every position, don't guess the order" shape as
+    /// `probe_menu`; the only difference is a scroll burst before backing
+    /// out of each one.
+    fn scroll_probe_menu(&mut self, n: u32, open_settle: u32, scroll_reps: u32,
+                          back_out_presses: u32) {
+        for _ in 0..n {
+            self.press(KeypadKey::A, 6, open_settle);
+            for _ in 0..scroll_reps {
+                self.press(KeypadKey::Down, 4, 10);
+            }
+            for _ in 0..scroll_reps {
+                self.press(KeypadKey::Up, 4, 10);
+            }
+            for _ in 0..back_out_presses {
+                self.press(KeypadKey::B, 6, 10);
+            }
+            self.press(KeypadKey::Down, 4, 8);
+        }
+    }
 }
 
 pub fn run_script(gb: &mut Gameboy, on_frame: &mut OnFrame<'_>) {
@@ -203,6 +226,36 @@ pub fn run_script(gb: &mut Gameboy, on_frame: &mut OnFrame<'_>) {
     // has room to settle, and so the run ends on ordinary play rather than
     // mid-battle-or-menu state.
     for frame in 0..1200u32 {
+        let want = match (frame / 20) % 8 {
+            0 | 1 => KeypadKey::Down,
+            2 => KeypadKey::A,
+            3 => KeypadKey::Up,
+            4 => KeypadKey::Left,
+            5 => KeypadKey::Start,
+            6 => KeypadKey::Right,
+            _ => KeypadKey::B,
+        };
+        d.gb.keydown(want);
+        d.tick();
+        d.gb.keyup(want);
+    }
+
+    // --- Phase 11: deeper menu exploration — the Pokédex and the bag,
+    // scrolled rather than glanced at. Phases 7 and 9 already open every
+    // START-menu position once each, but `probe_menu` only ever touches a
+    // list screen's first entry before backing out; a Pokédex with more
+    // than one species seen, or a bag with more than one item, needs actual
+    // scrolling to reach entry 2 and beyond. Appended after phase 10 rather
+    // than inserted earlier so every existing phase's frame numbers stay
+    // exactly what they were — this only adds frames, it never moves any.
+    d.press(KeypadKey::Start, 6, 20);
+    d.scroll_probe_menu(7, 20, 6, 2);
+    d.press(KeypadKey::B, 6, 10);
+
+    // --- Phase 12: back to ordinary play, the same shape as phases 2 and
+    // 10, so the run still ends on ordinary overworld play rather than
+    // mid-menu.
+    for frame in 0..800u32 {
         let want = match (frame / 20) % 8 {
             0 | 1 => KeypadKey::Down,
             2 => KeypadKey::A,

@@ -23,8 +23,30 @@ const WATCH: &[(u16, &str)] = &[
 
 fn main() {
     let rom_path = std::env::var("POKE_ROM").expect("set POKE_ROM");
+    let save_path = std::env::var("POKE_SAVE").ok();
     let rom = std::fs::read(&rom_path).expect("read rom");
-    let mut gb = Gameboy::new(rom, None);
+    // Round eight found every earlier round's real coverage numbers came
+    // from runs with POKE_SAVE set, and that a from-scratch new game (this
+    // binary's original None here) behaves very differently in a forced
+    // battle -- so this round's own original finding (phase 5's trainer
+    // battle apparently never concluding) needs re-checking under the same
+    // save-loaded conditions production runs actually use, not left standing
+    // on a run that turned out not to match them. Same staging pattern
+    // main.rs already uses.
+    let mut gb = match save_path {
+        Some(ref p) => {
+            let staged_rom = "target/levelup-staged.gb";
+            let staged_sav = "target/levelup-staged.sav";
+            std::fs::create_dir_all("target").ok();
+            std::fs::copy(&rom_path, staged_rom).unwrap();
+            std::fs::copy(p, staged_sav).unwrap();
+            Gameboy::new(
+                std::fs::read(staged_rom).unwrap(),
+                Some(std::path::PathBuf::from(staged_rom)),
+            )
+        }
+        None => Gameboy::new(rom, None),
+    };
 
     let mut last: Vec<u8> = WATCH.iter().map(|(a, _)| gb.peek(*a)).collect();
     println!("frame\taddress\tname\told\tnew");

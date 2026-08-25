@@ -115,6 +115,11 @@ That is itself the finding this round's audit was asked to produce: **the atlas'
 `produced_by.commit` and `run.date` now record this run rather than the original one, since
 it is the more recent confirmation of the same, unchanged evidence.
 
+**Had any entry disagreed, that disagreement would be a data issue, not a discovery about the
+game** — see [`docs/data-issues.md`](data-issues.md), which is where this run (and any future
+one) is logged in readable form, and which draws the line between a fault in the cartridge and
+a fault in this atlas's own record of it.
+
 ### Running it yourself
 
 ```bash
@@ -231,3 +236,72 @@ was proved.
 The split is the honest one. Everything that can be proved from the file itself is proved
 here, in this repository's CI, on every push; everything that needs a machine is proved by
 the machine and published back.
+
+---
+
+## Ranked hand-off for the next round
+
+This project's 2026-08-25 audit (verification, descriptions, linkage, docs quality, and the
+game-bugs/data-issues split) measured everything below rather than estimating it, so the
+next round can pick up any one item without re-surveying the atlas first. Ranked by value
+per unit of effort, highest first.
+
+1. **Wire the ROM content-check to more than three tables.** [`testharness/gen1atlas.rs`](https://github.com/Alchemy86/TerminalGB/blob/main/testharness/gen1atlas.rs)'s
+   `rom_checks` already proves `MonsterNames`, `BaseStats` and `PokedexOrder` are what they
+   claim by reading a short, unmistakable, non-redistributable byte signature at their
+   address — a mechanism that generalises to one match arm per symbol. **50 of the 60
+   entries with no verification method at all are ROM routines and tables this exact
+   mechanism could reach**, and each one is a few minutes of work once a signature is
+   chosen. This is a change to TerminalGB (`testharness/gen1atlas.rs`), not to AtlasGB —
+   dispatch it there. Highest value for the lowest cost of anything on this list.
+2. **A local `pret/pokered` checkout is the real unlock for descriptions.** This round had
+   no local checkout and no network access to fetch one, so its description pass was
+   limited to what TerminalGB's own plugin source comments and this project's existing
+   prose already established — a genuinely small, already-mined pool (six new facts found
+   across nine plugin source files; seventeen descriptions added in total once the
+   shared-address cross-reference cases were included). The 520 remaining `entry`-role
+   gaps are concentrated in `scratch` (161), `events` (104) and `system` (71) — groups
+   whose symbol names are exactly the ones where a plausible-sounding guess and a real fact
+   are indistinguishable without reading `ram/wram.asm`'s own structure. Building the
+   disassembly once (`make extract POKERED=~/src/pokered` documents the RGBDS version and
+   the ROM-match check) and reading its context — never copying its prose, exactly as
+   [provenance.md](provenance.md) already requires of every existing description — is what
+   would move this from seventeen to hundreds.
+3. **Extend the live script to reach a battle and open the PC.** Closes the last **7**
+   storage entries with zero evidence (`wSprite11StateData2MapX`, `wEnemyMoveMaxPP`,
+   `wBoxMon15Status`, plus whichever the current script's route genuinely never reaches —
+   confirm against a fresh run, not this list, since the set is exactly the kind of thing
+   that can move under future prose edits). A change to `testharness/gen1atlas.rs`'s
+   `script_key` — dispatch it. Small in count, but it is the difference between "storage is
+   fully evidenced" and "all but seven bytes are."
+4. **Design and land the linkage field the captain asked for.** Every entry can already be
+   cross-referenced by naming another symbol inside `desc` — this round's own additions do
+   exactly that — but that is prose, not something a reader or a tool can traverse
+   systematically, and it is not what "every entry reachable, every relationship
+   traversable, nothing a dead end" needs. The smallest deliberate extension: an eleventh,
+   **ours**, optional column — `related` — a comma-separated list of symbol names this
+   entry is read or written alongside, populated only where a chapter's own prose, an
+   invariant's `covers` list, or a structure definition already establishes the
+   relationship (never invented to fill the column). `tools/render.py` would render it as a
+   "Related" line per entry, the same way "Findings behind these bytes" already works per
+   chapter — this is that idea generalised from chapter-level curation to per-entry data.
+   Do not add the column and leave it empty for 2,898 rows; design it against a real backfill
+   plan or it becomes exactly the kind of promise a reader trusts and then finds broken.
+5. **Schedule the verification pass instead of relying on a human to remember it.**
+   TerminalGB does not currently run `testharness/gen1atlas.rs`'s Tier B/C/invariants on a
+   timer — only Tier A runs in its own CI, because the rest needs a cartridge no CI
+   machine has. A periodic run (a maintainer's own machine, on a cron, landing a report the
+   same way this round's was landed) is what turns "the atlas can be checked against the
+   cartridge" into "the atlas *is* checked against the cartridge, recently, always." Low
+   cost, meaningful trust gain, and it directly serves the game-bugs-vs-data-issues split:
+   [`docs/data-issues.md`](data-issues.md) is only as good as how often something has a
+   chance to land in it.
+6. **A full line-by-line docs pass on the pages this round only spot-checked.**
+   `audio.md`, `graphics.md`, `player.md`, `pokedex.md`, `storage.md`, `structures.md`,
+   `system.md`, `by-address.md` and `by-name.md`'s prose were checked for the failure modes
+   this round specifically went looking for (dead links, stale figures, contradictions
+   between pages, leftover placeholders — `tools/checklinks.py` plus a repository-wide grep
+   for the obvious markers) and came back clean, but were not each read start to finish the
+   way `sharp-edges.md`, `paper-claims.md`, `catching.md` and `cerulean-gym.md` were while
+   being written. A fresh pair of eyes reading each one fully is worth doing before calling
+   the docs pass complete rather than clean-by-the-checks-that-exist.

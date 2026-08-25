@@ -116,7 +116,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this VRAM block with `vChars1`/`vFont` — the same 2 KiB read as tile graphics before the title screen loads and as the game's font afterward; see those entries.",
    "addr_int": 34816
   },
   {
@@ -228,7 +228,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this VRAM block with `vBackPic`, where a Pokémon's back picture is decompressed to; see that entry.",
    "addr_int": 37648
   },
   {
@@ -5154,7 +5154,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Offset 0 of the player's own `wSpriteStateData2` (see that entry) — the walk-animation frame counter specifically.",
    "addr_int": 49664
   },
   {
@@ -14671,7 +14671,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this address with `wOverworldMap` (see that entry) — 1,300 bytes reused for a different purpose outside the overworld.",
    "addr_int": 50920
   },
   {
@@ -14719,7 +14719,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Starts exactly where the live block map ends (`wOverworldMapEnd`, see that entry) — the block map's own boundary and this buffer's start are the same address.",
    "addr_int": 52220
   },
   {
@@ -15391,7 +15391,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One of a dozen unrelated one-off scratch uses sharing this WRAM byte across different screens and routines — also, among others in this atlas, `wFilteredBagItems` when a bag menu is open; which one is live depends entirely on what is currently executing.",
    "addr_int": 52315
   },
   {
@@ -15726,7 +15726,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this byte with `wSimulatedJoypadStatesEnd` and other unrelated one-off scratch uses at this address; which is live depends on what is currently executing.",
    "addr_int": 52435
   },
   {
@@ -16743,7 +16743,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this address with `wEnemyMonAttackMod`/`wEnemyMonStatMods` — see those entries.",
    "addr_int": 52526
   },
   {
@@ -19363,7 +19363,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this address with `wTileMapBackup2` — the link-battle shared random-number list borrows this scratch buffer outside a link session; see that entry for the rest of what it is used for.",
    "addr_int": 52609
   },
   {
@@ -20211,7 +20211,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this address with `wStringBuffer` — see that entry.",
    "addr_int": 53067
   },
   {
@@ -20355,7 +20355,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this byte with `wCurItem`/`wCurPartySpecies` — reused for whichever operation (a list menu's selection, an item, a species) is currently in progress; see those entries for the specific facts.",
    "addr_int": 53137
   },
   {
@@ -31559,7 +31559,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Shares this byte with `wStatusFlags3`, one of several assorted progress-bit bytes; see that entry.",
    "addr_int": 55085
   },
   {
@@ -41622,7 +41622,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One of several unrelated scratch uses sharing this HRAM byte across different routines — elsewhere it also holds `hPreviousTileset` and `hSpriteInterlaceCounter` (see those entries) at different moments; which is live depends on what is currently executing.",
    "addr_int": 65419
   },
   {
@@ -42208,7 +42208,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Shares this HRAM byte with `hOAMBufferOffset` (see that entry) — a different routine's temporary value, at a moment `PrepareOAMData` is not running.",
    "addr_int": 65424
   },
   {
@@ -42328,7 +42328,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "One of several unrelated scratch uses sharing this HRAM byte — elsewhere it also holds the software-divide/multiply results `hDividend`/`hProduct`/`hQuotient` (see those entries) at different moments.",
    "addr_int": 65429
   },
   {
@@ -42478,7 +42478,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "One of several unrelated scratch uses sharing this HRAM byte — elsewhere it also holds `hMultiplicand`, the software-multiply input (see that entry), at a different moment.",
    "addr_int": 65430
   },
   {
@@ -42613,7 +42613,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "One of several unrelated scratch uses sharing this HRAM byte with the software math routines' `hDivisor`/`hMultiplier`/`hRemainder` (see those entries) at different moments.",
    "addr_int": 65433
   },
   {

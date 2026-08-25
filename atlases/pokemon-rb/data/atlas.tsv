@@ -2,14 +2,14 @@ region	bank	addr	len	symbol	role	sect	group	verify	desc
 VRAM	-	$8000	2048	vChars0	entry	VRAM	graphics	rom,live	The first of three tile blocks in video RAM, `$8000-$87FF`. Objects are always fetched from here and the block above it.
 VRAM	-	$8000	2048	vNPCSprites	alias	VRAM	graphics	rom,live	The overworld people's tiles.
 VRAM	-	$8000	2048	vSprites	alias	VRAM	graphics	rom,live	Object tiles.
-VRAM	-	$8800	2048	vTitleLogo	entry	VRAM	graphics	rom,live	
+VRAM	-	$8800	2048	vTitleLogo	entry	VRAM	graphics	rom,live	Shares this VRAM block with `vChars1`/`vFont` — the same 2 KiB read as tile graphics before the title screen loads and as the game's font afterward; see those entries.
 VRAM	-	$8800	2048	vChars1	alias	VRAM	graphics	rom,live	The middle tile block, `$8800-$8FFF`, reachable from both addressing modes.
 VRAM	-	$8800	2048	vFont	alias	VRAM	graphics	rom,live	Where the text font lands. This is the block that makes the tilemap read back as text: load the font here in ASCII-ish order and a tile id becomes a character code.
 VRAM	-	$8800	2048	vNPCSprites2	alias	VRAM	graphics	rom,live	
 VRAM	-	$9000	784	vTileset	entry	VRAM	graphics	rom,live	The 96 background tiles a map's tileset loads into. Re-copied on every map load, which is why anything written here by a tool is clobbered at the next door.
 VRAM	-	$9000	784	vFrontPic	alias	VRAM	graphics	rom,live	Where a Pokemon's front picture is decompressed to before a battle draws it.
 VRAM	-	$9000	784	vChars2	instance	VRAM	graphics	rom,live	The last tile block, `$9000-$97FF`, only reachable by the background when the unsigned addressing mode is selected.
-VRAM	-	$9310	1264	vTitleLogo2	entry	VRAM	graphics	rom,live	
+VRAM	-	$9310	1264	vTitleLogo2	entry	VRAM	graphics	rom,live	Shares this VRAM block with `vBackPic`, where a Pokémon's back picture is decompressed to; see that entry.
 VRAM	-	$9310	1264	vBackPic	alias	VRAM	graphics	rom,live	Where the back picture is decompressed to.
 VRAM	-	$9800	1024	vBGMap0	entry	VRAM	graphics	rom,live	The first 32x32 background tilemap. The 20x18 window the screen shows is a corner of it.
 VRAM	-	$9C00	1024	vBGMap1	entry	VRAM	graphics	rom,live	The second background tilemap, used for transitions and for the window layer.
@@ -330,7 +330,7 @@ WRAM0	-	$C1F9	1	wSprite15StateData1FacingDirection	instance	Sprite State Data	sp
 WRAM0	-	$C1FA	1	wSprite15StateData1YAdjusted	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C1FB	1	wSprite15StateData1XAdjusted	instance	Sprite State Data	sprites	live	
 WRAM0	-	$C1FC	4	wSprite15StateData1CollisionData	instance	Sprite State Data	sprites	live	
-WRAM0	-	$C200	2	wSpritePlayerStateData2WalkAnimationCounter	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C200	2	wSpritePlayerStateData2WalkAnimationCounter	entry	Sprite State Data	sprites	rom,live	Offset 0 of the player's own `wSpriteStateData2` (see that entry) — the walk-animation frame counter specifically.
 WRAM0	-	$C200	2	wSprite15StateData1End	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C200	2	wSpritePlayerStateData2	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C200	2	wSpriteStateData2	instance	Sprite State Data	sprites	rom,live	The second sixteen 16-byte sprite structures: map coordinates, which sprite sheet, and the movement script.
@@ -950,10 +950,10 @@ WRAM0	-	$C5A6	1	wShadowOAMBackupSprite39TileID	instance	Tilemap	sprites	live
 WRAM0	-	$C5A7	1	wShadowOAMBackupSprite39Attributes	instance	Tilemap	sprites	rom,live	
 WRAM0	-	$C5A8	40	wShadowOAMBackupEnd	entry	Tilemap	sprites	rom,live	
 WRAM0	-	$C5D0	280	wSerialEnemyMonsPatchList	entry	Tilemap	link	rom,live	The same list for the party the other console sent.
-WRAM0	-	$C6E8	1300	wTempPic	entry	Overworld Map	overworld	rom,live	
+WRAM0	-	$C6E8	1300	wTempPic	entry	Overworld Map	overworld	rom,live	Shares this address with `wOverworldMap` (see that entry) — 1,300 bytes reused for a different purpose outside the overworld.
 WRAM0	-	$C6E8	1300	wOverworldMap	alias	Overworld Map	overworld	rom,live	The live block map: the room the engine is actually drawing, with a three-block border. 1,300 bytes, which is the size of the largest map in the game.
 WRAM0	-	$CBFC	0	wOverworldMapEnd	entry	Overworld Map	overworld	rom,live	One past the live block map. The 1,300 bytes in front of it, with the three-block border the loader leaves on every side, are the rule a map has to obey: `(width + 6) x (height + 6)` blocks must fit. The game's own largest map is 10x72 blocks, which comes to 1,248.
-WRAM0	-	$CBFC	40	wRedrawRowOrColumnSrcTiles	entry	WRAM	overworld	rom,live	
+WRAM0	-	$CBFC	40	wRedrawRowOrColumnSrcTiles	entry	WRAM	overworld	rom,live	Starts exactly where the live block map ends (`wOverworldMapEnd`, see that entry) — the block map's own boundary and this buffer's start are the same address.
 WRAM0	-	$CC24	1	wTopMenuItemY	entry	WRAM	screen	rom,live	Row of the first item in the open menu, in screen tiles.
 WRAM0	-	$CC25	1	wTopMenuItemX	entry	WRAM	screen	rom,live	Column of the first item in the open menu.
 WRAM0	-	$CC26	1	wCurrentMenuItem	entry	WRAM	screen	rom,live	Which item the cursor is on, counted from the top item — **except in a battle's move list**, where `MoveSelectionMenu` writes `wPlayerMoveListIndex + 1`, so the first move reads 1 and every other menu in the game reads 0. Getting it wrong is silent: the cursor already equals the target, A fires on the wrong move, and nothing anywhere says so.
@@ -995,7 +995,7 @@ WRAM0	-	$CC53	2	wPredefBC	entry	WRAM	system	rom,live	`BC` saved across a `predef
 WRAM0	-	$CC55	2	wTrainerHeaderFlagBit	entry	WRAM	events	rom,live	
 WRAM0	-	$CC57	1	wNPCMovementScriptPointerTableNum	entry	WRAM	events	rom,live	
 WRAM0	-	$CC58	3	wNPCMovementScriptBank	entry	WRAM	events	rom,live	
-WRAM0	-	$CC5B	1	wBoostExpByExpAll	entry	WRAM	battle	rom,live	
+WRAM0	-	$CC5B	1	wBoostExpByExpAll	entry	WRAM	battle	rom,live	One of a dozen unrelated one-off scratch uses sharing this WRAM byte across different screens and routines — also, among others in this atlas, `wFilteredBagItems` when a bag menu is open; which one is live depends entirely on what is currently executing.
 WRAM0	-	$CC5B	1	wAnimationType	alias	WRAM	battle	rom,live	
 WRAM0	-	$CC5B	1	wDexRatingNumMonsSeen	alias	WRAM	battle	rom,live	
 WRAM0	-	$CC5B	1	wElevatorWarpMaps	alias	WRAM	battle	rom,live	
@@ -1016,7 +1016,7 @@ WRAM0	-	$CC97	10	wNPCMovementDirections2	entry	WRAM	scratch	rom,live
 WRAM0	-	$CC97	10	wSwitchPartyMonTempBuffer	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CCA1	49	wNumStepsToTake	entry	WRAM	overworld	rom,live	
 WRAM0	-	$CCD2	1	wRLEByteCount	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CCD3	1	wCanEvolveFlags	entry	WRAM	battle	rom,live	
+WRAM0	-	$CCD3	1	wCanEvolveFlags	entry	WRAM	battle	rom,live	Shares this byte with `wSimulatedJoypadStatesEnd` and other unrelated one-off scratch uses at this address; which is live depends on what is currently executing.
 WRAM0	-	$CCD3	1	wAddedToParty	alias	WRAM	battle	rom,live	
 WRAM0	-	$CCD3	1	wMiscBattleData	alias	WRAM	battle	rom,live	
 WRAM0	-	$CCD3	1	wParentMenuItem	alias	WRAM	battle	rom,live	
@@ -1080,7 +1080,7 @@ WRAM0	-	$CD29	1	wInGameTradeMonNick	entry	WRAM	scratch	rom,live
 WRAM0	-	$CD2A	2	wEnemyMonUnmodifiedSpeed	entry	WRAM	battle	rom,live	Speed for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD2C	1	wEnemyMonUnmodifiedSpecial	entry	WRAM	battle	live	Special for the opponent before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD2D	1	wEngagedTrainerClass	entry	WRAM	battle	rom,live	
-WRAM0	-	$CD2E	1	wEngagedTrainerSet	entry	WRAM	battle	rom,live	
+WRAM0	-	$CD2E	1	wEngagedTrainerSet	entry	WRAM	battle	rom,live	Shares this address with `wEnemyMonAttackMod`/`wEnemyMonStatMods` — see those entries.
 WRAM0	-	$CD2E	1	wEnemyMonAttackMod	alias	WRAM	battle	rom,live	Attack stage for the opponent, same bias.
 WRAM0	-	$CD2E	1	wEnemyMonStatMods	alias	WRAM	battle	rom,live	In-battle stat stages for the opponent, same 1-13 range with 7 neutral.
 WRAM0	-	$CD2F	1	wEnemyMonDefenseMod	entry	WRAM	battle	live	Defense stage for the opponent, same bias.
@@ -1244,7 +1244,7 @@ WRAM0	-	$CD71	2	wStatusScreenCurrentPP	entry	WRAM	scratch	rom,live
 WRAM0	-	$CD73	5	wPPUpCountAndMaxPP	entry	WRAM	scratch	live	
 WRAM0	-	$CD78	2	wNormalMaxPPList	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD7A	7	wEvoDataBufferEnd	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD81	360	wSerialOtherGameboyRandomNumberListBlock	entry	WRAM	link	rom,live	
+WRAM0	-	$CD81	360	wSerialOtherGameboyRandomNumberListBlock	entry	WRAM	link	rom,live	Shares this address with `wTileMapBackup2` — the link-battle shared random-number list borrows this scratch buffer outside a link session; see that entry for the rest of what it is used for.
 WRAM0	-	$CD81	360	wTileMapBackup2	alias	WRAM	link	rom,live	A second 360-byte screen backup. Also the largest clean scratch buffer below the save boundary, which is why other tools borrow it.
 WRAM0	-	$CEE9	1	wLearningMovesFromDayCare	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CEE9	1	wBuffer	alias	WRAM	scratch	rom,live	
@@ -1297,7 +1297,7 @@ WRAM0	-	$CF2D	1	wPalPacket	entry	WRAM	graphics	rom,live
 WRAM0	-	$CF2D	1	wCopyingSGBTileData	alias	WRAM	graphics	rom,live	
 WRAM0	-	$CF2D	1	wWhichPartyMenuHPBar	alias	WRAM	graphics	rom,live	
 WRAM0	-	$CF2E	29	wPartyMenuBlkPacket	entry	WRAM	graphics	rom,live	
-WRAM0	-	$CF4B	2	wExpAmountGained	entry	WRAM	battle	rom,live	
+WRAM0	-	$CF4B	2	wExpAmountGained	entry	WRAM	battle	rom,live	Shares this address with `wStringBuffer` — see that entry.
 WRAM0	-	$CF4B	2	wStringBuffer	alias	WRAM	battle	rom,live	Scratch for a string being assembled before it is placed.
 WRAM0	-	$CF4D	18	wGainBoostedExp	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF5F	17	wGymCityName	entry	WRAM	scratch	rom,live	
@@ -1306,7 +1306,7 @@ WRAM0	-	$CF7B	16	wItemList	entry	WRAM	scratch	rom,live
 WRAM0	-	$CF8B	2	wListPointer	entry	WRAM	screen	rom,live	
 WRAM0	-	$CF8D	2	wUnusedNamePointer	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF8F	2	wItemPrices	entry	WRAM	bag	rom,live	
-WRAM0	-	$CF91	1	wCurListMenuItem	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF91	1	wCurListMenuItem	entry	WRAM	scratch	rom,live	Shares this byte with `wCurItem`/`wCurPartySpecies` — reused for whichever operation (a list menu's selection, an item, a species) is currently in progress; see those entries for the specific facts.
 WRAM0	-	$CF91	1	wCurItem	alias	WRAM	scratch	rom,live	Which item the current operation is about.
 WRAM0	-	$CF91	1	wCurPartySpecies	alias	WRAM	scratch	rom,live	The species the current operation is about — set by `InitOpponent`, and reused by the party menus.
 WRAM0	-	$CF92	1	wWhichPokemon	entry	WRAM	storage	rom,live	Which party slot a menu or a link rendezvous picked. **`EnemySendOutFirstMon` computes it as the received byte minus 4 with no bounds check**, so answering the after-a-faint rendezvous with a move index instead of a slot underflows it to slot 252 and the game fields a glitch Pokemon whose name changes every turn.
@@ -2014,7 +2014,7 @@ WRAM0	-	$D71F	9	wUnusedCardKeyGateID	entry	Main Data	events	rom,live
 WRAM0	-	$D728	2	wStatusFlags1	entry	Main Data	events	rom,live	A byte of assorted progress bits the scripts test.
 WRAM0	-	$D72A	2	wBeatGymFlags	entry	Main Data	events	rom,live	One bit per gym leader defeated. Distinct from `wObtainedBadges`, which the badge case reads.
 WRAM0	-	$D72C	1	wStatusFlags2	instance	Main Data	events	rom,live	A second byte of assorted progress bits.
-WRAM0	-	$D72D	1	wCableClubDestinationMap	entry	Main Data	overworld	rom,live	
+WRAM0	-	$D72D	1	wCableClubDestinationMap	entry	Main Data	overworld	rom,live	Shares this byte with `wStatusFlags3`, one of several assorted progress-bit bytes; see that entry.
 WRAM0	-	$D72D	1	wStatusFlags3	instance	Main Data	events	rom,live	A third byte of assorted progress bits.
 WRAM0	-	$D72E	2	wStatusFlags4	instance	Main Data	events	rom,live	A fourth byte of assorted progress bits.
 WRAM0	-	$D730	2	wStatusFlags5	instance	Main Data	events	rom,live	A fifth byte of assorted progress bits.
@@ -2675,7 +2675,7 @@ WRAM0	-	$DF00	255	gap:WRAM00:$DF00	gap	Stack	system	live
 WRAM0	-	$DFFF	1	wStack	entry	Stack	system	rom,live	The **top** of the stack. The Stack section is `$DF00-$DFFF` and this label sits at its last byte because the stack pointer starts here and grows downwards through all 256 bytes — which is why the atlas records the 255 bytes below it as reached by no label rather than as a hole.
 HRAM	-	$FF80	10	hDMARoutine	entry	OAM DMA	system	rom,live	The OAM DMA routine, copied into high RAM at boot. It has to run from here: the CPU cannot read the cartridge or work RAM while a DMA is in progress, so the loop that waits for it must live somewhere that stays readable.
 HRAM	-	$FF8A	1	hSoftReset	entry	HRAM	system	rom,live	Counts down while A+B+Start+Select are held; reaching zero resets the game.
-HRAM	-	$FF8B	1	hSpriteDataOffset	entry	HRAM	system	rom,live	
+HRAM	-	$FF8B	1	hSpriteDataOffset	entry	HRAM	system	rom,live	One of several unrelated scratch uses sharing this HRAM byte across different routines — elsewhere it also holds `hPreviousTileset` and `hSpriteInterlaceCounter` (see those entries) at different moments; which is live depends on what is currently executing.
 HRAM	-	$FF8B	1	hBaseTileID	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hDexWeight	alias	HRAM	system	rom,live	
 HRAM	-	$FF8B	1	hDownArrowBlinkCount1	alias	HRAM	system	rom,live	
@@ -2712,7 +2712,7 @@ HRAM	-	$FF8E	1	hFourTileSpriteCount	alias	HRAM	system	rom
 HRAM	-	$FF8E	1	hLoadSpriteTemp2	instance	HRAM	system	rom	
 HRAM	-	$FF8F	1	hCollidingSpriteOffset	entry	HRAM	system	rom	
 HRAM	-	$FF8F	1	hSpriteOffset2	alias	HRAM	system	rom	
-HRAM	-	$FF90	1	hCollidingSpriteTempYValue	entry	HRAM	system	rom	
+HRAM	-	$FF90	1	hCollidingSpriteTempYValue	entry	HRAM	system	rom	Shares this HRAM byte with `hOAMBufferOffset` (see that entry) — a different routine's temporary value, at a moment `PrepareOAMData` is not running.
 HRAM	-	$FF90	1	hOAMBufferOffset	alias	HRAM	system	rom	How far `PrepareOAMData` has got through `wShadowOAM`, in bytes. It is eight bits and **nothing bounds it at the buffer's 160**, which is how sixteen drawable sprites can run the clear loop past `wShadowOAMEnd` and into the screen buffer behind it.
 HRAM	-	$FF91	1	hCollidingSpriteTempXValue	entry	HRAM	system	rom	
 HRAM	-	$FF91	1	hSpriteScreenX	alias	HRAM	system	rom	
@@ -2720,7 +2720,7 @@ HRAM	-	$FF92	1	hCollidingSpriteAdjustedDistance	entry	HRAM	system	rom
 HRAM	-	$FF92	1	hSpriteScreenY	alias	HRAM	system	rom	
 HRAM	-	$FF93	1	hTilePlayerStandingOn	entry	HRAM	system	rom	
 HRAM	-	$FF94	1	hSpritePriority	entry	HRAM	system	rom	
-HRAM	-	$FF95	1	hSwapTemp	entry	HRAM	system	rom	
+HRAM	-	$FF95	1	hSwapTemp	entry	HRAM	system	rom	One of several unrelated scratch uses sharing this HRAM byte — elsewhere it also holds the software-divide/multiply results `hDividend`/`hProduct`/`hQuotient` (see those entries) at different moments.
 HRAM	-	$FF95	1	hDividend	alias	HRAM	system	rom	Input to the software divide routine — the CPU has no divide instruction.
 HRAM	-	$FF95	1	hNPCMovementDirections2Index	alias	HRAM	system	rom	
 HRAM	-	$FF95	1	hNPCPlayerYDistance	alias	HRAM	system	rom	
@@ -2730,7 +2730,7 @@ HRAM	-	$FF95	1	hProduct	alias	HRAM	system	rom	Result of the software multiply, f
 HRAM	-	$FF95	1	hQuotient	alias	HRAM	system	rom	Result of the software divide.
 HRAM	-	$FF95	1	hSignCoordPointer	alias	HRAM	system	rom	
 HRAM	-	$FF95	1	hSwapItemID	alias	HRAM	system	rom	
-HRAM	-	$FF96	1	hExperience	entry	HRAM	system	rom	
+HRAM	-	$FF96	1	hExperience	entry	HRAM	system	rom	One of several unrelated scratch uses sharing this HRAM byte — elsewhere it also holds `hMultiplicand`, the software-multiply input (see that entry), at a different moment.
 HRAM	-	$FF96	1	hMultiplicand	alias	HRAM	system	rom	Input to the software multiply routine.
 HRAM	-	$FF96	1	hMutateWY	alias	HRAM	system	rom	
 HRAM	-	$FF96	1	hNPCPlayerXDistance	alias	HRAM	system	rom	
@@ -2739,7 +2739,7 @@ HRAM	-	$FF96	1	hSwapItemQuantity	alias	HRAM	system	rom
 HRAM	-	$FF97	1	hMutateWX	entry	HRAM	system	rom	
 HRAM	-	$FF97	1	hFindPathNumSteps	alias	HRAM	system	rom	
 HRAM	-	$FF98	1	hFindPathFlags	entry	HRAM	system	rom	
-HRAM	-	$FF99	1	hFindPathYProgress	entry	HRAM	system	rom	
+HRAM	-	$FF99	1	hFindPathYProgress	entry	HRAM	system	rom	One of several unrelated scratch uses sharing this HRAM byte with the software math routines' `hDivisor`/`hMultiplier`/`hRemainder` (see those entries) at different moments.
 HRAM	-	$FF99	1	hDivisor	alias	HRAM	system	rom	Divisor for the software divide.
 HRAM	-	$FF99	1	hMultiplier	alias	HRAM	system	rom	The other input to the software multiply.
 HRAM	-	$FF99	1	hPowerOf10	alias	HRAM	system	rom	

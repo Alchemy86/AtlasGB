@@ -21,6 +21,17 @@ to know *what has been discovered here* now has one door.
 > claim came from somewhere else and turned out to be wrong, the measurement that settled it is
 > shown.
 
+> **Where a *new* finding goes.** A fault in Pokémon and a fault in our own record of Pokémon are
+> different animals. Something the cartridge itself does — surprising, broken, or contradicting a
+> published belief (ours or somebody else's) about how the *game* works — is an entry here. A
+> single row of this atlas's own `atlas.tsv` turning out to be wrong — an address, a role, a
+> structure size, an evidence tier that disagrees with a fresh run against the cartridge — is a
+> **data issue**, not a discovery about the game, and it is logged at
+> [`docs/data-issues.md`](../../../docs/data-issues.md) instead, which explains how one is caught
+> and corrected. The "our own belief" entries below are about beliefs *this campaign held* while
+> measuring the game — a wrong formula, a wrong assumption about a route — not about a wrong cell
+> in this atlas's own published data.
+
 ---
 
 ## The slugs are a contract

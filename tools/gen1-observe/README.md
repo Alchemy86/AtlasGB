@@ -30,6 +30,11 @@ This page is the mechanism; that one is what it found.
   HP/exp/level bytes every frame, to answer a specific hand-off question (why did the forced
   level-up in round three never fire) rather than sweeping everything. See
   `docs/observation.md` for what it found.
+- **`src/bin/investigate_gym.rs`** — another one-question trace: forces a battle against
+  MISTY (`wCurOpponent = 235`) rather than a wild Pokémon or a JR.TRAINER, to check whether
+  the forcing technique reliably starts a gym battle at all before assuming it does. Does
+  *not* replay the full `run_script` — see the file's own header comment for why. See
+  `docs/observation.md` for what it found (and did not finish finding).
 
 ## How it works
 
@@ -98,6 +103,7 @@ cargo run --release --bin gen1-observe    # pass 1 -> observe-pass1.json
 cargo run --release --bin pass2           # pass 2 -> observe-pass2.json
 
 cargo run --release --bin investigate_levelup   # frame-by-frame trace to stdout, no JSON
+cargo run --release --bin investigate_gym       # same, for the forced Misty battle
 ```
 
 Nothing here touches TerminalGB's own tree — the `Cargo.toml` path dependency reads its

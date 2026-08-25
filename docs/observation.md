@@ -342,6 +342,43 @@ it are not related by that fact alone. `related` stays empty for all 17 addresse
 two groups; both are recorded here, not silently dropped, so a future round does not have to
 re-derive this if it ever doubts the call.
 
+## Round six: a real gym battle starts — checked, not assumed — but does not finish
+
+Hand-off item 4 asked for a full gym battle against Misty, forced to a clear loss, and — given
+round five's finding about the wild battle never starting — to check whether a forced trainer
+battle reliably starts at all rather than assume it does because phase 5's JR.TRAINER worked.
+[`investigate_gym`](../tools/gen1-observe/src/bin/investigate_gym.rs) is a third small,
+one-question tool built to check exactly that.
+
+**First attempt: force the battle right after the existing full script finishes.** This
+failed immediately and reproducibly — `wCurOpponent` and `wPartyMon1HP` were both overwritten
+to the same value within 0-2 frames of being forced, regardless of whether the game was given
+120 or 1,200 extra idle frames to settle first. Something the script's own final phases leave
+running (a party-reorder or save attempt still finishing, or lingering effects of phase 6's
+own forced blackout) keeps touching that WRAM region every frame even with zero input, and
+idling alone never let it finish. **This means "forcing a battle works" is a claim about the
+game's state, not just the technique** — a lesson worth generalising past this one battle.
+
+**Second attempt: force the battle in the same kind of state phase 5's own successful
+trainer-battle forcing used** — right after intro and one walk phase, before any menu, save
+or blackout activity, duplicated inline rather than by editing the shared script (which would
+move every existing pass's frame numbers). **This worked.** `wTrainerClass` loads to `35`
+(MISTY) and `wEnemyMon1Species` loads within a handful of frames of the forced write;
+`wIsInBattle` transitions from `0` to `2` (trainer) about 180 frames later — a real battle,
+not a stalled attempt. This confirms round five's finding was about state, not the technique:
+forcing a trainer battle is reliable *in a settled overworld-polling state*, and unreliable
+right after other menu/save/blackout activity, for both a JR.TRAINER and a gym leader alike.
+
+**What did not happen: the battle never progressed to a loss, or to any further measured
+change at all.** The same blind-A-mash pattern that carried phase 5's single-Pokémon
+JR.TRAINER fight all the way through produced nothing further here across roughly 8,000
+additional frames (well over two minutes of game time) — `wIsInBattle` stays at `2`, no HP
+byte moves, no badge bit flips. Left as an open question rather than guessed at: Misty's
+gym-leader battle may open on a dialogue variant the JR.TRAINER fight does not have, or need
+a different menu path than a flat A-mash reliably lands on. The well-scoped next step is
+`probe_menu`-style cursor cycling (already built and used elsewhere in `lib.rs`) pointed at
+whatever screen the battle is actually stuck on, not another blind, longer mash.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
@@ -364,11 +401,13 @@ Highest value per unit of effort, first — same rule the verification hand-off 
    battle never started at all, or started and ended inside one frame — that needs pass 2's
    instruction-level tracing pointed at `wIsInBattle` specifically across this window, a small,
    well-scoped follow-up rather than a re-run of everything.
-4. **A full gym battle (Misty, not just a JR.TRAINER), and a losing one played to its actual
-   end** rather than a low-HP battle that may resolve in either direction. cerulean-gym.md
-   already carries her exact team, so this is a data lookup, not a new derivation. Given item 3's
-   finding, worth checking with the same frame-by-frame technique whether a gym trainer battle
-   reliably starts the same way phase 5's did, before assuming it will.
+4. **~~A full gym battle, played to a loss~~ — half-answered this round: see
+   [above](#round-six-a-real-gym-battle-starts--checked-not-assumed--but-does-not-finish).**
+   The battle reliably *starts* (confirmed, not assumed — `wTrainerClass` loads to `35` and
+   `wIsInBattle` reaches `2`) once forced in a settled overworld state, the same state phase
+   5's own trainer forcing needs. What is still open: getting it to actually *play*, past
+   whatever screen a blind A-mash does not move it off of — try `probe_menu`-style cursor
+   cycling instead of another longer mash before anything else.
 5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
    still buildable with no TerminalGB change. Round five's manual byte-reading to classify

@@ -29,9 +29,10 @@ flowchart LR
     A --> X["tools/export.py"] --> J["atlas.json<br/>atlas.min.json"]
 ```
 
-Eight of the ten columns are derived. Two are ours: `verify`, which arrives from a
-verification run and cannot be typed by hand, and `desc`, which is written by hand and
-never copied.
+Eight of the eleven columns are derived. Three are ours: `verify`, which arrives from a
+verification run and cannot be typed by hand; `desc`, which is written by hand and never
+copied; and `related`, which names other symbols this one is measured to be read or
+written alongside.
 
 ---
 

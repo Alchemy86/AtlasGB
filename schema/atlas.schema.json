@@ -71,7 +71,7 @@
   "entry": {
    "type": "object",
    "required": ["region", "bank", "addr", "addr_int", "len", "symbol", "role",
-                "sect", "group", "verify", "desc"],
+                "sect", "group", "verify", "desc", "related"],
    "additionalProperties": false,
    "properties": {
     "region": {
@@ -129,6 +129,12 @@
     "desc": {
      "type": "string",
      "description": "What it is, in our own words, as Markdown. May be empty."
+    },
+    "related": {
+     "type": "array",
+     "description": "Other symbols this one is measured to be read or written alongside — a shared writing routine, or a structural sibling. Empty means no relationship has been measured yet, not that none exists. Every name listed is a symbol elsewhere in this atlas; see docs/schema.md and docs/observation.md.",
+     "uniqueItems": true,
+     "items": {"type": "string"}
     }
    }
   }

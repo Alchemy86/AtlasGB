@@ -7,7 +7,7 @@ atlas, beside the TSV in `atlases/<id>/data/`:
 
 * `atlas.json` — the whole atlas as one object: a `meta` block naming the game
   and carrying the counts, then `entries`, an array of objects with the TSV's
-  columns typed (`addr` and `len` become integers, `verify` becomes a list).
+  columns typed (`addr` and `len` become integers, `verify` and `related` become lists).
   This is the form a web tool or a save editor wants; `schema/atlas.schema.json`
   describes it, and it is shared by every atlas.
 * `atlas.min.json` — the same entries with the empty fields dropped and no
@@ -43,7 +43,7 @@ REPO = atlases_mod.REPO
 STORAGE = ("VRAM", "SRAM", "WRAM0", "HRAM")
 
 INT_COLUMNS = ("len",)
-TOKEN_COLUMNS = ("verify",)
+TOKEN_COLUMNS = ("verify", "related")
 
 
 def read_tsv(path: str) -> tuple[list[str], list[dict]]:

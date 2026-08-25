@@ -45,9 +45,9 @@ with open("atlases/pokemon-rb/data/atlas.tsv", encoding="utf-8", newline="") as 
 
 ## The columns
 
-Ten columns, in this order. **Eight are derived** from a built `pret/pokered` checkout by
-[`tools/extract.py`](../tools/extract.py) and must not be hand-edited; **two are ours** —
-`verify` and `desc`.
+Eleven columns, in this order. **Eight are derived** from a built `pret/pokered` checkout by
+[`tools/extract.py`](../tools/extract.py) and must not be hand-edited; **three are ours** —
+`verify`, `desc` and `related`.
 
 | # | column | derived? | what it holds |
 |--:|---|:--:|---|
@@ -61,6 +61,7 @@ Ten columns, in this order. **Eight are derived** from a built `pret/pokered` ch
 | 8 | [`group`](#group) | rules | our chapter |
 | 9 | [`verify`](#verify) | **ours** | the evidence for the entry |
 | 10 | [`desc`](#desc) | **ours** | what it is, in our own words |
+| 11 | [`related`](#related) | **ours** | other symbols this one is measured to be read or written alongside |
 
 ---
 
@@ -224,6 +225,27 @@ Descriptions are written from scratch. `pret/pokered`'s prose and comments are n
 to copy — see [provenance.md](provenance.md). Where a description asserts behaviour
 rather than restating a name, either an invariant covers it or it is hedged.
 
+### `related`
+
+<a id="related"></a>Other symbols in **this atlas** this one is *measured* to be read or
+written alongside, comma-separated, no spaces — the same shape as `verify`. Empty means no
+relationship has been measured yet, never that none exists; most entries are empty, the
+same honesty rule `desc` follows.
+
+A relationship recorded here has to be evidence, not a guess about what "sounds related" —
+in practice, either two entries share an address (an `entry` and its own `alias` are always
+implicitly related and do not need listing here) or a run of
+[`tools/gen1-observe`](../tools/gen1-observe/) found them written by the same routine. See
+[`docs/observation.md`](observation.md) for how that evidence is produced and the current
+list of measured groups.
+
+**Every name listed must be a real symbol elsewhere in this atlas** —
+[`tools/validate.py`](../tools/validate.py) checks it on every push, because a symbol
+renamed elsewhere would otherwise leave a `related` cell silently pointing at nothing. A
+relationship is not necessarily symmetric in the data (`A` naming `B` does not require `B`
+to name `A` back) but should usually be written both ways when it is added, so a reader
+arriving at either entry finds the link.
+
 ---
 
 ## Derived forms
@@ -242,7 +264,7 @@ The JSON rows carry the TSV's columns plus two conveniences:
 - `addr_int` — the address as an integer, so a tool can index by it without parsing
   `$D163` (`addr` keeps its `$XXXX` spelling, because that is how every other Gen 1
   document writes it);
-- `verify` — a **list** of tokens rather than a comma-joined string.
+- `verify` and `related` — each a **list** rather than a comma-joined string.
 
 `len` is an integer. Everything else is a string.
 

@@ -314,6 +314,22 @@ def chapter_table(rows, chapter: str) -> str:
             note = " ".join(f"**`{n}`** — {d}" for n, d in notes)
         else:
             note = ""
+        # `related` names other symbols this one is measured to be read or
+        # written alongside — a shared writing routine, or a structural
+        # sibling. Link each into its own chapter, wherever that is, since a
+        # related symbol is not always on this same page.
+        rel_names = []
+        for src in [r] + also:
+            for n in src.get("related", "").split(","):
+                if n and n not in rel_names:
+                    rel_names.append(n)
+        if rel_names:
+            links = []
+            for n in rel_names:
+                tgt = by_symbol.get(n)
+                grp = tgt["group"] if tgt else r["group"]
+                links.append(f"[`{n}`]({grp}.md#s-{n})")
+            note = (note + " " if note else "") + "*(related: " + ", ".join(links) + ")*"
         slots, stride = family(by_symbol, r) if r["role"] == "entry" else (1, None)
         if slots > 1:
             tail = f"\u00d7{slots}" + (f", stride {stride}" if stride else "")
@@ -509,7 +525,7 @@ def worked_example_block(rows, symbol: str = "wPartyCount") -> str:
     if row is None:
         return block("example", ["*(no such entry)*"])
     cols = ["region", "bank", "addr", "len", "symbol", "role", "sect", "group",
-            "verify", "desc"]
+            "verify", "desc", "related"]
     meanings = {
         "region": "which of the CPU's address ranges it is in",
         "bank": "the bank, or `-` where the region is not banked",
@@ -521,6 +537,7 @@ def worked_example_block(rows, symbol: str = "wPartyCount") -> str:
         "group": "our chapter — [`tools/chapters.py`](../../tools/chapters.py) decides it",
         "verify": "the evidence, comma separated: `rom`, `live`, `inv`",
         "desc": "what it is, in our own words — empty when nobody has written one",
+        "related": "other symbols measured alongside this one — empty when none has been",
     }
     raw = "\t".join(row.get(c, "") for c in cols)
     out = [

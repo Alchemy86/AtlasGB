@@ -104,7 +104,7 @@ checksum. Say so by name.
 
 ## 2. `data/atlas.tsv` — the rows
 
-Ten tab-separated columns, exactly as [the schema](schema.md) specifies. That page is the
+Eleven tab-separated columns, exactly as [the schema](schema.md) specifies. That page is the
 contract and it is shared: your atlas uses the same `region`, `role` and `verify`
 vocabularies as every other one, so a consumer writes one parser.
 
@@ -125,7 +125,7 @@ proposed as one.
 
 ## 3. The extractor — derive, do not transcribe
 
-Eight of the ten columns are *derived*; only `desc` and `verify` are ours.
+Eight of the eleven columns are *derived*; `desc`, `verify` and `related` are ours.
 [`tools/extract.py`](../tools/extract.py) derives them for pokered by parsing the linker's
 map file from a **built** checkout, and re-checks the ROM's SHA-1 first so an unbuilt or
 patched checkout can never silently supply addresses for a different cartridge.

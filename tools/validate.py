@@ -41,7 +41,7 @@ import atlases as atlases_mod  # noqa: E402
 REPO = atlases_mod.REPO
 
 COLUMNS = ["region", "bank", "addr", "len", "symbol", "role", "sect", "group",
-           "verify", "desc"]
+           "verify", "desc", "related"]
 
 REGIONS = {
     "VRAM": (0x8000, 0x9FFF),
@@ -162,6 +162,18 @@ def validate(atlas, quiet: bool) -> int:
     clashes = {s: ls for s, ls in dupes.items() if len(ls) > 1}
     rep.check("every symbol name is unique", not clashes,
               "; ".join(f"{s} on lines {ls}" for s, ls in list(clashes.items())[:5]))
+
+    # `related` names other symbols by hand, so it is the one column that can
+    # go stale silently — a symbol renamed elsewhere leaves a `related` cell
+    # pointing at nothing. Every name it lists must actually exist in this
+    # atlas.
+    known_symbols = set(dupes)
+    bad = []
+    for r in rows:
+        for name in (t for t in r["related"].split(",") if t):
+            if name not in known_symbols:
+                bad.append(f"{r['_line']}: {r['symbol']} -> {name!r} (no such symbol)")
+    rep.check("every related symbol exists", not bad, "; ".join(bad[:5]))
 
     # GitHub lowercases the `id` it renders from `<a id="s-SYMBOL">`, so two
     # symbols differing only in case would land on one anchor and one of the

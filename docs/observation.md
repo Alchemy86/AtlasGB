@@ -254,6 +254,29 @@ written into the relevant entries' own `desc`; the rest are unused so far.
 (ROM0, $019D)   —  excluded: wCurOpponent/wCurEnemyLevel — this tool's own debug_write() artifact
 ```
 
+## Round four: the `related` column lands
+
+The schema gained its eleventh column: `region, bank, addr, len, symbol, role, sect, group,
+verify, desc, related`, documented in [schema.md](schema.md#related), validated (every name
+`related` lists must exist elsewhere in the atlas, so a rename cannot leave it silently
+pointing nowhere), exported as a JSON list alongside `verify`, and rendered on each chapter
+page as `*(related: ...)*` links into wherever the other symbol actually lives — not always
+the same chapter.
+
+It was **not** backfilled from all 31 groups. Populating it is a claim of "measured and
+examined," not just "measured," and round three's own prose only examined six of the
+groups closely enough to stand behind: the nine-symbol audio channel-state group, the
+shadow-OAM sprite-pair fields (the live pair and, by the same paired-slot logic, the
+backup/restore pair), the six-symbol battle stat-stage group, and the two-symbol party
+experience-split flags. **31 addresses across those six groups now carry `related`.**
+
+Left out on purpose, both still sitting in [the 31 groups above](#the-31-groups-in-full) for
+whoever picks this up: the 13-member `(ROM0, $36E3)` group and the 4-member `(ROM0, $1E7E)`
+group — neither examined individually last round, so neither has earned a listing yet — and
+the `(ROM0, $0F39)` group, which round three's own prose named and then explicitly declined
+to trust ("plausibly one generic... utility... not treated as evidence"). A shared writer
+still is not the same claim as a checked relationship; the column only wants the second.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
@@ -282,10 +305,11 @@ Highest value per unit of effort, first — same rule the verification hand-off 
 5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
    still buildable with no TerminalGB change.
-6. **Land the `related` schema column, backfilled from [the 31 groups above](#the-31-groups-in-full)
-   plus whatever item 2's richer run adds.** The open question from round two — does grouping
-   by writer produce real structure — is answered; what's left is the tooling work of making
-   it queryable rather than a table in a doc page.
+6. **Examine the two held-back groups — `(ROM0, $36E3)`, 13 members, and `(ROM0, $1E7E)`,
+   4 members — and either back their symbols into `related` or write down why not.** Both are
+   real, measured writer-groups sitting unused in the table above; the only reason they are
+   not in `related` yet is that nobody has looked closely enough to say whether they are a
+   genuine relationship or another generic utility in the shape of `$00B6` and `$0F39`.
 
 ## See also
 

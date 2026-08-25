@@ -2,11 +2,12 @@
 """Regenerate the derived columns of the Pokemon Red/Blue atlas.
 
 `atlases/pokemon-rb/data/atlas.tsv` is the single source of truth for where
-Pokemon Red and Blue keep everything.  Eight of its ten columns are *derived*
-from a built `pret/pokered` checkout, and two are *ours*: what the entry is, in
-our own words, and how it was verified.  This script rewrites the derived
-columns and leaves ours alone, so a pokered bump is a reviewable diff rather
-than a rewrite.
+Pokemon Red and Blue keep everything.  Eight of its eleven columns are
+*derived* from a built `pret/pokered` checkout, and three are *ours*: what the
+entry is, in our own words; how it was verified; and what it is measured to be
+read or written alongside.  This script rewrites the derived columns and
+leaves ours alone, so a pokered bump is a reviewable diff rather than a
+rewrite.
 
     tools/extract.py --pokered /path/to/pokered            # report drift
     tools/extract.py --pokered /path/to/pokered --write    # apply it
@@ -67,6 +68,7 @@ COLUMNS = [
     "group",    # rules:   our chapter, from tools/chapters.py
     "verify",   # ours:    how the entry was checked; see docs/schema.md
     "desc",     # ours:    what it is, in our own words
+    "related",  # ours:    symbols this one is measured to be read or written alongside
 ]
 DERIVED = {"region", "bank", "addr", "len", "symbol", "role", "sect", "group"}
 CURATED = [c for c in COLUMNS if c not in DERIVED]
@@ -147,6 +149,7 @@ def row(kind, bank, addr, length, symbol, role, sect):
         "group": chapters.classify(kind, addr, symbol, sect),
         "verify": "",
         "desc": "",
+        "related": "",
     }
 
 

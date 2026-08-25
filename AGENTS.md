@@ -331,6 +331,29 @@ distinct from the one an existing description already credited. See
 [`docs/observation.md`](docs/observation.md) for the full, current list — that page, not this
 one, is where new rounds' findings accumulate.
 
+### The `related` column names symbols, and only a shared writer earns a listing
+
+`related` is the eleventh column, "ours" alongside `verify` and `desc`: a comma-separated
+list of other symbols this one is measured to be read or written alongside, the same shape
+as `verify` and likewise turned into a JSON list on export. `tools/validate.py` fails if a
+`related` cell names a symbol that does not exist elsewhere in the atlas, so a rename cannot
+leave it silently pointing at nothing.
+
+Its first backfill (31 measured writer-groups, 54 addresses, from
+[`docs/observation.md`](docs/observation.md#the-31-groups-in-full)) populated only **six** of
+those groups — the audio channel-state fields, the shadow-OAM sprite-pair fields (both the
+live pair and the backup/restore pair), the battle stat-stage fields, and the two party
+experience-split flags — because those are the ones that round's own prose actually examined
+and stood behind. **Two groups from the same table were deliberately left out**: a 13-member
+`(ROM0, $36E3)` group and a 4-member `(ROM0, $1E7E)` group, neither of which the prose ever
+discusses individually, and the `(ROM0, $0F39)` group, which the prose names explicitly and
+then declines — "plausibly one generic 'copy N bytes' utility reused across three unrelated
+features... not treated as evidence that these three features are related in any way beyond
+sharing a low-level tool." A shared writer is *measured*, but "measured" and "examined" are
+not the same thing, and this column only wants the second. Extending the backfill from the
+raw group table means examining the group first, the same way the channel-state and
+shadow-OAM groups were, not copying rows across because they happen to already be counted.
+
 ## Things that must stay true
 
 - **The seven unevidenced entries stay marked as unevidenced.** That honesty is the

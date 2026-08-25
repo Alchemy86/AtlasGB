@@ -309,6 +309,39 @@ phase tags a few descriptions carry (`wEnemyMonBaseStats`, `wRodResponse`, and o
 soon as `wCurOpponent` goes non-zero, per its own description, whether or not the battle that
 follows ever completes). Checked specifically before writing this section, not assumed.
 
+## Round five: the two held-back groups are generic too
+
+Hand-off item 6 asked to examine the 13-member `(ROM0, $36E3)` group and the 4-member
+`(ROM0, $1E7E)` group individually, rather than leave them sitting in the raw table forever.
+Neither needs a TerminalGB run to examine: the ROM file itself is local, `ROM0` maps directly
+to the first 16 KiB of the file, and a writer's PC is already known from round three's own
+trace — so this reads the raw bytes at each PC and classifies the *shape* of the code there
+by hand, against a Game Boy opcode table. No disassembler, no emulator, no TerminalGB build.
+
+**Both are generic utilities, not purpose-built routines — confirming the suspicion rather
+than resolving it the other way.**
+
+- **`(ROM0, $36E3)` is a constant-fill loop**: write one byte value to consecutive addresses
+  a counted number of times, then return. The instructions reference only a counter and a
+  destination pointer — nothing about *which* 13 symbols end up getting filled, because the
+  routine has no idea; it fills whatever address range it is called with. Exactly the shape
+  `$00B6` already has, just a fill instead of a copy.
+- **`(ROM0, $1E7E)` is a stack-pop-based bulk transfer**: a speed trick that points the stack
+  pointer at a source buffer and uses repeated `POP`/write pairs to move data two bytes at a
+  time, faster than a byte-at-a-time copy loop. Same story — the instructions move data
+  generically, with nothing in them that is specific to sprite buffers, back pics, or front
+  pics, which is what the 4 symbols in this group actually are.
+
+**The test that told these apart from a genuine relationship** (like the audio channel-init
+routine, which really does reference nine specific fields by name in its instructions): does
+the code at the writer's PC reference the *particular* fields it writes, or does it operate on
+a counted range handed to it by whoever calls it? A routine with the caller's destination and
+count baked into two registers and nothing else in its body is generic almost by definition —
+it has no way to "know" what it is filling or copying, so two things that happen to go through
+it are not related by that fact alone. `related` stays empty for all 17 addresses across these
+two groups; both are recorded here, not silently dropped, so a future round does not have to
+re-derive this if it ever doubts the call.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
@@ -338,12 +371,16 @@ Highest value per unit of effort, first — same rule the verification hand-off 
    reliably starts the same way phase 5's did, before assuming it will.
 5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
-   still buildable with no TerminalGB change.
-6. **Examine the two held-back groups — `(ROM0, $36E3)`, 13 members, and `(ROM0, $1E7E)`,
-   4 members — and either back their symbols into `related` or write down why not.** Both are
-   real, measured writer-groups sitting unused in the table above; the only reason they are
-   not in `related` yet is that nobody has looked closely enough to say whether they are a
-   genuine relationship or another generic utility in the shape of `$00B6` and `$0F39`.
+   still buildable with no TerminalGB change. Round five's manual byte-reading to classify
+   the two held-back groups is a hint this is tractable in small doses without a full
+   decoder — a real one would make that repeatable instead of by-hand each time.
+6. **~~Examine the two held-back groups~~ — done this round: see
+   [above](#round-five-the-two-held-back-groups-are-generic-too).** Both are generic
+   utilities (a fill loop, a stack-pop bulk transfer), not purpose-built routines, and stay
+   out of `related`. All 31 groups from round three are now accounted for: 6 backed `related`,
+   3 (`$36E3`, `$1E7E`, `$0F39`) examined and excluded as generic, and the remaining large
+   redundant run of shadow-OAM pair-groups is folded into the 6 that already cover those same
+   symbols. Nothing from the 31-group table is still sitting unexamined.
 
 ## See also
 

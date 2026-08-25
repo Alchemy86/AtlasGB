@@ -354,6 +354,22 @@ not the same thing, and this column only wants the second. Extending the backfil
 raw group table means examining the group first, the same way the channel-state and
 shadow-OAM groups were, not copying rows across because they happen to already be counted.
 
+**Both held-back groups were examined the next round, by reading the ROM bytes at their
+writer's PC directly** (the ROM file is local; no TerminalGB build or checkout is needed to
+read raw bytes at a known address) rather than left open indefinitely. Both turned out to be
+generic utilities, the same category as `$00B6` and `$0F39`, confirming the suspicion rather
+than resolving it the other way: `(ROM0, $36E3)` is a constant-fill loop (write one byte
+value for a counted number of addresses, unrelated to what value or which caller), and
+`(ROM0, $1E7E)` is a stack-pop-based bulk transfer (a speed trick that points the stack
+pointer at a source buffer and uses `POP`/write pairs instead of a byte-at-a-time loop) —
+neither is a routine built for one feature, so neither belongs in `related`. See
+[`docs/observation.md`](docs/observation.md#round-five-the-two-held-back-groups-are-generic-too)
+for how they were told apart from a genuine relationship: read the raw bytes at the writer's
+PC and check whether the shape is a tight, counted, value-agnostic loop (generic) or a
+routine whose instructions reference the specific fields it writes (purpose-built). This is
+a bounded, low-cost check worth doing before ever writing off a group as "unexamined" — no
+disassembler, no emulator run, just the ROM file and a Game Boy opcode table.
+
 ## Things that must stay true
 
 - **The seven unevidenced entries stay marked as unevidenced.** That honesty is the

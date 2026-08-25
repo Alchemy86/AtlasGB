@@ -12,3 +12,9 @@ One directory per cartridge. Each holds its own data, its own pages and a
 | **[Pokémon Red and Blue](pokemon-rb/)** | Pokémon Blue (English, USA/Europe)<br>Pokémon Red (English, USA/Europe) | 2,898 | R 1,594 · L 2,694 · I 36 · 7 unevidenced | [by address](pokemon-rb/docs/by-address.md) · [by name](pokemon-rb/docs/by-name.md) |
 
 <!-- atlas:end (atlases) -->
+
+**[Pokémon Gold and Silver](pokemon-gs/) is not in the table above, on purpose.** It has no
+`meta.json`, so the tools above do not see it — it carries real, citable Generation 2 prose with
+no `atlas.tsv` or verification run behind it yet, and the table's own claims/evidence columns
+would be a lie for a cartridge that has neither. See [its own front page](pokemon-gs/README.md)
+for what it holds and what turning it into a real atlas would take.

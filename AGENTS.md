@@ -141,28 +141,52 @@ own emulator leaving its APU uninitialised, not about the cartridge, and stayed 
 proof that a page can move almost whole and still leave behind the one entry that was never
 about the game.
 
-Several other TerminalGB pages (`battle-engine.md`, `battling.md`, `paper-claims.md`,
-`catching.md`, `catch-and-train.md`, `learning-moves.md`, `level-up-drill.md`,
-`cerulean-gym.md`, `sharp-edges.md`, `link-from-outside.md`, `leaving-the-cable-club.md`,
-`reading-the-screen.md`) are **mixed** — genuine cartridge facts folded into TerminalGB's own
-engine, harness, drill-tooling or plugin-implementation prose. Rather than move those pages
-whole (which would have carried emulator-implementation detail into an atlas that has no
-business describing it), the cartridge facts were extracted and written directly into the
-relevant chapter page's own prose (`battle.md`, `party.md`, `bag.md`, `events.md`, `screen.md`,
-`link.md`), cited the same way every other fact here is: by `pret/pokered` routine or symbol
-name, never by bare address, never by quoting the source page. The TerminalGB pages themselves
-were left alone; they still exist, still cover their emulator-side material, and in most cases
-still contain the same game facts too — that duplication is deliberate, not drift, because nothing
-here can safely delete or rewrite a file in another repository.
+**A second, wider pass moved everything else that was game knowledge.** The first pass above
+duplicated facts into chapter-page prose while leaving the TerminalGB originals whole — which is
+exactly the "two copies to drift" problem the project exists to avoid, applied to itself. The
+second pass went back through every remaining TerminalGB Gen 1 page and Gen 2's whole `docs/gen2/`
+area, applied the same game-versus-emulator line, and this time **split** rather than duplicated
+wherever a page mixed both: the game-fact half became new AtlasGB content — either folded into an
+existing chapter's prose (`battle.md`, `overworld.md`, `party.md`, `rom-data.md`, `screen.md`,
+`sprites.md` all grew this way) or a new hand-written page beside `discoveries.md`
+(`sharp-edges.md`, `paper-claims.md`, `catching.md`, `cerulean-gym.md`) — while the
+emulator/harness/agent-tooling half was left in place in TerminalGB, because nothing here can
+safely delete or rewrite a file in another repository. `battle-engine.md`, `battling.md`,
+`learning-moves.md`, `level-up-drill.md`, `reading-the-screen.md`, `memory-map.md`,
+`link-from-outside.md`, `leaving-the-cable-club.md`, `docs/link-trade.md`,
+`authoring-an-area.md`, `battle-control.md` and `agent-play.md` were all read in full for this;
+`agent-play.md`, `battle-control.md` and `authoring-an-area.md` turned out to be mixed rather
+than pure tooling as their names suggest — each gave up a specific extracted fact or section
+before the rest stayed put. `gen1/atlas/README.md` and `gen1/README.md` were confirmed to be
+pure TerminalGB mechanism/index pages with no game content at all, and stayed untouched.
+See `atlas-gamedata-migrate-wide-t7-handover.md` in firstmate's state directory for the
+page-by-page reasoning and the exhaustive link-fix table for TerminalGB's side.
 
-**Generation 2 (Pokémon Gold/Silver) is out of this migration entirely, on purpose.** TerminalGB
-holds real, citable game-data prose about Gold's memory map, save file and the Time Capsule — but
-`tools/validate.py` requires every discovered atlas (by `meta.json` presence) to have a working
-`data/atlas.tsv`, and there is no Gold extractor, no built `pret/pokegold` pipeline and no
-verification run behind one. Creating `atlases/pokemon-gs/` with prose and no data would turn
-`make check` red for the whole repository, not just that atlas. That page of content waits for
-whoever eventually does the real work of [adding an atlas](docs/adding-an-atlas.md) for Gold and
-Silver — the exact worked example that page's own `meta.json` sample already uses.
+**Generation 2 (Pokémon Gold/Silver) has real game-data prose now, without a data pipeline —
+see "A pending atlas has no `meta.json`" below.** `tools/validate.py` still requires every
+*discovered* atlas to have a working `data/atlas.tsv`, and there is still no Gold extractor, no
+built `pret/pokegold` pipeline and no verification run. What changed is recognising that
+`discoveries.md`'s own pattern — hand-written prose, no `atlas.tsv`, never touched by
+`tools/render.py` — does not require an atlas to be discovered at all. `atlases/pokemon-gs/`
+holds Gold and Silver's memory map, save file, screen-reading and Time Capsule facts as prose,
+with no `meta.json`, so `tools/atlases.py` never finds it and `make check` never asks it for
+data it does not have. A real, evidenced `pokemon-gs` atlas — extractor, `atlas.tsv`,
+verification run — is still exactly the work [adding an atlas](docs/adding-an-atlas.md)
+describes, and this prose does not substitute for it; it only means the citable facts TerminalGB
+had already written down are not stuck waiting for that work to happen first.
+
+### A pending atlas has no `meta.json`
+
+`atlases/pokemon-gs/` exists and holds real prose, but `tools/atlases.py` discovers atlases
+solely by the presence of `meta.json` (see "The data is namespaced by game" above), and this
+directory deliberately has none. That is not an oversight — it is what keeps `validate`,
+`evidence`, `render --check` and `export --check` from ever being asked about a `data/atlas.tsv`
+that does not exist and should not be faked. `tools/checklinks.py` is the one tool that is *not*
+gated this way: it walks every Markdown file in the repository regardless, so a pending atlas's
+links and anchors are checked exactly like a published one's. **Do not add a `meta.json` to
+`atlases/pokemon-gs/` without also doing the real work `docs/adding-an-atlas.md` describes** — an
+extractor, a real `atlas.tsv`, a landed verification run — or the moment discovery turns on,
+`validate.py` fails looking for a data file that was never built.
 
 ### Two licences, and the boundary is a path
 

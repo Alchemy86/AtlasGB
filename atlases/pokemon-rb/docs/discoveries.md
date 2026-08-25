@@ -48,11 +48,13 @@ correct its body and say so in it — that is what the "our own belief" rows bel
 | [the rival battle is not a coin flip](#the-rival-battle-is-not-a-coin-flip) | base stats decide it, and we had said otherwise | **our own belief** | — |
 | [crossing two levels loses the move in between](#crossing-two-levels-loses-the-move-in-between) | one battle, one level-up message, one learnset check | cartridge mechanic | [`wPartyMon1Level`][wPartyMon1Level] |
 | [cancelling an evolution costs one level and nothing else](#cancelling-an-evolution-costs-one-level-and-nothing-else) | it is re-offered at the very next level-up | cartridge mechanic | [`wPartyMon1Species`][wPartyMon1Species] |
+| [a decline box can scroll its own question off the screen](#a-decline-box-can-scroll-its-own-question-off-the-screen) | pressing A on it means YES, and by then the question is gone | cartridge mechanic | [`wCurrentMenuItem`][wCurrentMenuItem] |
 | [BubbleBeam is not in Mt Moon](#bubblebeam-is-not-in-mt-moon) | a plausible route plan, checked against the item tables | **an outside belief** | — |
 | [the one-way ledge trap](#the-one-way-ledge-trap) | a waypoint whose overshoot cannot be undone | route shape | [`wXCoord`][wXCoord] · [`wYCoord`][wYCoord] |
 | [the forest is not a scenic route](#the-forest-is-not-a-scenic-route) | Route 2's halves do not connect on foot | route shape | [`wCurMap`][wCurMap] |
 | [only one of the forest's three trainers is compulsory](#only-one-of-the-forests-three-trainers-is-compulsory) | we over-read our own grid | **our own belief** | — |
 | [no Potion is purchasable before Pewter](#no-potion-is-purchasable-before-pewter) | so three links have no healing but the nurse | cartridge mechanic | — |
+| [a trainer's sight line does not care about walls](#a-trainers-sight-line-does-not-care-about-walls) | it compares coordinates, not tiles in between | cartridge mechanic | [`wXCoord`][wXCoord] · [`wYCoord`][wYCoord] |
 | [wCurMap is not a loaded map](#wcurmap-is-not-a-loaded-map) | the trap that has caught four separate pieces of work | cartridge mechanic | [`wCurMap`][wCurMap] · [`wCurMapWidth`][wCurMapWidth] |
 | [a warp changes wCurMap before the coordinates](#a-warp-changes-wcurmap-before-the-coordinates) | one frame naming the destination and the departure's door | cartridge mechanic | [`wCurMap`][wCurMap] · [`wXCoord`][wXCoord] |
 | [a documented sentinel read as anything else](#a-documented-sentinel-read-as-anything-else) | `$FF` is "blacked out", not "trainer battle" | **our own belief** | [`wIsInBattle`][wIsInBattle] |
@@ -588,6 +590,39 @@ that prompt.
 
 ---
 
+### A decline box can scroll its own question off the screen
+
+**Kind: a cartridge mechanic.**
+
+**What it is.** The "delete an older move" prompt is a YES/NO box asking
+`Delete an older move to make room for X?`. Gen 1's text window holds two lines; that sentence is
+three. By the time the box is actually up and answerable, the words still on screen are
+`move to make room / for X?` — the opening words that would identify the box as *this* prompt are
+already gone.
+
+**How it showed up.** A driver that matched a screen against the prompt's opening words never
+recognised the box as open, fell through to a default of "press A", and **A on a YES/NO box means
+YES** — so a decline silently became a replacement, and the move list that opened next was for a
+decision already made in the driver's favour rather than the one it intended.
+
+**How it was found.** Frame by frame, with every decoded screen dumped rather than recalled. The
+box was open, correctly, on every frame the driver called "not found" — it was looking for text
+the box no longer carried.
+
+**What is actually happening.** Gen 1's dialogue window is two lines; a three-line sentence wraps
+and its first line scrolls away exactly as any two-line box's does. Nothing about the
+move-learning prompt is special — this is the general shape of every long yes/no box in the
+cartridge, and it is worth knowing beyond this one prompt: **identify a screen by text that is
+still on it at the moment you act**, never by its opening words alone.
+
+**The memory.** [`wCurrentMenuItem` `$CC26`][wCurrentMenuItem] — where the cursor lands once the
+box is correctly recognised as open.
+
+**Evidence.** [TerminalGB's level-up drill](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/level-up-drill.md),
+found with `GB_LEARN_DRILL_DUMP=1` printing the decoded screen at every settle.
+
+---
+
 ### BubbleBeam is not in Mt Moon
 
 **Kind: a correction of an outside belief.**
@@ -802,6 +837,39 @@ link was recorded as accepted rather than certified rather than tuned until it l
 *396 of 597 agents in a wild battle at once, in one patch of Route 1's grass, with a thin stream
 walking north to heal. There is nothing else for them to do: the nurse is the only healing in the
 game at this point.*
+
+---
+
+### A trainer's sight line does not care about walls
+
+**Kind: a cartridge mechanic.**
+
+**What it is.** Cerulean Gym's swimmer trainer stands at `(8,7)` facing **left**, with `(7,7)` and
+`(6,7)` both solid — the only walkable ground beside him is to his **right**. He engages anyway,
+from `(5,7)`: three tiles away, with two walls in between.
+
+**How it showed up.** On the first scripted attempt at that gym, the player crossed open floor
+three tiles from the swimmer and the battle simply started: `Splash! … I'm first up! Let's do
+it!`, with no line of sight that terrain could plausibly have supplied.
+
+**How it was found.** By reading the trainer-engagement check rather than assuming a sight cone.
+It compares the player's coordinates against a straight line drawn from the trainer's own facing
+direction, and tests nothing about the tiles the line crosses.
+
+**What is actually happening.** Gen 1's trainer detection is a coordinate comparison, not a raycast:
+it establishes that the player is somewhere on the row or column the trainer faces, within range,
+and never asks whether a wall sits between them. A trainer that "sees" the player through solid
+tiles is not a bug in the usual sense — the cartridge was never testing occlusion in the first
+place.
+
+**Why it generalises.** This project's own severance sweeps — the ones that decide which trainers
+on Route 3, in Viridian Forest and on Mt Moon are unavoidable — block a cone's *tiles* and ask
+whether the map still connects without them. That is the right model for "may the player stand
+here", and it is *not* a model of occlusion. This entry is the reason neither of those sweeps ever
+assumed a wall between a trainer and a route bought anything.
+
+**The memory.** [`wXCoord` `$D362`][wXCoord] · [`wYCoord` `$D361`][wYCoord] — what the engagement
+check compares against the trainer's own facing and position.
 
 ---
 
@@ -1234,19 +1302,20 @@ dozen lines each on top of it.
 
 ## Related pages
 
+- [Sharp edges](sharp-edges.md) — the same material where it is a *trap* rather than a story:
+  grouped by what you were reading, writing or watching when it bit. This page is the
+  reasoning; that one is the warning.
+- [A paper's Gen 1 claims, checked](paper-claims.md) — fifteen outside claims measured on the
+  cartridge, and the one of this project's own that did not survive the checking.
+- [Cerulean Gym, worked](cerulean-gym.md) — the trainer-sight-line finding above, in the place
+  it was found, alongside everything else the cartridge says about that gym.
 - [TerminalGB's memory map](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/memory-map.md) —
   the task-shaped companion to this atlas: why a plugin needs each byte, not just where it is.
-- [TerminalGB's sharp edges](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/sharp-edges.md) —
-  the same material where it is a *trap*: grouped by what you were trying to do when it bit you.
-  This page is the reasoning; that one is the warning.
 - [the Pewter chain](https://github.com/Alchemy86/AgentGB/tree/main/docs/agent/pewter-chain.md) —
   the campaign most of these came out of, with the per-link measurements and the certification
   bar.
 - [TerminalGB's battle policy](https://github.com/Alchemy86/TerminalGB/blob/main/docs/agent/battle-policy.md) —
   the battle findings in the order a policy needs them, with the report that goes beside a pass
   rate.
-- [TerminalGB's paper-claims write-up](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/paper-claims.md) —
-  eleven outside claims measured on the cartridge, and the one of ours that did not survive the
-  checking.
 - [TerminalGB's swarm view](https://github.com/Alchemy86/TerminalGB/blob/main/docs/swarm-view.md) —
   the null model: a decorrelated random walk over the same ledges, and where it does not get to.

@@ -58,10 +58,14 @@ turns, the measurement that settled it — does not fit in a cell, so it is reco
 next door: **the findings that back these descriptions live in this atlas's own discoveries
 page**,
 **[atlases/pokemon-rb/docs/discoveries.md](atlases/pokemon-rb/docs/discoveries.md)**
-— twenty-six findings about Pokémon Red/Blue, each with the evidence that produced it.
+— twenty-eight findings about Pokémon Red/Blue, each with the evidence that produced it.
 Documenting the game's own behaviour is this project's job; the discoveries page moved here
 from TerminalGB, the emulator that produces the verification runs behind them, because that
-is where it belongs.
+is where it belongs. Four sibling pages made the same move for the same reason:
+[sharp edges](atlases/pokemon-rb/docs/sharp-edges.md) (the same findings as traps, grouped by
+what you were doing when they bite), [a paper's claims, checked](atlases/pokemon-rb/docs/paper-claims.md),
+[catching](atlases/pokemon-rb/docs/catching.md) and [Cerulean Gym, worked](atlases/pokemon-rb/docs/cerulean-gym.md) —
+see [the atlas's own guides section](atlases/pokemon-rb/README.md#guides).
 
 Six chapter pages carry a **Findings behind these bytes** table linking into it:
 

@@ -45,6 +45,11 @@ which buttons are watched, whether the cursor wraps — and it is worth knowing 
 `HandleMenuInput` delays several frames after accepting a press and does not see a button that
 arrives inside that delay. That looks exactly like dropped input and is not.
 
+**The naming screen is not a menu, and A does not confirm on it.** `YOUR NAME?` and
+`RIVAL NAME?` are an on-screen keyboard: A types whatever letter the cursor is on, every time,
+with no upper bound, and only START commits the name and closes the screen. It is the one
+input screen in the game where holding A down does something other than nothing.
+
 TerminalGB uses this same property to script menus by reading text instead of counting frames,
 and to debug Mooneye/Blargg hardware-conformance test ROMs by decoding their assertion tables off
 the screen — see [its own

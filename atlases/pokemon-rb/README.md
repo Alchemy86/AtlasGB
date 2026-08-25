@@ -178,6 +178,22 @@ from the atlas's own addresses rather than transcribed.
 
 ---
 
+## Guides
+
+Hand-written pages, no `atlas.tsv` behind any of them — [`tools/render.py`](../../tools/render.py)
+never touches these, the way it never touches this section of this file. Where a chapter's own
+table needs a fact that does not fit a cell, one of these is where it actually lives.
+
+| page | what it is |
+|---|---|
+| [discoveries](docs/discoveries.md) | every fault, quirk and corrected belief this atlas's evidence turned up, with the full reasoning behind each |
+| [sharp edges](docs/sharp-edges.md) | the same material as a warning rather than a story — grouped by what you were doing when it would bite |
+| [paper-claims](docs/paper-claims.md) | fifteen outside claims about Gen 1 mechanics, checked against the cartridge |
+| [catching](docs/catching.md) | the capture routine disassembled, checked against 251 throws, and a worked example of choosing a target |
+| [Cerulean Gym, worked](docs/cerulean-gym.md) | one gym read out of the cartridge in full: the leader's team, the map, what beating it writes, the mart, the grass on the way there |
+
+---
+
 ## What this atlas covers, and what it does not
 
 **Pokémon Blue and Pokémon Red, English (USA/Europe).** The disassembly builds both from

@@ -26,6 +26,68 @@ factor of two was applied.
 Collision comes from the tileset, not from the map: `wTilesetCollisionPtr` is an
 `$FF`-terminated list of the tile ids you may walk on, and everything not in it is solid.
 
+### The room format
+
+A room is six independent structures, and every one of them can be traced back to the map
+header at [`wCurMapHeader`](#s-wCurMapHeader): a block map, the header itself, a tileset, a
+warp table, a sign table and an object table.
+
+**Two coordinate systems, and the factor between them is two.** A block is 4×4 screen tiles and
+a walk tile is 2×2 screen tiles, so one block is 2×2 walk tiles — `wCurMapHeight` and
+`wCurMapWidth` count *blocks*, while [`wYCoord`/`wXCoord`](#s-wYCoord) count *walk tiles*, at
+twice the resolution. Reporting a raw block width to something that reasons in walk-tile
+coordinates understates it by half and puts the player outside the map it is standing in the
+middle of.
+
+**The header**, laid out by the disassembly's `map_header` macro, eleven bytes plus a
+variable connections tail:
+
+| field | width | what it is |
+|---|---:|---|
+| `wCurMapTileset` | 1 | which tileset |
+| `wCurMapHeight` | 1 | in blocks |
+| `wCurMapWidth` | 1 | in blocks |
+| `wCurMapDataPtr` | 2 | the block map |
+| `wCurMapTextPtr` | 2 | this map's text table |
+| `wCurMapScriptPtr` | 2 | this map's script table |
+| `wCurMapConnections` | 1 | which of north/south/east/west connect, as a bitfield |
+| — | variable | one connection record per set bit |
+
+**The object-data stream** that follows the header is itself three tables, each with its own
+count byte and its own hard ceiling:
+
+| table | count field | record | max records | what a record holds |
+|---|---|---:|---:|---|
+| warps | `wNumberOfWarps` | 4 bytes | 32 | Y, X, destination warp id **minus one**, destination map |
+| signs | `wNumSigns` | 3 bytes | 16 | Y, X, text id |
+| objects | `wNumSprites` | 6-8 bytes | 16 declared, 15 usable | picture id, Y+4, X+4, two movement bytes, text id |
+
+**The stored warp id is one lower than the door it targets, and the coordinate order flips
+between the source and the macro that emits it** — the macro takes X before Y; the record
+stores Y before X. Both are read the same wrong way exactly once and the trap does not
+announce itself: the warp still lands somewhere, just not where the header said.
+
+**The tileset pointer table** — `wTilesetBank`, `wTilesetBlocksPtr`, `wTilesetGfxPtr`,
+`wTilesetCollisionPtr` — is read the same way regardless of what bank the blocks and
+collision pointers actually name, which is *why* [`wTilesetCollisionPtr`](#s-wTilesetCollisionPtr)
+can be pointed at WRAM instead of ROM: nothing downstream of `LoadTilesetHeader` distinguishes the
+two.
+
+**Collision is probed at a fixed offset from the player, and the probe is not the tile
+directly underfoot in every direction.** The routine that finds "the tile in front of the
+player" reads the walk tile's collision byte from its own **bottom-left** 8×8 quadrant of the
+16×16 tile, not the top-left one a naive reading of "the tile at this coordinate" would
+reach for — measured directly: block `$08`'s walk tile `(1,1)` decodes to tile index `$0A` at
+the position a top-left read would use (not in the tileset's collision list) and to `$1A` at
+the position the game's own probe actually reads (in the list), and the retail cartridge lets
+the player walk onto it. The player's own standing tile is probed the same way, one offset
+over.
+
+**What the block-map buffer and the coordinate range can actually hold**, derived rather than
+assumed: the buffer is sized for at most 1,300 blocks, and the largest map in the cartridge
+(Route 17 and Route 23, both 10×72) uses 720 of them; a coordinate axis has 127 blocks of
+range, 254 walk tiles; a tileset carries at most 256 blocks and 96 tiles.
+
 ### Findings behind these bytes
 
 `wCurMap` is the byte this project has been wrong about most often, and the reasoning is

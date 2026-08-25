@@ -19,6 +19,15 @@ it — the one that shifts sprites against the camera, and the one that decides 
 in front of an object resolves to — so raising it is what makes an extra object both *move
 correctly* and *be talkable*, and doing one without the other is a bug.
 
+**Slot 0's own map-position fields are not kept live during ordinary play.** Every other slot's
+`wSpriteStateData2` map Y/X pair is written whenever that object moves, because something else
+needs to read it; nothing in the ordinary overworld loop has a reason to read the player's own
+copy back, so it goes stale the moment the player walks — [`wYCoord`/`wXCoord`](overworld.md#s-wYCoord)
+are the addresses that actually track the player's position, and are what anything watching the
+player should read instead. Only two map scripts (Viridian City's and the Cable Club's) write
+slot 0's copy at all, both for their own narrow reason at that specific location; it is not
+general-purpose state.
+
 `wShadowOAM` is the 160-byte shadow copied into the hardware by the DMA routine every frame.
 **It is immediately followed by `wTileMap`** — `wShadowOAMEnd` and `wTileMap` are the same
 address — so the eleventh drawn character writes over the screen. That is a hard cap, not a

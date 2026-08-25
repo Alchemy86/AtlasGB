@@ -72,7 +72,13 @@ not anything the game requires:
 | 65 | VENUSAUR | SOLARBEAM | TACKLE, GROWL, VINE WHIP, RAZOR LEAF | forget GROWL |
 
 A decline plays out as two further prompts — offer to replace, then offer to abandon — and ends
-with the offered move simply not learned; nothing about the four held moves changes.
+with the offered move simply not learned; nothing about the four held moves changes. The three
+screens, verbatim: `Delete an older move to make room for <MOVE>?`, then either
+`Which move should be forgotten?` or, on a decline, `Abandon learning <MOVE>?`.
+
+**The first of those three is easy to misidentify, because it can scroll itself off the
+screen** — see [a decline box can scroll its own question off the
+screen](discoveries.md#a-decline-box-can-scroll-its-own-question-off-the-screen).
 
 ### Findings behind these bytes
 

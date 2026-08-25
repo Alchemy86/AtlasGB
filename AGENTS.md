@@ -259,6 +259,32 @@ namespacing still land. Do not make it required without coordinating with the pr
 (TerminalGB) — the digest contract is what lets a consumer reproduce a published run byte
 for byte, and it must not move underneath them.
 
+### Re-running the verification yourself: `cargo test --release` can fail spuriously
+
+`testharness/gen1atlas.rs` in TerminalGB is what produces an evidence report — see
+[docs/verification.md](docs/verification.md#running-it-yourself) for the full command.
+**`cargo test --release --test gen1atlas` intermittently fails there with `the crate X
+requires panic strategy 'abort'`.** This is a known, documented build-cache collision in
+TerminalGB itself (`docs/pitfalls/builds.md`, `[profile.release]` sets `panic = 'abort'`
+but a test target needs to unwind) — not a real error, and not anything wrong with the
+atlas or this repository. `cargo test --profile quick --test gen1atlas` sidesteps it
+outright (that profile sets `panic = "unwind"` and skips LTO) and produces identical
+pass/fail/tier results; only wall-clock time differs. Confirmed 2026-08-25: two runs under
+`--profile quick`, byte-identical, both agreeing with the previously-published run.
+
+### A fault in the game and a fault in this atlas's own data are different homes
+
+[`atlases/pokemon-rb/docs/discoveries.md`](atlases/pokemon-rb/docs/discoveries.md) is
+where the *cartridge* surprising us goes. [`docs/data-issues.md`](docs/data-issues.md) is
+where *this atlas being wrong* goes — an address, a role, a structure size or an evidence
+tier that a verification run shows disagreeing with the cartridge. The distinction is not
+cosmetic: conflating them would mean a reader cannot tell "the game does something
+strange" from "we published something wrong and fixed it," and those carry opposite
+implications for whether the *rest* of the atlas can be trusted. Every future verification
+run — a clean one or one that finds a disagreement — gets logged in `data-issues.md`,
+including a clean one, because a verification pass that found nothing wrong is itself
+worth recording as of when it ran.
+
 ## Things that must stay true
 
 - **The seven unevidenced entries stay marked as unevidenced.** That honesty is the

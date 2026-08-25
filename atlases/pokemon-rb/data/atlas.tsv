@@ -53,7 +53,7 @@ WRAM0	-	$C002	1	wMuteAudioAndPauseMusic	entry	Audio RAM	audio	rom,live	Silences 
 WRAM0	-	$C003	1	wDisableChannelOutputWhenSfxEnds	entry	Audio RAM	audio	rom,live	Silences a music channel that a sound effect borrowed, rather than letting the note resume.
 WRAM0	-	$C004	1	wStereoPanning	entry	Audio RAM	audio	rom,live	Which hardware channels reach which speaker.
 WRAM0	-	$C005	1	wSavedVolume	entry	Audio RAM	audio	rom,live	Master volume saved across a fade.
-WRAM0	-	$C006	16	wChannelCommandPointers	entry	Audio RAM	audio	rom,live	Where each channel is in its command stream — the sound engine is a little interpreter and this is its program counter.
+WRAM0	-	$C006	16	wChannelCommandPointers	entry	Audio RAM	audio	rom,live	Where each channel is in its command stream — the sound engine is a little interpreter and this is its program counter. Measured: written together with eight sibling per-channel fields (`wChannelSoundIDs`, `wChannelFlags1`, `wChannelDutyCycles`, `wChannelVibratoExtents`, `wChannelVibratoRates`, `wChannelFrequencyLowBytes`, `wChannelVibratoDelayCounterReloadValues`, `wChannelNoteSpeeds`) by one routine (bank 31 `$5AFE`) — the channel-init that arms a new note.
 WRAM0	-	$C016	16	wChannelReturnAddresses	entry	Audio RAM	audio	rom,live	Where a channel's command stream resumes after a subroutine call — the return-address stack for `wChannelCommandPointers`' own program counter. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$530A`, during battle-trigger, intro, walk/menus; 9 distinct values seen, 0-235.
 WRAM0	-	$C026	8	wChannelSoundIDs	entry	Audio RAM	audio	rom,live	What each of the eight software channels is currently playing.
 WRAM0	-	$C02E	8	wChannelFlags1	entry	Audio RAM	audio	rom,live	Per-channel state: whether a note is held, whether vibrato is on, and so forth.
@@ -542,7 +542,7 @@ WRAM0	-	$C2FE	2	wSprite15StateData2ImageBaseOffset	instance	Sprite State Data	sp
 WRAM0	-	$C300	1	wShadowOAMSprite00YCoord	entry	OAM Buffer	sprites	rom,live	Screen y of object entry 0, offset by 16. `$A0` parks an entry off the bottom of the screen, and it is the byte that floods `wTileMap` when the buffer overruns.
 WRAM0	-	$C300	0	wSpriteDataEnd	entry	Sprite State Data	sprites	rom,live	One past the sprite state.
 WRAM0	-	$C300	1	wShadowOAM	alias	OAM Buffer	sprites	rom,live	The 40-entry object buffer the game rebuilds every frame and copies to the hardware — four bytes each: y, x, tile id, attributes. **Never write it directly**; the sprite structures above are where a change belongs. Its end is `wTileMap`, and the two being adjacent is a fault the cartridge can fall through.
-WRAM0	-	$C300	1	wShadowOAMSprite00	alias	OAM Buffer	sprites	rom,live	Object entry 0: the four bytes y, x, tile id, attributes.
+WRAM0	-	$C300	1	wShadowOAMSprite00	alias	OAM Buffer	sprites	rom,live	Object entry 0: the four bytes y, x, tile id, attributes. Measured: written together with `wShadowOAMSprite01` and both slots' own X/Y/tile-id/attribute fields from several different routines across this playthrough (battle animation, sprite placement, the shadow-OAM backup/restore pair) — the two slots are consistently touched as a pair rather than independently, wherever they are touched at all.
 WRAM0	-	$C300	0	wSprite15StateData2End	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C301	1	wShadowOAMSprite00XCoord	entry	OAM Buffer	sprites	rom,live	Screen x of object entry 0, offset by 8.
 WRAM0	-	$C302	1	wShadowOAMSprite00TileID	entry	OAM Buffer	sprites	rom,live	Which tile object entry 0 draws.
@@ -986,7 +986,7 @@ WRAM0	-	$CC47	2	wLinkTimeoutCounter	alias	WRAM	scratch	rom,live	Counts down whil
 WRAM0	-	$CC49	1	wMonDataLocation	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CC49	1	wWhichTradeMonSelectionMenu	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CC4A	1	wMenuWrappingEnabled	entry	WRAM	screen	rom,live	Whether moving past the last item returns to the first.
-WRAM0	-	$CC4B	2	wCheckFor180DegreeTurn	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CC4B	2	wCheckFor180DegreeTurn	entry	WRAM	scratch	rom,live	Set while the game is deciding whether the player's last direction press is a full about-face rather than a step, which changes just the facing sprite instead of moving. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$04D7` and bank 17 `$056C`, during intro, trainer-battle, walk/menus; values seen: [0, 1].
 WRAM0	-	$CC4D	1	wToggleableObjectIndex	entry	WRAM	events	rom,live	
 WRAM0	-	$CC4E	1	wPredefID	entry	WRAM	system	rom,live	Which `predef` routine to run. Gen 1's answer to calling a far routine: put an id here and `Predef` looks it up and banks in.
 WRAM0	-	$CC4F	2	wPredefHL	entry	WRAM	system	rom,live	`HL` saved across a `predef` call.
@@ -1045,10 +1045,10 @@ WRAM0	-	$CCF1	1	wPlayerUsedMove	entry	WRAM	battle	rom,live
 WRAM0	-	$CCF2	1	wEnemyUsedMove	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCF3	1	wEnemyMonMinimized	entry	WRAM	battle	rom,live	The same for the opponent.
 WRAM0	-	$CCF4	1	wMoveDidntMiss	entry	WRAM	battle	rom,live	
-WRAM0	-	$CCF5	1	wPartyFoughtCurrentEnemyFlags	entry	WRAM	party	rom,live	One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split.
+WRAM0	-	$CCF5	1	wPartyFoughtCurrentEnemyFlags	entry	WRAM	party	rom,live	One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split. Measured: written together with `wPartyGainExpFlags` from the same instruction context (bank 3 `$7692`) — the two flag arrays are set as one act, not two.
 WRAM0	-	$CCF6	1	wLowHealthAlarmDisabled	entry	WRAM	battle	rom,live	
 WRAM0	-	$CCF7	14	wPlayerMonMinimized	entry	WRAM	battle	rom,live	Set once your active Pokemon has used MINIMIZE. **Cosmetic in Generation 1**: it only changes how the sprite is drawn. Nothing doubles a stomping move's damage against it until a later generation.
-WRAM0	-	$CD05	10	wEnemyNumHits	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD05	10	wEnemyNumHits	entry	WRAM	scratch	rom,live	How many times a multi-hit move (like DOUBLESLAP or FURY ATTACK) has struck so far this use. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6870`, during intro, party-reorder, post-save walk/menus; values seen: [0, 2, 3].
 WRAM0	-	$CD05	10	wEnemyBideAccumulatedDamage	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD05	10	wLuckySlotHiddenEventIndex	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD0F	1	wPlayerMonUnmodifiedLevel	entry	WRAM	battle	rom,live	
@@ -1064,7 +1064,7 @@ WRAM0	-	$CD14	2	wPlayerMonUnmodifiedDefense	entry	WRAM	battle	rom,live	Defense f
 WRAM0	-	$CD16	2	wPlayerMonUnmodifiedSpeed	entry	WRAM	battle	live	Speed for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD18	2	wPlayerMonUnmodifiedSpecial	entry	WRAM	battle	rom,live	Special for your side before any stat stage was applied. The battle struct's copy is the **modified** value — the one the damage formula uses — and the stages are integer ratios applied with truncation, so the original cannot be recovered by dividing back out. It is kept here instead.
 WRAM0	-	$CD1A	1	wPlayerMonAttackMod	entry	WRAM	battle	rom,live	Attack stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
-WRAM0	-	$CD1A	1	wPlayerMonStatMods	alias	WRAM	battle	rom,live	In-battle stat stages for your side. **7 is neutral, not 0**: the block is zeroed work RAM until `InitBattleVariables` writes the sevens, so a sample taken on the first frames of a battle reads zero everywhere and looks like -6 on everything.
+WRAM0	-	$CD1A	1	wPlayerMonStatMods	alias	WRAM	battle	rom,live	In-battle stat stages for your side. **7 is neutral, not 0**: the block is zeroed work RAM until `InitBattleVariables` writes the sevens, so a sample taken on the first frames of a battle reads zero everywhere and looks like -6 on everything. Measured: also written, together with `wPlayerMonDefenseMod`/`wPlayerMonSpeedMod`/`wPlayerMonSpecialMod`/`wPlayerMonEvasionMod`, from bank 15 `$4C0E` — a different routine from `InitBattleVariables` (bank 20 `$65AF`) that writes the same sevens, most likely the equivalent reset on a mid-battle switch-in rather than battle start; not confirmed further here.
 WRAM0	-	$CD1B	1	wPlayerMonDefenseMod	entry	WRAM	battle	live	Defense stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
 WRAM0	-	$CD1C	1	wPlayerMonSpeedMod	entry	WRAM	battle	rom,live	Speed stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
 WRAM0	-	$CD1D	1	wPlayerMonSpecialMod	entry	WRAM	battle	rom,live	Special stage for your side, **biased by 7**: `1` to `13` is `-6` to `+6`, and a freshly zeroed block reads as `-6` on everything until `InitBattleVariables` writes the sevens.
@@ -1088,7 +1088,7 @@ WRAM0	-	$CD30	1	wEnemyMonSpeedMod	entry	WRAM	battle	live	Speed stage for the opp
 WRAM0	-	$CD31	1	wEnemyMonSpecialMod	entry	WRAM	battle	rom,live	Special stage for the opponent, same bias.
 WRAM0	-	$CD32	1	wEnemyMonAccuracyMod	entry	WRAM	battle	rom,live	Accuracy stage for the opponent, same bias.
 WRAM0	-	$CD33	1	wEnemyMonEvasionMod	entry	WRAM	battle	rom,live	Evasion stage for the opponent, same bias.
-WRAM0	-	$CD34	2	wInGameTradeReceiveMonSpecies	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD34	2	wInGameTradeReceiveMonSpecies	entry	WRAM	scratch	rom,live	The species the player receives from an in-game trade — read once the trade is confirmed, before the party structures are actually rewritten. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6C2D`, during intro, wild-battle; values seen: [0, 7].
 WRAM0	-	$CD36	1	wEnemyMonStatModsEnd	entry	WRAM	battle	live	One past the opponent's six.
 WRAM0	-	$CD37	1	wFilteredBagItemsCount	entry	WRAM	bag	rom,live	How many items are in that filtered view.
 WRAM0	-	$CD37	1	wNPCMovementDirections2Index	alias	WRAM	bag	rom,live	
@@ -1097,7 +1097,7 @@ WRAM0	-	$CD38	1	wSimulatedJoypadStatesIndex	entry	WRAM	system	rom,live	How far t
 WRAM0	-	$CD39	1	wUnusedSimulatedJoypadStatesMask	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD3A	1	wUnusedOverrideSimulatedJoypadStatesIndex	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD3B	2	wOverrideSimulatedJoypadStatesMask	entry	WRAM	system	rom,live	
-WRAM0	-	$CD3D	1	wRodResponse	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD3D	1	wRodResponse	entry	WRAM	scratch	rom,live	Which of the fishing rod's possible outcomes (a bite, nothing, a species) the last cast produced. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$4509` and bank 28 `$4D50`, during intro, save, walk/menus, wild-battle; 38 distinct values, 0-177.
 WRAM0	-	$CD3D	1	wBadgeNumberTile	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3D	1	wBattleTransitionCircleScreenQuadrantY	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3D	1	wBattleTransitionCopyTilesOffset	alias	WRAM	scratch	rom,live	
@@ -1140,7 +1140,7 @@ WRAM0	-	$CD3D	1	wWereAnyMonsAsleep	alias	WRAM	scratch	rom,live
 WRAM0	-	$CD3D	1	wWhichBadge	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3D	1	wWhichTownMapLocation	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3D	1	wWhichTrade	alias	WRAM	scratch	rom,live	
-WRAM0	-	$CD3E	1	wNumCreditsMonsDisplayed	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD3E	1	wNumCreditsMonsDisplayed	entry	WRAM	scratch	rom,live	How many Pokémon the Hall of Fame credits sequence has drawn so far. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 28 `$4D54`, during intro, trainer-battle, wild-battle; values seen: [0, 1, 8].
 WRAM0	-	$CD3E	1	wBadgeNameTile	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3E	1	wBattleTransitionCircleScreenQuadrantX	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3E	1	wDayCareNumLevelsGrown	alias	WRAM	scratch	rom,live	
@@ -1230,10 +1230,10 @@ WRAM0	-	$CD5C	1	wSymmetricSpriteOAMAttributes	entry	WRAM	scratch	rom,live
 WRAM0	-	$CD5D	1	wMonPartySpriteSpecies	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD5E	1	wLeftGBMonSpecies	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD5F	1	wRightGBMonSpecies	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD60	10	wMiscFlags	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CD6A	1	wActionResultOrTookBattleTurn	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD60	10	wMiscFlags	entry	WRAM	scratch	rom,live	A small set of unrelated one-bit flags, grouped here for want of their own bytes rather than because they share a subject. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0567` and bank 17 `$05CA`, during intro, walk/menus; values seen: [0, 4].
+WRAM0	-	$CD6A	1	wActionResultOrTookBattleTurn	entry	WRAM	scratch	rom,live	Whether the action just attempted (a battle move, a field move) actually went ahead. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$55C9`, during intro, save; values seen: [0, 1].
 WRAM0	-	$CD6B	1	wJoyIgnore	entry	WRAM	system	rom,live	Buttons the game will not act on this frame.
-WRAM0	-	$CD6C	1	wNumMovesMinusOne	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CD6C	1	wNumMovesMinusOne	entry	WRAM	scratch	rom,live	One less than how many moves the Pokémon whose data is currently loaded knows — the move-list loop's own upper bound. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$5BB1`, during faint-battle, intro, party-reorder, save, start-menu-probe, trainer-battle; values seen: [0, 1].
 WRAM0	-	$CD6C	1	wDownscaledMonSize	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD6D	4	wBattleMenuCurrentPP	entry	WRAM	battle	rom,live	
 WRAM0	-	$CD6D	4	wEvoDataBuffer	alias	WRAM	battle	rom,live	
@@ -1246,7 +1246,7 @@ WRAM0	-	$CD78	2	wNormalMaxPPList	entry	WRAM	scratch	rom,live
 WRAM0	-	$CD7A	7	wEvoDataBufferEnd	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CD81	360	wSerialOtherGameboyRandomNumberListBlock	entry	WRAM	link	rom,live	Shares this address with `wTileMapBackup2` — the link-battle shared random-number list borrows this scratch buffer outside a link session; see that entry for the rest of what it is used for.
 WRAM0	-	$CD81	360	wTileMapBackup2	alias	WRAM	link	rom,live	A second 360-byte screen backup. Also the largest clean scratch buffer below the save boundary, which is why other tools borrow it.
-WRAM0	-	$CEE9	1	wLearningMovesFromDayCare	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CEE9	1	wLearningMovesFromDayCare	entry	WRAM	scratch	rom,live	Set while the level-up-move check is running for a Pokémon that just came back from the Day Care, rather than one that levelled up in a battle. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$009D`, during faint-battle, intro, party-reorder, post-save walk/menus, save, trainer-battle, wild-battle; values seen: [0, 14, 34, 49, 240].
 WRAM0	-	$CEE9	1	wBuffer	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CEE9	1	wChangeMonPicEnemyTurnSpecies	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CEE9	1	wEvoOldSpecies	alias	WRAM	scratch	rom,live	
@@ -1267,9 +1267,9 @@ WRAM0	-	$CEF0	13	wHPBarTempHP	entry	WRAM	battle	rom,live
 WRAM0	-	$CEFD	8	wHPBarHPDifference	entry	WRAM	battle	rom,live	
 WRAM0	-	$CF05	1	wAIItem	entry	WRAM	battle	rom,live	
 WRAM0	-	$CF06	1	wUsedItemOnWhichPokemon	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CF07	1	wAnimSoundID	entry	WRAM	battle	rom,live	
-WRAM0	-	$CF08	1	wBankswitchHomeSavedROMBank	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CF09	1	wBankswitchHomeTemp	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF07	1	wAnimSoundID	entry	WRAM	battle	rom,live	Which sound effect the current battle animation frame should play. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$414B`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 22, 30, 44, 132, 255].
+WRAM0	-	$CF08	1	wBankswitchHomeSavedROMBank	entry	WRAM	scratch	rom,live	The ROM bank in use before `Bankswitch`'s own home-bank helper switches away, restored once it returns. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$35C1` and bank 4 `$35C1`, during intro, save, start-menu-probe, trainer-battle, walk/menus; 10 distinct values, 0-30.
+WRAM0	-	$CF09	1	wBankswitchHomeTemp	entry	WRAM	scratch	rom,live	Scratch the home-bank bankswitch helper uses while it works. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$35BC` and bank 15 `$35BC`, during intro, save, trainer-battle, walk/menus; values seen: [0, 1, 3, 14].
 WRAM0	-	$CF0A	1	wBoughtOrSoldItemInMart	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF0B	1	wBattleResult	entry	WRAM	battle	rom,live	How the battle ended: won, lost, or ran.
 WRAM0	-	$CF0C	1	wAutoTextBoxDrawingControl	entry	WRAM	scratch	rom,live	
@@ -1282,10 +1282,10 @@ WRAM0	-	$CF10	1	wNPCMovementScriptFunctionNum	entry	WRAM	events	rom,live
 WRAM0	-	$CF11	1	wTextPredefFlag	entry	WRAM	screen	rom,live	
 WRAM0	-	$CF12	1	wPredefParentBank	entry	WRAM	system	rom,live	
 WRAM0	-	$CF13	1	wSpriteIndex	entry	WRAM	sprites	rom,live	
-WRAM0	-	$CF14	3	wCurSpriteMovement2	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF14	3	wCurSpriteMovement2	entry	WRAM	scratch	rom,live	The second of the two movement-script bytes for whichever sprite the overworld engine is currently stepping. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$4EDD`, during intro, walk/menus; values seen: [0, 1, 208, 255].
 WRAM0	-	$CF17	1	wNPCMovementScriptSpriteOffset	entry	WRAM	events	rom,live	
 WRAM0	-	$CF18	2	wScriptedNPCWalkCounter	entry	WRAM	events	rom,live	
-WRAM0	-	$CF1A	1	wOnCGB	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF1A	1	wOnCGB	entry	WRAM	scratch	rom,live	Set once, at boot, if the cartridge detects it is running on a Game Boy Color rather than an original Game Boy. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$0159`, during intro; values seen: [0].
 WRAM0	-	$CF1B	1	wOnSGB	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF1C	1	wDefaultPaletteCommand	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF1D	1	wWholeScreenPaletteMonSpecies	entry	WRAM	scratch	rom,live	
@@ -1299,11 +1299,11 @@ WRAM0	-	$CF2D	1	wWhichPartyMenuHPBar	alias	WRAM	graphics	rom,live
 WRAM0	-	$CF2E	29	wPartyMenuBlkPacket	entry	WRAM	graphics	rom,live	
 WRAM0	-	$CF4B	2	wExpAmountGained	entry	WRAM	battle	rom,live	Shares this address with `wStringBuffer` — see that entry.
 WRAM0	-	$CF4B	2	wStringBuffer	alias	WRAM	battle	rom,live	Scratch for a string being assembled before it is placed.
-WRAM0	-	$CF4D	18	wGainBoostedExp	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF4D	18	wGainBoostedExp	entry	WRAM	scratch	rom,live	The experience a battle win actually awards after the traded-Pokémon and Lucky-Egg-style boosts are applied — kept separate from the plain, unboosted total so the displayed number and the number actually added agree. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$382B`, during faint-battle, faint-setup, intro, party-reorder, save, start-menu-probe, trainer-battle; values seen: [0, 133, 136, 138, 142, 145, 147, 148].
 WRAM0	-	$CF5F	17	wGymCityName	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF70	11	wGymLeaderName	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF7B	16	wItemList	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CF8B	2	wListPointer	entry	WRAM	screen	rom,live	
+WRAM0	-	$CF8B	2	wListPointer	entry	WRAM	screen	rom,live	Pointer to the currently-open list menu's own item data, wherever that list's specific screen keeps it. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$5035`, during intro, save; values seen: [0, 29].
 WRAM0	-	$CF8D	2	wUnusedNamePointer	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF8F	2	wItemPrices	entry	WRAM	bag	rom,live	
 WRAM0	-	$CF91	1	wCurListMenuItem	entry	WRAM	scratch	rom,live	Shares this byte with `wCurItem`/`wCurPartySpecies` — reused for whichever operation (a list menu's selection, an item, a species) is currently in progress; see those entries for the specific facts.
@@ -1311,12 +1311,12 @@ WRAM0	-	$CF91	1	wCurItem	alias	WRAM	scratch	rom,live	Which item the current oper
 WRAM0	-	$CF91	1	wCurPartySpecies	alias	WRAM	scratch	rom,live	The species the current operation is about — set by `InitOpponent`, and reused by the party menus.
 WRAM0	-	$CF92	1	wWhichPokemon	entry	WRAM	storage	rom,live	Which party slot a menu or a link rendezvous picked. **`EnemySendOutFirstMon` computes it as the received byte minus 4 with no bounds check**, so answering the after-a-faint rendezvous with a move index instead of a slot underflows it to slot 252 and the game fields a glitch Pokemon whose name changes every turn.
 WRAM0	-	$CF93	1	wPrintItemPrices	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CF94	1	wListMenuID	entry	WRAM	screen	rom,live	
+WRAM0	-	$CF94	1	wListMenuID	entry	WRAM	screen	rom,live	Which kind of list menu is currently open — the id that tells the shared list-menu code how to draw and interpret whatever `wListPointer` names. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 4 `$68FB` and bank 15 `$4E80`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 1, 3].
 WRAM0	-	$CF94	1	wHPBarType	alias	WRAM	screen	rom,live	
 WRAM0	-	$CF95	1	wMoveMonType	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF95	1	wRemoveMonFromBox	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CF96	1	wItemQuantity	entry	WRAM	bag	rom,live	How many of it.
-WRAM0	-	$CF97	1	wMaxItemQuantity	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CF97	1	wMaxItemQuantity	entry	WRAM	scratch	rom,live	The largest quantity the quantity-picker will let the player select for whatever item or transaction menu is currently open — 99 for an ordinary item, fewer where the cap is the count still in the bag or on offer. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2F57` and bank 3 `$4E88`, during intro, post-save walk/menus, save; values seen: [0, 4, 5].
 WRAM0	-	$CF98	1	wLoadedMonSpecies	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CF98	1	wLoadedMon	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CF99	2	wLoadedMonHP	entry	WRAM	scratch	rom,live	
@@ -1347,8 +1347,8 @@ WRAM0	-	$CFC4	1	wFontLoaded	entry	WRAM	screen	rom,live	Whether the font tiles ar
 WRAM0	-	$CFC5	1	wWalkCounter	entry	WRAM	overworld	rom,live	Counts 7 down to 0 across a walk animation. Non-zero means the engine owns every sprite's screen position, so anything writing sprite pixels must stand off until it reaches zero.
 WRAM0	-	$CFC6	1	wTileInFrontOfPlayer	entry	WRAM	overworld	rom,live	The tile the player is facing, which is what an A press interrogates.
 WRAM0	-	$CFC7	1	wAudioFadeOutControl	entry	WRAM	audio	rom,live	Whether a fade-out is currently in progress. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$1F80`, during battle-trigger, intro, walk/menus; values seen: [0, 10, 186, 189].
-WRAM0	-	$CFC8	1	wAudioFadeOutCounterReloadValue	entry	WRAM	audio	rom,live	
-WRAM0	-	$CFC9	1	wAudioFadeOutCounter	entry	WRAM	audio	rom,live	
+WRAM0	-	$CFC8	1	wAudioFadeOutCounterReloadValue	entry	WRAM	audio	rom,live	The starting value `wAudioFadeOutCounter` counts down from for the current fade. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$241B`, during intro; values seen: [0, 10].
+WRAM0	-	$CFC9	1	wAudioFadeOutCounter	entry	WRAM	audio	rom,live	Frames left in the current audio fade-out. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$28E3` and bank 1 `$28EA`, during bag-setup, intro, walk/menus, wild-battle; 11 distinct values, 0-10.
 WRAM0	-	$CFCA	1	wLastMusicSoundID	entry	WRAM	audio	rom,live	What was playing before a sound effect took over, so it can be restored.
 WRAM0	-	$CFCB	1	wUpdateSpritesEnabled	entry	WRAM	system	rom,live	Whether the engine redraws sprites this frame. Cleared around anything that writes video RAM by hand.
 WRAM0	-	$CFCC	1	wEnemyMoveNum	entry	WRAM	scratch	rom,live	
@@ -1386,7 +1386,7 @@ WRAM0	-	$CFF8	2	wEnemyMonDefense	entry	WRAM	battle	rom,live	Computed Defense, bi
 WRAM0	-	$CFFA	2	wEnemyMonSpeed	entry	WRAM	battle	rom,live	Computed Speed, big-endian.
 WRAM0	-	$CFFC	2	wEnemyMonSpecial	entry	WRAM	battle	rom,live	Computed Special, big-endian. One stat here; Gen 2 splits it in two.
 WRAM0	-	$CFFE	4	wEnemyMonPP	entry	WRAM	battle	rom,live	Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2.
-WRAM0	-	$D002	5	wEnemyMonBaseStats	entry	WRAM	battle	rom,live	
+WRAM0	-	$D002	5	wEnemyMonBaseStats	entry	WRAM	battle	rom,live	The first of the five base stats copied into the opponent's battle structure when it is built — the leading edge of the same base-stats record `wEnemyMonBaseExp` sits beside. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6BDE`, during intro, wild-battle; values seen: [0, 105].
 WRAM0	-	$D007	1	wEnemyMonActualCatchRate	entry	WRAM	battle	rom,live	The catch rate the ball routine actually reads — **not** the species' base rate, because Safari bait and rocks move it.
 WRAM0	-	$D008	1	wEnemyMonBaseExp	entry	WRAM	battle	rom	The opponent's species' base experience yield, copied in when the battle starts so the reward can be computed without re-reading the species table afterward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger; values seen: [204].
 WRAM0	-	$D009	11	wBattleMonNick	entry	WRAM	battle	rom,live	The nickname shown above your side of the battle.
@@ -1454,22 +1454,22 @@ WRAM0	-	$D078	1	wBattleStatusDataEnd	alias	WRAM	battle	rom,live
 WRAM0	-	$D079	1	wObjectToHide	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D079	1	wAmountMoneyWon	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D07A	2	wObjectToShow	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D07C	1	wAnimationID	entry	WRAM	battle	rom,live	
+WRAM0	-	$D07C	1	wAnimationID	entry	WRAM	battle	rom,live	Which battle animation is currently playing. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$4292`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 1, 23, 31, 39, 45, 193, 195].
 WRAM0	-	$D07C	1	wDefaultMap	alias	WRAM	battle	rom,live	
 WRAM0	-	$D07C	1	wMenuItemOffset	alias	WRAM	battle	rom,live	
 WRAM0	-	$D07D	1	wTempTilesetNumTiles	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D07D	1	wNamingScreenType	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D07D	1	wPartyMenuTypeOrMessageID	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D07E	3	wSavedListScrollOffset	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D081	1	wBaseCoordX	entry	WRAM	battle	rom,live	
-WRAM0	-	$D082	1	wBaseCoordY	entry	WRAM	battle	rom,live	
+WRAM0	-	$D081	1	wBaseCoordX	entry	WRAM	battle	rom,live	The screen column the current battle animation's effect is drawn from. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4E90`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 22 distinct values, 0-152.
+WRAM0	-	$D082	1	wBaseCoordY	entry	WRAM	battle	rom,live	The screen row the current battle animation's effect is drawn from. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4E8C`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 19 distinct values, 0-96.
 WRAM0	-	$D083	1	wLowHealthAlarm	entry	WRAM	battle	rom,live	The state of the low-HP beep, which is its own channel and outlives the battle music.
 WRAM0	-	$D084	1	wFBTileCounter	entry	WRAM	battle	rom,live	How many tiles the current battle-transition animation has drawn so far. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 30 `$4016`, during battle, intro; 14 distinct values seen, 0-16.
 WRAM0	-	$D085	1	wMovingBGTilesCounter2	entry	WRAM	scratch	rom,live	A second counter for the moving-background battle-transition effect, alongside its own first counter. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$1ED9`, during battle, battle-trigger, intro, walk/menus; values seen: [0, 1, 2, 3, 4, 5, 6, 7].
 WRAM0	-	$D086	1	wSubAnimFrameDelay	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D087	1	wSubAnimCounter	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D087	1	wSubAnimCounter	entry	WRAM	scratch	rom,live	How far the current battle sub-animation has played. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4EA3` and bank 30 `$418C`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 12 distinct values, 0-11.
 WRAM0	-	$D088	1	wSaveFileStatus	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D089	1	wNumFBTiles	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D089	1	wNumFBTiles	entry	WRAM	scratch	rom,live	How many tiles the current battle-transition frame-blend effect is drawing this pass. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4003`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 2, 4, 12, 16].
 WRAM0	-	$D08A	1	wUnusedWaterDropletsByte	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D08A	1	wCoordAdjustmentAmount	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D08A	1	wFallingObjectMovementByte	alias	WRAM	scratch	rom,live	
@@ -1488,7 +1488,7 @@ WRAM0	-	$D08C	2	wEndBattleWinTextPointer	entry	WRAM	scratch	rom,live
 WRAM0	-	$D08E	4	wEndBattleLoseTextPointer	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D092	2	wEndBattleTextRomBank	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D094	2	wSubAnimAddrPtr	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D096	4	wSlotMachineAllowMatchesCounter	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D096	4	wSlotMachineAllowMatchesCounter	entry	WRAM	scratch	rom,live	A general animation-timing counter reused across several battle effects — not, despite the name this atlas inherited from the disassembly, specific to the Game Corner's slot machines during ordinary battle animation. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4EC2` and bank 30 `$41BA`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 34 distinct values, 0-170.
 WRAM0	-	$D096	4	wSubAnimSubEntryAddr	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D09A	1	wOutwardSpiralTileMapPointer	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D09B	1	wUnusedMoveAnimByte	entry	WRAM	scratch	rom,live	
@@ -1509,22 +1509,22 @@ WRAM0	-	$D0A1	1	wSpriteCurPosX	entry	WRAM	graphics	rom,live	Column the decompres
 WRAM0	-	$D0A2	1	wSpriteCurPosY	entry	WRAM	scratch	rom,live	Row the decompressor is filling.
 WRAM0	-	$D0A3	1	wSpriteWidth	entry	WRAM	graphics	rom,live	Width of the picture being decompressed, in tiles.
 WRAM0	-	$D0A4	1	wSpriteHeight	entry	WRAM	graphics	rom,live	Height of the picture being decompressed, in tiles.
-WRAM0	-	$D0A5	1	wSpriteInputCurByte	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D0A6	1	wSpriteInputBitCounter	entry	WRAM	graphics	rom,live	
-WRAM0	-	$D0A7	1	wSpriteOutputBitOffset	entry	WRAM	graphics	rom,live	
+WRAM0	-	$D0A5	1	wSpriteInputCurByte	entry	WRAM	scratch	rom,live	The byte the sprite-decompressor is currently unpacking from — the read side of the same bitstream `wSpriteInputBitCounter` counts through. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$2685` and bank 13 `$2679`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 256 distinct values, 0-255.
+WRAM0	-	$D0A6	1	wSpriteInputBitCounter	entry	WRAM	graphics	rom,live	How many bits of the current input byte the sprite-decompressor has consumed. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$267E` and bank 13 `$2527`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 9 distinct values, 0-8.
+WRAM0	-	$D0A7	1	wSpriteOutputBitOffset	entry	WRAM	graphics	rom,live	How many bits into the current output byte the sprite-decompressor has written. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$2601` and bank 13 `$2612`, during intro, trainer-battle, trainer-battle-setup, wild-battle; values seen: [0, 1, 2, 3].
 WRAM0	-	$D0A8	1	wSpriteLoadFlags	entry	WRAM	graphics	rom,live	Which of the two bitplanes are being produced and how they are combined. Gen 1 stores the two planes of a 2bpp picture as a run-length-coded bit stream plus an optional XOR of one plane against the other, which is why the same picture can be encoded three ways.
 WRAM0	-	$D0A9	1	wSpriteUnpackMode	entry	WRAM	graphics	rom,live	
 WRAM0	-	$D0AA	1	wSpriteFlipped	entry	WRAM	graphics	rom,live	Whether this picture is stored mirrored.
 WRAM0	-	$D0AB	2	wSpriteInputPtr	entry	WRAM	graphics	rom,live	Where the sprite decompressor is reading from.
 WRAM0	-	$D0AD	2	wSpriteOutputPtr	entry	WRAM	graphics	rom,live	Where it is writing to in the cartridge-RAM buffers.
-WRAM0	-	$D0AF	2	wSpriteOutputPtrCached	entry	WRAM	graphics	rom,live	
+WRAM0	-	$D0AF	2	wSpriteOutputPtrCached	entry	WRAM	graphics	rom,live	A cached copy of the sprite-decompressor's output pointer, kept beside the working one so the routine does not have to reconstruct it every pass. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$289B` and bank 13 `$285F`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 98 distinct values, 0-248.
 WRAM0	-	$D0B1	2	wSpriteDecodeTable0Ptr	entry	WRAM	graphics	rom,live	One of the two nybble-expansion tables the decompressor alternates between.
 WRAM0	-	$D0B3	2	wSpriteDecodeTable1Ptr	entry	WRAM	graphics	rom,live	The other nybble-expansion table.
-WRAM0	-	$D0B5	1	wNameListIndex	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D0B5	1	wNameListIndex	entry	WRAM	scratch	rom,live	Which entry of whatever name list (species, moves, items, trainers) is currently open the cursor is on. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$5B94` and bank 1 `$4527`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle, wild-battle; 10 distinct values, 0-177.
 WRAM0	-	$D0B5	1	wCurSpecies	alias	WRAM	scratch	rom,live	
-WRAM0	-	$D0B6	1	wNameListType	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D0B6	1	wNameListType	entry	WRAM	scratch	rom,live	Which kind of name list — species, moves, items, trainers — the shared name-list-drawing code is currently drawing, so it knows which table to read names out of. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2FDD`, during intro, post-save walk/menus, save, trainer-battle; values seen: [0, 2, 4].
 WRAM0	-	$D0B7	1	wPredefBank	entry	WRAM	system	rom,live	Which ROM bank the `Predef` call currently in progress needs mapped in — `Predef` is the game's own generic banked-subroutine-call mechanism, and this is where it stashes the destination. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 19 `$7E6F`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 12 distinct values seen, 0-44.
-WRAM0	-	$D0B8	1	wMonHIndex	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D0B8	1	wMonHIndex	entry	WRAM	scratch	rom,live	The internal index of whichever Pokémon's data is currently loaded into the scratch buffers, alongside `wLoadedMonLevel`. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$15A3`, during faint-setup, intro, party-reorder, save, start-menu-probe, trainer-battle, wild-battle; values seen: [0, 1, 7, 84, 153, 177].
 WRAM0	-	$D0B8	1	wMonHeader	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D0B9	1	wMonHBaseHP	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0B9	1	wMonHBaseStats	alias	WRAM	scratch	rom,live	
@@ -1550,7 +1550,7 @@ WRAM0	-	$D0DB	1	wRepelRemainingSteps	entry	WRAM	scratch	rom,live
 WRAM0	-	$D0DC	4	wMoves	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0E0	1	wMoveNum	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0E1	56	wMovesString	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D119	1	wUnusedCurMapTilesetCopy	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D119	1	wUnusedCurMapTilesetCopy	entry	WRAM	scratch	rom,live	A second copy of the current map's tileset id — written alongside `wCurMapTileset` but, as far as this playthrough found, never read back from separately. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$1087`, during intro, walk/menus; values seen: [0, 6, 134].
 WRAM0	-	$D11A	1	wWalkBikeSurfStateCopy	entry	WRAM	overworld	rom,live	
 WRAM0	-	$D11B	1	wInitListType	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D11C	1	wCapturedMonSpecies	entry	WRAM	scratch	rom,live	
@@ -1572,17 +1572,17 @@ WRAM0	-	$D11F	1	wForcePlayerToChooseMon	entry	WRAM	scratch	rom,live
 WRAM0	-	$D120	1	wNumRunAttempts	entry	WRAM	battle	rom,live	How many times you have tried to run this battle; each attempt makes the next more likely.
 WRAM0	-	$D121	1	wEvolutionOccurred	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D122	2	wVBlankSavedROMBank	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D124	1	wIsKeyItem	entry	WRAM	system	rom,live	
+WRAM0	-	$D124	1	wIsKeyItem	entry	WRAM	system	rom,live	Set while the currently-selected bag item is a key item (one the bag's own TOSS option refuses to throw away). Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$6766` and bank 3 `$6795`, during intro, post-save walk/menus, save; values seen: [0, 1].
 WRAM0	-	$D125	1	wTextBoxID	entry	WRAM	screen	rom,live	Which text box shape to draw.
-WRAM0	-	$D126	1	wCurrentMapScriptFlags	entry	WRAM	overworld	rom,live	
+WRAM0	-	$D126	1	wCurrentMapScriptFlags	entry	WRAM	overworld	rom,live	Per-map-script bit flags, reset each time a new map's script begins. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$5BB8` and bank 1 `$03F9`, during intro; values seen: [0, 32, 96].
 WRAM0	-	$D127	1	wCurEnemyLevel	entry	WRAM	battle	rom,live	The level a wild opponent is generated at.
 WRAM0	-	$D128	2	wItemListPointer	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D12A	1	wListCount	entry	WRAM	screen	rom,live	
+WRAM0	-	$D12A	1	wListCount	entry	WRAM	screen	rom,live	How many rows the currently-open list menu (a bag, a party list, a START menu) has. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C11` and bank 1 `$2C05`, during intro, post-save walk/menus, save; values seen: [0, 2].
 WRAM0	-	$D12B	1	wLinkState	entry	WRAM	link	rom,live	What the link cable is doing. Non-zero means the console is in the Cable Club, and the value distinguishes trading from battling — which is why a virtual link partner that only knows how to trade can walk into a real battle.
 WRAM0	-	$D12C	1	wTwoOptionMenuID	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D12D	1	wOutOfBattleBlackout	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D12D	1	wOutOfBattleBlackout	entry	WRAM	scratch	rom,live	Set when the party blacks out — the same event a wild or trainer battle's own black-out produces, but flagged for the overworld code that has to march the player back to the last Pokémon Center once the battle screen closes. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C9C` and bank 1 `$2D1F`, during intro, save; values seen: [0, 1].
 WRAM0	-	$D12D	1	wChosenMenuItem	alias	WRAM	scratch	rom,live	
-WRAM0	-	$D12E	1	wMenuExitMethod	entry	WRAM	screen	rom,live	
+WRAM0	-	$D12E	1	wMenuExitMethod	entry	WRAM	screen	rom,live	How the menu just closed — cancelled, confirmed, or forced shut — read by whatever opened it to decide what happens next. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C99` and bank 1 `$2E43`, during intro, post-save walk/menus, save; values seen: [0, 1, 2].
 WRAM0	-	$D12F	1	wGymGateTileBlock	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D12F	1	wDungeonWarpDataEntrySize	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D12F	1	wWhichPewterGuy	alias	WRAM	scratch	rom,live	
@@ -1593,7 +1593,7 @@ WRAM0	-	$D132	1	wSavedSpriteMapY	entry	WRAM	scratch	rom,live
 WRAM0	-	$D133	6	wSavedSpriteMapX	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D139	1	wWhichPrize	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D13A	1	wIgnoreInputCounter	entry	WRAM	scratch	rom,live	A free-running counter (all 256 byte values observed) written on almost every frame — the byte itself, not its name, is what this playthrough actually established; whether it gates input the way its name suggests is not confirmed here. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$4E41`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 256 distinct values seen, 0-255.
-WRAM0	-	$D13B	1	wStepCounter	entry	WRAM	overworld	rom,live	
+WRAM0	-	$D13B	1	wStepCounter	entry	WRAM	overworld	rom,live	Counts the player's steps since it was last reset — the same counter a wild-encounter roll or a hatching check reads to decide whether enough steps have passed. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$05F0`, during intro, walk/menus; 39 distinct values, 0-255.
 WRAM0	-	$D13C	1	wNumberOfNoRandomBattleStepsLeft	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D13D	1	wPrize1	entry	WRAM	bag	rom,live	
 WRAM0	-	$D13E	1	wPrize2	instance	WRAM	bag	rom,live	
@@ -1866,15 +1866,15 @@ WRAM0	-	$D4B0	1	wNumSigns	entry	Main Data	overworld	rom,live	How many readable s
 WRAM0	-	$D4B1	32	wSignCoords	entry	Main Data	overworld	rom,live	Sign positions, y then x.
 WRAM0	-	$D4D1	16	wSignTextIDs	entry	Main Data	overworld	rom,live	Which text each sign prints.
 WRAM0	-	$D4E1	1	wNumSprites	entry	Main Data	sprites	rom,live	How many object slots the engine believes this map has. Two routines are gated on it, so raising it is what makes extra sprites move *and* makes them talkable.
-WRAM0	-	$D4E2	1	wYOffsetSinceLastSpecialWarp	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D4E3	1	wXOffsetSinceLastSpecialWarp	entry	Main Data	overworld	rom,live	
+WRAM0	-	$D4E2	1	wYOffsetSinceLastSpecialWarp	entry	Main Data	overworld	rom,live	How far the player has walked vertically since the last warp that was not an ordinary door — the offset a return trip (like Dig or an Escape Rope) restores against. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0E01` and bank 17 `$0DEB`, during intro, walk/menus; values seen: [0, 251, 252, 253, 254].
+WRAM0	-	$D4E3	1	wXOffsetSinceLastSpecialWarp	entry	Main Data	overworld	rom,live	How far the player has walked horizontally since the last special warp. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0DD3` and bank 17 `$0DC0`, during intro, walk/menus; values seen: [0, 2, 3, 4, 5, 6, 7].
 WRAM0	-	$D4E4	32	wMapSpriteData	entry	Main Data	overworld	rom,live	A (movement byte, text id) pair per object. The text id is what an A press against an object resolves to.
 WRAM0	-	$D504	32	wMapSpriteExtraData	entry	Main Data	overworld	rom,live	A second pair per object, used by trainers and item balls to say which trainer or which item.
 WRAM0	-	$D524	1	wCurrentMapHeight2	entry	Main Data	overworld	rom,live	Map height again, this time in walk tiles. The engine keeps both units.
 WRAM0	-	$D525	1	wCurrentMapWidth2	entry	Main Data	overworld	rom,live	Map width in walk tiles.
-WRAM0	-	$D526	2	wMapViewVRAMPointer	entry	Main Data	overworld	rom,live	
+WRAM0	-	$D526	2	wMapViewVRAMPointer	entry	Main Data	overworld	rom,live	Where in VRAM the currently-visible corner of the map view is being written. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0D9D` and bank 17 `$0D82`, during intro, walk/menus; 28 distinct values, 0-218.
 WRAM0	-	$D528	1	wPlayerMovingDirection	entry	Main Data	overworld	rom,live	Which way the player is currently stepping.
-WRAM0	-	$D529	1	wPlayerLastStopDirection	entry	Main Data	overworld	rom,live	
+WRAM0	-	$D529	1	wPlayerLastStopDirection	entry	Main Data	overworld	rom,live	The direction the player was facing the last time they stood still — read by whichever script or object needs to know where the player was looking, not just where they are. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$04E1`, during intro, walk/menus; values seen: [0, 1, 4, 8].
 WRAM0	-	$D52A	1	wPlayerDirection	entry	Main Data	overworld	rom,live	Which way the player is facing.
 WRAM0	-	$D52B	1	wTilesetBank	entry	Main Data	overworld	rom,live	Which ROM bank holds this tileset's blocks and art.
 WRAM0	-	$D52C	2	wTilesetBlocksPtr	entry	Main Data	overworld	rom,live	Pointer to the blockset: 16 tile ids per 32x32 block.
@@ -2024,7 +2024,7 @@ WRAM0	-	$D734	2	wElite4Flags	entry	Main Data	events	rom,live	Progress through th
 WRAM0	-	$D736	1	wMovementFlags	entry	Main Data	events	rom,live	Whether the bicycle, surfing or the running shoes-equivalent movement is active.
 WRAM0	-	$D737	4	wCompletedInGameTradeFlags	entry	Main Data	events	rom,live	One bit per in-game trade already done, so an NPC cannot be traded with twice.
 WRAM0	-	$D73B	1	wWarpedFromWhichWarp	entry	Main Data	overworld	rom,live	
-WRAM0	-	$D73C	3	wWarpedFromWhichMap	entry	Main Data	overworld	rom,live	
+WRAM0	-	$D73C	3	wWarpedFromWhichMap	entry	Main Data	overworld	rom,live	Which map the player warped in from — read by a destination map's own script when it needs to know where the player just came from, not only where they are now. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0746`, during intro, walk/menus; values seen: [0, 38, 41].
 WRAM0	-	$D73F	1	wCardKeyDoorY	entry	Main Data	events	rom,live	Which door the Card Key was used on, vertical.
 WRAM0	-	$D740	3	wCardKeyDoorX	entry	Main Data	events	rom,live	Which door the Card Key was used on, horizontal.
 WRAM0	-	$D743	1	wFirstLockTrashCanIndex	entry	Main Data	events	rom,live	Which bin the Vermilion Gym's first switch is in — the puzzle's state, kept in the save.

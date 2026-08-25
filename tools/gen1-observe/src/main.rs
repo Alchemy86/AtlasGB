@@ -1,38 +1,24 @@
-// Pass 1: a frame-granularity sweep of a real, richer playthrough than
-// TerminalGB's own gen1atlas.rs Tier C script (which never reaches a battle
-// or a menu past the opening). For every WRAM/HRAM byte, record which frames
-// it changed on and what values it took. Cheap: `Gameboy::frame()` is the
-// same high-level stepping the existing harness uses.
+// Pass 1: a frame-granularity sweep of the shared script (src/lib.rs). For
+// every WRAM/HRAM byte, record which frames it changed on and what values it
+// took. Cheap: `Gameboy::frame()` is the same high-level stepping the
+// existing TerminalGB harness uses.
+use gen1_observe::run_script;
 use std::collections::BTreeMap;
+use std::io::Write;
 use std::time::Instant;
 use terminalgb::gameboy::Gameboy;
-use terminalgb::KeypadKey;
 
+const VRAM_LO: u16 = 0x8000;
+const VRAM_HI: u16 = 0x9FFF;
 const WRAM_LO: u16 = 0xC000;
 const WRAM_HI: u16 = 0xDFFF;
 const HRAM_LO: u16 = 0xFF80;
 const HRAM_HI: u16 = 0xFFFE;
 
-fn regions() -> Vec<(u16, u16)> {
-    vec![(WRAM_LO, WRAM_HI), (HRAM_LO, HRAM_HI)]
-}
-
 #[derive(Default)]
 struct ByteHistory {
-    // frames this byte changed on (capped)
     change_frames: Vec<u32>,
     values_seen: Vec<u8>,
-}
-
-fn press(gb: &mut Gameboy, key: KeypadKey, frames_held: u32, frames_gap: u32, sweep: &mut impl FnMut(&mut Gameboy, u32)) {
-    gb.keydown(key);
-    for _ in 0..frames_held {
-        sweep(gb, 1);
-    }
-    gb.keyup(key);
-    for _ in 0..frames_gap {
-        sweep(gb, 1);
-    }
 }
 
 fn main() {
@@ -43,7 +29,6 @@ fn main() {
     let data = std::fs::read(&rom_path).expect("read rom");
     let mut gb = match save_path {
         Some(ref p) => {
-            // stage a copy so nothing writes beside the real save
             let staged_rom = "target/observe-staged.gb";
             let staged_sav = "target/observe-staged.sav";
             std::fs::create_dir_all("target").ok();
@@ -59,28 +44,28 @@ fn main() {
 
     let mut history: BTreeMap<u16, ByteHistory> = BTreeMap::new();
     let mut prev: BTreeMap<u16, u8> = BTreeMap::new();
-    for (lo, hi) in regions() {
+    for (lo, hi) in [(VRAM_LO, VRAM_HI), (WRAM_LO, WRAM_HI), (HRAM_LO, HRAM_HI)] {
         for a in lo..=hi {
             prev.insert(a, gb.peek(a));
         }
     }
-
-    let mut frame_no: u32 = 0;
     let mut co_occurrence: Vec<(u32, Vec<u16>)> = Vec::new();
 
-    let mut sweep = |gb: &mut Gameboy, n: u32| {
-        for _ in 0..n {
+    let start = Instant::now();
+    let mut last_frame = 0u32;
+    {
+        let mut on_frame = |gb: &mut Gameboy, frame_no: u32| {
             gb.frame();
-            frame_no += 1;
+            last_frame = frame_no;
             let mut changed_this_frame = Vec::new();
-            for (lo, hi) in regions() {
+            for (lo, hi) in [(VRAM_LO, VRAM_HI), (WRAM_LO, WRAM_HI), (HRAM_LO, HRAM_HI)] {
                 let now = gb.peek_range(lo, (hi - lo) as usize + 1);
                 for (i, b) in now.iter().enumerate() {
                     let addr = lo + i as u16;
                     let before = prev.get(&addr).copied().unwrap_or(0);
                     if *b != before {
                         let h = history.entry(addr).or_default();
-                        if h.change_frames.len() < 64 {
+                        if h.change_frames.len() < 96 {
                             h.change_frames.push(frame_no);
                         }
                         if !h.values_seen.contains(b) && h.values_seen.len() < 32 {
@@ -91,91 +76,24 @@ fn main() {
                     }
                 }
             }
-            if !changed_this_frame.is_empty() && co_occurrence.len() < 20000 {
+            if !changed_this_frame.is_empty() && co_occurrence.len() < 30000 {
                 co_occurrence.push((frame_no, changed_this_frame));
             }
-        }
-    };
-
-    let start = Instant::now();
-
-    // Phase 1: title -> naming/continue screens, same shape as gen1atlas.rs's
-    // own script (A and START alternating opens a save, mashes past intro).
-    for frame in 0..1400u32 {
-        let want = if (frame / 24) % 2 == 0 {
-            KeypadKey::A
-        } else {
-            KeypadKey::Start
         };
-        gb.keydown(want);
-        sweep(&mut gb, 1);
-        gb.keyup(want);
-    }
-
-    // Phase 2: walk and open menus (same cadence as gen1atlas.rs Tier C),
-    // long enough to reach the overworld reliably and exercise the sprite
-    // engine, text engine and map-loading bytes.
-    for frame in 0..1800u32 {
-        let want = match (frame / 20) % 8 {
-            0 | 1 => KeypadKey::Down,
-            2 => KeypadKey::A,
-            3 => KeypadKey::Up,
-            4 => KeypadKey::Left,
-            5 => KeypadKey::Start,
-            6 => KeypadKey::Right,
-            _ => KeypadKey::B,
-        };
-        gb.keydown(want);
-        sweep(&mut gb, 1);
-        gb.keyup(want);
-    }
-
-    // Phase 3: force a wild battle the way the game's own debug menu does —
-    // writing wCurOpponent, an already-verified, fully-described entry in
-    // this atlas ($D059) — rather than needing to walk into grass. Species 1
-    // internal index, level 5.
-    gb.debug_write(0xD059, 1); // wCurOpponent: species internal index 1
-    gb.debug_write(0xD127, 5); // wCurEnemyLevel
-    for _ in 0..30u32 {
-        sweep(&mut gb, 1);
-    }
-    // Fight it out: mash A. On the main FIGHT/PKMN/ITEM/RUN menu this selects
-    // FIGHT; on the move list it selects the first move; on text boxes it
-    // advances them. Not clever, consistent — same philosophy as the existing
-    // harness script.
-    for _ in 0..40u32 {
-        let mut s2 = |gb: &mut Gameboy, n: u32| sweep(gb, n);
-        press(&mut gb, KeypadKey::A, 8, 16, &mut s2);
-    }
-
-    // Phase 4: back in the overworld (win, lose, or run out the clock),
-    // open the START menu and walk it — POKEMON, ITEM, and back — to reach
-    // the party/bag screens without needing to find a Pokemon Center.
-    for _ in 0..10u32 {
-        let mut s2 = |gb: &mut Gameboy, n: u32| sweep(gb, n);
-        press(&mut gb, KeypadKey::Start, 6, 20, &mut s2);
-        press(&mut gb, KeypadKey::A, 6, 20, &mut s2);
-    }
-    for _ in 0..30u32 {
-        let mut s2 = |gb: &mut Gameboy, n: u32| sweep(gb, n);
-        press(&mut gb, KeypadKey::Down, 4, 8, &mut s2);
-        press(&mut gb, KeypadKey::A, 4, 12, &mut s2);
-        press(&mut gb, KeypadKey::B, 4, 12, &mut s2);
+        run_script(&mut gb, &mut on_frame);
     }
 
     let elapsed = start.elapsed();
     eprintln!(
-        "ran {frame_no} frames in {:.2}s ({} bytes with at least one observed change, {} co-occurrence frame-events)",
+        "ran {} frames in {:.2}s ({} bytes with at least one observed change, {} co-occurrence frame-events)",
+        last_frame + 1,
         elapsed.as_secs_f64(),
         history.len(),
         co_occurrence.len()
     );
 
-    // Write compact JSON: per-address change_frames + values_seen, plus the
-    // co-occurrence log (frame -> which addresses moved together).
-    use std::io::Write;
     let mut out = std::fs::File::create(&out_path).unwrap();
-    write!(out, "{{\"total_frames\": {frame_no}, \"addresses\": {{").unwrap();
+    write!(out, "{{\"total_frames\": {}, \"addresses\": {{", last_frame + 1).unwrap();
     let mut first = true;
     for (addr, h) in &history {
         if !first {

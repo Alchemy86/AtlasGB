@@ -890,7 +890,7 @@
     "rom",
     "live"
    ],
-   "desc": "Where each channel is in its command stream — the sound engine is a little interpreter and this is its program counter.",
+   "desc": "Where each channel is in its command stream — the sound engine is a little interpreter and this is its program counter. Measured: written together with eight sibling per-channel fields (`wChannelSoundIDs`, `wChannelFlags1`, `wChannelDutyCycles`, `wChannelVibratoExtents`, `wChannelVibratoRates`, `wChannelFrequencyLowBytes`, `wChannelVibratoDelayCounterReloadValues`, `wChannelNoteSpeeds`) by one routine (bank 31 `$5AFE`) — the channel-init that arms a new note.",
    "addr_int": 49158
   },
   {
@@ -8406,7 +8406,7 @@
     "rom",
     "live"
    ],
-   "desc": "Object entry 0: the four bytes y, x, tile id, attributes.",
+   "desc": "Object entry 0: the four bytes y, x, tile id, attributes. Measured: written together with `wShadowOAMSprite01` and both slots' own X/Y/tile-id/attribute fields from several different routines across this playthrough (battle animation, sprite placement, the shadow-OAM backup/restore pair) — the two slots are consistently touched as a pair rather than independently, wherever they are touched at all.",
    "addr_int": 49920
   },
   {
@@ -15247,7 +15247,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set while the game is deciding whether the player's last direction press is a full about-face rather than a step, which changes just the facing sprite instead of moving. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$04D7` and bank 17 `$056C`, during intro, trainer-battle, walk/menus; values seen: [0, 1].",
    "addr_int": 52299
   },
   {
@@ -16189,7 +16189,7 @@
     "rom",
     "live"
    ],
-   "desc": "One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split.",
+   "desc": "One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split. Measured: written together with `wPartyGainExpFlags` from the same instruction context (bank 3 `$7692`) — the two flag arrays are set as one act, not two.",
    "addr_int": 52469
   },
   {
@@ -16237,7 +16237,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many times a multi-hit move (like DOUBLESLAP or FURY ATTACK) has struck so far this use. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6870`, during intro, party-reorder, post-save walk/menus; values seen: [0, 2, 3].",
    "addr_int": 52485
   },
   {
@@ -16492,7 +16492,7 @@
     "rom",
     "live"
    ],
-   "desc": "In-battle stat stages for your side. **7 is neutral, not 0**: the block is zeroed work RAM until `InitBattleVariables` writes the sevens, so a sample taken on the first frames of a battle reads zero everywhere and looks like -6 on everything.",
+   "desc": "In-battle stat stages for your side. **7 is neutral, not 0**: the block is zeroed work RAM until `InitBattleVariables` writes the sevens, so a sample taken on the first frames of a battle reads zero everywhere and looks like -6 on everything. Measured: also written, together with `wPlayerMonDefenseMod`/`wPlayerMonSpeedMod`/`wPlayerMonSpecialMod`/`wPlayerMonEvasionMod`, from bank 15 `$4C0E` — a different routine from `InitBattleVariables` (bank 20 `$65AF`) that writes the same sevens, most likely the equivalent reset on a mid-battle switch-in rather than battle start; not confirmed further here.",
    "addr_int": 52506
   },
   {
@@ -16869,7 +16869,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The species the player receives from an in-game trade — read once the trade is confirmed, before the party structures are actually rewritten. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6C2D`, during intro, wild-battle; values seen: [0, 7].",
    "addr_int": 52532
   },
   {
@@ -17012,7 +17012,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which of the fishing rod's possible outcomes (a bite, nothing, a species) the last cast produced. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$4509` and bank 28 `$4D50`, during intro, save, walk/menus, wild-battle; 38 distinct values, 0-177.",
    "addr_int": 52541
   },
   {
@@ -17700,7 +17700,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many Pokémon the Hall of Fame credits sequence has drawn so far. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 28 `$4D54`, during intro, trainer-battle, wild-battle; values seen: [0, 1, 8].",
    "addr_int": 52542
   },
   {
@@ -19140,7 +19140,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A small set of unrelated one-bit flags, grouped here for want of their own bytes rather than because they share a subject. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0567` and bank 17 `$05CA`, during intro, walk/menus; values seen: [0, 4].",
    "addr_int": 52576
   },
   {
@@ -19156,7 +19156,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Whether the action just attempted (a battle move, a field move) actually went ahead. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$55C9`, during intro, save; values seen: [0, 1].",
    "addr_int": 52586
   },
   {
@@ -19188,7 +19188,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One less than how many moves the Pokémon whose data is currently loaded knows — the move-list loop's own upper bound. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$5BB1`, during faint-battle, intro, party-reorder, save, start-menu-probe, trainer-battle; values seen: [0, 1].",
    "addr_int": 52588
   },
   {
@@ -19395,7 +19395,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set while the level-up-move check is running for a Pokémon that just came back from the Day Care, rather than one that levelled up in a battle. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$009D`, during faint-battle, intro, party-reorder, post-save walk/menus, save, trainer-battle, wild-battle; values seen: [0, 14, 34, 49, 240].",
    "addr_int": 52969
   },
   {
@@ -19731,7 +19731,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which sound effect the current battle animation frame should play. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$414B`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 22, 30, 44, 132, 255].",
    "addr_int": 52999
   },
   {
@@ -19747,7 +19747,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The ROM bank in use before `Bankswitch`'s own home-bank helper switches away, restored once it returns. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$35C1` and bank 4 `$35C1`, during intro, save, start-menu-probe, trainer-battle, walk/menus; 10 distinct values, 0-30.",
    "addr_int": 53000
   },
   {
@@ -19763,7 +19763,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Scratch the home-bank bankswitch helper uses while it works. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$35BC` and bank 15 `$35BC`, during intro, save, trainer-battle, walk/menus; values seen: [0, 1, 3, 14].",
    "addr_int": 53001
   },
   {
@@ -19971,7 +19971,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The second of the two movement-script bytes for whichever sprite the overworld engine is currently stepping. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$4EDD`, during intro, walk/menus; values seen: [0, 1, 208, 255].",
    "addr_int": 53012
   },
   {
@@ -20019,7 +20019,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set once, at boot, if the cartridge detects it is running on a Game Boy Color rather than an original Game Boy. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$0159`, during intro; values seen: [0].",
    "addr_int": 53018
   },
   {
@@ -20243,7 +20243,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The experience a battle win actually awards after the traded-Pokémon and Lucky-Egg-style boosts are applied — kept separate from the plain, unboosted total so the displayed number and the number actually added agree. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$382B`, during faint-battle, faint-setup, intro, party-reorder, save, start-menu-probe, trainer-battle; values seen: [0, 133, 136, 138, 142, 145, 147, 148].",
    "addr_int": 53069
   },
   {
@@ -20307,7 +20307,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Pointer to the currently-open list menu's own item data, wherever that list's specific screen keeps it. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$5035`, during intro, save; values seen: [0, 29].",
    "addr_int": 53131
   },
   {
@@ -20435,7 +20435,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which kind of list menu is currently open — the id that tells the shared list-menu code how to draw and interpret whatever `wListPointer` names. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 4 `$68FB` and bank 15 `$4E80`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 1, 3].",
    "addr_int": 53140
   },
   {
@@ -20515,7 +20515,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The largest quantity the quantity-picker will let the player select for whatever item or transaction menu is currently open — 99 for an ordinary item, fewer where the cap is the count still in the bag or on offer. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2F57` and bank 3 `$4E88`, during intro, post-save walk/menus, save; values seen: [0, 4, 5].",
    "addr_int": 53143
   },
   {
@@ -21002,7 +21002,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The starting value `wAudioFadeOutCounter` counts down from for the current fade. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$241B`, during intro; values seen: [0, 10].",
    "addr_int": 53192
   },
   {
@@ -21018,7 +21018,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left in the current audio fade-out. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$28E3` and bank 1 `$28EA`, during bag-setup, intro, walk/menus, wild-battle; 11 distinct values, 0-10.",
    "addr_int": 53193
   },
   {
@@ -21621,7 +21621,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The first of the five base stats copied into the opponent's battle structure when it is built — the leading edge of the same base-stats record `wEnemyMonBaseExp` sits beside. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6BDE`, during intro, wild-battle; values seen: [0, 105].",
    "addr_int": 53250
   },
   {
@@ -22708,7 +22708,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which battle animation is currently playing. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$4292`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 1, 23, 31, 39, 45, 193, 195].",
    "addr_int": 53372
   },
   {
@@ -22820,7 +22820,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The screen column the current battle animation's effect is drawn from. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4E90`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 22 distinct values, 0-152.",
    "addr_int": 53377
   },
   {
@@ -22836,7 +22836,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The screen row the current battle animation's effect is drawn from. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4E8C`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 19 distinct values, 0-96.",
    "addr_int": 53378
   },
   {
@@ -22916,7 +22916,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far the current battle sub-animation has played. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4EA3` and bank 30 `$418C`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 12 distinct values, 0-11.",
    "addr_int": 53383
   },
   {
@@ -22948,7 +22948,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many tiles the current battle-transition frame-blend effect is drawing this pass. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4003`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; values seen: [0, 2, 4, 12, 16].",
    "addr_int": 53385
   },
   {
@@ -23252,7 +23252,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A general animation-timing counter reused across several battle effects — not, despite the name this atlas inherited from the disassembly, specific to the Game Corner's slot machines during ordinary battle animation. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 30 `$4EC2` and bank 30 `$41BA`, during faint-battle, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle; 34 distinct values, 0-170.",
    "addr_int": 53398
   },
   {
@@ -23588,7 +23588,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The byte the sprite-decompressor is currently unpacking from — the read side of the same bitstream `wSpriteInputBitCounter` counts through. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$2685` and bank 13 `$2679`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 256 distinct values, 0-255.",
    "addr_int": 53413
   },
   {
@@ -23604,7 +23604,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many bits of the current input byte the sprite-decompressor has consumed. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$267E` and bank 13 `$2527`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 9 distinct values, 0-8.",
    "addr_int": 53414
   },
   {
@@ -23620,7 +23620,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many bits into the current output byte the sprite-decompressor has written. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$2601` and bank 13 `$2612`, during intro, trainer-battle, trainer-battle-setup, wild-battle; values seen: [0, 1, 2, 3].",
    "addr_int": 53415
   },
   {
@@ -23716,7 +23716,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A cached copy of the sprite-decompressor's output pointer, kept beside the working one so the routine does not have to reconstruct it every pass. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 13 `$289B` and bank 13 `$285F`, during intro, trainer-battle, trainer-battle-setup, wild-battle; 98 distinct values, 0-248.",
    "addr_int": 53423
   },
   {
@@ -23764,7 +23764,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which entry of whatever name list (species, moves, items, trainers) is currently open the cursor is on. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$5B94` and bank 1 `$4527`, during faint-battle, faint-setup, intro, party-reorder, post-save walk/menus, save, start-menu-probe, trainer-battle, wild-battle; 10 distinct values, 0-177.",
    "addr_int": 53429
   },
   {
@@ -23796,7 +23796,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which kind of name list — species, moves, items, trainers — the shared name-list-drawing code is currently drawing, so it knows which table to read names out of. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2FDD`, during intro, post-save walk/menus, save, trainer-battle; values seen: [0, 2, 4].",
    "addr_int": 53430
   },
   {
@@ -23828,7 +23828,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The internal index of whichever Pokémon's data is currently loaded into the scratch buffers, alongside `wLoadedMonLevel`. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 14 `$15A3`, during faint-setup, intro, party-reorder, save, start-menu-probe, trainer-battle, wild-battle; values seen: [0, 1, 7, 84, 153, 177].",
    "addr_int": 53432
   },
   {
@@ -24239,7 +24239,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A second copy of the current map's tileset id — written alongside `wCurMapTileset` but, as far as this playthrough found, never read back from separately. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$1087`, during intro, walk/menus; values seen: [0, 6, 134].",
    "addr_int": 53529
   },
   {
@@ -24591,7 +24591,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set while the currently-selected bag item is a key item (one the bag's own TOSS option refuses to throw away). Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 3 `$6766` and bank 3 `$6795`, during intro, post-save walk/menus, save; values seen: [0, 1].",
    "addr_int": 53540
   },
   {
@@ -24623,7 +24623,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Per-map-script bit flags, reset each time a new map's script begins. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$5BB8` and bank 1 `$03F9`, during intro; values seen: [0, 32, 96].",
    "addr_int": 53542
   },
   {
@@ -24671,7 +24671,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many rows the currently-open list menu (a bag, a party list, a START menu) has. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C11` and bank 1 `$2C05`, during intro, post-save walk/menus, save; values seen: [0, 2].",
    "addr_int": 53546
   },
   {
@@ -24719,7 +24719,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Set when the party blacks out — the same event a wild or trainer battle's own black-out produces, but flagged for the overworld code that has to march the player back to the last Pokémon Center once the battle screen closes. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C9C` and bank 1 `$2D1F`, during intro, save; values seen: [0, 1].",
    "addr_int": 53549
   },
   {
@@ -24751,7 +24751,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How the menu just closed — cancelled, confirmed, or forced shut — read by whatever opened it to decide what happens next. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$2C99` and bank 1 `$2E43`, during intro, post-save walk/menus, save; values seen: [0, 1, 2].",
    "addr_int": 53550
   },
   {
@@ -24927,7 +24927,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Counts the player's steps since it was last reset — the same counter a wild-encounter roll or a hatching check reads to decide whether enough steps have passed. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$05F0`, during intro, walk/menus; 39 distinct values, 0-255.",
    "addr_int": 53563
   },
   {
@@ -29191,7 +29191,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far the player has walked vertically since the last warp that was not an ordinary door — the offset a return trip (like Dig or an Escape Rope) restores against. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0E01` and bank 17 `$0DEB`, during intro, walk/menus; values seen: [0, 251, 252, 253, 254].",
    "addr_int": 54498
   },
   {
@@ -29207,7 +29207,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far the player has walked horizontally since the last special warp. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0DD3` and bank 17 `$0DC0`, during intro, walk/menus; values seen: [0, 2, 3, 4, 5, 6, 7].",
    "addr_int": 54499
   },
   {
@@ -29287,7 +29287,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Where in VRAM the currently-visible corner of the map view is being written. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0D9D` and bank 17 `$0D82`, during intro, walk/menus; 28 distinct values, 0-218.",
    "addr_int": 54566
   },
   {
@@ -29319,7 +29319,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The direction the player was facing the last time they stood still — read by whichever script or object needs to know where the player was looking, not just where they are. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$04E1`, during intro, walk/menus; values seen: [0, 1, 4, 8].",
    "addr_int": 54569
   },
   {
@@ -31719,7 +31719,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which map the player warped in from — read by a destination map's own script when it needs to know where the player just came from, not only where they are now. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 17 `$0746`, during intro, walk/menus; values seen: [0, 38, 41].",
    "addr_int": 55100
   },
   {

@@ -101,7 +101,7 @@ the messy symptom, the wrong turns, the measurement that settled it — is recor
 |---|---:|---|:--:|---|
 | `$AF2C` b1 | 404 | <a id="s-sPartyData"></a>`sPartyData` | R | The saved party, the same layout as `wPartyCount` onwards. |
 | `$CC2B` | 1 | <a id="s-wPartyAndBillsPCSavedMenuItem"></a>`wPartyAndBillsPCSavedMenuItem` | RL |  |
-| `$CCF5` | 1 | <a id="s-wPartyFoughtCurrentEnemyFlags"></a>`wPartyFoughtCurrentEnemyFlags` | RL | One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split. |
+| `$CCF5` | 1 | <a id="s-wPartyFoughtCurrentEnemyFlags"></a>`wPartyFoughtCurrentEnemyFlags` | RL | One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split. Measured: written together with `wPartyGainExpFlags` from the same instruction context (bank 3 `$7692`) — the two flag arrays are set as one act, not two. |
 | `$D058` | 1 | <a id="s-wPartyGainExpFlags"></a>`wPartyGainExpFlags` | RL | One bit per party slot: who was in the battle and therefore earns experience. |
 | `$D163` | 1 | <a id="s-wPartyCount"></a>`wPartyCount`<br><a id="s-wPartyDataStart"></a>`wPartyDataStart` | RLI | **`wPartyCount`** — How many Pokemon you are carrying, 0 to 6. **Verified live**: the harness reads it, walks both parallel species lists, and requires them to agree and to be `$FF`-terminated. **`wPartyDataStart`** — Label for the first byte of the party block; the same address as `wPartyCount`. |
 | `$D164` | 7 | <a id="s-wPartySpecies"></a>`wPartySpecies` | RLI | Six species indices and an `$FF` terminator — a flat list beside the structures, written at a different moment from the copy inside each `party_struct`. The two agreeing is what makes both addresses trustworthy. |

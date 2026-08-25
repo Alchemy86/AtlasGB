@@ -135,7 +135,7 @@ Base `wEnemyMon` at `$CFE5`.
 | 21 | 2 | `Speed` | Computed Speed, big-endian. |
 | 23 | 2 | `Special` | Computed Special, big-endian. One stat here; Gen 2 splits it in two. |
 | 25 | 4 | `PP` | Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2. |
-| 29 | 5 | `BaseStats` |  |
+| 29 | 5 | `BaseStats` | The first of the five base stats copied into the opponent's battle structure when it is built — the leading edge of the same base-stats record `wEnemyMonBaseExp` sits beside. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 15 `$6BDE`, during intro, wild-battle; values seen: [0, 105]. |
 | 34 | 1 | `ActualCatchRate` | The catch rate the ball routine actually reads — **not** the species' base rate, because Safari bait and rocks move it. |
 | 35 | 1 | `BaseExp` | The opponent's species' base experience yield, copied in when the battle starts so the reward can be computed without re-reading the species table afterward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger; values seen: [204]. |
 | 1838 | 1 | `OrTrainerClass` |  |

@@ -5,16 +5,16 @@
 **Verification asks whether an existing claim is true.** This page is about a different
 question: how a description gets *written* in the first place, once the well of already-
 written-down evidence (a sibling entry, a comment in the emulator's own source) runs dry —
-which round two of the descriptions work found it very nearly had, after seventeen new
-entries. The answer this project settled on: **generate fresh evidence instead of searching
-for old evidence.** We own the emulator and the cartridge, which means we can watch what the
-game's own code actually does to an address — who writes it, when, to what values — and
-write the description from that, exactly as measured as anything else in this atlas.
+which the first round of this work found it very nearly had, after seventeen new entries.
+The answer this project settled on: **generate fresh evidence instead of searching for old
+evidence.** We own the emulator and the cartridge, which means we can watch what the game's
+own code actually does to an address — who writes it, when, to what values — and write the
+description from that, exactly as measured as anything else in this atlas.
 
-The standard has not moved. **Watching it happen is a wider definition of evidence, not a
-looser one.** A description below is written only where the watching produced something
-specific and unambiguous; where it did not, the entry stays empty and is counted, the same
-rule [`atlas.tsv`'s own `desc` column](schema.md#desc) has always followed.
+The standard has not moved, across any round of this. **Watching it happen is a wider
+definition of evidence, not a looser one.** A description is written only where the watching
+produced something specific and unambiguous; where it did not, the entry stays empty and is
+counted, the same rule [`atlas.tsv`'s own `desc` column](schema.md#desc) has always followed.
 
 ---
 
@@ -26,126 +26,271 @@ nothing written there). Full methodology, the exact commands, and its own honest
 are in [its README](../tools/gen1-observe/README.md); this page is the results and the
 provenance convention, not a second copy of the mechanism.
 
-In short: step a real playthrough frame by frame, recording which WRAM/HRAM bytes change and
-when (cheap — the same granularity TerminalGB's own live-sweep tier uses); then, only for the
-specific frames where a description-less address moved, re-run the identical script and
-single-step **instruction by instruction**, recording the program counter and ROM bank behind
-every write. Cross-reference that `(bank, pc)` against this atlas's own named ROM routines to
-try to name the writer, when a name exists to find.
+In short: step a real playthrough frame by frame, recording which VRAM/WRAM/HRAM bytes
+change and when (cheap — the same granularity TerminalGB's own live-sweep tier uses); then,
+only for the specific frames where a target address moved, re-run the identical script and
+single-step **instruction by instruction**, recording the program counter and ROM bank
+behind every write. The script itself lives once, shared, in `tools/gen1-observe/src/lib.rs`
+— both passes replay the exact same button presses and forced states, which is what keeps a
+frame number from pass 1 meaning the same thing in pass 2.
 
-## What this round's run measured
+---
 
-One playthrough: the intro, a walk, **a wild battle forced by writing `wCurOpponent` and
-`wCurEnemyLevel` directly** — the same technique the game's own debug menu uses, and both
-addresses are already fully evidenced entries in this atlas, not a new guess — fought out by
-pressing A, then the START menu's PARTY and ITEM screens. 6,030 frames, roughly 100 seconds
-of game time, played against the same real retail cartridge and save this atlas's own
-cartridge-verification pass uses.
+## Coverage: a number, kept separate from description count
 
-Of the 505 entries with no description this playthrough could even observe changing, 481
-moved at least once. A first pass credited the wrong thing to almost everything: **307
-different addresses shared a single sole writer — a boot-time bulk memory-clear loop at bank
-1, `$1F80`** — which is a true fact about all 307 but not an *interesting* one about any single
-byte, and was excluded once recognised. After that filter, **90 entries had a write history
-specific enough to describe with real confidence**: one to three distinct writing locations,
-each with observed values and the game phase (intro / walking / a battle / a menu) they
-occurred in.
+An address nothing has ever touched is a different problem from one that has been touched
+but not yet described, and the two must not be conflated — a description backlog is normal;
+an unreachable byte might mean the wrong address, dead code, or simply a game state nobody
+has driven to yet. Measured across both rounds of runs to date (round two's playthrough plus
+round three's, below), against the 936 `VRAM`/`WRAM0`/`HRAM` entry-role addresses this tool
+can watch (the atlas's other 76 distinct addresses are `ROM0`/`ROMX`, a different, already-
+existing evidence tier — see [the note on SRAM](#what-this-tool-still-cannot-see) for the
+rest):
 
-**Every one of the 90 descriptions says what was measured, in its own text** — the writer's
-location, the phase, the values actually seen — rather than only stating a conclusion. Where
-the measured facts were genuinely ambiguous about *why* a byte behaves the way it does
-(`wIgnoreInputCounter` is a clean, single-writer, free-running counter — but whether it
-gates input the way its name suggests was not established, only that it counts), the
-description says so rather than reaching past what was measured.
+**911 of 936 touched by at least one run. 25 never touched by either.** Those 25, by name,
+so the gap is visible rather than folded into a percentage: `wChannelPitchSlideCurrentFrequencyLowBytes`,
+`hSpritePriority`, `hSavedNumToPrint`, `hUnusedCoinsByte`, `hCoins`, `hDivideBCDQuotient`,
+`hDivideBCDBuffer`, `hSerialReceivedNewData`, `hSerialIgnoringInitialData`, `hSerialSendData`,
+`hSerialReceiveData`, `hJoy6`, `hAutoBGTransferDest`, `hRedrawMapViewRowOffset`,
+`hItemToRemoveIndex`, `hOaksAideNumMonsOwned`, `hUnlockedSilphCoDoors`, `hNewPartyLength`,
+`hIsToggleableObjectOff`, `hDivisor2`, `hQuotient2`, `hSpriteVRAMSlotAndFacing`,
+`hSavedMapTextPtr`, `hSpriteMapYCoord`, `hFieldMoveMonMenuTopMenuItemX`. Most of these name
+their own gap: the serial/link bytes need an actual two-console link session; the coin bytes
+need the Game Corner; `hOaksAideNumMonsOwned` needs that specific sidequest; `hUnlockedSilphCoDoors`
+needs a late-game area nothing here has reached. None of the 25 looks like a wrong address —
+each has a specific, plausible reason nothing yet run has exercised it.
 
-**Descriptions now cover 582 of the 1,012 distinct addresses (57%)**, up from 492 (round two)
-and 475 (round one) — provenance for every description is recorded in git history by which
-round's commit added it; this page is where the *method* for the newest 90 is recorded, once,
-rather than in each entry.
+### What this tool still cannot see
 
-## Linkage: a partial result, reported honestly
+**`SRAM` (the save file, 21 distinct addresses) is not watched by either round's runs.**
+Unlike `ROM0`/`ROMX`, which is bank-switched but exposes `Gameboy::debug_rom_bank()` to say
+which bank is currently mapped, `SRAM`'s four banks have no equivalent accessor — this tool
+would see a change at, say, `$A010` without being able to say which of the four physical
+banks it belongs to, which is worse than not looking at all for an atlas whose `(region,
+bank, addr)` triple is the identifying key. Round three's script does trigger a save (see
+below), so the save routine's writes genuinely happened — they are just not attributable to
+the right bank from outside. Closing this needs a small TerminalGB addition
+(`debug_sram_bank()`, mirroring `debug_rom_bank()` exactly) — see the hand-off.
 
-The captain's ask was specific: addresses read and written together are the relationships
-this atlas should make navigable, now measurable instead of inferred. This round's run
-measured co-occurrence at two grains and one of them was genuinely useful, the other mostly
-was not:
+---
 
-**Frame-level co-occurrence — which addresses changed on the same frame — was dominated by
-things that already change every frame regardless of each other.** The RNG seed bytes
-(`hRandomAdd`/`hRandomSub`) and the free-running counter above top every list of "changes
-together," which is true and uninteresting: everything that ticks every frame co-occurs with
-everything else that does. It is not the kind of relationship a reader benefits from being
-told, so none of it was written into a description.
+## Round two (582 → this page's own history)
 
-**Instruction-level co-occurrence — two target addresses changed by the exact same
-instruction, the much stronger signal — found nothing in this run**, because none of the 505
-targeted addresses happened to be written by the same instruction as another target. That is
-plausible rather than a failure of the method: a single instruction writing two *specific,
-both-missing-a-description* bytes at once is a narrow coincidence to ask a general-purpose
-target list to hit. The fix, for a future run, is to target the search deliberately — pick
-known-adjacent pairs (two consecutive fields of one structure, already documented in
-[structures.md](../atlases/pokemon-rb/docs/structures.md)) and confirm they are written
-together, rather than hoping a broad target list happens to contain a pair that is.
+One playthrough: the intro, a walk, a wild battle forced by writing `wCurOpponent` and
+`wCurEnemyLevel` directly, fought out by pressing A, then the START menu's PARTY and ITEM
+screens. 6,030 frames. Of 505 description-less entries it could observe, 481 moved; a
+boot-time bulk memory-clear loop (bank 1, `$1F80`) turned out to be the sole writer of 307 of
+them and was recognised and excluded as uninteresting rather than credited; 90 had a write
+history specific enough to describe with real confidence. Descriptions: 492 → 582 of 1,012.
 
-**What this round's linkage contribution actually is: cross-references written directly
-into the prose of several of the 90 descriptions**, where the measured facts made the
-relationship to a sibling entry unambiguous (for instance, `wSpritePlayerStateData1YAdjusted`'s
-description names `wSpritePlayerStateData2YDisplacement` as the raw value it is derived
-from). That is real linkage, sourced from this round's own measurement, expressed in the only
-place the current schema can hold a relationship — free text in `desc` — rather than a
-structured, traversable field. The schema extension proposed in last round's hand-off (an
-optional `related` column) is still the right shape for making this systematic; it was not
-built this round, for the same reason it was not built last round: a half-backfilled column
-is a promise a reader trusts and then finds broken.
+Linkage that round: frame-level co-occurrence was mostly noise (things that already change
+every frame regardless of each other); instruction-level co-occurrence found nothing, because
+none of the 505 general-purpose targets happened to share a writing instruction with another
+target.
+
+## Round three: wider coverage, and linkage by writing routine instead of co-occurrence
+
+Two changes from round two, both requested directly: **drive more of the game**, and instead
+of asking "did two addresses change on the same instruction" (which failed last round), ask
+**"were two addresses written by the *same routine*"** — a fact this tool already measures
+(the program counter behind every write) rather than a correlation it has to go looking for.
+
+### The wider script
+
+`tools/gen1-observe/src/lib.rs`'s shared script now runs ten phases: intro → walk/menus →
+**stock the bag** (writing `wNumBagItems`/`wBagItems` directly, the same already-verified-
+address technique battle-forcing uses) → **a wild battle, probing the in-battle ITEM menu
+before fighting it out** → **a trainer battle** (class 6, JR.TRAINER♀, roster 1 — GOLDEEN
+level 19, a fact this atlas already carries from `cerulean-gym.md`, not a new guess) →
+**force the party to 1 HP and fight a much stronger wild opponent**, deliberately reaching
+the faint/black-out path rather than hoping a battle goes badly → **probe the START menu
+position by position** (`Driver::probe_menu` tries A then backs out with B at each cursor
+position in turn, rather than assuming a guessed menu order — see the tool's own README) →
+**attempt a party reorder** → **attempt a save** → walk/menus again, ending the run on
+ordinary play. 8,718 frames, roughly 145 seconds of game time, same real cartridge and save.
+
+**What it reached, honestly assessed against the captain's own list:** wild battle ✓, trainer
+battle ✓, a gym-class trainer specifically ✓ (JR.TRAINER, not a full gym leader — Misty was
+considered and left for a future run, see the hand-off), items in battle ✓ (probed, not
+confirmed used — see below), saving ✓ (the save prompt was reached and answered; whether the
+write actually completed was not separately confirmed — SRAM is not watched, see above),
+fainting and whiting out ✓, the Pokédex — passively, a wild battle marks a species seen, no
+dedicated visit. **Not reached this round:** shops and buying (no reliable navigation to a
+mart NPC without knowing this save's exact map), healing at a centre (same reason), party
+reordering and out-of-battle item use (the menu was probed but there is no proof from this
+data alone that a swap or a use actually completed, only that the relevant screens opened),
+evolution and a confirmed level-up (`wPartyMon1Exp` was forced to 5,000 before the first
+battle specifically to raise the odds; `wPartyMon1Level` and `wPartyMon1Species` did not
+change across the whole run, so this attempt did not work, and no further attempt was made to
+find out why — see the hand-off).
+
+### 46 more descriptions, the same way as round two
+
+Of the entries still missing a description going into this round, 392 had at least one
+recorded write in this playthrough. Two generic writers dominated and were excluded, the same
+way round two's boot-clear loop was: the boot-clear loop again (its address, `$1F80`, does
+not move — a physical fact about where the code lives, not a coincidence), and **a ROM0
+"copy N bytes" utility at `$00B6`**, found as the writer of 39 completely unrelated addresses
+(the health-bar animation, a base-stats lookup buffer, a map-connection offset, and a
+day-care move-learning flag, among others) once a bug in this round's own analysis script was
+fixed: `ROM0` is *always* mapped regardless of the bank register, so grouping its writers by
+`(bank, pc)` instead of by `pc` alone was accidentally splitting one shared routine into seven
+apparently-different ones by the accident of whatever bank happened to be switched in at the
+time. Once merged and recognised as generic, it was excluded the same way the boot-clear loop
+was — **do this bank-independence correction for `ROM0` in any future pass**, it is not
+specific to this round's data.
+
+After excluding both, 46 entries had a write history clean enough to describe with real
+confidence. Descriptions now: **628 of 1,012 distinct addresses (62%)**, up from 582.
+
+### Linkage, by writing routine — the captain's own suggestion, and it worked
+
+Grouping every traced address (not only the description-less ones — linkage should connect
+described and undescribed entries alike) by its writer, after excluding the two generic
+utilities above, found **31 genuine groups covering 54 distinct addresses** — a real, if
+partial, answer to "does this give the navigable structure the captain asked for." Some of
+what it found:
+
+- **Nine audio channel-state fields, one routine (bank 31, `$5AFE`)**: `wChannelCommandPointers`,
+  `wChannelSoundIDs`, `wChannelFlags1`, `wChannelDutyCycles`, `wChannelVibratoExtents`,
+  `wChannelVibratoRates`, `wChannelFrequencyLowBytes`, `wChannelVibratoDelayCounterReloadValues`,
+  `wChannelNoteSpeeds` — measured evidence for exactly the "per-channel state, set up together
+  when a channel starts a new note" story `audio.md`'s prose already tells from the naming
+  convention alone.
+- **Eight shadow-OAM backup fields, two consistently-paired slots**: `wShadowOAMSprite00`/`01`
+  and each of their X/Y/tile-id/attribute fields are written together, from several different
+  routines depending on context (battle animation, ordinary sprite placement, the backup/
+  restore pair) — the *routine* differs by context, but slots 0 and 1 are never touched
+  independently in this data, which is itself the finding.
+- **Six battle stat-stage fields, one routine (bank 15, `$4C0E`) — and it is *not*
+  `InitBattleVariables`.** `wPlayerMonStatMods`/`DefenseMod`/`SpeedMod`/`SpecialMod`/`EvasionMod`
+  already carry a description crediting `InitBattleVariables` (bank 20, `$65AF`) with writing
+  the neutral sevens at battle start — true, and confirmed again this round — but this
+  *separate* routine writes the same five bytes to the same values from a different address
+  entirely, almost certainly the equivalent reset that runs on a mid-battle switch-in rather
+  than at the battle's start. Recorded as a measured fact, not fully chased down.
+- **`wPartyFoughtCurrentEnemyFlags` and `wPartyGainExpFlags`, written as one act** (bank 3,
+  `$7692`) — the two flag arrays that between them decide the experience split are not two
+  separate updates, they are one.
+- **A stranger one, left as a question rather than a description**: `wTileMapBackup` (the
+  screen snapshot taken before a menu opens) and `wSerialEnemyMonsPatchList` (the link
+  protocol's own patch list for an incoming trade) share a writer (`$0F39`) with the
+  shadow-OAM backup pair. Plausibly one generic "copy N bytes between two buffers" utility
+  reused across three unrelated features, the same shape as the `$00B6` utility above but a
+  different, smaller one — not confirmed further, and not treated as evidence that these
+  three features are related in any way beyond sharing a low-level tool.
+
+**Four apparent instruction-level co-occurrences also turned up this round, and all four are
+artifacts, not findings.** Broadening the trace to every address (not only the description-
+less ones) meant this tool's *own* `debug_write()` setup calls — writing `wNumBagItems`,
+`wBagItems`, `wCurOpponent`, `wCurEnemyLevel`, `wTrainerNo`, `wPartyMon1Exp`, `wPartyMon1HP`
+to force a state — landed inside a traced frame and were misread as the game's own code
+writing two addresses in one instruction, because the shadow map they are compared against
+was only initialised once, before any of this tool's own writes happened. **Recognised and
+excluded, the same discipline as the boot-clear loop and the `$00B6` utility — a script's own
+setup writes must never seed a writer-group, and this is now a standing rule for this tool,
+not a one-off fix**, recorded in [`AGENTS.md`](../AGENTS.md) so it survives past this round's
+own memory of finding it.
+
+**This is not yet a schema field.** 54 addresses across 31 groups is real, measured data —
+enough to design the `related` column's backfill properly, not enough alone to justify
+rushing the schema change itself this round, for the same reason stated after round two: a
+half-implemented column is a worse outcome than an honest note here. Two of the strongest
+groups (the audio channel-state array, the two flag arrays) were folded into the relevant
+entries' own `desc` text this round, in the same free-text cross-reference style established
+last round; the rest of the 31 groups are recorded here, in full, so the next round does not
+have to re-run pass 2 to recover them — see [the raw group data](#the-31-groups-in-full)
+below.
+
+### The 31 groups, in full
+
+Format: writer location — count — symbols. `ROM0` writers are bank-independent (see above);
+banked writers name their bank. Two of these (marked ✓) already have their cross-reference
+written into the relevant entries' own `desc`; the rest are unused so far.
+
+```
+(ROM0, $36E3)  13  vNPCSprites2, vBackPic, vBGMap0, vBGMap1, wSpritePlayerStateData1PictureID,
+                   wSpritePlayerStateData1ImageIndex, wSpritePlayerStateData1YPixels,
+                   wSpritePlayerStateData1XPixels, wSpritePlayerStateData1FacingDirection,
+                   wSpritePlayerStateData1YAdjusted, wSpritePlayerStateData1XAdjusted,
+                   wSpritePlayerStateData2ImageBaseOffset, wWhichTrade
+(bank 31, $5AFE) 9  wChannelCommandPointers, wChannelSoundIDs, wChannelFlags1, wChannelDutyCycles,
+                   wChannelVibratoExtents, wChannelVibratoRates, wChannelFrequencyLowBytes,
+                   wChannelVibratoDelayCounterReloadValues, wChannelNoteSpeeds  ✓
+(ROM0, $0088)   8  wShadowOAMSprite00, wShadowOAMSprite00XCoord, wShadowOAMSprite00TileID,
+                   wShadowOAMSprite00Attributes, wShadowOAMSprite01, wShadowOAMSprite01XCoord,
+                   wShadowOAMSprite01TileID, wShadowOAMSprite01Attributes
+(bank 15, $4C0E) 6  wPlayerMonStatMods, wPlayerMonDefenseMod, wPlayerMonSpeedMod,
+                   wPlayerMonSpecialMod, wInGameTradeReceiveMonName, wPlayerMonEvasionMod  ✓
+(ROM0, $1E7E)   4  vSprites, vNPCSprites2, vFrontPic, vBackPic
+(ROM0, $0F39)   4  wTileMapBackup, wShadowOAMBackupSprite01, wShadowOAMBackupEnd,
+                   wSerialEnemyMonsPatchList
+(bank 2, $5A8A) 3  wChannelNoteDelayCounters, wChannelLoopCounters, wChannelNoteSpeeds
+(ROM0, $1CF9)   2  vBGMap0, vBGMap1
+(bank 1, $4BE5) 2  wSpritePlayerStateData1YAdjusted, wSprite01StateData1YAdjusted
+(bank 1, $4BEB) 2  wSpritePlayerStateData1XAdjusted, wSprite01StateData1XAdjusted
+(ROM0, $0097)   2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 1, $44FE) 2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 1, $4B71) 2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 1, $4BCD) 2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 15,$6CB6) 2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 30,$408E) 2  wShadowOAMSprite00, wShadowOAMSprite01
+(bank 16,$57BE) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 1, $4500) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 1, $4B79) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 15,$6CB8) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 15,$4108) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 15,$4109) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 30,$4099) 2  wShadowOAMSprite00XCoord, wShadowOAMSprite01XCoord
+(bank 1, $4B98) 2  wShadowOAMSprite00TileID, wShadowOAMSprite01TileID
+(bank 30,$409F) 2  wShadowOAMSprite00TileID, wShadowOAMSprite01TileID
+(bank 1, $4BA4) 2  wShadowOAMSprite00Attributes, wShadowOAMSprite01Attributes
+(bank 30,$40AC) 2  wShadowOAMSprite00Attributes, wShadowOAMSprite01Attributes
+(ROM0, $0F3C)   2  wShadowOAMBackupSprite00XCoord, wShadowOAMBackupSprite01XCoord
+(ROM0, $0F3F)   2  wShadowOAMBackupSprite00TileID, wShadowOAMBackupSprite01TileID
+(ROM0, $0F42)   2  wShadowOAMBackupSprite00Attributes, wShadowOAMBackupSprite01Attributes
+(bank 3, $7692) 2  wPartyFoughtCurrentEnemyFlags, wPartyGainExpFlags  ✓ (both directions)
+(ROM0, $3837)   —  excluded: wCurOpponent/wTrainerNo — this tool's own debug_write() artifact
+(ROM0, $019D)   —  excluded: wCurOpponent/wCurEnemyLevel — this tool's own debug_write() artifact
+```
 
 ## Ranked hand-off for the next round
 
-Highest value per unit of effort, first — same rule last round's hand-off in
-[verification.md](verification.md#ranked-hand-off-for-the-next-round) used, and that one is
-still current for verification specifically; this list is about widening observation.
+Highest value per unit of effort, first — same rule the verification hand-off in
+[verification.md](verification.md#ranked-hand-off-for-the-next-round) uses.
 
-1. **Richer scripts reach more of the game, and each new one is cheap to add.** This round's
-   playthrough never opened the PC, never caught anything, never used an item, and fought
-   exactly one battle with one move repeated. Every one of those is a few more lines in
-   `tools/gen1-observe/src/main.rs` and `src/bin/pass2.rs` (kept in lock-step, since pass 2
-   must replay pass 1's script exactly) — `wCurOpponent`/`wCurEnemyLevel` already proved that
-   forcing a state directly, rather than navigating to it, is both legitimate (it is the
-   game's own debug-menu technique) and cheap. A script that also opens the PC and catches a
-   wild Pokémon would very likely double or triple the 90 clean descriptions this round found,
-   since `storage` and the rest of `battle`/`party` are exactly the chapters a longer script
-   would newly reach.
-2. **Target known-adjacent pairs deliberately for linkage, instead of hoping a broad target
-   list contains one.** This round's `instr_co_occurrence` came back empty because none of
-   the 505 targeted addresses happened to be written by the same instruction as another
-   target. [`structures.md`](../atlases/pokemon-rb/docs/structures.md) already lists which
-   fields are structurally adjacent (`party_struct`, `box_struct`, `battle_struct`) — running
-   pass 2 with *those* pairs as the target list, specifically to confirm or refute that
-   adjacent fields are written together, would produce the first genuinely measured linkage
-   facts rather than another honest null result.
-3. **A disassembly checkout would let this same tool trace reads, not only writes.** The
-   ceiling this round hit is structural: `step_instruction()` plus a before/after diff can see
-   a byte change (a write) but not a byte being read, because a read leaves no trace to diff.
-   Closing that needs either a minimal opcode decoder for the handful of memory-referencing
-   Sharp LR35902 instructions (`ld a,[nn]`/`ld a,[hl]`/`ldh a,[n]` and their register-indirect
-   forms — genuinely small, a few dozen opcodes) built into `gen1-observe` itself, which needs
-   no change to TerminalGB at all, or a bus-level read hook added to TerminalGB (a real change
-   there — tell the captain and he dispatches it, per this project's standing rule). The
-   decoder is the cheaper of the two and does not require anyone's permission to build.
-4. **Extend the ROM-content-check mechanism (already ranked #1 in verification.md's own
-   hand-off) before trusting any ROM entry's `len` for a *second* purpose.** This round's own
-   near-miss — `ItemNames`' inflated `len` swallowing 74,000 spurious write attributions
-   before the 80-byte cap caught it — is exactly the failure that mechanism would prevent
-   directly: a real signature check confirms a ROM entry's *actual* extent, not the accident
-   of what the next atlas entry over happens to be.
-5. **The `related` schema field, now with a concrete backfill plan.** Item 2 above, once run,
-   produces exactly the kind of data that field was designed to hold. Land the schema change
-   and the backfill together, from real pass-2 output, rather than as two separate steps
-   where the column sits empty in between.
+1. **`debug_sram_bank()` in TerminalGB, mirroring `debug_rom_bank()` exactly.** The single
+   highest-value addition, because it closes the one region-shaped gap (21 `SRAM` addresses,
+   the save file itself) rather than another individual byte — a real TerminalGB change,
+   dispatch it to the captain rather than attempting a workaround here.
+2. **A script that reaches the PC and a mart.** Both need actual navigation (not a
+   forceable state the way a battle is), which needs knowing this save's own map — read it
+   back from `wCurMap`/`wYCoord`/`wXCoord` at the start of a run and branch the script's own
+   walk phase toward the nearest known Pokémon Center or mart for *this* save specifically,
+   rather than assuming a fixed map. `storage` and the item-price/shop-menu addresses are
+   exactly what this would newly reach.
+3. **Find out why the forced level-up did not fire, or replace the attempt with one that
+   works.** `wPartyMon1Exp` was pushed to 5,000 before a battle specifically to raise the
+   odds of crossing a level boundary, and it did not produce one. Either the wild battle's
+   exp award did not land before the run ended, or 5,000 was not close enough to a real
+   threshold — both answers are one more traced write away (watch `wPartyMon1Exp` and
+   `wPartyMon1Level` together across the battle's own end sequence) and neither has been
+   checked yet.
+4. **A full gym battle (Misty, not just a JR.TRAINER), and a losing one played to its actual
+   end** rather than a low-HP battle that may resolve in either direction. cerulean-gym.md
+   already carries her exact team, so this is a data lookup, not a new derivation.
+5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
+   from round two's hand-off — still the ceiling on what "which code reads it" can answer,
+   still buildable with no TerminalGB change.
+6. **Land the `related` schema column, backfilled from [the 31 groups above](#the-31-groups-in-full)
+   plus whatever item 2's richer run adds.** The open question from round two — does grouping
+   by writer produce real structure — is answered; what's left is the tooling work of making
+   it queryable rather than a table in a doc page.
 
 ## See also
 
 - [`tools/gen1-observe/README.md`](../tools/gen1-observe/README.md) — the tool itself, the
-  exact commands, and the `len`-column pitfall it found and worked around.
+  exact commands, and the `len`-column and ROM0-bank-independence pitfalls it found.
 - [verification.md](verification.md) — the sibling process this page is not: confirming an
   existing claim against the cartridge, rather than generating a new one.
 - [schema.md](schema.md) — the `desc` column's own contract, unchanged by this page.

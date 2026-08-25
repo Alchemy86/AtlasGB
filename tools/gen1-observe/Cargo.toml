@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 publish = false
 
+[lib]
+name = "gen1_observe"
+path = "src/lib.rs"
+
 # A standalone crate, deliberately outside TerminalGB's own workspace: this
 # project never writes to that repository, only reads and depends on its
 # published library surface. `default-features = false` pulls in

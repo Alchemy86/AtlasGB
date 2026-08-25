@@ -303,6 +303,34 @@ an unguarded range match against it credited it with writing dozens of unrelated
 a small-window cap caught it. Never use a ROM entry's `len` for anything beyond the
 completeness invariant it was built for.
 
+Two more traps the same tool found on its second round, both standing rules for anyone
+extending it, not one-off fixes:
+
+- **`ROM0` (`$0000`-`$3FFF`) is always mapped, regardless of the bank register.** Grouping its
+  writers by `(bank, pc)` instead of by `pc` alone splits one shared routine into several
+  apparently-different ones, by the accident of whatever bank happened to be switched in when
+  each write happened — a 39-address generic byte-copy utility at `$00B6` was nearly credited
+  as evidence for a dozen unrelated relationships this way. For any PC below `$4000`, group
+  and look it up by PC alone.
+- **A script's own `debug_write()` setup calls can be misattributed to whatever instruction
+  happens to run first in the next traced frame.** The tool forces states directly (a battle,
+  a stocked bag) the same way TerminalGB's own debug menu does, which is legitimate, but the
+  *detection* of that write is a diff against a shadow map taken once at the start of the run
+  — so the forced write's "before" value is stale by the time it is compared, and it can look
+  like the game's own code wrote two addresses in one instruction when really this tool wrote
+  them itself, outside any frame, well before either was ever diffed. Any address the script
+  directly `debug_write()`s must be excluded from writer-grouping and co-occurrence analysis
+  entirely, not merely have its first event distrusted.
+
+Grouping addresses by their **writing routine** — not by naive frame- or instruction-level
+co-occurrence, which mostly surfaces things that already change every frame regardless of
+each other — is what actually produced measured linkage: a sound-engine channel-init routine
+writing nine per-channel fields together, two shadow-OAM slots never touched independently
+regardless of which of several routines is doing the touching, a stat-stage reset routine
+distinct from the one an existing description already credited. See
+[`docs/observation.md`](docs/observation.md) for the full, current list — that page, not this
+one, is where new rounds' findings accumulate.
+
 ## Things that must stay true
 
 - **The seven unevidenced entries stay marked as unevidenced.** That honesty is the

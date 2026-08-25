@@ -478,44 +478,110 @@ tries to actually select and use a move.
 `POKE_SAVE` be default, the same way `main.rs` always has — a negative result from a fresh game
 is a finding about fresh games, not about the technique, the emulator, or the atlas.
 
+## Round nine: the resolved gym battle pays for itself in move-mechanic descriptions
+
+Round eight's fix (load `POKE_SAVE`, use the navigation sequence) means `investigate_gym` now
+reliably plays a real gym battle to a black-out — and that battle exercises a whole family of
+move-mechanic addresses nothing had watched yet. Rather than starting a new investigation, this
+round widened `investigate_gym`'s existing `WATCH` list to the twelve still-undescribed siblings
+of the addresses it was already tracking (`wPlayerMoveNum`/`wEnemyMoveNum` and the effect/power/
+type/accuracy/PP fields the `Moves` ROM table entry already documents as a six-byte group, plus
+`wPlayerUsedMove`, `wEnemyUsedMove`, and `wMoveDidntMiss`) and re-ran the identical, already-
+proven battle.
+
+The re-run reproduced round eight's own trace exactly (`wEnemyMonHP` `41→40→39`, `wBattleMonHP`
+`20→7→0`, black-out at frame 3,179) and this time also recorded real values for every newly-
+watched address across two different move selections on each side: `wPlayerMoveNum`
+`0→84→0→33→0`, `wEnemyMoveNum` `0→55→0→33`, with the matching effect/power/type/accuracy/PP
+quintets loading alongside each. **14 new descriptions landed** from this single trace (734 →
+748 entries described, 25.3% → 25.8%) — each one states the measured values and cites the
+`Moves` ROM table entry for the shared six-field layout, the same citation convention
+`wPlayerMonAccuracyMod`'s existing description already uses for the accuracy byte's own math.
+
+Two things this trace found and described honestly rather than smoothing over:
+
+- **`wEnemyMoveNum`/`wEnemyMoveEffect` briefly loaded a third value (`175`, effect `11`) mid-turn
+  before reverting to the move actually used (`33`) one frame before the turn resolved.** Not
+  guessed at as a second move "under consideration" — recorded as a transient scratch reload,
+  the same category of caution `investigate_gym`'s own header comment already applies to this
+  address group (`group=scratch`, not a stable holding cell).
+- **`wMoveDidntMiss` toggles once per turn (five times across the battle) and never holds `1`
+  across a turn boundary** — real, repeatable behavior, and the name plus that pattern together
+  are good evidence for "this turn's accuracy check passed" (`wMoveMissed`, described earlier,
+  is presumably its accuracy-check-*failed* counterpart) — but the trace does not pin the exact
+  instant it flips relative to the damage calculation, so the description says that plainly
+  rather than asserting a causal order this run did not actually show.
+
+**`related` was deliberately left blank for all fourteen.** Every field in a move's six-byte
+group visibly loads on the same *frame* (pass 1's own granularity), which is suggestive but is
+exactly the co-occurrence signal this project already tried and dropped as too noisy — `related`
+only wants a *measured shared writer* (a pass 2 instruction-level trace confirming the same PC),
+and this round only ran pass 1 granularity against `investigate_gym`. Backfilling `related` for
+this group is a well-scoped pass 2 follow-up, not a conclusion to draw from what this round
+actually measured.
+
+`wPlayerDisabledMoveNumber` and `wEnemyDisabledMoveNumber` were added to the watch list too and
+came back with **no evidence at all** — neither side's move was ever disabled in this fight, so
+both stay blank rather than guessed at from the name. That is the honest outcome, not a bug in
+the watch list.
+
+`make check` passes clean; `wPlayerMoveMaxPP` (previously `verify=live` with no `desc`, a gap
+the sibling `wEnemyMoveMaxPP` entry already flagged as inconsistent) is now described too.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
 [verification.md](verification.md#ranked-hand-off-for-the-next-round) uses.
 
-1. **`debug_sram_bank()` in TerminalGB, mirroring `debug_rom_bank()` exactly.** The single
-   highest-value addition, because it closes the one region-shaped gap (21 `SRAM` addresses,
-   the save file itself) rather than another individual byte — a real TerminalGB change,
-   dispatch it to the captain rather than attempting a workaround here.
-2. **A script that reaches the PC and a mart.** Both need actual navigation (not a
+1. **Pass 2 (instruction-level) tracing over `investigate_gym`'s resolved battle, to backfill
+   `related` for the move-mechanic group round nine described.** Round nine's fourteen new
+   descriptions were pass-1 (frame) granularity only, and deliberately left `related` blank for
+   exactly the reason this project already learned once — frame co-occurrence is not a measured
+   shared writer. The battle itself is now proven reliable and reproducible (see round eight),
+   so pointing pass 2's own `step_instruction` tracing at the same forced battle, targeted at the
+   twelve `wPlayerMove*`/`wEnemyMove*` addresses, is a well-scoped follow-up that could confirm
+   (or refute) the "one load routine, six fields" structure the descriptions already suggest —
+   and unlike round nine's own trace, this one would earn a `related` entry rather than an
+   inference.
+2. **`debug_sram_bank()` in TerminalGB, mirroring `debug_rom_bank()` exactly.** The single
+   highest-value structural addition, because it closes the one region-shaped gap (21 `SRAM`
+   addresses, the save file itself) rather than another individual byte — a real TerminalGB
+   change, dispatch it to the captain rather than attempting a workaround here.
+3. **A script that reaches the PC and a mart.** Both need actual navigation (not a
    forceable state the way a battle is), which needs knowing this save's own map — read it
    back from `wCurMap`/`wYCoord`/`wXCoord` at the start of a run and branch the script's own
    walk phase toward the nearest known Pokémon Center or mart for *this* save specifically,
    rather than assuming a fixed map. `storage` and the item-price/shop-menu addresses are
-   exactly what this would newly reach.
-3. **~~Find out why the forced level-up did not fire~~ — partially answered this round: see
-   [above](#round-four-why-the-forced-level-up-never-fired--a-partial-answer).** `wIsInBattle`
-   never left `0` during the wild-battle phase, so no battle completed and there was no
-   experience award for the forced 5,000 to combine with. What is still open: whether the
-   battle never started at all, or started and ended inside one frame — that needs pass 2's
-   instruction-level tracing pointed at `wIsInBattle` specifically across this window, a small,
-   well-scoped follow-up rather than a re-run of everything.
-4. **A full gym battle, played to a loss — two navigation attempts have now failed cleanly;
-   the next step is instruction-level tracing, not a third input pattern.** See
-   [round seven](#round-seven-two-navigation-attempts-at-the-stuck-battle-both-a-clean-negative).
-   The battle reliably *starts* and loads real, independently-documented data (`wTrainerClass`
-   `35`, `wEnemyMonHP` `41` matching STARYU's own level-18 HP), but both a blind A-mash and a
-   targeted `B, Up, A, A` sequence leave every watched address frozen afterward, including a
-   poll counter that should tick on every menu-active frame. Point pass 2's own
-   `step_instruction` tracing at this exact window before trying a fourth button pattern —
-   this needs to see *what the CPU is doing*, not another guess at what to press.
-5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
+   exactly what this would newly reach — directly answers the captain's "shops" gap, and a
+   Pokémon Center's PC menu on the way there would reach `wPartyAndBillsPCSavedMenuItem` and
+   the box-storage symbols (`sBox2`-`sBox6`, `wBoxMon2`-`wBoxMon20` and their fields) for free.
+4. **~~A full gym battle, played to a loss~~ — done, see [round eight](#round-eight-the-gym-battle-resolves--the-missing-piece-was-a-real-save).**
+   Loading the real save and using the `B, Up, A, A` navigation sequence together (not either
+   alone) produces a complete battle ending in a genuine black-out, reproduced again this round
+   while widening the watch list.
+5. **Evolution, the Pokédex, and HMs — three more of the captain's named gaps, all forceable the
+   same way a battle already is.** `wEvolutionOccurred`/`wForceEvolution` and `wPokedexNum`/
+   `wDexMaxSeenMon`/`wDexRatingNumMonsSeen` are plain `debug_write` targets the same way
+   `wCurOpponent`/`wPartyMon1HP` already are for a forced battle — no navigation needed, just a
+   state to force and a script to watch it resolve. HMs (`wFieldMoves`, `wNumFieldMoves`,
+   `wFieldMovesLeftmostXCoord`) likely need the party to actually know one first, which the
+   existing forced-battle party already might, worth checking before assuming a new setup step.
+6. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
    still buildable with no TerminalGB change. Round five's manual byte-reading to classify
    the two held-back groups, and round seven's diagnosis of the stuck battle, are both hints
    this is tractable in small doses without a full decoder — a real one would make both
-   repeatable instead of by-hand each time, and directly unblocks item 4.
-6. **~~Examine the two held-back groups~~ — done this round: see
+   repeatable instead of by-hand each time.
+7. **~~Find out why the forced level-up did not fire~~ — answered as far as this trace shows:
+   see [above](#round-four-why-the-forced-level-up-never-fired--a-partial-answer) and
+   [round eight](#round-eight-the-gym-battle-resolves--the-missing-piece-was-a-real-save).**
+   `wIsInBattle` never left `0` during the wild-battle phase even with the save loaded — blind
+   A-mashing reliably *starts* a forced battle (trainer or wild) but has not been shown to
+   *finish* one within the budgets tried, gym battle now being the one exception once real
+   navigation replaced the mash. Instruction-level tracing of this specific phase is still the
+   well-scoped next step if this is worth reopening, but item 1 above is higher-value pass-2
+   work right now.
+8. **~~Examine the two held-back groups~~ — done this round: see
    [above](#round-five-the-two-held-back-groups-are-generic-too).** Both are generic
    utilities (a fill loop, a stack-pop bulk transfer), not purpose-built routines, and stay
    out of `related`. All 31 groups from round three are now accounted for: 6 backed `related`,

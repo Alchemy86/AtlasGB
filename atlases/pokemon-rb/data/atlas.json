@@ -17324,7 +17324,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The move ID actually executed this turn, set later than wPlayerMoveNum (which loads as soon as a move is selected in the menu, well before the turn resolves). Measured in the same gym battle: set to 33 partway through the turn that first damaged STARYU, roughly 375 frames after wPlayerMoveNum had already loaded 33 for that same turn.",
    "related": [],
    "addr_int": 52465
   },
@@ -17341,7 +17341,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Same role as wPlayerUsedMove, for the opponent's move. Measured in the same gym battle: set to the opponent's move ID during each turn's resolution (55, then later 33) and reset to 0 before the next turn's menu opens -- unlike wEnemyMoveNum, which reloads straight to the new move rather than resetting to 0 first.",
    "related": [],
    "addr_int": 52466
   },
@@ -17375,7 +17375,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A flag that toggles 0 to 1 and back to 0 within each battle turn -- five times total across this gym battle, one per completed turn, never holding 1 across a turn boundary. The per-turn toggle and the name both point at \"this turn's accuracy check passed\" (compare wMoveMissed, the confirmed accuracy-check-failed flag elsewhere in this atlas), but this trace does not pin down the exact instant it flips relative to the turn's damage calculation.",
    "related": [],
    "addr_int": 52468
   },
@@ -22613,7 +22613,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Mirrors wPlayerMoveNum for the opponent's currently-loaded move. Measured in the same gym battle: values seen: [55, 33, 0], plus one transient reload to 175 mid-turn (frame 1614) that reverted to 33 before the turn resolved (frame 1834) -- a scratch reuse, not a second move actually being considered that turn.",
    "related": [],
    "addr_int": 53196
   },
@@ -22630,7 +22630,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The effect ID from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [0, 11] -- the 11 is the same transient mid-turn reload wEnemyMoveNum recorded, reverting to 0 once the turn resolved.",
    "related": [],
    "addr_int": 53197
   },
@@ -22647,7 +22647,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The base power from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [40, 35].",
    "related": [],
    "addr_int": 53198
   },
@@ -22664,7 +22664,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The type ID from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [21, 0].",
    "related": [],
    "addr_int": 53199
   },
@@ -22681,7 +22681,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The accuracy byte from the same table row as wEnemyMoveNum (see wPlayerMoveAccuracy for the scaling note). Measured in the same gym battle: values seen: [255, 242].",
    "related": [],
    "addr_int": 53200
   },
@@ -22712,7 +22712,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The move ID loaded into the player's move-data scratch group (effect, power, type, accuracy and PP follow in the next five bytes -- the same six-field order as the `Moves` ROM table). Measured across a real gym battle against Misty, played to a black-out, covering both of the player's party members: loads on each move selection and resets to 0 before the next turn's menu; values seen: [84, 33, 0].",
    "related": [],
    "addr_int": 53202
   },
@@ -22729,7 +22729,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The effect ID from the same `Moves` table row wPlayerMoveNum was just loaded from. Measured in the same gym battle: values seen: [6, 0].",
    "related": [],
    "addr_int": 53203
   },
@@ -22746,7 +22746,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The base power from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [40, 35, 0].",
    "related": [],
    "addr_int": 53204
   },
@@ -22763,7 +22763,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The type ID from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [23, 0].",
    "related": [],
    "addr_int": 53205
   },
@@ -22780,7 +22780,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The accuracy byte from the same `Moves` table row as wPlayerMoveNum, out of 255, before wPlayerMonAccuracyMod's own stage scaling is applied (see that entry). Measured in the same gym battle: values seen: [255, 242, 0].",
    "related": [],
    "addr_int": 53206
   },
@@ -22796,7 +22796,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The max PP from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [30, 35, 0].",
    "related": [],
    "addr_int": 53207
   },

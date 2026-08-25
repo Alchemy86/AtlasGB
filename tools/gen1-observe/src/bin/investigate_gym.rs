@@ -35,6 +35,29 @@ const WATCH: &[(u16, &str)] = &[
     (0xCC34, "wMenuJoypadPollCount"),
     (0xCD6B, "wJoyIgnore"),
     (0xD125, "wTextBoxID"),
+    // Round nine: hand-off item 4 is answered (a real gym battle plays to a
+    // black-out) -- these are the move-mechanic addresses that same real
+    // battle exercises but nothing has watched yet: which move each side
+    // picked, its stats as loaded from the move data table, whether it
+    // missed, and PP. wPlayerMoveListIndex/wEnemyMoveListIndex are already
+    // described; these are their still-undescribed siblings.
+    (0xCCEE, "wPlayerDisabledMoveNumber"),
+    (0xCCEF, "wEnemyDisabledMoveNumber"),
+    (0xCCF1, "wPlayerUsedMove"),
+    (0xCCF2, "wEnemyUsedMove"),
+    (0xCCF4, "wMoveDidntMiss"),
+    (0xCFCC, "wEnemyMoveNum"),
+    (0xCFCD, "wEnemyMoveEffect"),
+    (0xCFCE, "wEnemyMovePower"),
+    (0xCFCF, "wEnemyMoveType"),
+    (0xCFD0, "wEnemyMoveAccuracy"),
+    (0xCFD1, "wEnemyMoveMaxPP"),
+    (0xCFD2, "wPlayerMoveNum"),
+    (0xCFD3, "wPlayerMoveEffect"),
+    (0xCFD4, "wPlayerMovePower"),
+    (0xCFD5, "wPlayerMoveType"),
+    (0xCFD6, "wPlayerMoveAccuracy"),
+    (0xCFD7, "wPlayerMoveMaxPP"),
 ];
 
 fn main() {

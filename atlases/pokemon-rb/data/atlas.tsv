@@ -1041,10 +1041,10 @@ WRAM0	-	$CCED	1	wMonIsDisobedient	entry	WRAM	battle	rom,live	Set when a traded P
 WRAM0	-	$CCEE	1	wPlayerDisabledMoveNumber	entry	WRAM	battle	rom,live		
 WRAM0	-	$CCEF	1	wEnemyDisabledMoveNumber	entry	WRAM	battle	rom,live		
 WRAM0	-	$CCF0	1	wInHandlePlayerMonFainted	entry	WRAM	battle	rom,live		
-WRAM0	-	$CCF1	1	wPlayerUsedMove	entry	WRAM	battle	rom,live		
-WRAM0	-	$CCF2	1	wEnemyUsedMove	entry	WRAM	battle	rom,live		
+WRAM0	-	$CCF1	1	wPlayerUsedMove	entry	WRAM	battle	rom,live	The move ID actually executed this turn, set later than wPlayerMoveNum (which loads as soon as a move is selected in the menu, well before the turn resolves). Measured in the same gym battle: set to 33 partway through the turn that first damaged STARYU, roughly 375 frames after wPlayerMoveNum had already loaded 33 for that same turn.	
+WRAM0	-	$CCF2	1	wEnemyUsedMove	entry	WRAM	battle	rom,live	Same role as wPlayerUsedMove, for the opponent's move. Measured in the same gym battle: set to the opponent's move ID during each turn's resolution (55, then later 33) and reset to 0 before the next turn's menu opens -- unlike wEnemyMoveNum, which reloads straight to the new move rather than resetting to 0 first.	
 WRAM0	-	$CCF3	1	wEnemyMonMinimized	entry	WRAM	battle	rom,live	The same for the opponent.	
-WRAM0	-	$CCF4	1	wMoveDidntMiss	entry	WRAM	battle	rom,live		
+WRAM0	-	$CCF4	1	wMoveDidntMiss	entry	WRAM	battle	rom,live	A flag that toggles 0 to 1 and back to 0 within each battle turn -- five times total across this gym battle, one per completed turn, never holding 1 across a turn boundary. The per-turn toggle and the name both point at "this turn's accuracy check passed" (compare wMoveMissed, the confirmed accuracy-check-failed flag elsewhere in this atlas), but this trace does not pin down the exact instant it flips relative to the turn's damage calculation.	
 WRAM0	-	$CCF5	1	wPartyFoughtCurrentEnemyFlags	entry	WRAM	party	rom,live	One bit per party slot, set for anyone who faced the current opponent. Used to decide the experience split. Measured: written together with `wPartyGainExpFlags` from the same instruction context (bank 3 `$7692`) — the two flag arrays are set as one act, not two.	wPartyGainExpFlags
 WRAM0	-	$CCF6	1	wLowHealthAlarmDisabled	entry	WRAM	battle	rom,live		
 WRAM0	-	$CCF7	14	wPlayerMonMinimized	entry	WRAM	battle	rom,live	Set once your active Pokemon has used MINIMIZE. **Cosmetic in Generation 1**: it only changes how the sprite is drawn. Nothing doubles a stomping move's damage against it until a later generation.	
@@ -1351,18 +1351,18 @@ WRAM0	-	$CFC8	1	wAudioFadeOutCounterReloadValue	entry	WRAM	audio	rom,live	The st
 WRAM0	-	$CFC9	1	wAudioFadeOutCounter	entry	WRAM	audio	rom,live	Frames left in the current audio fade-out. Measured across a real playthrough (walk, a wild battle, a trainer battle, a forced faint, menus, a save): written from bank 1 `$28E3` and bank 1 `$28EA`, during bag-setup, intro, walk/menus, wild-battle; 11 distinct values, 0-10.	
 WRAM0	-	$CFCA	1	wLastMusicSoundID	entry	WRAM	audio	rom,live	What was playing before a sound effect took over, so it can be restored.	
 WRAM0	-	$CFCB	1	wUpdateSpritesEnabled	entry	WRAM	system	rom,live	Whether the engine redraws sprites this frame. Cleared around anything that writes video RAM by hand.	
-WRAM0	-	$CFCC	1	wEnemyMoveNum	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFCD	1	wEnemyMoveEffect	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFCE	1	wEnemyMovePower	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFCF	1	wEnemyMoveType	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD0	1	wEnemyMoveAccuracy	entry	WRAM	scratch	rom,live		
+WRAM0	-	$CFCC	1	wEnemyMoveNum	entry	WRAM	scratch	rom,live	Mirrors wPlayerMoveNum for the opponent's currently-loaded move. Measured in the same gym battle: values seen: [55, 33, 0], plus one transient reload to 175 mid-turn (frame 1614) that reverted to 33 before the turn resolved (frame 1834) -- a scratch reuse, not a second move actually being considered that turn.	
+WRAM0	-	$CFCD	1	wEnemyMoveEffect	entry	WRAM	scratch	rom,live	The effect ID from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [0, 11] -- the 11 is the same transient mid-turn reload wEnemyMoveNum recorded, reverting to 0 once the turn resolved.	
+WRAM0	-	$CFCE	1	wEnemyMovePower	entry	WRAM	scratch	rom,live	The base power from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [40, 35].	
+WRAM0	-	$CFCF	1	wEnemyMoveType	entry	WRAM	scratch	rom,live	The type ID from the same table row as wEnemyMoveNum. Measured in the same gym battle: values seen: [21, 0].	
+WRAM0	-	$CFD0	1	wEnemyMoveAccuracy	entry	WRAM	scratch	rom,live	The accuracy byte from the same table row as wEnemyMoveNum (see wPlayerMoveAccuracy for the scaling note). Measured in the same gym battle: values seen: [255, 242].	
 WRAM0	-	$CFD1	1	wEnemyMoveMaxPP	entry	WRAM	scratch		The maximum PP of the move the opponent just selected, read from the move data table before the battle menu shows it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle; values seen: [25, 30].	
-WRAM0	-	$CFD2	1	wPlayerMoveNum	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD3	1	wPlayerMoveEffect	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD4	1	wPlayerMovePower	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD5	1	wPlayerMoveType	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD6	1	wPlayerMoveAccuracy	entry	WRAM	scratch	rom,live		
-WRAM0	-	$CFD7	1	wPlayerMoveMaxPP	entry	WRAM	scratch	live		
+WRAM0	-	$CFD2	1	wPlayerMoveNum	entry	WRAM	scratch	rom,live	The move ID loaded into the player's move-data scratch group (effect, power, type, accuracy and PP follow in the next five bytes -- the same six-field order as the `Moves` ROM table). Measured across a real gym battle against Misty, played to a black-out, covering both of the player's party members: loads on each move selection and resets to 0 before the next turn's menu; values seen: [84, 33, 0].	
+WRAM0	-	$CFD3	1	wPlayerMoveEffect	entry	WRAM	scratch	rom,live	The effect ID from the same `Moves` table row wPlayerMoveNum was just loaded from. Measured in the same gym battle: values seen: [6, 0].	
+WRAM0	-	$CFD4	1	wPlayerMovePower	entry	WRAM	scratch	rom,live	The base power from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [40, 35, 0].	
+WRAM0	-	$CFD5	1	wPlayerMoveType	entry	WRAM	scratch	rom,live	The type ID from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [23, 0].	
+WRAM0	-	$CFD6	1	wPlayerMoveAccuracy	entry	WRAM	scratch	rom,live	The accuracy byte from the same `Moves` table row as wPlayerMoveNum, out of 255, before wPlayerMonAccuracyMod's own stage scaling is applied (see that entry). Measured in the same gym battle: values seen: [255, 242, 0].	
+WRAM0	-	$CFD7	1	wPlayerMoveMaxPP	entry	WRAM	scratch	live	The max PP from the same `Moves` table row as wPlayerMoveNum. Measured in the same gym battle: values seen: [30, 35, 0].	
 WRAM0	-	$CFD8	1	wEnemyMonSpecies2	entry	WRAM	battle	rom,live	The species the battle initialiser branches on, written before `wEnemyMon` is filled.	
 WRAM0	-	$CFD9	1	wBattleMonSpecies2	entry	WRAM	battle	rom,live	Your active Pokemon's species, kept outside the structure.	
 WRAM0	-	$CFDA	11	wEnemyMonNick	entry	WRAM	battle	rom,live	The nickname shown above the opponent.	

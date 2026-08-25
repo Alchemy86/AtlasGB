@@ -392,6 +392,41 @@ trainer battle in this script but has not been shown to reliably finish one**, g
 plain trainer alike, within the budgets tried so far. Worth knowing before the next round
 assumes a battle "worked" from `wIsInBattle` alone.
 
+## Round seven: two navigation attempts at the stuck battle, both a clean negative
+
+Picked the well-scoped next step straight off round six's own hand-off — try `probe_menu`-style
+cursor cycling instead of another blind mash — and widened `investigate_gym`'s watch list first
+(`wEnemyMonHP`, `wBattleMonHP`, `wCurrentMenuItem`, `wMenuJoypadPollCount`, `wJoyIgnore`,
+`wTextBoxID`) so a second attempt would have more than `wIsInBattle` to read.
+
+**The wider watch list confirmed the battle really is well-formed, not garbage from a bad
+forced write**: `wEnemyMonHP` settles at 41 — exactly STARYU's level-18 HP in
+[cerulean-gym.md](../atlases/pokemon-rb/docs/cerulean-gym.md#mistys-team), independently
+documented there from the cartridge's own trainer data, not from this run. The forced battle
+is a real, correctly-loaded Misty fight.
+
+**Neither a plain A-mash nor a targeted `B, Up, A, A` sequence (back out, move toward FIGHT,
+select it, select the first move) moved anything further.** Both runs land on the exact same
+frozen picture: `wCurrentMenuItem` fixed at `1` for the rest of the run, `wJoyIgnore` reading
+`0` (the game is not refusing the input), and — notably — `wMenuJoypadPollCount` never changing
+even once across either entire run, stuck period or not, which rules out the tidy theory this
+round started with ("frozen poll counter proves the game left its normal menu loop") since it
+never counts in the phases that work either. **This is now a second honest negative, the same
+kind round three's linkage-by-co-occurrence attempt was**: two different, reasoned navigation
+strategies, checked with real diagnostic data, both came back empty, and the honest report is
+that the actual blocker is not identified rather than a third guess dressed as a fix.
+
+**What is ruled out, and what is not.** Not an audio-related stub in the "embedding build":
+TerminalGB's own `docs/audio.md` states the APU itself always runs regardless of build
+features, only speaker output is gated, so a game routine polling APU status would see the
+same thing a full build would. Not yet ruled out: a genuine game-logic wait this environment
+cannot satisfy for some other reason, or an input-timing requirement finer than whole-frame
+`held`/`gap` presses can express. Telling those apart needs the instruction-level tracing
+(`begin_frame`/`step_instruction`/`check_and_reset_gpu_updated`) pass 2 already uses, pointed
+at this exact stuck window, to see whether the CPU is genuinely looping in place or the PPU is
+still drawing new frames nobody is reading the right addresses for — not a fourth input pattern
+guessed at without new instrumentation.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
@@ -414,18 +449,21 @@ Highest value per unit of effort, first — same rule the verification hand-off 
    battle never started at all, or started and ended inside one frame — that needs pass 2's
    instruction-level tracing pointed at `wIsInBattle` specifically across this window, a small,
    well-scoped follow-up rather than a re-run of everything.
-4. **~~A full gym battle, played to a loss~~ — half-answered this round: see
-   [above](#round-six-a-real-gym-battle-starts--checked-not-assumed--but-does-not-finish).**
-   The battle reliably *starts* (confirmed, not assumed — `wTrainerClass` loads to `35` and
-   `wIsInBattle` reaches `2`) once forced in a settled overworld state, the same state phase
-   5's own trainer forcing needs. What is still open: getting it to actually *play*, past
-   whatever screen a blind A-mash does not move it off of — try `probe_menu`-style cursor
-   cycling instead of another longer mash before anything else.
+4. **A full gym battle, played to a loss — two navigation attempts have now failed cleanly;
+   the next step is instruction-level tracing, not a third input pattern.** See
+   [round seven](#round-seven-two-navigation-attempts-at-the-stuck-battle-both-a-clean-negative).
+   The battle reliably *starts* and loads real, independently-documented data (`wTrainerClass`
+   `35`, `wEnemyMonHP` `41` matching STARYU's own level-18 HP), but both a blind A-mash and a
+   targeted `B, Up, A, A` sequence leave every watched address frozen afterward, including a
+   poll counter that should tick on every menu-active frame. Point pass 2's own
+   `step_instruction` tracing at this exact window before trying a fourth button pattern —
+   this needs to see *what the CPU is doing*, not another guess at what to press.
 5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
    still buildable with no TerminalGB change. Round five's manual byte-reading to classify
-   the two held-back groups is a hint this is tractable in small doses without a full
-   decoder — a real one would make that repeatable instead of by-hand each time.
+   the two held-back groups, and round seven's diagnosis of the stuck battle, are both hints
+   this is tractable in small doses without a full decoder — a real one would make both
+   repeatable instead of by-hand each time, and directly unblocks item 4.
 6. **~~Examine the two held-back groups~~ — done this round: see
    [above](#round-five-the-two-held-back-groups-are-generic-too).** Both are generic
    utilities (a fill loop, a stack-pop bulk transfer), not purpose-built routines, and stay

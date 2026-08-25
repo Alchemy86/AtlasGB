@@ -27,6 +27,14 @@ const WATCH: &[(u16, &str)] = &[
     (0xD16C, "wPartyMon1HP.hi"),
     (0xD16D, "wPartyMon1HP.lo"),
     (0xD356, "wObtainedBadges"),
+    (0xCFE6, "wEnemyMonHP.hi"),
+    (0xCFE7, "wEnemyMonHP.lo"),
+    (0xD015, "wBattleMonHP.hi"),
+    (0xD016, "wBattleMonHP.lo"),
+    (0xCC26, "wCurrentMenuItem"),
+    (0xCC34, "wMenuJoypadPollCount"),
+    (0xCD6B, "wJoyIgnore"),
+    (0xD125, "wTextBoxID"),
 ];
 
 fn main() {
@@ -88,15 +96,28 @@ fn main() {
     for _ in 0..30u32 {
         poll(&mut gb, &mut frame);
     }
-    for _ in 0..400u32 {
-        gb.keydown(KeypadKey::A);
-        for _ in 0..8 {
-            poll(&mut gb, &mut frame);
+    // `wCurrentMenuItem` sat at 1 for the whole rest of a pure A-mash run
+    // (round six's first attempt) — plausibly PKMN, not FIGHT, on the main
+    // battle menu's 4 items, if a pure-A mash never actually moves the
+    // cursor off wherever the battle's own setup leaves it. Try explicitly:
+    // B (back out of whatever is open), UP (toward FIGHT), A (pick it), A
+    // (pick the first move, `MoveSelectionMenu`'s own "+1" indexing) —
+    // rather than another longer blind mash of the same single button.
+    let mut press = |gb: &mut Gameboy, key: KeypadKey, held: u32, gap: u32, frame: &mut u32| {
+        gb.keydown(key);
+        for _ in 0..held {
+            poll(gb, frame);
         }
-        gb.keyup(KeypadKey::A);
-        for _ in 0..16 {
-            poll(&mut gb, &mut frame);
+        gb.keyup(key);
+        for _ in 0..gap {
+            poll(gb, frame);
         }
+    };
+    for _ in 0..200u32 {
+        press(&mut gb, KeypadKey::B, 6, 16, &mut frame);
+        press(&mut gb, KeypadKey::Up, 6, 16, &mut frame);
+        press(&mut gb, KeypadKey::A, 6, 16, &mut frame);
+        press(&mut gb, KeypadKey::A, 6, 16, &mut frame);
     }
     eprintln!("done at frame {frame}");
 }

@@ -2,15 +2,25 @@
 
 [← Pokémon Red/Blue](../README.md) · [by address](by-address.md) · [by name](by-name.md) · [the structures](structures.md) · [AtlasGB](../../../README.md)
 
-`wTileMap` is 20×18 tile ids: the screen. And it can be read back as **text**.
+`wTileMap` (`$C3A0`, 20×18 tile ids) is the screen. And it can be read back as **text** — not
+"can be OCR'd": the bytes *are* the characters.
 
-Gen 1 loads its font so that a tile id *is* the character code of the glyph it draws, and
-`PlaceString` writes character codes straight into this buffer. So decoding `wTileMap` with the
-Gen 1 character map prints exactly what a player can see — menu items, dialogue, a Pokémon's
-name, a trainer's assertion table. That single property is what lets a headless test navigate
-menus by *reading the screen* instead of counting frames, which is robust against animation
-length and emulation speed in a way a button script never is. It has [its own
-page](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/reading-the-screen.md).
+Two facts about the same design decision make that true. Gen 1's charmap (`charmap.asm`) loads
+the font so that **a tile id equals the character code of the glyph it draws**: `A`–`Z` at
+`$80`–`$99`, `a`–`z` at `$A0`–`$B9`, `0`–`9` at `$F6`–`$FF`, space at `$7F`, the terminator at
+`$50`. And `PlaceString` writes those character codes straight into `wTileMap`; the PPU's
+ordinary background pipeline then turns each byte into the glyph with that tile id. There is no
+separate "text layer" to decode against — the tilemap *is* the text buffer, and reading it back
+with the charmap prints exactly what a player can see: menu items, dialogue, a Pokémon's name, a
+trainer's assertion table. That single property is what lets a headless test navigate menus by
+*reading the screen* instead of counting frames, which is robust against animation length and
+emulation speed in a way a button script never is.
+
+A handful of tiles decode to more than one character, because the game packs common words into
+single tiles: `$4A` is `PKMN`, `$54` is `POKé`, `$5D` is `TRAINER`, `$BD` is `'s`. A decoder has
+to expand these — which means **a decoded screen is not a fixed-length string**: 360 tiles do
+not produce 360 characters, so slicing by byte index panics on a multi-character tile, or gives
+the wrong column even when it doesn't. Decode row by row if the row boundary matters.
 
 Two consequences worth carrying:
 
@@ -22,17 +32,30 @@ Two consequences worth carrying:
   A decoder that assumes one mapping everywhere is confidently wrong on the screens it was not
   tested against.
 
+Two more traps sit beside these. **Gen 1 draws the whole screen through the WINDOW layer, not
+the background map** — `LCDC` bit 5 is on with `WY = 0`, `WX = 7` — so it is `wTileMap` in WRAM,
+the game's own buffer, that holds the screen; the BG tilemap at `$9800` reads back as 20×18
+spaces, and every menu looks empty there. And because `wTileMap` pads every row to twenty
+columns and a message can wrap across rows, matching a phrase against the decoded screen means
+collapsing runs of whitespace to one space first — comparing raw text against a needle like
+`used FLAMETHROWER` fails on the padding that splits it.
+
 The menu machinery beside it is a small state machine — top item, current item, maximum item,
 which buttons are watched, whether the cursor wraps — and it is worth knowing that
 `HandleMenuInput` delays several frames after accepting a press and does not see a button that
 arrives inside that delay. That looks exactly like dropped input and is not.
 
+TerminalGB uses this same property to script menus by reading text instead of counting frames,
+and to debug Mooneye/Blargg hardware-conformance test ROMs by decoding their assertion tables off
+the screen — see [its own
+page](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/reading-the-screen.md).
+
 ### Findings behind these bytes
 
 | the finding | the bytes it is about |
 |---|---|
-| [the battle move menu cursor is 1-based](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-battle-move-menu-cursor-is-1-based) | [`wCurrentMenuItem`](#s-wCurrentMenuItem), [`wPlayerMoveListIndex`](scratch.md#s-wPlayerMoveListIndex) |
-| [the Oak's Lab soft-lock](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-oaks-lab-soft-lock) | [`wTileMap`](#s-wTileMap) |
+| [the battle move menu cursor is 1-based](discoveries.md#the-battle-move-menu-cursor-is-1-based) | [`wCurrentMenuItem`](#s-wCurrentMenuItem), [`wPlayerMoveListIndex`](scratch.md#s-wPlayerMoveListIndex) |
+| [the Oak's Lab soft-lock](discoveries.md#the-oaks-lab-soft-lock) | [`wTileMap`](#s-wTileMap) |
 
 The first of those is the kind that never announces itself: `MoveSelectionMenu` seeds
 `wCurrentMenuItem` with the move index **plus one**, so a driver that aims at slot 0 finds the

@@ -91,10 +91,12 @@ collide on one anchor, so `tools/validate.py` fails if one ever appears.
 
 **`by-name.md` carries `#s-<symbol>` too, and that is not redundant.** An outside project
 linking into an index by name will guess the index page, because an index is the page you can
-guess — TerminalGB's discovery record links fourteen symbols to `by-name.md#s-<symbol>`, and
-until those anchors existed every one of them silently landed at the top of the page. A
-fragment that resolves nowhere fails quietly; nothing in either repository could have caught
-it. The same rule is why `name_index_block` links **aliases** to their `#s-` fragment as well:
+guess — this atlas's own [`discoveries.md`](atlases/pokemon-rb/docs/discoveries.md) links
+sixteen symbols to `by-name.md#s-<symbol>` for exactly that reason. Before that page moved here
+from TerminalGB, every one of those links pointed in from outside the repository, and until the
+anchors existed each one silently landed at the top of the page. A fragment that resolves
+nowhere fails quietly; nothing could have caught it from either side. The same rule is why
+`name_index_block` links **aliases** to their `#s-` fragment as well:
 they have carried anchors on the chapter pages for as long as they have been listed, and
 sending `wPartyMons` to the top of a 105-row page is a worse answer than the row it asked for.
 
@@ -112,15 +114,55 @@ The reasoning behind a finding does **not** go in the cell. `desc` is exported v
 `atlas.json`, vendored into other repositories and read by tools that never asked for a
 hyperlink, so a URL there ages badly in places nobody is looking. The fact goes on the entry;
 the story goes in the chapter page's prose, in a `### Findings behind these bytes` table
-linking to `docs/gen1/discoveries.md#<slug>` in TerminalGB. Those slugs are a published
-contract at the other end — read the page for them, never invent one — and `make check` only
-resolves external links under `make links`, so a rotted one will not turn CI red.
+linking to `atlases/pokemon-rb/docs/discoveries.md#<slug>`. Those slugs are this atlas's own
+published contract — read the page for them, never invent one. The page used to live in
+TerminalGB, and while it did, `make check` only resolved that link as external and could not
+catch a rotted fragment; now that it lives here, `tools/checklinks.py` resolves the fragment on
+every push and a rotted one turns CI red.
 
 `tools/render.py` folds `instance` rows onto slot 1, **except where the row has a description**.
 `wPlayerBattleStatus1`..`3` are consecutive one-byte symbols and so read as a repeated
 structure to the extractor, but they hold different bits; a written description is the signal
 that a slot means something of its own, and folding it away would hide the thing that was
 written down.
+
+### Game-data content lives here, not in TerminalGB
+
+AtlasGB documents and discovers game data; TerminalGB documents its own emulator. Before the
+migration recorded here, that line was blurry: `atlases/pokemon-rb/docs/discoveries.md` — the
+reasoning behind two dozen of this atlas's findings — lived in TerminalGB's repository and every
+chapter page linked out to it. It now lives here, as a hand-written page with no `atlas.tsv`
+behind it (`tools/render.py` never touches it; its headings are load-bearing anchors other
+projects and this atlas's own chapter pages link into by slug, so **never reword or remove one**
+— add new entries, correct a wrong one in place, exactly as the page's own top section says).
+
+**One entry did not move.** "A cartridge can tell there is no sound chip" was about TerminalGB's
+own emulator leaving its APU uninitialised, not about the cartridge, and stayed in TerminalGB —
+proof that a page can move almost whole and still leave behind the one entry that was never
+about the game.
+
+Several other TerminalGB pages (`battle-engine.md`, `battling.md`, `paper-claims.md`,
+`catching.md`, `catch-and-train.md`, `learning-moves.md`, `level-up-drill.md`,
+`cerulean-gym.md`, `sharp-edges.md`, `link-from-outside.md`, `leaving-the-cable-club.md`,
+`reading-the-screen.md`) are **mixed** — genuine cartridge facts folded into TerminalGB's own
+engine, harness, drill-tooling or plugin-implementation prose. Rather than move those pages
+whole (which would have carried emulator-implementation detail into an atlas that has no
+business describing it), the cartridge facts were extracted and written directly into the
+relevant chapter page's own prose (`battle.md`, `party.md`, `bag.md`, `events.md`, `screen.md`,
+`link.md`), cited the same way every other fact here is: by `pret/pokered` routine or symbol
+name, never by bare address, never by quoting the source page. The TerminalGB pages themselves
+were left alone; they still exist, still cover their emulator-side material, and in most cases
+still contain the same game facts too — that duplication is deliberate, not drift, because nothing
+here can safely delete or rewrite a file in another repository.
+
+**Generation 2 (Pokémon Gold/Silver) is out of this migration entirely, on purpose.** TerminalGB
+holds real, citable game-data prose about Gold's memory map, save file and the Time Capsule — but
+`tools/validate.py` requires every discovered atlas (by `meta.json` presence) to have a working
+`data/atlas.tsv`, and there is no Gold extractor, no built `pret/pokegold` pipeline and no
+verification run behind one. Creating `atlases/pokemon-gs/` with prose and no data would turn
+`make check` red for the whole repository, not just that atlas. That page of content waits for
+whoever eventually does the real work of [adding an atlas](docs/adding-an-atlas.md) for Gold and
+Silver — the exact worked example that page's own `meta.json` sample already uses.
 
 ### Two licences, and the boundary is a path
 

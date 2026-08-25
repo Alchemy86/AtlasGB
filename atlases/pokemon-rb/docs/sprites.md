@@ -28,7 +28,7 @@ guideline, and it is a cap the cartridge does not enforce: see below.
 
 | the finding | the bytes it is about |
 |---|---|
-| [the Oak's Lab soft-lock](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-oaks-lab-soft-lock) | [`wShadowOAM`](#s-wShadowOAM), [`wShadowOAMEnd`](#s-wShadowOAMEnd), [`hOAMBufferOffset`](system.md#s-hOAMBufferOffset), [`wTileMap`](screen.md#s-wTileMap) |
+| [the Oak's Lab soft-lock](discoveries.md#the-oaks-lab-soft-lock) | [`wShadowOAM`](#s-wShadowOAM), [`wShadowOAMEnd`](#s-wShadowOAMEnd), [`hOAMBufferOffset`](system.md#s-hOAMBufferOffset), [`wTileMap`](screen.md#s-wTileMap) |
 
 **The overrun is a fault in the game, not a limit it enforces.** `PrepareOAMData` walks all
 sixteen slots and writes four entries for each one that survives the visibility cull, tracking

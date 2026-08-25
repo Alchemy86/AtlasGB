@@ -37,25 +37,130 @@ in the overworld returns encounter data, so check `wIsInBattle` first.
 
 Several entries below carry a sentence that cost somebody a campaign to establish. The
 reasoning — the messy symptom, the wrong turns, the measurement that settled it — is recorded
-once, in [TerminalGB's discovery
-record](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md), and
-linked from here rather than repeated. The *fact* belongs on the entry; the *story* belongs one
-link away.
+once, in [this atlas's own discoveries page](discoveries.md), and linked from here rather than
+repeated. The *fact* belongs on the entry; the *story* belongs one link away.
 
 | the finding | the bytes it is about |
 |---|---|
-| [a screen does not survive a switch](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-screen-does-not-survive-a-switch) | [`wPlayerBattleStatus3`](#s-wPlayerBattleStatus3), [`wPlayerStatsToDouble`](scratch.md#s-wPlayerStatsToDouble) |
-| [a documented sentinel read as anything else](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-documented-sentinel-read-as-anything-else) | [`wIsInBattle`](#s-wIsInBattle) |
-| [the blackout carve-out](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-blackout-carve-out) | [`wCurOpponent`](#s-wCurOpponent), [`wCurMap`](overworld.md#s-wCurMap) |
-| [a critical hit is the worst case](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-critical-hit-is-the-worst-case) | [`wBattleMon`](#s-wBattleMon), [`wMonHBaseSpeed`](scratch.md#s-wMonHBaseSpeed) |
-| [accuracy is not the number in the move table](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#accuracy-is-not-the-number-in-the-move-table) | [`wPlayerMonStatMods`](#s-wPlayerMonStatMods), [`wPlayerMonAccuracyMod`](#s-wPlayerMonAccuracyMod) |
-| [a missed trapping move leaves its counter standing](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-missed-trapping-move-leaves-its-counter-standing) | [`wPlayerNumAttacksLeft`](#s-wPlayerNumAttacksLeft) |
-| [an escape is not free](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#an-escape-is-not-free) | [`wEnemyMon`](#s-wEnemyMon) |
+| [a screen does not survive a switch](discoveries.md#a-screen-does-not-survive-a-switch) | [`wPlayerBattleStatus3`](#s-wPlayerBattleStatus3), [`wPlayerStatsToDouble`](scratch.md#s-wPlayerStatsToDouble) |
+| [a documented sentinel read as anything else](discoveries.md#a-documented-sentinel-read-as-anything-else) | [`wIsInBattle`](#s-wIsInBattle) |
+| [the blackout carve-out](discoveries.md#the-blackout-carve-out) | [`wCurOpponent`](#s-wCurOpponent), [`wCurMap`](overworld.md#s-wCurMap) |
+| [a critical hit is the worst case](discoveries.md#a-critical-hit-is-the-worst-case) | [`wBattleMon`](#s-wBattleMon), [`wMonHBaseSpeed`](scratch.md#s-wMonHBaseSpeed) |
+| [accuracy is not the number in the move table](discoveries.md#accuracy-is-not-the-number-in-the-move-table) | [`wPlayerMonStatMods`](#s-wPlayerMonStatMods), [`wPlayerMonAccuracyMod`](#s-wPlayerMonAccuracyMod) |
+| [a missed trapping move leaves its counter standing](discoveries.md#a-missed-trapping-move-leaves-its-counter-standing) | [`wPlayerNumAttacksLeft`](#s-wPlayerNumAttacksLeft) |
+| [an escape is not free](discoveries.md#an-escape-is-not-free) | [`wEnemyMon`](#s-wEnemyMon) |
 
 **`wPlayerBattleStatus1`, `2` and `3` are three different bytes, not three slots.** They sit
 consecutively and are one byte each, so the extractor reads them as a repeated structure — but
 they hold different bits, and only the block from `wPlayerStatsToDouble` clears on a switch. A
 described slot is listed on its own row below for exactly that reason.
+
+### Known battle-engine bugs
+
+Gen 1's battle engine has real defects, not just surprising-but-correct rules, and every one
+below is cited to the routine that produces it — a model of this game that "fixed" them would be
+a model of a game nobody played.
+
+**A critical hit discards stat stages in the damage calculation too, not only in its own rate.**
+`GetDamageVarsForPlayerAttack` doubles the level on a crit, but pulls Attack and Defense from the
+unmodified stat rather than the stage-adjusted one — a crit landed through your own SWORDS DANCE
+can do *less* damage than an ordinary hit would have with the boost counted.
+
+**A move can be reported as a miss after its accuracy roll already passed.** `AdjustDamageForMoveType`
+rounds a doubly-resisted hit down to zero damage — its own comment says the case "only occurs if a
+move that would do 2 or 3 damage is 0.25x effective" — and zero damage sets `wMoveMissed`, so the
+game prints the ordinary miss text for an attack that connected and was merely too weak to
+register.
+
+**Full paralysis is 63 in 256, not exactly one in four.** The check is `cp 25 percent`, and the
+disassembly's own `percent()` macro truncates a percentage into a comparison byte instead of
+rounding it — 25 percent of 256 truncates to 63, not 64.
+
+**A sleeping Pokémon's counter is rolled 1–7 turns**, not the commonly quoted 1–4 or 1–7-inclusive
+range some references give with a different convention: `SleepEffect` masks a random byte with
+`SLP_MASK` and rerolls a zero, and the source's own comment gives the range as "a random number
+between 1 and 7." And the turn the counter reaches zero is not free: both the "still asleep" and
+"just woke up" paths fall into the same `.sleepDone` label, so waking up costs a whole turn rather
+than skipping straight to an action.
+
+**Raising or lowering a stat stage recomputes the stat from scratch, and recomputing it is not
+free of side effects.** `StatModifierUpEffect` (and its downward counterpart) pulls from the
+unmodified stat and reapplies any badge boost every time it runs, rather than checking whether one
+is already folded in — its own comments say plainly that badge boosts "get reapplied again to
+every stat" and that doing this means "paralysis and burn penalties, as well as badge boosts are
+ignored." So changing a stage also wipes out a burn or paralysis penalty already baked into that
+stat, and repeated stage changes on a badge-covered stat compound the boost instead of applying it
+once. A burned Pokémon whose Attack is lowered a stage, for instance, has its burn halving undone
+in the same stroke.
+
+**HYPER BEAM skips its forced recharge turn if the hit that used it was also the knockout.**
+`HYPER_BEAM_EFFECT` is absent from `AlwaysHappenSideEffects` — the list of effects the engine
+applies unconditionally — and the code path that notices a knockout returns before the recharge
+flag is ever set.
+
+**COUNTER's priority is not merely low, it is fixed.** `MainInBattleLoop`'s hard-coded turn order
+runs it in its own slot *after* the opponent's attack has already resolved that turn, regardless of
+either side's Speed — a faster Pokémon using COUNTER still goes second, because there would be
+nothing to counter otherwise.
+
+**THRASH, PETAL DANCE and BIDE roll their lock length from the same counter a trapping move
+uses** — [`wPlayerNumAttacksLeft`](#s-wPlayerNumAttacksLeft) — and from the same routine shape:
+`ThrashPetalDanceEffect` and `BideEffect` each draw one random bit and add two, giving a roll of 2
+or 3 (measured over 161 Thrash locks and 281 Bides), so a Thrash lock runs 3-4 attacking turns and
+a Bide runs the same length to its release. `TrappingEffect`'s own comment states "3/8 chance for
+2 and 3 attacks, and 1/8 chance for 4 and 5 attacks," measured close to that shape over 371 locks
+(39%, 34%, 13%, 14%).
+
+**The toxic-tick counter is shared with LEECH SEED rather than gated to poison.** The
+disassembly's own comment says the ticks are counted "even if the damage is not poison (hence the
+Leech Seed glitch)" — so a Pokémon that is both badly poisoned and seeded bumps the same counter
+from both effects each turn, and has both drains multiplied by it.
+
+### What the battle screen shows, and what it doesn't
+
+A player looking at the battle screen sees both Pokémon's **names** — the nickname, not the
+species, since an unrenamed Pokémon's nickname defaults to its species name and only the nickname
+is ever drawn — and **levels**, both **HP bars**, the player's own **exact HP** as a fraction, and,
+on the FIGHT menu, the highlighted move's **type and PP**. It never shows the opponent's stats, its
+exact HP, or its move list.
+
+The wild and trainer battle screens are the same picture. Traced frame by frame over a matched
+pair — one save, one challenger, only the wild-or-trainer line different — **no cell differs
+across all 1,200 paired frames**, and the fewest differing on any single frame is **two, the level
+digits**. The only tell is the opening banner: `Wild <NAME> appeared!` is on screen for **9
+frames**, `<NAME> wants to fight!` for **11** — about a sixth of a second, with nothing
+distinguishing the two screens before or after it.
+
+Throwing a ball at a trainer's Pokémon costs nothing but the turn. `ItemUseBall` branches to
+`ThrowBallAtTrainerMon`, prints its own refusal text, and returns without touching the bag —
+measured over 64 throws in synthesized trainer battles: **64 blocked, 64 balls kept, 0 spent.**
+
+### Catching
+
+The game hands over its first Poké Balls rather than selling them. `wEventFlags` bit 4 of byte 4
+(`$D74B`) is `EVENT_GOT_POKEBALLS_FROM_OAK` — the flag immediately before `EVENT_GOT_POKEDEX` — and
+the script that sets it also gives five `POKE_BALL`s, with Oak explaining that the balls are how
+you actually catch a Pokémon rather than just see one. Buying one instead costs ¥200, from the
+first mart that stocks any — Viridian's does not.
+
+`ItemUsePokeBall` (`engine/items/item_effects.asm`) is not the pass/fail test a modern formula
+assumes. Three things make it different:
+
+- **A Great or Ultra Ball's check is a resampling loop, not a threshold you can fail.** A random
+  byte over the ball's cutoff (200 for Great, 150 for Ultra and Safari) jumps back and redraws, so
+  the ball's real effect is to bias the draw toward low values rather than reject high ones —
+  reading it as a pass/fail hurdle, the natural reading for a modern formula, understates every
+  Great and Ultra Ball's odds.
+- **A status bonus is subtracted from the roll and can catch outright.** Sleep or freeze is worth
+  25, any other status 12; if the random byte comes in under the bonus, the Pokémon is caught with
+  no further check at all.
+- **The shake animation is decided after the outcome, not before it.** Everything that produces the
+  one-, two- or three-shake animation runs only once capture or failure is already settled — three
+  shakes and a break is not a near miss, because the miss happened earlier in the routine.
+
+Disassembled and turned into a closed form, the routine agrees with the retail cartridge: sweeping
+HP, status and ball type across **251 throws**, the observed catch rate was **61.0%** against a
+closed-form prediction of **59.8%** — `z = +0.36` against a 3.09% standard error.
 
 <!-- atlas:begin (table) — generated by tools/render.py from the atlas data; edit the data, not the table -->
 

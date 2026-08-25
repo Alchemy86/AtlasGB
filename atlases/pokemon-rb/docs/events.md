@@ -13,6 +13,14 @@ before it lets you walk north, which is why setting bit 0 of byte 0 skips the wh
 introduction, the starter choice and the rival battle, and is the cheapest way to get a brand
 new game walking.
 
+**One concrete instance: the Cerulean Gym badge win.** It writes four bits of `$D75E` — byte 23
+of `wEventFlags` — from `$00` to `$CC`: bits 2 and 3 for the gym's own two trainers
+(`EVENT_BEAT_CERULEAN_GYM_TRAINER_0`, `EVENT_BEAT_CERULEAN_GYM_TRAINER_1`), bit 6 for the TM11
+pickup (`EVENT_GOT_TM11`), and bit 7 for Misty herself (`EVENT_BEAT_MISTY`) — read off
+`constants/event_constants.asm`'s own `const` list. A snapshot of the full 320 bytes before and
+after the fight shows nothing else moves and nothing is cleared; `wObtainedBadges` and
+`wBeatGymFlags` each pick up their own bit 1 in the same fight, and no further.
+
 Beside it sits the **missable-object system**. `wToggleableObjectFlags` has one bit per object
 that can be removed from a map — an item ball picked up, a boulder pushed — and
 `wToggleableObjectList` is rebuilt from those flags every time a map loads. That is the
@@ -30,7 +38,7 @@ the failure this atlas exists as a reaction to.
 
 | the finding | the bytes it is about |
 |---|---|
-| [the blackout carve-out](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-blackout-carve-out) | [`wOaksLabCurScript`](#s-wOaksLabCurScript) |
+| [the blackout carve-out](discoveries.md#the-blackout-carve-out) | [`wOaksLabCurScript`](#s-wOaksLabCurScript) |
 
 Losing the starter battle to the rival in Oak's Lab is not a loss: `HandlePlayerBlackOut`
 returns early when `wCurOpponent` is the rival and `wCurMap` is that laboratory, and the map

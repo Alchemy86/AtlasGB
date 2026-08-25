@@ -18,9 +18,74 @@ Three traps live in the structure and all three have cost real time:
   internal index and `BaseStats` by Pokédex number; `PokedexOrder` converts. Read one with the
   other's index and you get a plausible, wrong Pokémon.
 
+That trap is not academic: PARAS' own internal index is **109** against a Pokédex number of
+**46**, and reading either table with the other's number raises no error — it returns a
+different, entirely plausible Pokémon. Every symbol in this atlas that stores a species carries
+the internal index. A lookup by *name* instead of by index has its own version of the same
+trap: [two internal indices print as one identical name](discoveries.md#two-species-share-one-printable-name),
+so a name is not a safe key either.
+
 The party block ends exactly where the saved block begins — `wPartyDataEnd` and
 `wMainDataStart` are the same address — which is why the party survives a reset and most of
 what is above it in memory does not.
+
+**A caught Pokémon's moves are a pure function of its species and its level, nothing else.**
+`WriteMonMoves` (`engine/pokemon/add_mon.asm`) builds the four bytes at `wPartyMon1Moves` from the
+species' own starting moves (`BaseStats`' `MOVE1`..`MOVE4`) and its level-up learnset, oldest move
+pushed out once the four slots are full. Two Pokémon of the same species at the same level always
+arrive holding the same four moves — nothing about the battle that produced one, or the trainer
+that owns it, enters into it. A wild or trainer Pokémon's exact moveset is therefore knowable
+before it is ever seen.
+
+**Experience from a battle goes to whichever Pokémon was sent out, not to the party as a whole.**
+Gen 1 always sends out the first party member with any HP, so a Pokémon left on the bench earns
+nothing until it leads — the only way to move it up is `SwitchPartyMon`
+(`engine/menus/party_menu.asm`), reached from the START menu's `POKéMON` list. `wPartyFoughtCurrentEnemyFlags`
+and `wPartyGainExpFlags` record who was actually in the fight and is therefore owed a share of the
+experience; neither says anything about a Pokémon still waiting in slot 6.
+
+Levelling up checks a single per-species table, `EvosMovesPointerTable` (bank `$0E`), for a
+`(level, move)` entry, and the whole cartridge holds **728** of them across its 190 internal
+indices — indexed the same way `wPartySpecies` is, [and just as easy to misread against the wrong
+table](discoveries.md#the-learnset-table-is-indexed-by-internal-number-not-by-dex-number). A
+"which move should be forgotten?" prompt only fires once the four slots above are already full;
+walking every species from level 1 to level 100 finds **840** such prompts, and collapsing them to
+"these four moves held, this one offered" leaves only **581** distinct shapes. The learning system
+is closed and enumerable, not open-ended — which is also why
+[crossing two level boundaries in one battle still loses the move that belonged to the level in
+between](discoveries.md#crossing-two-levels-loses-the-move-in-between): the game checks the
+learnset once, for the level it ends the battle on, not for every level passed through.
+
+One line driven on the real cartridge, a BULBASAUR raised from level 1 with
+[every evolution taken](discoveries.md#cancelling-an-evolution-costs-one-level-and-nothing-else),
+shows the shape of it. `held` is what `WriteMonMoves` had already given it; `offered` is
+`EvosMovesPointerTable`'s entry for that level. Which of the two the game keeps afterwards is left
+to the player — the cartridge only asks — so `chosen` below is one stated answering rule's output,
+not anything the game requires:
+
+| level | form | offered | held before the prompt | chosen |
+|---:|---|---|---|---|
+| 22 | IVYSAUR | POISONPOWDER | TACKLE, GROWL, LEECH SEED, VINE WHIP | forget LEECH SEED |
+| 30 | IVYSAUR | RAZOR LEAF | TACKLE, GROWL, VINE WHIP, POISONPOWDER | forget POISONPOWDER |
+| 43 | VENUSAUR | GROWTH | TACKLE, GROWL, VINE WHIP, RAZOR LEAF | decline |
+| 55 | VENUSAUR | SLEEP POWDER | TACKLE, GROWL, VINE WHIP, RAZOR LEAF | decline |
+| 65 | VENUSAUR | SOLARBEAM | TACKLE, GROWL, VINE WHIP, RAZOR LEAF | forget GROWL |
+
+A decline plays out as two further prompts — offer to replace, then offer to abandon — and ends
+with the offered move simply not learned; nothing about the four held moves changes.
+
+### Findings behind these bytes
+
+Several entries below carry a sentence that cost somebody a campaign to establish. The reasoning —
+the messy symptom, the wrong turns, the measurement that settled it — is recorded once, in
+[this atlas's own discoveries page](discoveries.md), and linked from here rather than repeated.
+
+| the finding | the bytes it is about |
+|---|---|
+| [the learnset table is indexed by internal number, not by dex number](discoveries.md#the-learnset-table-is-indexed-by-internal-number-not-by-dex-number) | [`wPartySpecies`](#s-wPartySpecies), [`wPartyMon1Species`](#s-wPartyMon1Species) |
+| [two species share one printable name](discoveries.md#two-species-share-one-printable-name) | [`wPartyMon1Species`](#s-wPartyMon1Species) |
+| [crossing two levels loses the move in between](discoveries.md#crossing-two-levels-loses-the-move-in-between) | [`wPartyMon1Level`](#s-wPartyMon1Level) |
+| [cancelling an evolution costs one level and nothing else](discoveries.md#cancelling-an-evolution-costs-one-level-and-nothing-else) | [`wPartyMon1Species`](#s-wPartyMon1Species) |
 
 <!-- atlas:begin (table) — generated by tools/render.py from the atlas data; edit the data, not the table -->
 

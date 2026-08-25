@@ -55,13 +55,15 @@ it, which is exactly why there is room for more.
 
 An entry says *what* an address is for. The reasoning behind it — the symptom, the wrong
 turns, the measurement that settled it — does not fit in a cell, so it is recorded once
-next door: **the findings that back these descriptions live in TerminalGB's discovery
-record**,
-**[docs/gen1/discoveries.md](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md)**
-— twenty-one findings about Pokémon Red/Blue, each with the evidence that produced it.
+next door: **the findings that back these descriptions live in this atlas's own discoveries
+page**,
+**[atlases/pokemon-rb/docs/discoveries.md](atlases/pokemon-rb/docs/discoveries.md)**
+— twenty-six findings about Pokémon Red/Blue, each with the evidence that produced it.
+Documenting the game's own behaviour is this project's job; the discoveries page moved here
+from TerminalGB, the emulator that produces the verification runs behind them, because that
+is where it belongs.
 
-Six chapter pages carry a **Findings behind these bytes** table linking into it, so the two
-repositories point at each other rather than leaving you to notice it by accident:
+Six chapter pages carry a **Findings behind these bytes** table linking into it:
 
 | chapter | the findings it points at |
 |---|---|

@@ -21,9 +21,9 @@ and nobody has written it.
 
 | the finding | the bytes it is about |
 |---|---|
-| [a screen does not survive a switch](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-screen-does-not-survive-a-switch) | [`wPlayerStatsToDouble`](#s-wPlayerStatsToDouble), [`wEnemyStatsToDouble`](#s-wEnemyStatsToDouble) |
-| [a critical hit is the worst case](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#a-critical-hit-is-the-worst-case) | [`wMonHBaseSpeed`](#s-wMonHBaseSpeed) |
-| [the battle move menu cursor is 1-based](https://github.com/Alchemy86/TerminalGB/blob/main/docs/gen1/discoveries.md#the-battle-move-menu-cursor-is-1-based) | [`wPlayerMoveListIndex`](#s-wPlayerMoveListIndex) |
+| [a screen does not survive a switch](discoveries.md#a-screen-does-not-survive-a-switch) | [`wPlayerStatsToDouble`](#s-wPlayerStatsToDouble), [`wEnemyStatsToDouble`](#s-wEnemyStatsToDouble) |
+| [a critical hit is the worst case](discoveries.md#a-critical-hit-is-the-worst-case) | [`wMonHBaseSpeed`](#s-wMonHBaseSpeed) |
+| [the battle move menu cursor is 1-based](discoveries.md#the-battle-move-menu-cursor-is-1-based) | [`wPlayerMoveListIndex`](#s-wPlayerMoveListIndex) |
 
 `wPlayerStatsToDouble` is the clearest case of an address mattering for something other than
 its name: whatever it is called, it is the **first of the five bytes a switch zeroes**, and

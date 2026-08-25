@@ -25,6 +25,11 @@ This page is the mechanism; that one is what it found.
   same thing in the other.
 - **`src/main.rs`** (`gen1-observe`) — pass 1: frame-granularity sweep.
 - **`src/bin/pass2.rs`** — pass 2: instruction-granularity trace, targeted.
+- **`src/bin/investigate_levelup.rs`** — a small, one-question trace: replays `run_script`
+  watching only `wIsInBattle`, `wCurOpponent`, `wCurEnemyLevel` and the party's own species/
+  HP/exp/level bytes every frame, to answer a specific hand-off question (why did the forced
+  level-up in round three never fire) rather than sweeping everything. See
+  `docs/observation.md` for what it found.
 
 ## How it works
 
@@ -91,6 +96,8 @@ cargo run --release --bin gen1-observe    # pass 1 -> observe-pass1.json
 # build pass 2's input from pass 1's output + whichever atlas addresses you want traced
 # (a short Python script against atlas.json; see docs/observation.md for what this round used)
 cargo run --release --bin pass2           # pass 2 -> observe-pass2.json
+
+cargo run --release --bin investigate_levelup   # frame-by-frame trace to stdout, no JSON
 ```
 
 Nothing here touches TerminalGB's own tree — the `Cargo.toml` path dependency reads its

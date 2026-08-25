@@ -277,6 +277,38 @@ the `(ROM0, $0F39)` group, which round three's own prose named and then explicit
 to trust ("plausibly one generic... utility... not treated as evidence"). A shared writer
 still is not the same claim as a checked relationship; the column only wants the second.
 
+### Round four: why the forced level-up never fired — a partial answer
+
+Hand-off item 3 asked why boosting `wPartyMon1Exp` to 5,000 before the forced wild battle
+never produced a level-up. [`investigate_levelup`](../tools/gen1-observe/src/bin/investigate_levelup.rs)
+replays the identical script watching `wIsInBattle`, `wCurOpponent`, `wCurEnemyLevel` and the
+party's own species/HP/exp/level bytes on every single frame, rather than sweeping everything.
+
+**The measured answer: no battle ever ran during the phase that was supposed to be the wild
+battle.** `wCurOpponent` and `wCurEnemyLevel` take the forced values (1, 5) the instant they
+are written, exactly as expected — but `wIsInBattle` (0 none, 1 wild, 2 trainer) stays at `0`
+for the entire wild-battle phase that follows, only becoming non-zero (`2`, trainer) once
+phase 5's trainer battle is forced afterward. No battle outcome, no experience award, nothing
+for the forced 5,000 to combine with — which is a sufficient explanation on its own for why no
+level-up happened, independent of whether 5,000 was even close to a real threshold.
+
+**What this does not answer, and is left open rather than guessed at:** whether the wild
+battle genuinely never started, or started and ended within the span of one frame too fast
+for frame-granularity polling to catch — `gb.frame()` runs a whole frame's CPU work before
+this tool can look, so a same-frame flip up and back down is invisible at this resolution.
+Telling those apart needs pass 2's instruction-level tracing pointed specifically at
+`wIsInBattle` across this window, not a new frame-level run — a smaller, well-scoped next
+step, not done this round. Either way, forcing `wCurOpponent`/`wCurEnemyLevel` alone is not
+sufficient to run a wild battle to completion the way it is for a trainer battle in this same
+script; something else a real wild encounter normally provides (or checks) is missing.
+
+This does **not** call any existing description into question: the "during ... wild-battle"
+phase tags a few descriptions carry (`wEnemyMonBaseStats`, `wRodResponse`, and others) record
+*when in the script* a write happened, not a claim that a battle outcome was reached — and
+`wEnemyMonBaseStats` genuinely does get written in that window (enemy-data loading starts as
+soon as `wCurOpponent` goes non-zero, per its own description, whether or not the battle that
+follows ever completes). Checked specifically before writing this section, not assumed.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
@@ -292,16 +324,18 @@ Highest value per unit of effort, first — same rule the verification hand-off 
    walk phase toward the nearest known Pokémon Center or mart for *this* save specifically,
    rather than assuming a fixed map. `storage` and the item-price/shop-menu addresses are
    exactly what this would newly reach.
-3. **Find out why the forced level-up did not fire, or replace the attempt with one that
-   works.** `wPartyMon1Exp` was pushed to 5,000 before a battle specifically to raise the
-   odds of crossing a level boundary, and it did not produce one. Either the wild battle's
-   exp award did not land before the run ended, or 5,000 was not close enough to a real
-   threshold — both answers are one more traced write away (watch `wPartyMon1Exp` and
-   `wPartyMon1Level` together across the battle's own end sequence) and neither has been
-   checked yet.
+3. **~~Find out why the forced level-up did not fire~~ — partially answered this round: see
+   [above](#round-four-why-the-forced-level-up-never-fired--a-partial-answer).** `wIsInBattle`
+   never left `0` during the wild-battle phase, so no battle completed and there was no
+   experience award for the forced 5,000 to combine with. What is still open: whether the
+   battle never started at all, or started and ended inside one frame — that needs pass 2's
+   instruction-level tracing pointed at `wIsInBattle` specifically across this window, a small,
+   well-scoped follow-up rather than a re-run of everything.
 4. **A full gym battle (Misty, not just a JR.TRAINER), and a losing one played to its actual
    end** rather than a low-HP battle that may resolve in either direction. cerulean-gym.md
-   already carries her exact team, so this is a data lookup, not a new derivation.
+   already carries her exact team, so this is a data lookup, not a new derivation. Given item 3's
+   finding, worth checking with the same frame-by-frame technique whether a gym trainer battle
+   reliably starts the same way phase 5's did, before assuming it will.
 5. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
    still buildable with no TerminalGB change.

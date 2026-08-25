@@ -78,9 +78,11 @@ Six chapter pages carry a **Findings behind these bytes** table linking into it:
 | **[sprites](atlases/pokemon-rb/docs/sprites.md)** | the object-buffer overrun that stamps tiles into the map |
 | **[events](atlases/pokemon-rb/docs/events.md)** | the blackout carve-out behind the one described map script |
 
-Written descriptions cover **492 of the 1,012 distinct addresses**, and **802 entries and
+Written descriptions cover **582 of the 1,012 distinct addresses**, and **712 entries and
 aliases are deliberately blank**: this project cannot yet describe them honestly, and a
-plausible sentence derived from a symbol name is the thing it exists as a reaction to.
+plausible sentence derived from a symbol name is the thing it exists as a reaction to. Ninety
+of the written descriptions were generated, not found — see
+[how](docs/observation.md).
 
 ---
 

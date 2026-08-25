@@ -54,41 +54,41 @@ WRAM0	-	$C003	1	wDisableChannelOutputWhenSfxEnds	entry	Audio RAM	audio	rom,live	
 WRAM0	-	$C004	1	wStereoPanning	entry	Audio RAM	audio	rom,live	Which hardware channels reach which speaker.
 WRAM0	-	$C005	1	wSavedVolume	entry	Audio RAM	audio	rom,live	Master volume saved across a fade.
 WRAM0	-	$C006	16	wChannelCommandPointers	entry	Audio RAM	audio	rom,live	Where each channel is in its command stream — the sound engine is a little interpreter and this is its program counter.
-WRAM0	-	$C016	16	wChannelReturnAddresses	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C016	16	wChannelReturnAddresses	entry	Audio RAM	audio	rom,live	Where a channel's command stream resumes after a subroutine call — the return-address stack for `wChannelCommandPointers`' own program counter. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$530A`, during battle-trigger, intro, walk/menus; 9 distinct values seen, 0-235.
 WRAM0	-	$C026	8	wChannelSoundIDs	entry	Audio RAM	audio	rom,live	What each of the eight software channels is currently playing.
 WRAM0	-	$C02E	8	wChannelFlags1	entry	Audio RAM	audio	rom,live	Per-channel state: whether a note is held, whether vibrato is on, and so forth.
 WRAM0	-	$C036	8	wChannelFlags2	instance	Audio RAM	audio	rom,live	
 WRAM0	-	$C03E	8	wChannelDutyCycles	entry	Audio RAM	audio	rom,live	The square channels' duty setting per software channel.
-WRAM0	-	$C046	8	wChannelDutyCyclePatterns	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C04E	8	wChannelVibratoDelayCounters	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C056	8	wChannelVibratoExtents	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C046	8	wChannelDutyCyclePatterns	entry	Audio RAM	audio	rom,live	Which of the four duty-cycle waveforms each square channel is currently using. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C04E	8	wChannelVibratoDelayCounters	entry	Audio RAM	audio	rom,live	Frames left before vibrato starts on each channel, counting down from `wChannelVibratoDelayCounterReloadValues`. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 31 `$51F8`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 10 distinct values seen, 0-9.
+WRAM0	-	$C056	8	wChannelVibratoExtents	entry	Audio RAM	audio	rom,live	How far each channel's vibrato swings the pitch. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 33].
 WRAM0	-	$C05E	8	wChannelVibratoRates	entry	Audio RAM	audio	rom,live	How fast each channel's vibrato oscillates.
 WRAM0	-	$C066	8	wChannelFrequencyLowBytes	entry	Audio RAM	audio	rom,live	The low byte of each channel's current pitch.
-WRAM0	-	$C06E	8	wChannelVibratoDelayCounterReloadValues	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C076	8	wChannelPitchSlideLengthModifiers	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C07E	8	wChannelPitchSlideFrequencySteps	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C086	8	wChannelPitchSlideFrequencyStepsFractionalPart	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C08E	8	wChannelPitchSlideCurrentFrequencyFractionalPart	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C096	8	wChannelPitchSlideCurrentFrequencyHighBytes	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C06E	8	wChannelVibratoDelayCounterReloadValues	entry	Audio RAM	audio	rom,live	The value `wChannelVibratoDelayCounters` is reloaded with once its countdown reaches zero. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 6, 9].
+WRAM0	-	$C076	8	wChannelPitchSlideLengthModifiers	entry	Audio RAM	audio	rom,live	How many steps a channel's pitch slide takes to complete. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C07E	8	wChannelPitchSlideFrequencySteps	entry	Audio RAM	audio	rom,live	How far the pitch moves each step of a channel's slide. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C086	8	wChannelPitchSlideFrequencyStepsFractionalPart	entry	Audio RAM	audio	rom,live	The sub-integer remainder of `wChannelPitchSlideFrequencySteps`, carried so a slow slide still lands exactly on its target frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C08E	8	wChannelPitchSlideCurrentFrequencyFractionalPart	entry	Audio RAM	audio	rom,live	The sub-integer remainder of a channel's pitch as its slide moves it, kept beside the whole-number frequency bytes. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C096	8	wChannelPitchSlideCurrentFrequencyHighBytes	entry	Audio RAM	audio	rom,live	The high byte of each channel's pitch as a slide is moving it toward the target frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C09E	8	wChannelPitchSlideCurrentFrequencyLowBytes	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0A6	8	wChannelPitchSlideTargetFrequencyHighBytes	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0AE	8	wChannelPitchSlideTargetFrequencyLowBytes	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C0A6	8	wChannelPitchSlideTargetFrequencyHighBytes	entry	Audio RAM	audio	rom,live	The high byte of the frequency a channel's pitch slide is moving toward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C0AE	8	wChannelPitchSlideTargetFrequencyLowBytes	entry	Audio RAM	audio	rom,live	The low byte of the frequency a channel's pitch slide is moving toward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C0B6	8	wChannelNoteDelayCounters	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0BE	8	wChannelLoopCounters	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0C6	8	wChannelNoteSpeeds	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0CE	8	wChannelNoteDelayCountersFractionalPart	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0D6	8	wChannelOctaves	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0DE	8	wChannelVolumes	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0E6	1	wMusicWaveInstrument	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0E7	1	wSfxWaveInstrument	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0E8	2	wMusicTempo	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0EA	2	wSfxTempo	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0EC	2	wSfxHeaderPointer	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C0BE	8	wChannelLoopCounters	entry	Audio RAM	audio	rom,live	How many repeats are left of a looped section of a channel's command stream. Measured across a real playthrough (walk, a forced battle, menus): written from bank 2 `$5A8A`, during intro; values seen: [0, 1].
+WRAM0	-	$C0C6	8	wChannelNoteSpeeds	entry	Audio RAM	audio	rom,live	How many frames each of a channel's notes lasts. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$5368` and bank 2 `$5A8A`, during battle-trigger, intro, walk/menus; values seen: [0, 1, 8, 12].
+WRAM0	-	$C0CE	8	wChannelNoteDelayCountersFractionalPart	entry	Audio RAM	audio	rom,live	The sub-frame remainder of a channel's note-length countdown (`wChannelNoteDelayCounters`), carried so a note's length stays accurate over many notes. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$55C3` and bank 8 `$5CD0`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 12 distinct values seen, 0-240.
+WRAM0	-	$C0D6	8	wChannelOctaves	entry	Audio RAM	audio	rom,live	Each channel's current octave. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$54E2` and bank 8 `$5BEF`, during battle, battle-trigger, intro, post-battle menus, walk/menus; values seen: [0, 4, 5, 6].
+WRAM0	-	$C0DE	8	wChannelVolumes	entry	Audio RAM	audio	rom,live	Each channel's current volume. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$5393` and bank 8 `$5AA0`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 15 distinct values seen, 0-231.
+WRAM0	-	$C0E6	1	wMusicWaveInstrument	entry	Audio RAM	audio	rom,live	Which of the wave channel's four instrument samples the current music track is using. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 1].
+WRAM0	-	$C0E7	1	wSfxWaveInstrument	entry	Audio RAM	audio	rom,live	Which of the wave channel's four instrument samples the current sound effect is using — kept separate from `wMusicWaveInstrument` so a sound effect borrowing the wave channel does not change what the music resumes with. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C0E8	2	wMusicTempo	entry	Audio RAM	audio	rom,live	The current music track's tempo. Measured across a real playthrough (walk, a forced battle, menus): written from bank 2 `$5A7D`, during battle-trigger, intro; values seen: [0, 1].
+WRAM0	-	$C0EA	2	wSfxTempo	entry	Audio RAM	audio	rom,live	The current sound effect's tempo, kept separate from `wMusicTempo` for the same reason `wSfxWaveInstrument` is. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 2 `$5A80`, during battle, intro; values seen: [0, 1].
+WRAM0	-	$C0EC	2	wSfxHeaderPointer	entry	Audio RAM	audio	rom,live	Pointer to the currently-playing sound effect's own header in ROM. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$59CE`, during battle, intro; values seen: [0, 64, 65, 66].
 WRAM0	-	$C0EE	1	wNewSoundID	entry	Audio RAM	audio	rom,live	The sound requested this frame, before the engine has acted on it.
 WRAM0	-	$C0EF	1	wAudioROMBank	entry	Audio RAM	audio	rom,live	Which bank the currently playing music lives in — the sound data is banked like everything else.
 WRAM0	-	$C0F0	1	wAudioSavedROMBank	entry	Audio RAM	audio	rom,live	The bank to return to after the sound engine has finished.
-WRAM0	-	$C0F1	1	wFrequencyModifier	entry	Audio RAM	audio	rom,live	
-WRAM0	-	$C0F2	14	wTempoModifier	entry	Audio RAM	audio	rom,live	
+WRAM0	-	$C0F1	1	wFrequencyModifier	entry	Audio RAM	audio	rom,live	Added to a channel's frequency bytes as a note plays — the vibrato and pitch-slide effects both work by writing here rather than by touching the note's own base frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle, intro; values seen: [0, 32, 96, 128, 238, 248].
+WRAM0	-	$C0F2	14	wTempoModifier	entry	Audio RAM	audio	rom,live	Per-channel adjustment to the base tempo. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle, intro; values seen: [0, 1, 16, 48, 64, 96, 128].
 WRAM0	-	$C100	1	wSpriteStateData1	entry	Sprite State Data	sprites	rom,live	Sixteen 16-byte sprite structures. **Slot 0 is the player**; slots 1-15 are the map's objects. This half holds screen position and animation; `wSpriteStateData2` holds map position and identity.
 WRAM0	-	$C100	1	wSpriteDataStart	alias	Sprite State Data	sprites	rom,live	First byte of the sprite state, an alias of `wSpriteStateData1`.
 WRAM0	-	$C100	1	wSpritePlayerStateData1	alias	Sprite State Data	sprites	rom,live	Slot 0 of the first sprite bank: the player. Every other slot has the same shape.
@@ -99,11 +99,11 @@ WRAM0	-	$C103	1	wSpritePlayerStateData1YStepVector	entry	Sprite State Data	sprit
 WRAM0	-	$C104	1	wSpritePlayerStateData1YPixels	entry	Sprite State Data	sprites	rom,live	Screen position, vertical. **The engine owns these while a step is in progress** — it shifts every slot two pixels a frame against the player's motion so they appear to stay put on the map. Writing them mid-step makes an object ride the camera and then snap.
 WRAM0	-	$C105	1	wSpritePlayerStateData1XStepVector	entry	Sprite State Data	sprites	rom,live	How far the slot moves horizontally per frame of a step.
 WRAM0	-	$C106	1	wSpritePlayerStateData1XPixels	entry	Sprite State Data	sprites	rom,live	Screen position, horizontal.
-WRAM0	-	$C107	1	wSpritePlayerStateData1IntraAnimFrameCounter	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C108	1	wSpritePlayerStateData1AnimFrameCounter	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C107	1	wSpritePlayerStateData1IntraAnimFrameCounter	entry	Sprite State Data	sprites	rom,live	Frames left on the player sprite's current animation frame before it advances to the next one. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4E9E`, during intro, walk/menus; values seen: [0, 1, 2, 3, 4].
+WRAM0	-	$C108	1	wSpritePlayerStateData1AnimFrameCounter	entry	Sprite State Data	sprites	rom,live	Which frame of the player sprite's walking/facing animation is currently showing. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4EAA` and bank 1 `$4E81`, during intro, walk/menus; values seen: [0, 1, 2, 3].
 WRAM0	-	$C109	1	wSpritePlayerStateData1FacingDirection	entry	Sprite State Data	sprites	rom,live	Which way the slot faces: 0 down, 4 up, 8 left, 12 right.
-WRAM0	-	$C10A	1	wSpritePlayerStateData1YAdjusted	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C10B	1	wSpritePlayerStateData1XAdjusted	entry	Sprite State Data	sprites	live	
+WRAM0	-	$C10A	1	wSpritePlayerStateData1YAdjusted	entry	Sprite State Data	sprites	live	The player sprite's own screen Y position, adjusted for the mid-step camera offset — distinct from `wSpritePlayerStateData2YDisplacement`, which is the raw displacement this is derived from. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4CA3`, during intro, walk/menus; values seen: [0, 57, 64, 71].
+WRAM0	-	$C10B	1	wSpritePlayerStateData1XAdjusted	entry	Sprite State Data	sprites	live	The player sprite's own screen X position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4CA0`, during intro, walk/menus; values seen: [0, 57, 64, 71].
 WRAM0	-	$C10C	4	wSpritePlayerStateData1CollisionData	entry	Sprite State Data	sprites	rom,live	Which of the four directions are blocked for this slot.
 WRAM0	-	$C110	1	wSprite01StateData1PictureID	entry	Sprite State Data	sprites	rom,live	Which sprite sheet map object 1 draws from; 0 means the slot is unused, and it is the only thing `PrepareOAMData` checks before drawing the slot.
 WRAM0	-	$C110	1	wSprite01StateData1	alias	Sprite State Data	sprites	rom,live	Map object 1's first-bank structure.
@@ -114,11 +114,11 @@ WRAM0	-	$C113	1	wSprite01StateData1YStepVector	entry	Sprite State Data	sprites	r
 WRAM0	-	$C114	1	wSprite01StateData1YPixels	entry	Sprite State Data	sprites	rom,live	Screen position of map object 1, vertical. The engine owns it while a step is in progress — that is what `wWalkCounter` being non-zero means.
 WRAM0	-	$C115	1	wSprite01StateData1XStepVector	entry	Sprite State Data	sprites	live	How far map object 1 moves horizontally per frame of a step.
 WRAM0	-	$C116	1	wSprite01StateData1XPixels	entry	Sprite State Data	sprites	rom,live	Screen position of map object 1, horizontal.
-WRAM0	-	$C117	1	wSprite01StateData1IntraAnimFrameCounter	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C118	1	wSprite01StateData1AnimFrameCounter	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C117	1	wSprite01StateData1IntraAnimFrameCounter	entry	Sprite State Data	sprites	live	Frames left on object slot 1's current animation frame before it advances. Same field as `wSpritePlayerStateData1IntraAnimFrameCounter`, one slot over. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C118	1	wSprite01StateData1AnimFrameCounter	entry	Sprite State Data	sprites	rom,live	Which frame of object slot 1's animation is currently showing. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C119	1	wSprite01StateData1FacingDirection	entry	Sprite State Data	sprites	rom,live	Which way map object 1 faces: 0 down, 4 up, 8 left, 12 right.
-WRAM0	-	$C11A	1	wSprite01StateData1YAdjusted	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C11B	1	wSprite01StateData1XAdjusted	entry	Sprite State Data	sprites	live	
+WRAM0	-	$C11A	1	wSprite01StateData1YAdjusted	entry	Sprite State Data	sprites	live	Object slot 1's screen Y position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4BE5` and bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 16, 32, 208, 224, 240].
+WRAM0	-	$C11B	1	wSprite01StateData1XAdjusted	entry	Sprite State Data	sprites	live	Object slot 1's screen X position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4BEB` and bank 28 `$00B6`, during intro, walk/menus; 9 distinct values seen, 0-240.
 WRAM0	-	$C11C	4	wSprite01StateData1CollisionData	entry	Sprite State Data	sprites	live	Which of the four directions are blocked for map object 1.
 WRAM0	-	$C120	1	wSprite01StateData1End	entry	Sprite State Data	sprites	live	One past map object 1's first-bank structure.
 WRAM0	-	$C120	1	wSprite02StateData1	instance	Sprite State Data	sprites	live	
@@ -334,27 +334,27 @@ WRAM0	-	$C200	2	wSpritePlayerStateData2WalkAnimationCounter	entry	Sprite State D
 WRAM0	-	$C200	2	wSprite15StateData1End	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C200	2	wSpritePlayerStateData2	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C200	2	wSpriteStateData2	instance	Sprite State Data	sprites	rom,live	The second sixteen 16-byte sprite structures: map coordinates, which sprite sheet, and the movement script.
-WRAM0	-	$C202	1	wSpritePlayerStateData2YDisplacement	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C203	1	wSpritePlayerStateData2XDisplacement	entry	Sprite State Data	sprites	live	
+WRAM0	-	$C202	1	wSpritePlayerStateData2YDisplacement	entry	Sprite State Data	sprites	live	The player sprite's own raw pixel offset from its tile during a step, before the mid-step adjustment `wSpritePlayerStateData1YAdjusted` applies. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C203	1	wSpritePlayerStateData2XDisplacement	entry	Sprite State Data	sprites	live	The player sprite's own raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C204	1	wSpritePlayerStateData2MapY	entry	Sprite State Data	sprites	rom,live	Map position, vertical, offset by 4 — the border blocks are counted in. Maintained for scripted objects; **not** kept up to date for the player slot in ordinary play.
 WRAM0	-	$C205	1	wSpritePlayerStateData2MapX	entry	Sprite State Data	sprites	live	Map position, horizontal, offset by 4.
-WRAM0	-	$C206	1	wSpritePlayerStateData2MovementByte1	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C207	1	wSpritePlayerStateData2GrassPriority	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C208	1	wSpritePlayerStateData2MovementDelay	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C209	4	wSpritePlayerStateData2OrigFacingDirection	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C206	1	wSpritePlayerStateData2MovementByte1	entry	Sprite State Data	sprites	rom,live	The player sprite's current movement-script instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C207	1	wSpritePlayerStateData2GrassPriority	entry	Sprite State Data	sprites	rom,live	Whether the player sprite draws over or under the tall-grass tile beneath it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C208	1	wSpritePlayerStateData2MovementDelay	entry	Sprite State Data	sprites	live	Frames left before the player sprite's movement script advances to its next instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C209	4	wSpritePlayerStateData2OrigFacingDirection	entry	Sprite State Data	sprites	rom,live	The direction the player sprite was facing before its current movement instruction, restored if the instruction is a brief one (like a single look) rather than a walk. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C20D	1	wSpritePlayerStateData2PictureID	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C20E	2	wSpritePlayerStateData2ImageBaseOffset	entry	Sprite State Data	sprites	rom,live	Where in video RAM this slot's tiles were loaded. 0 makes the engine skip the slot's movement AI while still drawing it.
-WRAM0	-	$C210	2	wSprite01StateData2WalkAnimationCounter	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C210	2	wSprite01StateData2WalkAnimationCounter	entry	Sprite State Data	sprites	rom,live	Object slot 1's own walk-animation frame counter, the sibling of `wSpritePlayerStateData2WalkAnimationCounter`. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C210	2	wSprite01StateData2	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C210	2	wSpritePlayerStateData2End	instance	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C212	1	wSprite01StateData2YDisplacement	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C213	1	wSprite01StateData2XDisplacement	entry	Sprite State Data	sprites	live	
+WRAM0	-	$C212	1	wSprite01StateData2YDisplacement	entry	Sprite State Data	sprites	rom,live	Object slot 1's raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 8].
+WRAM0	-	$C213	1	wSprite01StateData2XDisplacement	entry	Sprite State Data	sprites	live	Object slot 1's raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 8].
 WRAM0	-	$C214	1	wSprite01StateData2MapY	entry	Sprite State Data	sprites	rom,live	Map position of map object 1, vertical, offset by 4 — the map's object list stores the coordinate plus four, and the border blocks are what the four counts.
 WRAM0	-	$C215	1	wSprite01StateData2MapX	entry	Sprite State Data	sprites	rom,live	Map position of map object 1, horizontal, offset by 4.
-WRAM0	-	$C216	1	wSprite01StateData2MovementByte1	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C217	1	wSprite01StateData2GrassPriority	entry	Sprite State Data	sprites	rom,live	
-WRAM0	-	$C218	1	wSprite01StateData2MovementDelay	entry	Sprite State Data	sprites	live	
-WRAM0	-	$C219	4	wSprite01StateData2OrigFacingDirection	entry	Sprite State Data	sprites	rom,live	
+WRAM0	-	$C216	1	wSprite01StateData2MovementByte1	entry	Sprite State Data	sprites	live	Object slot 1's current movement-script instruction. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro; values seen: [0, 255].
+WRAM0	-	$C217	1	wSprite01StateData2GrassPriority	entry	Sprite State Data	sprites	rom,live	Whether object slot 1 draws over or under the tall-grass tile beneath it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
+WRAM0	-	$C218	1	wSprite01StateData2MovementDelay	entry	Sprite State Data	sprites	live	Frames left before object slot 1's movement script advances. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$5069`, during intro, walk/menus; 88 distinct values seen, 0-126.
+WRAM0	-	$C219	4	wSprite01StateData2OrigFacingDirection	entry	Sprite State Data	sprites	rom,live	The direction object slot 1 was facing before its current movement instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].
 WRAM0	-	$C21D	1	wSprite01StateData2PictureID	instance	Sprite State Data	sprites	rom,live	
 WRAM0	-	$C21E	2	wSprite01StateData2ImageBaseOffset	entry	Sprite State Data	sprites	rom,live	Where in video RAM map object 1's tiles were loaded. **Zero makes the engine skip the slot's movement handling entirely** — no walking, no visibility cull — while the drawing pass, which looks only at `PictureID`, still puts it on screen.
 WRAM0	-	$C220	2	wSprite01StateData2End	instance	Sprite State Data	sprites	rom,live	
@@ -750,14 +750,14 @@ WRAM0	-	$C508	1	wShadowOAMBackupSprite00	alias	Tilemap	link	rom,live
 WRAM0	-	$C508	1	wShadowOAMBackupSprite00YCoord	alias	Tilemap	link	rom,live	
 WRAM0	-	$C508	1	wSurroundingTiles	alias	Tilemap	link	rom,live	The block of map tiles around the player, gathered so the collision check and the text engine can look at them without re-reading the block map.
 WRAM0	-	$C508	1	wTileMapBackup	alias	Tilemap	link	rom,live	A copy of the screen taken before a menu opens, so closing it can restore what was underneath without redrawing the map.
-WRAM0	-	$C509	1	wShadowOAMBackupSprite00XCoord	entry	Tilemap	sprites	live	
-WRAM0	-	$C50A	1	wShadowOAMBackupSprite00TileID	entry	Tilemap	sprites	live	
-WRAM0	-	$C50B	1	wShadowOAMBackupSprite00Attributes	entry	Tilemap	sprites	live	
-WRAM0	-	$C50C	1	wShadowOAMBackupSprite01YCoord	entry	Tilemap	sprites	live	
+WRAM0	-	$C509	1	wShadowOAMBackupSprite00XCoord	entry	Tilemap	sprites	live	Slot 0's screen X, in the saved copy of `wShadowOAM` this project's own battle-control save-safety check reads back against. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
+WRAM0	-	$C50A	1	wShadowOAMBackupSprite00TileID	entry	Tilemap	sprites	live	Slot 0's tile id, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
+WRAM0	-	$C50B	1	wShadowOAMBackupSprite00Attributes	entry	Tilemap	sprites	live	Slot 0's OAM attribute byte (palette, flip, priority), in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
+WRAM0	-	$C50C	1	wShadowOAMBackupSprite01YCoord	entry	Tilemap	sprites	live	Slot 1's screen Y, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
 WRAM0	-	$C50C	1	wShadowOAMBackupSprite01	alias	Tilemap	sprites	live	
-WRAM0	-	$C50D	1	wShadowOAMBackupSprite01XCoord	entry	Tilemap	sprites	rom,live	
-WRAM0	-	$C50E	1	wShadowOAMBackupSprite01TileID	entry	Tilemap	sprites	live	
-WRAM0	-	$C50F	1	wShadowOAMBackupSprite01Attributes	entry	Tilemap	sprites	live	
+WRAM0	-	$C50D	1	wShadowOAMBackupSprite01XCoord	entry	Tilemap	sprites	rom,live	Slot 1's screen X, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
+WRAM0	-	$C50E	1	wShadowOAMBackupSprite01TileID	entry	Tilemap	sprites	live	Slot 1's tile id, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
+WRAM0	-	$C50F	1	wShadowOAMBackupSprite01Attributes	entry	Tilemap	sprites	live	Slot 1's OAM attribute byte, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
 WRAM0	-	$C510	1	wShadowOAMBackupSprite02	instance	Tilemap	sprites	rom,live	
 WRAM0	-	$C510	1	wShadowOAMBackupSprite02YCoord	instance	Tilemap	sprites	rom,live	
 WRAM0	-	$C511	1	wShadowOAMBackupSprite02XCoord	instance	Tilemap	sprites	live	
@@ -948,7 +948,7 @@ WRAM0	-	$C5A4	1	wShadowOAMBackupSprite39YCoord	instance	Tilemap	sprites	live
 WRAM0	-	$C5A5	1	wShadowOAMBackupSprite39XCoord	instance	Tilemap	sprites	live	
 WRAM0	-	$C5A6	1	wShadowOAMBackupSprite39TileID	instance	Tilemap	sprites	live	
 WRAM0	-	$C5A7	1	wShadowOAMBackupSprite39Attributes	instance	Tilemap	sprites	rom,live	
-WRAM0	-	$C5A8	40	wShadowOAMBackupEnd	entry	Tilemap	sprites	rom,live	
+WRAM0	-	$C5A8	40	wShadowOAMBackupEnd	entry	Tilemap	sprites	rom,live	One past the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.
 WRAM0	-	$C5D0	280	wSerialEnemyMonsPatchList	entry	Tilemap	link	rom,live	The same list for the party the other console sent.
 WRAM0	-	$C6E8	1300	wTempPic	entry	Overworld Map	overworld	rom,live	Shares this address with `wOverworldMap` (see that entry) — 1,300 bytes reused for a different purpose outside the overworld.
 WRAM0	-	$C6E8	1300	wOverworldMap	alias	Overworld Map	overworld	rom,live	The live block map: the room the engine is actually drawing, with a three-block border. 1,300 bytes, which is the size of the largest map in the game.
@@ -1174,14 +1174,14 @@ WRAM0	-	$CD3F	1	wPlayerSpinWhileMovingUpOrDownAnimFrameDelay	alias	WRAM	scratch	
 WRAM0	-	$CD3F	1	wTrainerFacingDirection	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3F	1	wTrainerInfoTextBoxNextRowOffset	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CD3F	1	wSlotMachineWheel2Offset	instance	WRAM	scratch	rom,live	
-WRAM0	-	$CD40	1	wOptionsCancelCursorX	entry	WRAM	player	rom,live	
+WRAM0	-	$CD40	1	wOptionsCancelCursorX	entry	WRAM	player	rom,live	The menu cursor's X position on the OPTIONS screen when it was last backed out of, restored so re-opening the menu does not reset it. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 14 `$00B6`, during battle, intro, post-battle menus, walk/menus; values seen: [0, 3, 4, 116, 119].
 WRAM0	-	$CD40	1	wHUDCornerTile	alias	WRAM	player	rom,live	
 WRAM0	-	$CD40	1	wHiddenEventY	alias	WRAM	player	rom,live	
 WRAM0	-	$CD40	1	wHoFMonOrPlayer	alias	WRAM	player	rom,live	
 WRAM0	-	$CD40	1	wPlayerSpinInPlaceAnimSoundID	alias	WRAM	player	rom,live	
 WRAM0	-	$CD40	1	wTrainerScreenY	alias	WRAM	player	rom,live	
 WRAM0	-	$CD40	1	wSlotMachineWheel3Offset	instance	WRAM	scratch	rom,live	
-WRAM0	-	$CD41	1	wTrainerScreenX	entry	WRAM	events	rom,live	
+WRAM0	-	$CD41	1	wTrainerScreenX	entry	WRAM	events	rom,live	Screen X coordinate used while drawing the trainer/status screen. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 14 `$00B6`, during battle, intro, post-battle menus, walk/menus; values seen: [0, 13, 111, 120].
 WRAM0	-	$CD41	1	wDayCarePerLevelCost	alias	WRAM	events	rom,live	
 WRAM0	-	$CD41	1	wHUDTriangleTile	alias	WRAM	events	rom,live	
 WRAM0	-	$CD41	1	wHiddenEventX	alias	WRAM	events	rom,live	
@@ -1336,7 +1336,7 @@ WRAM0	-	$CFAF	2	wLoadedMonSpeedExp	entry	WRAM	scratch	rom,live	A base address `C
 WRAM0	-	$CFB1	2	wLoadedMonSpecialExp	entry	WRAM	scratch	live	
 WRAM0	-	$CFB3	2	wLoadedMonDVs	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFB5	4	wLoadedMonPP	entry	WRAM	scratch	live	
-WRAM0	-	$CFB9	1	wLoadedMonLevel	entry	WRAM	scratch	rom,live	
+WRAM0	-	$CFB9	1	wLoadedMonLevel	entry	WRAM	scratch	rom,live	The level of whichever Pokémon's data is currently loaded into the scratch buffers — used by the stat and experience calculations that need a level and nothing else about the Pokémon yet. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 15 `$4E1D`, during battle, intro, post-battle menus; values seen: [0, 5, 12].
 WRAM0	-	$CFBA	2	wLoadedMonMaxHP	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFBA	2	wLoadedMonStats	alias	WRAM	scratch	rom,live	
 WRAM0	-	$CFBC	2	wLoadedMonAttack	entry	WRAM	scratch	rom,live	
@@ -1346,7 +1346,7 @@ WRAM0	-	$CFC2	2	wLoadedMonSpecial	entry	WRAM	scratch	rom,live
 WRAM0	-	$CFC4	1	wFontLoaded	entry	WRAM	screen	rom,live	Whether the font tiles are in video RAM. The screen only reads back as text while this is set.
 WRAM0	-	$CFC5	1	wWalkCounter	entry	WRAM	overworld	rom,live	Counts 7 down to 0 across a walk animation. Non-zero means the engine owns every sprite's screen position, so anything writing sprite pixels must stand off until it reaches zero.
 WRAM0	-	$CFC6	1	wTileInFrontOfPlayer	entry	WRAM	overworld	rom,live	The tile the player is facing, which is what an A press interrogates.
-WRAM0	-	$CFC7	1	wAudioFadeOutControl	entry	WRAM	audio	rom,live	
+WRAM0	-	$CFC7	1	wAudioFadeOutControl	entry	WRAM	audio	rom,live	Whether a fade-out is currently in progress. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$1F80`, during battle-trigger, intro, walk/menus; values seen: [0, 10, 186, 189].
 WRAM0	-	$CFC8	1	wAudioFadeOutCounterReloadValue	entry	WRAM	audio	rom,live	
 WRAM0	-	$CFC9	1	wAudioFadeOutCounter	entry	WRAM	audio	rom,live	
 WRAM0	-	$CFCA	1	wLastMusicSoundID	entry	WRAM	audio	rom,live	What was playing before a sound effect took over, so it can be restored.
@@ -1356,7 +1356,7 @@ WRAM0	-	$CFCD	1	wEnemyMoveEffect	entry	WRAM	scratch	rom,live
 WRAM0	-	$CFCE	1	wEnemyMovePower	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFCF	1	wEnemyMoveType	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFD0	1	wEnemyMoveAccuracy	entry	WRAM	scratch	rom,live	
-WRAM0	-	$CFD1	1	wEnemyMoveMaxPP	entry	WRAM	scratch		
+WRAM0	-	$CFD1	1	wEnemyMoveMaxPP	entry	WRAM	scratch		The maximum PP of the move the opponent just selected, read from the move data table before the battle menu shows it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle; values seen: [25, 30].
 WRAM0	-	$CFD2	1	wPlayerMoveNum	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFD3	1	wPlayerMoveEffect	entry	WRAM	scratch	rom,live	
 WRAM0	-	$CFD4	1	wPlayerMovePower	entry	WRAM	scratch	rom,live	
@@ -1388,7 +1388,7 @@ WRAM0	-	$CFFC	2	wEnemyMonSpecial	entry	WRAM	battle	rom,live	Computed Special, bi
 WRAM0	-	$CFFE	4	wEnemyMonPP	entry	WRAM	battle	rom,live	Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2.
 WRAM0	-	$D002	5	wEnemyMonBaseStats	entry	WRAM	battle	rom,live	
 WRAM0	-	$D007	1	wEnemyMonActualCatchRate	entry	WRAM	battle	rom,live	The catch rate the ball routine actually reads — **not** the species' base rate, because Safari bait and rocks move it.
-WRAM0	-	$D008	1	wEnemyMonBaseExp	entry	WRAM	battle	rom	
+WRAM0	-	$D008	1	wEnemyMonBaseExp	entry	WRAM	battle	rom	The opponent's species' base experience yield, copied in when the battle starts so the reward can be computed without re-reading the species table afterward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger; values seen: [204].
 WRAM0	-	$D009	11	wBattleMonNick	entry	WRAM	battle	rom,live	The nickname shown above your side of the battle.
 WRAM0	-	$D014	1	wBattleMonSpecies	entry	WRAM	battle	rom,live	Species **internal index** — not the Pokedex number. `PokedexOrder` converts.
 WRAM0	-	$D014	1	wBattleMon	alias	WRAM	battle	rom,live,inv	Your active Pokemon as the battle engine sees it: a 29-byte `battle_struct`, **not** the 44-byte party shape. Original trainer, experience and stat experience are gone, so the level and the five stats sit at different offsets — confusing the two is the classic way to produce a level 6,400 Pokemon. The level here is also what a critical hit doubles: Generation 1 substitutes twice the level into the damage formula, so the worst critical outcome is above the best ordinary one.
@@ -1464,8 +1464,8 @@ WRAM0	-	$D07E	3	wSavedListScrollOffset	entry	WRAM	scratch	rom,live
 WRAM0	-	$D081	1	wBaseCoordX	entry	WRAM	battle	rom,live	
 WRAM0	-	$D082	1	wBaseCoordY	entry	WRAM	battle	rom,live	
 WRAM0	-	$D083	1	wLowHealthAlarm	entry	WRAM	battle	rom,live	The state of the low-HP beep, which is its own channel and outlives the battle music.
-WRAM0	-	$D084	1	wFBTileCounter	entry	WRAM	battle	rom,live	
-WRAM0	-	$D085	1	wMovingBGTilesCounter2	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D084	1	wFBTileCounter	entry	WRAM	battle	rom,live	How many tiles the current battle-transition animation has drawn so far. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 30 `$4016`, during battle, intro; 14 distinct values seen, 0-16.
+WRAM0	-	$D085	1	wMovingBGTilesCounter2	entry	WRAM	scratch	rom,live	A second counter for the moving-background battle-transition effect, alongside its own first counter. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$1ED9`, during battle, battle-trigger, intro, walk/menus; values seen: [0, 1, 2, 3, 4, 5, 6, 7].
 WRAM0	-	$D086	1	wSubAnimFrameDelay	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D087	1	wSubAnimCounter	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D088	1	wSaveFileStatus	entry	WRAM	scratch	rom,live	
@@ -1523,7 +1523,7 @@ WRAM0	-	$D0B3	2	wSpriteDecodeTable1Ptr	entry	WRAM	graphics	rom,live	The other ny
 WRAM0	-	$D0B5	1	wNameListIndex	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0B5	1	wCurSpecies	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D0B6	1	wNameListType	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D0B7	1	wPredefBank	entry	WRAM	system	rom,live	
+WRAM0	-	$D0B7	1	wPredefBank	entry	WRAM	system	rom,live	Which ROM bank the `Predef` call currently in progress needs mapped in — `Predef` is the game's own generic banked-subroutine-call mechanism, and this is where it stashes the destination. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 19 `$7E6F`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 12 distinct values seen, 0-44.
 WRAM0	-	$D0B8	1	wMonHIndex	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D0B8	1	wMonHeader	alias	WRAM	scratch	rom,live	
 WRAM0	-	$D0B9	1	wMonHBaseHP	entry	WRAM	scratch	rom,live	
@@ -1592,7 +1592,7 @@ WRAM0	-	$D131	1	wSavedSpriteScreenX	entry	WRAM	scratch	rom,live
 WRAM0	-	$D132	1	wSavedSpriteMapY	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D133	6	wSavedSpriteMapX	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D139	1	wWhichPrize	entry	WRAM	scratch	rom,live	
-WRAM0	-	$D13A	1	wIgnoreInputCounter	entry	WRAM	scratch	rom,live	
+WRAM0	-	$D13A	1	wIgnoreInputCounter	entry	WRAM	scratch	rom,live	A free-running counter (all 256 byte values observed) written on almost every frame — the byte itself, not its name, is what this playthrough actually established; whether it gates input the way its name suggests is not confirmed here. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$4E41`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 256 distinct values seen, 0-255.
 WRAM0	-	$D13B	1	wStepCounter	entry	WRAM	overworld	rom,live	
 WRAM0	-	$D13C	1	wNumberOfNoRandomBattleStepsLeft	entry	WRAM	scratch	rom,live	
 WRAM0	-	$D13D	1	wPrize1	entry	WRAM	bag	rom,live	
@@ -1890,7 +1890,7 @@ WRAM0	-	$D5A3	1	wUnusedMapVariable	entry	Main Data	overworld	rom,live
 WRAM0	-	$D5A4	2	wPlayerCoins	entry	Main Data	player	rom,live	Game Corner coins, two bytes of BCD. A separate currency from money with its own cap.
 WRAM0	-	$D5A6	32	wToggleableObjectFlags	entry	Main Data	events	rom,live	One bit per object that can be removed from a map — an item ball taken, a boulder moved. This is the *missable object* system: the flag decides whether the object is placed when the map loads.
 WRAM0	-	$D5C6	7	wToggleableObjectFlagsEnd	entry	Main Data	events	live	
-WRAM0	-	$D5CD	1	wSavedSpriteImageIndex	entry	Main Data	events	rom,live	
+WRAM0	-	$D5CD	1	wSavedSpriteImageIndex	entry	Main Data	events	rom,live	The picture id a sprite is reloaded with once its toggleable-object state changes (appearing after being hidden, or the reverse). Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4B30`, during battle-trigger, intro, walk/menus; 28 distinct values seen, 0-255.
 WRAM0	-	$D5CE	34	wToggleableObjectList	entry	Main Data	events	rom,live	Which map objects are currently hidden, rebuilt whenever a map loads.
 WRAM0	-	$D5F0	1	wOaksLabCurScript	entry	Main Data	events	rom,live	Which step of Oak's laboratory's map script the game is on. **Measured**: losing the starter battle to the rival leaves it at `SCRIPT_OAKSLAB_RIVAL_STARTS_EXIT`, which is exactly where winning leaves it — `HandlePlayerBlackOut` returns without blacking the player out when `wCurOpponent` is `OPP_RIVAL1` and `wCurMap` is `OAKS_LAB`, and the map script heals the party on its next tick.
 WRAM0	-	$D5F0	1	wGameProgressFlags	alias	Main Data	events	rom,live	
@@ -2699,7 +2699,7 @@ HRAM	-	$FF8C	1	hSlidingRegionSize	alias	HRAM	system	rom,live
 HRAM	-	$FF8C	1	hSpriteHeight	alias	HRAM	system	rom,live	
 HRAM	-	$FF8C	1	hTextID	alias	HRAM	system	rom,live	
 HRAM	-	$FF8C	1	hDownArrowBlinkCount2	instance	HRAM	system	rom,live	
-HRAM	-	$FF8D	1	hEnemySpeed	entry	HRAM	system	rom,live	
+HRAM	-	$FF8D	1	hEnemySpeed	entry	HRAM	system	rom,live	The opponent's Speed stat, kept in high RAM for the turn-order check that compares it against the player's own Speed. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 5 `$78CF`, during battle, intro, walk/menus; 12 distinct values seen, 0-72.
 HRAM	-	$FF8D	1	hLoadSpriteTemp1	alias	HRAM	system	rom,live	
 HRAM	-	$FF8D	1	hSlideDirection	alias	HRAM	system	rom,live	
 HRAM	-	$FF8D	1	hSpriteFacingDirection	alias	HRAM	system	rom,live	
@@ -2707,18 +2707,18 @@ HRAM	-	$FF8D	1	hSpriteImageIndex	alias	HRAM	system	rom,live
 HRAM	-	$FF8D	1	hSpriteMovementByte2	alias	HRAM	system	rom,live	
 HRAM	-	$FF8D	1	hSpriteOffset	alias	HRAM	system	rom,live	
 HRAM	-	$FF8D	1	hVRAMSlot	alias	HRAM	system	rom,live	
-HRAM	-	$FF8E	1	hHalveItemPrices	entry	HRAM	system	rom	
+HRAM	-	$FF8E	1	hHalveItemPrices	entry	HRAM	system	rom	Set while browsing the PC's item storage, which sells back at half the mart price. Measured across a real playthrough (walk, a forced battle, menus): written from bank 5 `$7909`, during walk/menus; values seen: [1].
 HRAM	-	$FF8E	1	hFourTileSpriteCount	alias	HRAM	system	rom	
 HRAM	-	$FF8E	1	hLoadSpriteTemp2	instance	HRAM	system	rom	
-HRAM	-	$FF8F	1	hCollidingSpriteOffset	entry	HRAM	system	rom	
+HRAM	-	$FF8F	1	hCollidingSpriteOffset	entry	HRAM	system	rom	The OAM-buffer offset of whichever sprite the player is about to walk into, computed fresh each step before the collision check reads it. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4B21` and bank 1 `$4CA5`, during battle-trigger, intro, walk/menus; 31 distinct values seen, 0-240.
 HRAM	-	$FF8F	1	hSpriteOffset2	alias	HRAM	system	rom	
 HRAM	-	$FF90	1	hCollidingSpriteTempYValue	entry	HRAM	system	rom	Shares this HRAM byte with `hOAMBufferOffset` (see that entry) — a different routine's temporary value, at a moment `PrepareOAMData` is not running.
 HRAM	-	$FF90	1	hOAMBufferOffset	alias	HRAM	system	rom	How far `PrepareOAMData` has got through `wShadowOAM`, in bytes. It is eight bits and **nothing bounds it at the buffer's 160**, which is how sixteen drawable sprites can run the clear loop past `wShadowOAMEnd` and into the screen buffer behind it.
 HRAM	-	$FF91	1	hCollidingSpriteTempXValue	entry	HRAM	system	rom	
 HRAM	-	$FF91	1	hSpriteScreenX	alias	HRAM	system	rom	
-HRAM	-	$FF92	1	hCollidingSpriteAdjustedDistance	entry	HRAM	system	rom	
+HRAM	-	$FF92	1	hCollidingSpriteAdjustedDistance	entry	HRAM	system	rom	Distance (adjusted for direction) between the player and the sprite `hCollidingSpriteOffset` names, used to decide whether the step is blocked. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4BD4`, during battle-trigger, intro, walk/menus; 102 distinct values seen, 0-254.
 HRAM	-	$FF92	1	hSpriteScreenY	alias	HRAM	system	rom	
-HRAM	-	$FF93	1	hTilePlayerStandingOn	entry	HRAM	system	rom	
+HRAM	-	$FF93	1	hTilePlayerStandingOn	entry	HRAM	system	rom	The tile id under the player's own feet, read fresh every step for the collision and encounter checks. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4C5F` and bank 1 `$4E44`, during intro, walk/menus; 10 distinct values seen, 16-128.
 HRAM	-	$FF94	1	hSpritePriority	entry	HRAM	system	rom	
 HRAM	-	$FF95	1	hSwapTemp	entry	HRAM	system	rom	One of several unrelated scratch uses sharing this HRAM byte — elsewhere it also holds the software-divide/multiply results `hDividend`/`hProduct`/`hQuotient` (see those entries) at different moments.
 HRAM	-	$FF95	1	hDividend	alias	HRAM	system	rom	Input to the software divide routine — the CPU has no divide instruction.
@@ -2749,7 +2749,7 @@ HRAM	-	$FF9A	1	hDivideBuffer	alias	HRAM	system	rom
 HRAM	-	$FF9B	1	hNPCPlayerRelativePosPerspective	entry	HRAM	system	rom	
 HRAM	-	$FF9B	1	hMultiplyBuffer	alias	HRAM	system	rom	
 HRAM	-	$FF9C	1	hSavedNumToPrint	entry	HRAM	system	rom	
-HRAM	-	$FF9D	2	hNPCPlayerRelativePosFlags	entry	HRAM	system	rom	
+HRAM	-	$FF9D	2	hNPCPlayerRelativePosFlags	entry	HRAM	system	rom	Which side of the player an NPC is on, computed while deciding whether that NPC's sight line reaches the player. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 13 `$7D65`, during battle, intro, post-battle menus; values seen: [0, 1, 2, 4, 5, 6, 85].
 HRAM	-	$FF9F	1	hUnusedCoinsByte	entry	HRAM	system	rom	
 HRAM	-	$FF9F	1	hMoney	alias	HRAM	system	rom	
 HRAM	-	$FFA0	2	hCoins	entry	HRAM	system	rom	
@@ -2764,7 +2764,7 @@ HRAM	-	$FFAD	1	hSerialReceiveData	entry	HRAM	link	rom
 HRAM	-	$FFAE	1	hSCX	entry	HRAM	system	rom,live	The background's horizontal scroll as the game wants it, copied to the hardware in the vertical blank.
 HRAM	-	$FFAF	1	hSCY	entry	HRAM	system	rom,live	The background's vertical scroll, likewise.
 HRAM	-	$FFB0	1	hWY	entry	HRAM	system	rom,live	Where the window layer starts. Gen 1 draws almost everything through the window, which is why reading `$9800` returns spaces.
-HRAM	-	$FFB1	1	hJoyLast	entry	HRAM	system	rom,live	
+HRAM	-	$FFB1	1	hJoyLast	entry	HRAM	system	rom,live	The joypad reading from the previous frame, kept so the input handler can tell a fresh press from a held button. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$4015`, during battle, battle-trigger, intro, post-battle menus, walk/menus; values seen: [0, 1, 2, 8, 16, 32, 64, 128].
 HRAM	-	$FFB2	1	hJoyReleased	entry	HRAM	system	rom,live	Buttons that came up this frame.
 HRAM	-	$FFB3	1	hJoyPressed	entry	HRAM	system	rom,live	Buttons that went down this frame — a held button appears once.
 HRAM	-	$FFB4	1	hJoyHeld	entry	HRAM	system	rom,live	Buttons currently held.
@@ -2772,31 +2772,31 @@ HRAM	-	$FFB5	1	hJoy5	entry	HRAM	system	rom,live
 HRAM	-	$FFB6	1	hJoy6	entry	HRAM	system	rom	
 HRAM	-	$FFB7	1	hJoy7	entry	HRAM	system	rom	
 HRAM	-	$FFB8	1	hLoadedROMBank	entry	HRAM	system	rom,live	Which switched ROM bank is mapped. Kept in high RAM so an interrupt can restore it.
-HRAM	-	$FFB9	1	hSavedROMBank	entry	HRAM	system	rom,live	
+HRAM	-	$FFB9	1	hSavedROMBank	entry	HRAM	system	rom,live	The ROM bank in use before a `Bankswitch` call, restored once the called routine returns. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$23E9` and bank 15 `$23E9`, during battle, battle-trigger, intro, post-battle menus; 9 distinct values seen, 1-37.
 HRAM	-	$FFBA	1	hAutoBGTransferEnabled	entry	HRAM	system	rom,live	
 HRAM	-	$FFBB	1	hAutoBGTransferPortion	entry	HRAM	system	rom,live	
 HRAM	-	$FFBC	2	hAutoBGTransferDest	entry	HRAM	system	rom,live	
 HRAM	-	$FFBE	1	hRedrawMapViewRowOffset	entry	HRAM	system	rom	
-HRAM	-	$FFBF	2	hSPTemp	entry	HRAM	system	rom,live	
-HRAM	-	$FFC1	2	hVBlankCopyBGSource	entry	HRAM	system	rom	
-HRAM	-	$FFC3	2	hVBlankCopyBGDest	entry	HRAM	system	rom	
-HRAM	-	$FFC5	1	hVBlankCopyBGNumRows	entry	HRAM	system	rom	
+HRAM	-	$FFBF	2	hSPTemp	entry	HRAM	system	rom,live	Scratch for the stack pointer during a low-level routine that needs to save and restore it. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1D5E`, during intro; values seen: [223].
+HRAM	-	$FFC1	2	hVBlankCopyBGSource	entry	HRAM	system	rom	Source address for a background-tile copy the VBlank handler performs — part of the small queued-copy mechanism that keeps VRAM writes inside the vertical blank. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$190C` and bank 1 `$1DFE`, during intro, walk/menus; values seen: [0, 24, 144, 160].
+HRAM	-	$FFC3	2	hVBlankCopyBGDest	entry	HRAM	system	rom	Destination address for the same queued VBlank background-tile copy `hVBlankCopyBGSource` names. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1903`, during intro, walk/menus; values seen: [0, 128, 192].
+HRAM	-	$FFC5	1	hVBlankCopyBGNumRows	entry	HRAM	system	rom	How many rows the queued VBlank background-tile copy transfers. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1909`, during intro; values seen: [6].
 HRAM	-	$FFC6	1	hVBlankCopySize	entry	HRAM	system	rom,live	
 HRAM	-	$FFC7	2	hVBlankCopySource	entry	HRAM	system	rom,live	
 HRAM	-	$FFC9	2	hVBlankCopyDest	entry	HRAM	system	rom,live	
-HRAM	-	$FFCB	1	hVBlankCopyDoubleSize	entry	HRAM	system	rom,live	
-HRAM	-	$FFCC	2	hVBlankCopyDoubleSource	entry	HRAM	system	rom,live	
-HRAM	-	$FFCE	2	hVBlankCopyDoubleDest	entry	HRAM	system	rom,live	
+HRAM	-	$FFCB	1	hVBlankCopyDoubleSize	entry	HRAM	system	rom,live	How many bytes the VBlank handler's other queued copy (for 2bpp tile data, which moves in pairs) transfers. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 4 `$1E1F`, during battle, intro, walk/menus; values seen: [0, 3, 6, 8].
+HRAM	-	$FFCC	2	hVBlankCopyDoubleSource	entry	HRAM	system	rom,live	Source address for the VBlank handler's queued 2bpp tile-data copy. Measured across a real playthrough (walk, a forced battle, menus): written from bank 4 `$1E51`, during battle, intro, walk/menus; values seen: [0, 64, 128, 152, 192, 200].
+HRAM	-	$FFCE	2	hVBlankCopyDoubleDest	entry	HRAM	system	rom,live	Destination address for the VBlank handler's queued 2bpp tile-data copy. Measured across a real playthrough (walk, a forced battle, menus): written from bank 4 `$1E49` and bank 4 `$189D`, during battle, intro, walk/menus; values seen: [0, 48, 128, 144, 208].
 HRAM	-	$FFD0	1	hRedrawRowOrColumnMode	entry	HRAM	system	rom	
 HRAM	-	$FFD1	2	hRedrawRowOrColumnDest	entry	HRAM	system	rom	
 HRAM	-	$FFD3	1	hRandomAdd	entry	HRAM	rng	rom,live,inv	High byte of the 16-bit seed. `Random_` mixes the hardware divider register `rDIV` in on **every** call, which is why a Gen 1 roll is not reproducible from the seed alone. **Verified live**: the harness requires both bytes to move within a second of ordinary play.
 HRAM	-	$FFD4	1	hRandomSub	entry	HRAM	rng	rom,live,inv	Low byte of the seed, advanced by a subtract where the high byte is advanced by an add.
 HRAM	-	$FFD5	1	hFrameCounter	entry	HRAM	system	rom,live	
 HRAM	-	$FFD6	1	hVBlankOccurred	entry	HRAM	system	rom,live	Set by `DelayFrame` and cleared by the VBlank handler; the game spins here until it clears. **A machine parked in that loop is usually healthy** — a Game Boy spends most of every frame in it — so finding the CPU here proves nothing on its own. What distinguishes a real hang is interrupts: stuck reads `IME` low with the VBlank bit set in both `IE` and `IF`.
-HRAM	-	$FFD7	1	hTileAnimations	entry	HRAM	system	rom	
+HRAM	-	$FFD7	1	hTileAnimations	entry	HRAM	system	rom	Which of the game's animated tiles (water, flowers) are currently enabled for the loaded tileset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 15 `$6C73`, during battle, walk/menus; values seen: [0, 2].
 HRAM	-	$FFD8	2	hMovingBGTilesCounter1	entry	HRAM	system	rom	
-HRAM	-	$FFDA	1	hCurrentSpriteOffset	entry	HRAM	system	rom	
-HRAM	-	$FFDB	1	hInteractedWithBookshelf	entry	HRAM	system	rom	
+HRAM	-	$FFDA	1	hCurrentSpriteOffset	entry	HRAM	system	rom	The OAM-buffer offset of whichever sprite `PrepareOAMData` is currently placing — steps by 16 (one shadow-OAM entry's worth) once per sprite, which is exactly the multiples-of-16 sequence measured. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4C3D`, during intro, walk/menus; 16 distinct values seen, 0-240.
+HRAM	-	$FFDB	1	hInteractedWithBookshelf	entry	HRAM	system	rom	Set when the player has just read a bookshelf, so the same A press does not immediately re-trigger it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during walk/menus; values seen: [255].
 HRAM	-	$FFDB	1	hDexRatingNumMonsSeen	alias	HRAM	system	rom	
 HRAM	-	$FFDB	1	hGymGateIndex	alias	HRAM	system	rom	
 HRAM	-	$FFDB	1	hGymTrashCanRandNumMask	alias	HRAM	system	rom	
@@ -2818,26 +2818,26 @@ HRAM	-	$FFDD	3	hOaksAideNumMonsOwned	entry	HRAM	system	rom
 HRAM	-	$FFDD	3	hPlayerXCoord	alias	HRAM	system	rom	
 HRAM	-	$FFE0	1	hUnlockedSilphCoDoors	entry	HRAM	system	rom	
 HRAM	-	$FFE0	1	hBackupGymGateIndex	alias	HRAM	system	rom	
-HRAM	-	$FFE1	3	hStartTileID	entry	HRAM	system	rom	
+HRAM	-	$FFE1	3	hStartTileID	entry	HRAM	system	rom	The tile id `PrepareOAMData` begins placing sprites from — the base of whatever block of VRAM the current sprite set was loaded into. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle; values seen: [0, 49].
 HRAM	-	$FFE4	1	hNewPartyLength	entry	HRAM	system	rom	
-HRAM	-	$FFE5	1	hIsToggleableObjectOff	entry	HRAM	system	rom	
+HRAM	-	$FFE5	1	hIsToggleableObjectOff	entry	HRAM	system	rom	Whether the toggleable object (an item ball, a pushed boulder) currently being drawn has been removed from the map. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$71C5`, during walk/menus; values seen: [0, 1].
 HRAM	-	$FFE5	1	hDividend2	alias	HRAM	system	rom	
 HRAM	-	$FFE6	1	hDivisor2	entry	HRAM	system	rom	
 HRAM	-	$FFE7	1	hQuotient2	entry	HRAM	system	rom	
-HRAM	-	$FFE8	1	hMapROMBank	entry	HRAM	system	rom	
+HRAM	-	$FFE8	1	hMapROMBank	entry	HRAM	system	rom	Which ROM bank the current map's own data (its block map, text and scripts) lives in. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$12CB`, during intro, walk/menus; values seen: [6, 7, 17, 21].
 HRAM	-	$FFE9	1	hSpriteVRAMSlotAndFacing	entry	HRAM	system	rom	
-HRAM	-	$FFEA	1	hSpriteAnimFrameCounter	entry	HRAM	system	rom	
+HRAM	-	$FFEA	1	hSpriteAnimFrameCounter	entry	HRAM	system	rom	Scratch copy of an animation frame counter, used while `PrepareOAMData` is deciding which tiles a walking sprite needs this frame. Measured across a real playthrough (walk, a forced battle, menus): changed value, during walk/menus; values seen: [255].
 HRAM	-	$FFEA	1	hCoordsInFrontOfPlayerMatch	alias	HRAM	system	rom	
-HRAM	-	$FFEB	1	hItemAlreadyFound	entry	HRAM	system	rom	
+HRAM	-	$FFEB	1	hItemAlreadyFound	entry	HRAM	system	rom	Set while checking a map's hidden-item flags, so the same tile is not offered twice. Measured across a real playthrough (walk, a forced battle, menus): written from bank 17 `$69A4` and bank 17 `$3EEC`, during walk/menus; values seen: [0, 255].
 HRAM	-	$FFEB	1	hSpriteScreenYCoord	alias	HRAM	system	rom	
 HRAM	-	$FFEC	1	hSavedMapTextPtr	entry	HRAM	system	rom	
 HRAM	-	$FFEC	1	hSpriteScreenXCoord	alias	HRAM	system	rom	
 HRAM	-	$FFED	1	hSpriteMapYCoord	entry	HRAM	system	rom	
-HRAM	-	$FFEE	5	hDidntFindAnyHiddenEvent	entry	HRAM	system	rom	
+HRAM	-	$FFEE	5	hDidntFindAnyHiddenEvent	entry	HRAM	system	rom	Set when a check of the map's hidden-object flags finds nothing at the player's tile. Measured across a real playthrough (walk, a forced battle, menus): written from bank 17 `$69A7` and bank 17 `$69FE`, during walk/menus; values seen: [0, 255].
 HRAM	-	$FFEE	5	hSpriteMapXCoord	alias	HRAM	system	rom	
-HRAM	-	$FFF3	1	hWhoseTurn	entry	HRAM	system	rom	
+HRAM	-	$FFF3	1	hWhoseTurn	entry	HRAM	system	rom	Whose turn the battle engine is currently resolving — the player's or the opponent's. Measured across a real playthrough (walk, a forced battle, menus): written from bank 15 `$54E4`, during battle; values seen: [0, 1].
 HRAM	-	$FFF4	2	hClearLetterPrintingDelayFlags	entry	HRAM	system	rom	Clears the text delay for one message.
-HRAM	-	$FFF6	1	hUILayoutFlags	entry	HRAM	system	rom	
+HRAM	-	$FFF6	1	hUILayoutFlags	entry	HRAM	system	rom	Which optional pieces of the current menu's layout are drawn (a border, a second column, and so on). Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 15 `$5331`, during battle; values seen: [0, 2, 4].
 HRAM	-	$FFF7	1	hFieldMoveMonMenuTopMenuItemX	entry	HRAM	system	rom	
 HRAM	-	$FFF8	1	hJoyInput	entry	HRAM	system	rom,live	Buttons as the hardware reports them this frame.
 HRAM	-	$FFF9	6	hDisableJoypadPolling	entry	HRAM	system	rom,live	Set while a cutscene is feeding the game canned button presses.

@@ -15,6 +15,7 @@ would take. The maps themselves live with the cartridge they are about, under
 | **[consuming it](consuming.md)** | fetching, vendoring, pinning, and the anti-drift gate worth copying |
 | **[verification](verification.md)** | the evidence tiers, the invariants, and the loop that keeps them true |
 | **[data issues](data-issues.md)** | the log of times this atlas's own data was wrong, and how a new one gets caught and corrected — distinct from [discoveries](../atlases/pokemon-rb/docs/discoveries.md), which is faults in the *game* |
+| **[observation](observation.md)** | generating descriptions and linkage by watching a real playthrough, once the well of already-written-down evidence runs dry |
 | **[adding an atlas](adding-an-atlas.md)** | what a second cartridge would cost, and what you would have to hand over |
 | **[provenance](provenance.md)** | where the data came from, what is ours and what is the community's |
 | **[licence](licensing.md)** | CC BY-SA 4.0 over the atlas content, MIT over the tooling and the schema — and the honest longer answer about facts, names and prose |

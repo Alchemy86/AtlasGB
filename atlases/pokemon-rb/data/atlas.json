@@ -906,7 +906,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Where a channel's command stream resumes after a subroutine call — the return-address stack for `wChannelCommandPointers`' own program counter. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$530A`, during battle-trigger, intro, walk/menus; 9 distinct values seen, 0-235.",
    "addr_int": 49174
   },
   {
@@ -986,7 +986,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which of the four duty-cycle waveforms each square channel is currently using. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49222
   },
   {
@@ -1002,7 +1002,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left before vibrato starts on each channel, counting down from `wChannelVibratoDelayCounterReloadValues`. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 31 `$51F8`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 10 distinct values seen, 0-9.",
    "addr_int": 49230
   },
   {
@@ -1018,7 +1018,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far each channel's vibrato swings the pitch. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 33].",
    "addr_int": 49238
   },
   {
@@ -1066,7 +1066,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The value `wChannelVibratoDelayCounters` is reloaded with once its countdown reaches zero. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 6, 9].",
    "addr_int": 49262
   },
   {
@@ -1082,7 +1082,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many steps a channel's pitch slide takes to complete. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49270
   },
   {
@@ -1098,7 +1098,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How far the pitch moves each step of a channel's slide. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49278
   },
   {
@@ -1114,7 +1114,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The sub-integer remainder of `wChannelPitchSlideFrequencySteps`, carried so a slow slide still lands exactly on its target frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49286
   },
   {
@@ -1130,7 +1130,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The sub-integer remainder of a channel's pitch as its slide moves it, kept beside the whole-number frequency bytes. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49294
   },
   {
@@ -1146,7 +1146,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The high byte of each channel's pitch as a slide is moving it toward the target frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49302
   },
   {
@@ -1178,7 +1178,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The high byte of the frequency a channel's pitch slide is moving toward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49318
   },
   {
@@ -1194,7 +1194,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The low byte of the frequency a channel's pitch slide is moving toward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49326
   },
   {
@@ -1226,7 +1226,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many repeats are left of a looped section of a channel's command stream. Measured across a real playthrough (walk, a forced battle, menus): written from bank 2 `$5A8A`, during intro; values seen: [0, 1].",
    "addr_int": 49342
   },
   {
@@ -1242,7 +1242,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many frames each of a channel's notes lasts. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$5368` and bank 2 `$5A8A`, during battle-trigger, intro, walk/menus; values seen: [0, 1, 8, 12].",
    "addr_int": 49350
   },
   {
@@ -1258,7 +1258,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The sub-frame remainder of a channel's note-length countdown (`wChannelNoteDelayCounters`), carried so a note's length stays accurate over many notes. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$55C3` and bank 8 `$5CD0`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 12 distinct values seen, 0-240.",
    "addr_int": 49358
   },
   {
@@ -1274,7 +1274,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Each channel's current octave. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$54E2` and bank 8 `$5BEF`, during battle, battle-trigger, intro, post-battle menus, walk/menus; values seen: [0, 4, 5, 6].",
    "addr_int": 49366
   },
   {
@@ -1290,7 +1290,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Each channel's current volume. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$5393` and bank 8 `$5AA0`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 15 distinct values seen, 0-231.",
    "addr_int": 49374
   },
   {
@@ -1306,7 +1306,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which of the wave channel's four instrument samples the current music track is using. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger, intro; values seen: [0, 1].",
    "addr_int": 49382
   },
   {
@@ -1322,7 +1322,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which of the wave channel's four instrument samples the current sound effect is using — kept separate from `wMusicWaveInstrument` so a sound effect borrowing the wave channel does not change what the music resumes with. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49383
   },
   {
@@ -1338,7 +1338,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The current music track's tempo. Measured across a real playthrough (walk, a forced battle, menus): written from bank 2 `$5A7D`, during battle-trigger, intro; values seen: [0, 1].",
    "addr_int": 49384
   },
   {
@@ -1354,7 +1354,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The current sound effect's tempo, kept separate from `wMusicTempo` for the same reason `wSfxWaveInstrument` is. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 2 `$5A80`, during battle, intro; values seen: [0, 1].",
    "addr_int": 49386
   },
   {
@@ -1370,7 +1370,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Pointer to the currently-playing sound effect's own header in ROM. Measured across a real playthrough (walk, a forced battle, menus): written from bank 31 `$59CE`, during battle, intro; values seen: [0, 64, 65, 66].",
    "addr_int": 49388
   },
   {
@@ -1434,7 +1434,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Added to a channel's frequency bytes as a note plays — the vibrato and pitch-slide effects both work by writing here rather than by touching the note's own base frequency. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle, intro; values seen: [0, 32, 96, 128, 238, 248].",
    "addr_int": 49393
   },
   {
@@ -1450,7 +1450,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Per-channel adjustment to the base tempo. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle, intro; values seen: [0, 1, 16, 48, 64, 96, 128].",
    "addr_int": 49394
   },
   {
@@ -1626,7 +1626,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left on the player sprite's current animation frame before it advances to the next one. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4E9E`, during intro, walk/menus; values seen: [0, 1, 2, 3, 4].",
    "addr_int": 49415
   },
   {
@@ -1642,7 +1642,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which frame of the player sprite's walking/facing animation is currently showing. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4EAA` and bank 1 `$4E81`, during intro, walk/menus; values seen: [0, 1, 2, 3].",
    "addr_int": 49416
   },
   {
@@ -1673,7 +1673,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The player sprite's own screen Y position, adjusted for the mid-step camera offset — distinct from `wSpritePlayerStateData2YDisplacement`, which is the raw displacement this is derived from. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4CA3`, during intro, walk/menus; values seen: [0, 57, 64, 71].",
    "addr_int": 49418
   },
   {
@@ -1688,7 +1688,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The player sprite's own screen X position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4CA0`, during intro, walk/menus; values seen: [0, 57, 64, 71].",
    "addr_int": 49419
   },
   {
@@ -1862,7 +1862,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left on object slot 1's current animation frame before it advances. Same field as `wSpritePlayerStateData1IntraAnimFrameCounter`, one slot over. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49431
   },
   {
@@ -1878,7 +1878,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which frame of object slot 1's animation is currently showing. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49432
   },
   {
@@ -1909,7 +1909,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's screen Y position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4BE5` and bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 16, 32, 208, 224, 240].",
    "addr_int": 49434
   },
   {
@@ -1924,7 +1924,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's screen X position, adjusted for the mid-step camera offset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4BEB` and bank 28 `$00B6`, during intro, walk/menus; 9 distinct values seen, 0-240.",
    "addr_int": 49435
   },
   {
@@ -5217,7 +5217,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The player sprite's own raw pixel offset from its tile during a step, before the mid-step adjustment `wSpritePlayerStateData1YAdjusted` applies. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49666
   },
   {
@@ -5232,7 +5232,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "The player sprite's own raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49667
   },
   {
@@ -5279,7 +5279,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The player sprite's current movement-script instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49670
   },
   {
@@ -5295,7 +5295,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Whether the player sprite draws over or under the tall-grass tile beneath it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49671
   },
   {
@@ -5310,7 +5310,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left before the player sprite's movement script advances to its next instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49672
   },
   {
@@ -5326,7 +5326,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The direction the player sprite was facing before its current movement instruction, restored if the instruction is a brief one (like a single look) rather than a walk. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49673
   },
   {
@@ -5374,7 +5374,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's own walk-animation frame counter, the sibling of `wSpritePlayerStateData2WalkAnimationCounter`. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49680
   },
   {
@@ -5422,7 +5422,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 8].",
    "addr_int": 49682
   },
   {
@@ -5437,7 +5437,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's raw pixel offset from its tile during a step. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro, walk/menus; values seen: [0, 8].",
    "addr_int": 49683
   },
   {
@@ -5484,7 +5484,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Object slot 1's current movement-script instruction. Measured across a real playthrough (walk, a forced battle, menus): written from bank 28 `$00B6`, during intro; values seen: [0, 255].",
    "addr_int": 49686
   },
   {
@@ -5500,7 +5500,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Whether object slot 1 draws over or under the tall-grass tile beneath it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49687
   },
   {
@@ -5515,7 +5515,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Frames left before object slot 1's movement script advances. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$5069`, during intro, walk/menus; 88 distinct values seen, 0-126.",
    "addr_int": 49688
   },
   {
@@ -5531,7 +5531,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The direction object slot 1 was facing before its current movement instruction. Measured across a real playthrough (walk, a forced battle, menus): changed value, during intro; values seen: [0].",
    "addr_int": 49689
   },
   {
@@ -11631,7 +11631,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 0's screen X, in the saved copy of `wShadowOAM` this project's own battle-control save-safety check reads back against. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50441
   },
   {
@@ -11646,7 +11646,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 0's tile id, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50442
   },
   {
@@ -11661,7 +11661,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 0's OAM attribute byte (palette, flip, priority), in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50443
   },
   {
@@ -11676,7 +11676,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's screen Y, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50444
   },
   {
@@ -11707,7 +11707,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's screen X, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50445
   },
   {
@@ -11722,7 +11722,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's tile id, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50446
   },
   {
@@ -11737,7 +11737,7 @@
    "verify": [
     "live"
    ],
-   "desc": "",
+   "desc": "Slot 1's OAM attribute byte, in the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50447
   },
   {
@@ -14639,7 +14639,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "One past the saved copy of `wShadowOAM`. Measured: all eight fields of both backed-up slots are written together, from the same two nearby routines (bank 25/26, `$0F39`-`$0F42`) — one saves the backup, the other restores it.",
    "addr_int": 50600
   },
   {
@@ -18244,7 +18244,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The menu cursor's X position on the OPTIONS screen when it was last backed out of, restored so re-opening the menu does not reset it. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 14 `$00B6`, during battle, intro, post-battle menus, walk/menus; values seen: [0, 3, 4, 116, 119].",
    "addr_int": 52544
   },
   {
@@ -18356,7 +18356,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Screen X coordinate used while drawing the trainer/status screen. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 14 `$00B6`, during battle, intro, post-battle menus, walk/menus; values seen: [0, 13, 111, 120].",
    "addr_int": 52545
   },
   {
@@ -20826,7 +20826,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The level of whichever Pokémon's data is currently loaded into the scratch buffers — used by the stat and experience calculations that need a level and nothing else about the Pokémon yet. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 15 `$4E1D`, during battle, intro, post-battle menus; values seen: [0, 5, 12].",
    "addr_int": 53177
   },
   {
@@ -20986,7 +20986,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Whether a fade-out is currently in progress. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$1F80`, during battle-trigger, intro, walk/menus; values seen: [0, 10, 186, 189].",
    "addr_int": 53191
   },
   {
@@ -21143,7 +21143,7 @@
    "sect": "WRAM",
    "group": "scratch",
    "verify": [],
-   "desc": "",
+   "desc": "The maximum PP of the move the opponent just selected, read from the move data table before the battle menu shows it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle; values seen: [25, 30].",
    "addr_int": 53201
   },
   {
@@ -21652,7 +21652,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The opponent's species' base experience yield, copied in when the battle starts so the reward can be computed without re-reading the species table afterward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger; values seen: [204].",
    "addr_int": 53256
   },
   {
@@ -22868,7 +22868,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many tiles the current battle-transition animation has drawn so far. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 30 `$4016`, during battle, intro; 14 distinct values seen, 0-16.",
    "addr_int": 53380
   },
   {
@@ -22884,7 +22884,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A second counter for the moving-background battle-transition effect, alongside its own first counter. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$1ED9`, during battle, battle-trigger, intro, walk/menus; values seen: [0, 1, 2, 3, 4, 5, 6, 7].",
    "addr_int": 53381
   },
   {
@@ -23812,7 +23812,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Which ROM bank the `Predef` call currently in progress needs mapped in — `Predef` is the game's own generic banked-subroutine-call mechanism, and this is where it stashes the destination. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 19 `$7E6F`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 12 distinct values seen, 0-44.",
    "addr_int": 53431
   },
   {
@@ -24911,7 +24911,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A free-running counter (all 256 byte values observed) written on almost every frame — the byte itself, not its name, is what this playthrough actually established; whether it gates input the way its name suggests is not confirmed here. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 6 `$4E41`, during battle, battle-trigger, intro, post-battle menus, walk/menus; 256 distinct values seen, 0-255.",
    "addr_int": 53562
   },
   {
@@ -29576,7 +29576,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The picture id a sprite is reloaded with once its toggleable-object state changes (appearing after being hidden, or the reverse). Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4B30`, during battle-trigger, intro, walk/menus; 28 distinct values seen, 0-255.",
    "addr_int": 54733
   },
   {
@@ -42006,7 +42006,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's Speed stat, kept in high RAM for the turn-order check that compares it against the player's own Speed. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 5 `$78CF`, during battle, intro, walk/menus; 12 distinct values seen, 0-72.",
    "addr_int": 65421
   },
   {
@@ -42133,7 +42133,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Set while browsing the PC's item storage, which sells back at half the mart price. Measured across a real playthrough (walk, a forced battle, menus): written from bank 5 `$7909`, during walk/menus; values seen: [1].",
    "addr_int": 65422
   },
   {
@@ -42178,7 +42178,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The OAM-buffer offset of whichever sprite the player is about to walk into, computed fresh each step before the collision check reads it. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4B21` and bank 1 `$4CA5`, during battle-trigger, intro, walk/menus; 31 distinct values seen, 0-240.",
    "addr_int": 65423
   },
   {
@@ -42268,7 +42268,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Distance (adjusted for direction) between the player and the sprite `hCollidingSpriteOffset` names, used to decide whether the step is blocked. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 1 `$4BD4`, during battle-trigger, intro, walk/menus; 102 distinct values seen, 0-254.",
    "addr_int": 65426
   },
   {
@@ -42298,7 +42298,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The tile id under the player's own feet, read fresh every step for the collision and encounter checks. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4C5F` and bank 1 `$4E44`, during intro, walk/menus; 10 distinct values seen, 16-128.",
    "addr_int": 65427
   },
   {
@@ -42763,7 +42763,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Which side of the player an NPC is on, computed while deciding whether that NPC's sight line reaches the player. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 13 `$7D65`, during battle, intro, post-battle menus; values seen: [0, 1, 2, 4, 5, 6, 85].",
    "addr_int": 65437
   },
   {
@@ -42993,7 +42993,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The joypad reading from the previous frame, kept so the input handler can tell a fresh press from a held button. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$4015`, during battle, battle-trigger, intro, post-battle menus, walk/menus; values seen: [0, 1, 2, 8, 16, 32, 64, 128].",
    "addr_int": 65457
   },
   {
@@ -43119,7 +43119,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The ROM bank in use before a `Bankswitch` call, restored once the called routine returns. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$23E9` and bank 15 `$23E9`, during battle, battle-trigger, intro, post-battle menus; 9 distinct values seen, 1-37.",
    "addr_int": 65465
   },
   {
@@ -43198,7 +43198,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Scratch for the stack pointer during a low-level routine that needs to save and restore it. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1D5E`, during intro; values seen: [223].",
    "addr_int": 65471
   },
   {
@@ -43213,7 +43213,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Source address for a background-tile copy the VBlank handler performs — part of the small queued-copy mechanism that keeps VRAM writes inside the vertical blank. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$190C` and bank 1 `$1DFE`, during intro, walk/menus; values seen: [0, 24, 144, 160].",
    "addr_int": 65473
   },
   {
@@ -43228,7 +43228,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Destination address for the same queued VBlank background-tile copy `hVBlankCopyBGSource` names. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1903`, during intro, walk/menus; values seen: [0, 128, 192].",
    "addr_int": 65475
   },
   {
@@ -43243,7 +43243,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "How many rows the queued VBlank background-tile copy transfers. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$1909`, during intro; values seen: [6].",
    "addr_int": 65477
   },
   {
@@ -43307,7 +43307,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "How many bytes the VBlank handler's other queued copy (for 2bpp tile data, which moves in pairs) transfers. Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 4 `$1E1F`, during battle, intro, walk/menus; values seen: [0, 3, 6, 8].",
    "addr_int": 65483
   },
   {
@@ -43323,7 +43323,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Source address for the VBlank handler's queued 2bpp tile-data copy. Measured across a real playthrough (walk, a forced battle, menus): written from bank 4 `$1E51`, during battle, intro, walk/menus; values seen: [0, 64, 128, 152, 192, 200].",
    "addr_int": 65484
   },
   {
@@ -43339,7 +43339,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Destination address for the VBlank handler's queued 2bpp tile-data copy. Measured across a real playthrough (walk, a forced battle, menus): written from bank 4 `$1E49` and bank 4 `$189D`, during battle, intro, walk/menus; values seen: [0, 48, 128, 144, 208].",
    "addr_int": 65486
   },
   {
@@ -43450,7 +43450,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Which of the game's animated tiles (water, flowers) are currently enabled for the loaded tileset. Measured across a real playthrough (walk, a forced battle, menus): written from bank 15 `$6C73`, during battle, walk/menus; values seen: [0, 2].",
    "addr_int": 65495
   },
   {
@@ -43480,7 +43480,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The OAM-buffer offset of whichever sprite `PrepareOAMData` is currently placing — steps by 16 (one shadow-OAM entry's worth) once per sprite, which is exactly the multiples-of-16 sequence measured. Measured across a real playthrough (walk, a forced battle, menus): written from bank 1 `$4C3D`, during intro, walk/menus; 16 distinct values seen, 0-240.",
    "addr_int": 65498
   },
   {
@@ -43495,7 +43495,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Set when the player has just read a bookshelf, so the same A press does not immediately re-trigger it. Measured across a real playthrough (walk, a forced battle, menus): changed value, during walk/menus; values seen: [255].",
    "addr_int": 65499
   },
   {
@@ -43825,7 +43825,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "The tile id `PrepareOAMData` begins placing sprites from — the base of whatever block of VRAM the current sprite set was loaded into. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle; values seen: [0, 49].",
    "addr_int": 65505
   },
   {
@@ -43855,7 +43855,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Whether the toggleable object (an item ball, a pushed boulder) currently being drawn has been removed from the map. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$71C5`, during walk/menus; values seen: [0, 1].",
    "addr_int": 65509
   },
   {
@@ -43915,7 +43915,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Which ROM bank the current map's own data (its block map, text and scripts) lives in. Measured across a real playthrough (walk, a forced battle, menus): written from bank 3 `$12CB`, during intro, walk/menus; values seen: [6, 7, 17, 21].",
    "addr_int": 65512
   },
   {
@@ -43945,7 +43945,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Scratch copy of an animation frame counter, used while `PrepareOAMData` is deciding which tiles a walking sprite needs this frame. Measured across a real playthrough (walk, a forced battle, menus): changed value, during walk/menus; values seen: [255].",
    "addr_int": 65514
   },
   {
@@ -43975,7 +43975,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Set while checking a map's hidden-item flags, so the same tile is not offered twice. Measured across a real playthrough (walk, a forced battle, menus): written from bank 17 `$69A4` and bank 17 `$3EEC`, during walk/menus; values seen: [0, 255].",
    "addr_int": 65515
   },
   {
@@ -44050,7 +44050,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Set when a check of the map's hidden-object flags finds nothing at the player's tile. Measured across a real playthrough (walk, a forced battle, menus): written from bank 17 `$69A7` and bank 17 `$69FE`, during walk/menus; values seen: [0, 255].",
    "addr_int": 65518
   },
   {
@@ -44080,7 +44080,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Whose turn the battle engine is currently resolving — the player's or the opponent's. Measured across a real playthrough (walk, a forced battle, menus): written from bank 15 `$54E4`, during battle; values seen: [0, 1].",
    "addr_int": 65523
   },
   {
@@ -44110,7 +44110,7 @@
    "verify": [
     "rom"
    ],
-   "desc": "",
+   "desc": "Which optional pieces of the current menu's layout are drawn (a border, a second column, and so on). Measured across a real playthrough (walk, a forced battle, menus): written from 3 places, chiefly bank 15 `$5331`, during battle; values seen: [0, 2, 4].",
    "addr_int": 65526
   },
   {

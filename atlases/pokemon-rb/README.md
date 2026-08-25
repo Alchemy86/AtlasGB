@@ -35,7 +35,7 @@ gets [its own atlas](../../docs/adding-an-atlas.md), never a merge into this one
 
 Storage entries in total: **2,842**.
 
-Written descriptions cover **492 of the 1,012 distinct addresses** (48%). The rest carry their symbol name and their evidence and nothing more, which is the honest state of them — every chapter page reports its own figure at the top of its table.
+Written descriptions cover **582 of the 1,012 distinct addresses** (57%). The rest carry their symbol name and their evidence and nothing more, which is the honest state of them — every chapter page reports its own figure at the top of its table.
 
 <!-- atlas:end (evidence) -->
 
@@ -229,11 +229,13 @@ The two things that would help most, in order:
    closing them completes the storage evidence entirely. [The machinery
    exists](../../docs/verification.md#confirmed-against-the-cartridge-independently-on-2026-08-25);
    only the script is missing.
-2. **Descriptions.** 492 of 1,012 distinct addresses carry one. The rest are honest but
+2. **Descriptions.** 582 of 1,012 distinct addresses carry one. The rest are honest but
    thin. Write from scratch, from real evidence — a disassembly symbol, a measured finding,
    observed behaviour under the emulator — never from the plausibility of the symbol name
    alone; see [provenance](../../docs/provenance.md) for why that matters — and hedge
-   anything an invariant does not cover.
+   anything an invariant does not cover. When the well of already-written-down evidence runs
+   dry, [generating fresh evidence by watching a real playthrough](../../docs/observation.md)
+   is what closed the next ninety.
 
 Then: `make check` before you push. It is what CI runs, and it is red until every
 generated file agrees with the data.

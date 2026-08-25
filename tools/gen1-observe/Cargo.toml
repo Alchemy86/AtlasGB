@@ -1,0 +1,27 @@
+[package]
+name = "gen1-observe"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# A standalone crate, deliberately outside TerminalGB's own workspace: this
+# project never writes to that repository, only reads and depends on its
+# published library surface. `default-features = false` pulls in
+# TerminalGB's own "embedding build" — the emulator core and nothing else,
+# no window system, no terminal, no image codecs — which is also what
+# sidesteps the panic-strategy build-cache collision documented in
+# TerminalGB's docs/pitfalls/builds.md (fewer dependencies, none of which
+# need `panic = "abort"`).
+[dependencies]
+# Absolute, machine-specific on purpose for now: this tool assumes a sibling
+# TerminalGB checkout at this path, which is this project's own working
+# environment's convention, not a portable one. If your checkout lives
+# somewhere else, edit this one line before building — there is no build
+# script here to make it configurable, deliberately, until a second machine
+# actually needs it (see the hand-off in docs/verification.md).
+terminalgb = { path = "/home/aaron/Github/firstmate/projects/gameboy", default-features = false }
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+
+[profile.release]
+opt-level = 3

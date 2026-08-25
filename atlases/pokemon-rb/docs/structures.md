@@ -137,7 +137,7 @@ Base `wEnemyMon` at `$CFE5`.
 | 25 | 4 | `PP` | Four bytes: current PP in the low 6 bits, PP Ups applied in the top 2. |
 | 29 | 5 | `BaseStats` |  |
 | 34 | 1 | `ActualCatchRate` | The catch rate the ball routine actually reads — **not** the species' base rate, because Safari bait and rocks move it. |
-| 35 | 1 | `BaseExp` |  |
+| 35 | 1 | `BaseExp` | The opponent's species' base experience yield, copied in when the battle starts so the reward can be computed without re-reading the species table afterward. Measured across a real playthrough (walk, a forced battle, menus): changed value, during battle-trigger; values seen: [204]. |
 | 1838 | 1 | `OrTrainerClass` |  |
 | 2239 | 1 | `1` / `1Species` / `s` | The opposing trainer's first Pokemon, a whole 44-byte `party_struct` — the *party* shape, not the 29-byte battle shape. Shares its storage with the map's wild encounter tables, so it only means anything once `wIsInBattle` says a trainer battle is running. |
 | 2240 | 2 | `1HP` | Current HP, **big-endian**. |

@@ -285,6 +285,24 @@ run — a clean one or one that finds a disagreement — gets logged in `data-is
 including a clean one, because a verification pass that found nothing wrong is itself
 worth recording as of when it ran.
 
+### Descriptions can be generated, not only found — see `tools/gen1-observe/`
+
+When the well of already-written-down evidence (a sibling entry sharing an address, a
+comment in TerminalGB's own plugin source) runs dry — it very nearly did, after round two's
+seventeen new descriptions — the next place to look is not the symbol name. It is the
+cartridge itself: [`tools/gen1-observe/`](tools/gen1-observe/) is a standalone Rust crate
+(a path dependency on TerminalGB's published library, nothing written into that repository)
+that steps a real playthrough and records, per address, which code writes it, when, and to
+what values — see [`docs/observation.md`](docs/observation.md) for the results and
+[the tool's own README](tools/gen1-observe/README.md) for the method. It found and worked
+around a real trap worth knowing generally: **a ROM entry's `len` column is "distance to the
+next atlas entry in the same bank," which is exhaustively accurate for WRAM/HRAM but can be
+wildly inflated for a sparsely-covered ROM bank** — `ItemNames`' recorded length is 13,598
+bytes because nothing else in its bank is named yet, not because the table is that large, and
+an unguarded range match against it credited it with writing dozens of unrelated bytes before
+a small-window cap caught it. Never use a ROM entry's `len` for anything beyond the
+completeness invariant it was built for.
+
 ## Things that must stay true
 
 - **The seven unevidenced entries stay marked as unevidenced.** That honesty is the

@@ -309,7 +309,10 @@ extending it, not one-off fixes:
 - **`ROM0` (`$0000`-`$3FFF`) is always mapped, regardless of the bank register.** Grouping its
   writers by `(bank, pc)` instead of by `pc` alone splits one shared routine into several
   apparently-different ones, by the accident of whatever bank happened to be switched in when
-  each write happened — a 39-address generic byte-copy utility at `$00B6` was nearly credited
+  each write happened — a 39-address generic byte-*fill* utility at `$00B6` (round ten read
+  its actual opcode bytes and corrected this from an earlier round's "copy" label — see
+  [docs/observation.md](docs/observation.md#round-ten-a-stale-characterization-caught-by-reading-the-actual-bytes);
+  the exclusion from `related` was never in question, only the mechanism) was nearly credited
   as evidence for a dozen unrelated relationships this way. For any PC below `$4000`, group
   and look it up by PC alone.
 - **A script's own `debug_write()` setup calls can be misattributed to whatever instruction

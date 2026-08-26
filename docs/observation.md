@@ -130,7 +130,11 @@ Of the entries still missing a description going into this round, 392 had at lea
 recorded write in this playthrough. Two generic writers dominated and were excluded, the same
 way round two's boot-clear loop was: the boot-clear loop again (its address, `$1F80`, does
 not move — a physical fact about where the code lives, not a coincidence), and **a ROM0
-"copy N bytes" utility at `$00B6`**, found as the writer of 39 completely unrelated addresses
+"copy N bytes" utility at `$00B6`** [round ten measured the actual opcode bytes at this
+address and found this characterization backwards — see
+[below](#round-ten-a-stale-characterization-caught-by-reading-the-actual-bytes) — it fills,
+it does not copy; the exclusion from `related` this round reached is unaffected], found as
+the writer of 39 completely unrelated addresses
 (the health-bar animation, a base-stats lookup buffer, a map-connection offset, and a
 day-care move-learning flag, among others) once a bug in this round's own analysis script was
 fixed: `ROM0` is *always* mapped regardless of the bank register, so grouping its writers by
@@ -324,8 +328,11 @@ than resolving it the other way.**
 - **`(ROM0, $36E3)` is a constant-fill loop**: write one byte value to consecutive addresses
   a counted number of times, then return. The instructions reference only a counter and a
   destination pointer — nothing about *which* 13 symbols end up getting filled, because the
-  routine has no idea; it fills whatever address range it is called with. Exactly the shape
-  `$00B6` already has, just a fill instead of a copy.
+  routine has no idea; it fills whatever address range it is called with. **This was written
+  believing `$00B6` was a copy loop, "just a fill instead of a copy" — round ten measured
+  `$00B6`'s own bytes directly and found it is *also* a fill loop, the same shape as this one,
+  not a copy** (see
+  [below](#round-ten-a-stale-characterization-caught-by-reading-the-actual-bytes)).
 - **`(ROM0, $1E7E)` is a stack-pop-based bulk transfer**: a speed trick that points the stack
   pointer at a source buffer and uses repeated `POP`/write pairs to move data two bytes at a
   time, faster than a byte-at-a-time copy loop. Same story — the instructions move data
@@ -528,26 +535,105 @@ the watch list.
 `make check` passes clean; `wPlayerMoveMaxPP` (previously `verify=live` with no `desc`, a gap
 the sibling `wEnemyMoveMaxPP` entry already flagged as inconsistent) is now described too.
 
+## Round ten: a stale characterization, caught by reading the actual bytes
+
+Round nine's own hand-off top item was pass 2 (instruction-level) tracing over
+`investigate_gym`'s now-reliable forced battle, to earn real `related` linkage instead of the
+frame-level co-occurrence this project has already tried and dropped once. `pass2.rs` cannot
+be pointed at that battle as-is — it is hardcoded to replay `lib.rs`'s shared `run_script`, and
+the forced Misty battle is `investigate_gym`'s own script, not that one. Rather than change
+`pass2.rs`'s contract, a new binary, `investigate_gym_pc.rs`, duplicates `investigate_gym`'s
+exact setup and applies `pass2.rs`'s own proven instruction-level loop
+(`begin_frame`/`step_instruction`/`check_and_reset_gpu_updated`/`end_frame`) to it directly —
+the same tool's technique, not a new one, applied where the existing binary's fixed contract
+did not reach.
+
+**A real, contiguous, purpose-built writer group — nine addresses, not by co-occurrence but
+by reading the actual instruction bytes and finding no `CALL`/`RET` between any of them.** The
+trace caught a single instruction sequence (bank 15, `$4CB7` onward) writing, in order:
+`wDamageMultipliers`, `wPlayerMoveNum`, `wPlayerUsedMove`, `wEnemyUsedMove`, then
+`wPlayerStatsToDouble`/`wPlayerStatsToHalve`/`wPlayerBattleStatus1`/`wPlayerBattleStatus2`/
+`wPlayerBattleStatus3` via an incrementing `HL` pointer. The last five were already known —
+`wPlayerStatsToDouble`'s own existing description already cites `SendOutMon` zeroing
+`$D060`-`$D064` — but `related` was never backfilled for them, and the first four (the move
+scratch and the damage multiplier) were not previously known to be part of the same call at
+all. Confirmed by reading the raw ROM bytes at the PC directly (the same by-hand technique
+round five used for the two held-back groups), not inferred from the addresses alone:
+`EA 5B D0` is `LD ($D05B),A`, `EA D2 CF` is `LD ($CFD2),A`, and so on in one unbroken run —
+this is what "same writing routine" is supposed to mean for this column, measured rather than
+guessed. All nine symbols now carry a full-mesh `related` list (`wPlayerStatsToDouble`'s own
+alias, `wBattleStatusData`, does not need one — an entry and its alias are already implicitly
+related).
+
+**`wPlayerUsedMove` and `wEnemyUsedMove` also share a second writer, separately.** The
+*setting* of "which move was just used" (as opposed to the *clearing* above) traces to bank 15
+`$5B11`, a single `LD (HL),A` reached by both sides' turn resolution with `HL` pointed at
+whichever target applies. This does not add anything new to the `related` list above (both
+symbols are already in the nine-member group), but it is worth recording as a second,
+independent line of evidence for the same relationship.
+
+**The move-data fields (`wPlayerMoveNum`/`wEnemyMoveNum` and their five siblings each) were
+checked the same way and confirmed to stay excluded, for a more precise reason than round nine
+had.** Every one of their twelve writes traces to `bank14:$00B6` or `bank15:$00B6` — the same
+physical ROM0 routine (bank-independent, per the standing rule) already known generic from
+round three. Reading its own bytes directly this round (`12 13 0B 79 B0 20 F8 C9`) decodes to
+`LD (DE),A` / `INC DE` / `DEC BC` / `LD A,C` / `OR B` / `JR NZ` / `RET` — a loop with no source
+read at all, so it cannot be the multi-byte "copy from the `Moves` table" operation on its own.
+**That single unbroken decode also corrects an inherited claim: `$00B6` has been called a
+"copy N bytes" utility since round three, and it is not one — it is a fill loop, writing
+whatever is already in `A` across a counted range, the same shape round five's own `$36E3`
+finding already has.** The correction does not change any conclusion this atlas has published
+— `$00B6` was excluded from `related` either way — but the mechanism matters for reading the
+six move-data fields correctly: each field's distinct value (84, 6, 40, 23, 255, 30, ...) means
+some *other*, not-directly-observed routine must call `$00B6` once per field with a freshly
+loaded `A` and a count of one, using it as a generic single-byte store rather than a bulk copy.
+This trace only captured the write instruction itself, inside `$00B6`, never the caller, so
+that mechanism is inference from the shape of the evidence, not a second measured fact — stated
+as such, not asserted as settled. Both inline notes above (in the round-three and round-five
+write-ups) now point here rather than silently rewriting what those rounds believed at the
+time.
+
+**Twelve more descriptions, from the same battle, this time for `battle`-group entries the
+trace happened to also exercise** (734 → 748 → 760 entries described, 25.8% → 26.2%):
+`wEnemyMonUnmodifiedLevel` (18, matching STARYU's own documented level),
+`wPlayerMonUnmodifiedLevel` (12 for the first party member sent out, 5 for the second — tracks
+whichever Pokemon is currently out, not a fixed value), `wLastSwitchInEnemyMonHP`,
+`wDamageMultipliers`, `wHPBarOldHP`/`wHPBarNewHP`/`wHPBarDelta` (the HP-bar's own animated
+countdown, watched ticking down a frame at a time across two real HP drops),
+`wEngagedTrainerClass` (33, a different number from `wTrainerClass`'s 35 for the *same* fight —
+recorded as a plain fact, not explained), `wInHandlePlayerMonFainted`,
+`wBattleAndStartSavedMenuItem`, `wAILayer2Encouragement` (increments once per AI
+move-reconsideration event), and `wBattleMenuCurrentPP` (mostly `$00B6` noise, briefly settling
+to the real per-slot PP). Three addresses in this same widened watch — `wAnimPalette`,
+`wHPBarTempHP`, `wHPBarHPDifference` — are 30-, 13- and 8-byte buffers of which this round only
+watched one byte each; that one byte changed exactly once, which is real but too thin to write
+a `desc` for the whole entry from, so all three stay blank rather than being described from a
+twelfth of their own data.
+
+**A clean negative, recorded rather than dropped: `wForceEvolution` does nothing on its own.**
+A new one-off binary, `investigate_evolution.rs`, following the same "force it, then check
+before trusting it" shape that worked for the gym battle, wrote `1` into `wForceEvolution`
+from a stable overworld state and idled 600 frames (10 real-time seconds) watching it,
+`wEvolutionOccurred`, and the active party member's species/level. Nothing moved — not even a
+write-back to 0. The flag is not polled passively by an overworld/background routine; whatever
+consumes it needs a specific flow (a menu, a stone item, a battle) to reach it, not yet
+identified. `wGymLeaderNo`, `wMoveMenuType`, `wLowHealthAlarmDisabled`,
+`wBattleTransitionSpiralDirection` and `wEnemyMonOrTrainerClass` were also in this round's
+widened battle watch and never changed either — forcing `wCurOpponent` directly, bypassing
+whatever normally sets up a trainer encounter, plausibly skips whatever populates
+`wGymLeaderNo` in particular; not confirmed further this round.
+
 ## Ranked hand-off for the next round
 
 Highest value per unit of effort, first — same rule the verification hand-off in
 [verification.md](verification.md#ranked-hand-off-for-the-next-round) uses.
 
-1. **Pass 2 (instruction-level) tracing over `investigate_gym`'s resolved battle, to backfill
-   `related` for the move-mechanic group round nine described.** Round nine's fourteen new
-   descriptions were pass-1 (frame) granularity only, and deliberately left `related` blank for
-   exactly the reason this project already learned once — frame co-occurrence is not a measured
-   shared writer. The battle itself is now proven reliable and reproducible (see round eight),
-   so pointing pass 2's own `step_instruction` tracing at the same forced battle, targeted at the
-   twelve `wPlayerMove*`/`wEnemyMove*` addresses, is a well-scoped follow-up that could confirm
-   (or refute) the "one load routine, six fields" structure the descriptions already suggest —
-   and unlike round nine's own trace, this one would earn a `related` entry rather than an
-   inference.
-2. **`debug_sram_bank()` in TerminalGB, mirroring `debug_rom_bank()` exactly.** The single
-   highest-value structural addition, because it closes the one region-shaped gap (21 `SRAM`
-   addresses, the save file itself) rather than another individual byte — a real TerminalGB
-   change, dispatch it to the captain rather than attempting a workaround here.
-3. **A script that reaches the PC and a mart.** Both need actual navigation (not a
+1. **`debug_sram_bank()` in TerminalGB, mirroring `debug_rom_bank()` exactly.** Unchanged
+   ranking, still the single highest-value structural addition: it closes the one
+   region-shaped gap (21 `SRAM` addresses, the save file itself) rather than another
+   individual byte — a real TerminalGB change, dispatch it to the captain rather than
+   attempting a workaround here.
+2. **A script that reaches the PC and a mart.** Both need actual navigation (not a
    forceable state the way a battle is), which needs knowing this save's own map — read it
    back from `wCurMap`/`wYCoord`/`wXCoord` at the start of a run and branch the script's own
    walk phase toward the nearest known Pokémon Center or mart for *this* save specifically,
@@ -555,39 +641,57 @@ Highest value per unit of effort, first — same rule the verification hand-off 
    exactly what this would newly reach — directly answers the captain's "shops" gap, and a
    Pokémon Center's PC menu on the way there would reach `wPartyAndBillsPCSavedMenuItem` and
    the box-storage symbols (`sBox2`-`sBox6`, `wBoxMon2`-`wBoxMon20` and their fields) for free.
-4. **~~A full gym battle, played to a loss~~ — done, see [round eight](#round-eight-the-gym-battle-resolves--the-missing-piece-was-a-real-save).**
-   Loading the real save and using the `B, Up, A, A` navigation sequence together (not either
-   alone) produces a complete battle ending in a genuine black-out, reproduced again this round
-   while widening the watch list.
-5. **Evolution, the Pokédex, and HMs — three more of the captain's named gaps, all forceable the
-   same way a battle already is.** `wEvolutionOccurred`/`wForceEvolution` and `wPokedexNum`/
-   `wDexMaxSeenMon`/`wDexRatingNumMonsSeen` are plain `debug_write` targets the same way
-   `wCurOpponent`/`wPartyMon1HP` already are for a forced battle — no navigation needed, just a
-   state to force and a script to watch it resolve. HMs (`wFieldMoves`, `wNumFieldMoves`,
-   `wFieldMovesLeftmostXCoord`) likely need the party to actually know one first, which the
-   existing forced-battle party already might, worth checking before assuming a new setup step.
-6. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
+3. **Evolution via a stone item, or the Pokédex, or HMs — three more of the captain's named
+   gaps.** Round ten's `wForceEvolution` probe was a clean negative: the flag alone, forced
+   in the overworld with nothing else, produced no effect within 600 idle frames. The next,
+   costlier attempt is the real trigger path — use a bag item (an evolution stone) on a party
+   Pokemon through the actual menu flow, the same kind of navigation item 2 above needs, not
+   another blind flag write. `wPokedexNum`/`wDexMaxSeenMon`/`wDexRatingNumMonsSeen` and the
+   `wFieldMoves` HM group remain untried and may be more directly forceable — worth a
+   `debug_write`-only attempt each before assuming they need navigation too.
+4. **A minimal opcode decoder, so this tool can trace reads as well as writes.** Unchanged
    from round two's hand-off — still the ceiling on what "which code reads it" can answer,
-   still buildable with no TerminalGB change. Round five's manual byte-reading to classify
-   the two held-back groups, and round seven's diagnosis of the stuck battle, are both hints
-   this is tractable in small doses without a full decoder — a real one would make both
-   repeatable instead of by-hand each time.
+   still buildable with no TerminalGB change. Round ten's own two by-hand decodes (the
+   `$4CB7` reset routine, confirming `$00B6`'s actual shape) are a second and third hint this
+   is tractable in small doses without a full decoder — a real one would make it repeatable
+   instead of by-hand each time.
+5. **The HP-bar animation group ($CEEB-$CEFC and neighbors) is a strong `related` candidate
+   not yet confirmed to the same standard as round ten's nine-member group.** `wHPBarOldHP`
+   and `wHPBarNewHP` visibly tick in lockstep, frame by frame, throughout an animated HP-bar
+   wipe (round ten measured this directly), but their writer PCs differ (`$7A8A` vs `$7A62`,
+   ~230 bytes apart in bank 3) rather than matching exactly, so they were described but not
+   linked. Reading the raw bytes across that range (the same by-hand technique round ten's own
+   `$4CB7` group and round five's held-back groups both used) would settle whether this is one
+   routine's several instructions or genuinely separate ones, before `related` is populated
+   either way.
+6. **`wAnimPalette`, `wHPBarTempHP`, `wHPBarHPDifference` are multi-byte buffers this round
+   only watched one byte of each.** Each changed exactly once in that one byte, in the same
+   already-reliable gym battle — real evidence, just a twelfth or a thirtieth of the entry's
+   own data, not enough to describe the whole entry from. Widening the watch to the buffers'
+   remaining bytes in the same, already-reproducible run is a low-cost follow-up, no new
+   technique needed.
 7. **~~Find out why the forced level-up did not fire~~ — answered as far as this trace shows:
    see [above](#round-four-why-the-forced-level-up-never-fired--a-partial-answer) and
    [round eight](#round-eight-the-gym-battle-resolves--the-missing-piece-was-a-real-save).**
    `wIsInBattle` never left `0` during the wild-battle phase even with the save loaded — blind
    A-mashing reliably *starts* a forced battle (trainer or wild) but has not been shown to
    *finish* one within the budgets tried, gym battle now being the one exception once real
-   navigation replaced the mash. Instruction-level tracing of this specific phase is still the
-   well-scoped next step if this is worth reopening, but item 1 above is higher-value pass-2
-   work right now.
-8. **~~Examine the two held-back groups~~ — done this round: see
+   navigation replaced the mash.
+8. **~~Pass 2 tracing over the resolved battle, to backfill `related`~~ — done this round: see
+   [above](#round-ten-a-stale-characterization-caught-by-reading-the-actual-bytes).** A real,
+   contiguous nine-member writer group found and confirmed by reading raw ROM bytes at the
+   writer's PC; the twelve move-data fields checked the same way and confirmed to stay
+   excluded, for a more precise reason than round nine had (`$00B6` is a generic fill loop,
+   not a copy — a stale characterization from round three, corrected in place this round).
+9. **~~Examine the two held-back groups~~ — done in round five: see
    [above](#round-five-the-two-held-back-groups-are-generic-too).** Both are generic
    utilities (a fill loop, a stack-pop bulk transfer), not purpose-built routines, and stay
-   out of `related`. All 31 groups from round three are now accounted for: 6 backed `related`,
-   3 (`$36E3`, `$1E7E`, `$0F39`) examined and excluded as generic, and the remaining large
-   redundant run of shadow-OAM pair-groups is folded into the 6 that already cover those same
-   symbols. Nothing from the 31-group table is still sitting unexamined.
+   out of `related`. All 31 groups from round three are now accounted for: 6 backed `related`
+   in round four, 3 (`$36E3`, `$1E7E`, `$0F39`) examined and excluded as generic in round
+   five, and the remaining large redundant run of shadow-OAM pair-groups is folded into the 6
+   that already cover those same symbols. Nothing from the 31-group table is still sitting
+   unexamined; round ten's nine-member group is new territory the 31-group table never
+   covered, found by widening the watch rather than mining that old table further.
 
 ## See also
 

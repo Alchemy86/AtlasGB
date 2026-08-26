@@ -35,6 +35,17 @@ This page is the mechanism; that one is what it found.
   the forcing technique reliably starts a gym battle at all before assuming it does. Does
   *not* replay the full `run_script` — see the file's own header comment for why. See
   `docs/observation.md` for what it found (and did not finish finding).
+- **`src/bin/investigate_gym_pc.rs`** — the same forced Misty battle as `investigate_gym.rs`,
+  duplicated rather than shared (see that file's own header comment for why), with `pass2.rs`'s
+  own instruction-level loop applied to it directly instead of `investigate_gym.rs`'s
+  frame-level polling — `pass2.rs` itself is hardcoded to replay `run_script`, so it cannot
+  point at this battle's own script as-is. Every write event's program counter and ROM bank are
+  printed alongside the value change, which is what let round ten confirm a real writer group
+  by reading raw ROM bytes rather than guessing from address proximity.
+- **`src/bin/investigate_evolution.rs`** — a one-question probe: forces `wForceEvolution` from
+  a stable overworld state and watches for any effect, the same "force it, then check before
+  trusting it" shape `investigate_gym.rs` already uses. See `docs/observation.md` round ten for
+  what it found (a clean negative — the flag alone does nothing).
 
 ## How it works
 
@@ -104,6 +115,8 @@ cargo run --release --bin pass2           # pass 2 -> observe-pass2.json
 
 cargo run --release --bin investigate_levelup   # frame-by-frame trace to stdout, no JSON
 cargo run --release --bin investigate_gym       # same, for the forced Misty battle
+cargo run --release --bin investigate_gym_pc    # same battle, instruction-level (frame+PC+bank)
+cargo run --release --bin investigate_evolution # forces wForceEvolution, watches for an effect
 ```
 
 Nothing here touches TerminalGB's own tree — the `Cargo.toml` path dependency reads its

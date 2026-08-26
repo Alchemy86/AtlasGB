@@ -16000,7 +16000,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Measured in the same gym battle's own intro/continue sequence, before any menu was opened by this run's script: changes once, from 4 to 0, at frame 49 -- too little data this round to say more than that a write happens this early.",
    "related": [],
    "addr_int": 52269
   },
@@ -17002,7 +17002,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "Increments by 1 each time the enemy AI's move-selection scratch (wEnemyMoveNum and its siblings) briefly reloads a different move before settling. Measured three times in the same gym battle, 0 to 1 to 2 to 3, exactly at those three reconsideration events. The low byte never changed.",
    "related": [],
    "addr_int": 52437
   },
@@ -17171,7 +17171,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's HP at the moment it was sent out -- a snapshot kept alongside the live, changing wEnemyMonHP. Measured in the same gym battle: $0029 (41, matching STARYU's own HP) loads the instant it switches in; the high byte never changed across the whole battle.",
    "related": [],
    "addr_int": 52451
   },
@@ -17307,7 +17307,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A flag set once the active Pokemon's HP reaches 0. Measured in the same gym battle: 0 throughout, then 1 exactly 27 frames after wBattleMonHP first reads 0 -- the gap between the HP hitting zero and this flag being noticed is itself real, measured behavior, not simultaneity.",
    "related": [],
    "addr_int": 52464
   },
@@ -17325,7 +17325,16 @@
     "live"
    ],
    "desc": "The move ID actually executed this turn, set later than wPlayerMoveNum (which loads as soon as a move is selected in the menu, well before the turn resolves). Measured in the same gym battle: set to 33 partway through the turn that first damaged STARYU, roughly 375 frames after wPlayerMoveNum had already loaded 33 for that same turn.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve"
+   ],
    "addr_int": 52465
   },
   {
@@ -17342,7 +17351,16 @@
     "live"
    ],
    "desc": "Same role as wPlayerUsedMove, for the opponent's move. Measured in the same gym battle: set to the opponent's move ID during each turn's resolution (55, then later 33) and reset to 0 before the next turn's menu opens -- unlike wEnemyMoveNum, which reloads straight to the new move rather than resetting to 0 first.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 52466
   },
   {
@@ -17496,7 +17514,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The active party member's level before any in-battle modifier, refreshed each time a new Pokemon is sent out. Measured in the same gym battle: 12 for the first party member sent out, 5 for the second, both loading the same frame wBattleMonHP populates for that Pokemon.",
    "related": [],
    "addr_int": 52495
   },
@@ -17885,7 +17903,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The opponent's level before any in-battle modifier is applied. Measured across a real gym battle against Misty, played to a black-out: loads to 18 at switch-in, matching STARYU's own documented level-18 HP (see discoveries.md's cerulean-gym.md coverage, wEnemyMonHP settling at 41).",
    "related": [],
    "addr_int": 52515
   },
@@ -18002,7 +18020,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A trainer-class value loaded at battle start, distinct from wTrainerClass. Measured in the same gym battle against Misty (wTrainerClass loads to 35): wEngagedTrainerClass loads to 33 -- a different number for the same fight, not explained further this round.",
    "related": [],
    "addr_int": 52525
   },
@@ -20651,7 +20669,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The four move slots' current-PP values shown on the FIGHT menu. Measured in the same gym battle: extremely noisy through most of a turn -- driven almost entirely by the same ROM0 $00B6 generic fill primitive already excluded from related elsewhere in this atlas, reused for many unrelated purposes between calls -- but briefly settles to the real value right after a move is chosen (matching wPlayerMoveMaxPP, e.g. 30 for the move loaded at frame 867). Intermediate values are not meaningful; only the settled one is.",
    "related": [],
    "addr_int": 52589
   },
@@ -21007,7 +21025,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The health bar's animation start point. Measured in the same gym battle: loads to the pre-hit HP the instant a hit lands, then ticks down by 1 roughly every 5-7 frames in step with wHPBarNewHP until they meet -- watched directly across both HP drops in this battle (STARYU 41->40->39, and the player's own Pokemon's two faints), the visible mechanism behind the animated health-bar wipe.",
    "related": [],
    "addr_int": 52971
   },
@@ -21075,7 +21093,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "The health bar's animation target, 2 bytes big-endian. Measured in the same gym battle: set to the post-hit HP the instant a hit lands, then wHPBarOldHP counts down to meet it a frame at a time -- see wHPBarOldHP.",
    "related": [],
    "addr_int": 52973
   },
@@ -21109,7 +21127,7 @@
     "rom",
     "live"
    ],
-   "desc": "",
+   "desc": "A one-shot value written once and left alone afterward. Measured once in the same gym battle: set to 255 ($FF) at the moment the player's first Pokemon fainted, and never changed again for the rest of the battle, including STARYU's own HP drops and the second faint -- not enough data this round to say what triggers a write versus what leaves it alone.",
    "related": [],
    "addr_int": 52975
   },
@@ -22713,7 +22731,16 @@
     "live"
    ],
    "desc": "The move ID loaded into the player's move-data scratch group (effect, power, type, accuracy and PP follow in the next five bytes -- the same six-field order as the `Moves` ROM table). Measured across a real gym battle against Misty, played to a black-out, covering both of the player's party members: loads on each move selection and resets to 0 before the next turn's menu; values seen: [84, 33, 0].",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53202
   },
   {
@@ -23799,8 +23826,17 @@
     "rom",
     "live"
    ],
-   "desc": "",
-   "related": [],
+   "desc": "A scratch byte touched during each hit's damage calculation. Measured in the same gym battle: raw values 10 and 138 (not independently confirmed against a public encoding this round), one per hit, reset to 0 immediately before the next Pokemon is sent out -- in the same contiguous instruction sequence (bank 15, $4CB7 onward) that also clears wPlayerMoveNum, wPlayerUsedMove, wEnemyUsedMove and the wPlayerStatsToDouble..wPlayerBattleStatus3 group (see related).",
+   "related": [
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53339
   },
   {
@@ -23902,7 +23938,16 @@
     "live"
    ],
    "desc": "First of the five bytes `SendOutMon` zeroes when a Pokemon comes out — `$D060` to `$D064`, which takes in all three of your side's battle-status bytes. That is what makes a Generation 1 screen belong to the Pokemon rather than to the side.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53344
   },
   {
@@ -23936,7 +23981,16 @@
     "live"
    ],
    "desc": "",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53345
   },
   {
@@ -23953,7 +24007,16 @@
     "live"
    ],
    "desc": "Volatile battle state for your side: confusion, trapping, flinching and the rest, one bit each.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus2",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53346
   },
   {
@@ -23970,7 +24033,16 @@
     "live"
    ],
    "desc": "The second volatile byte for your side. It carries `GETTING_PUMPED`, the FOCUS ENERGY bit, with no counter beside it — and in Generation 1 that bit **quarters** the critical-hit rate instead of raising it, because `CriticalHitTest` shifts the wrong way. Measured for a base-Speed-140 Electrode: 0.2604 of 960 attacks crit without it, 0.0612 of 588 with.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus3",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53347
   },
   {
@@ -23987,7 +24059,16 @@
     "live"
    ],
    "desc": "The third volatile byte for your side. Bit 1 is LIGHT SCREEN and bit 2 is REFLECT, and in Generation 1 **both belong to the Pokemon, not to the side**: `SendOutMon` zeroes this byte, so a screen does not survive a switch. Measured driving a real voluntary switch: `$04` with REFLECT up, `$00` immediately afterwards, with the opponent's copy at `$00` throughout.",
-   "related": [],
+   "related": [
+    "wDamageMultipliers",
+    "wEnemyUsedMove",
+    "wPlayerBattleStatus1",
+    "wPlayerBattleStatus2",
+    "wPlayerMoveNum",
+    "wPlayerStatsToDouble",
+    "wPlayerStatsToHalve",
+    "wPlayerUsedMove"
+   ],
    "addr_int": 53348
   },
   {

@@ -72,6 +72,7 @@ correct its body and say so in it — that is what the "our own belief" rows bel
 | [two map names in our own table were wrong](#two-map-names-in-our-own-table-were-wrong) | an agent was told it was in a Pokémon Center | **our own belief** | [`wCurMap`][wCurMap] |
 | [a screen does not survive a switch](#a-screen-does-not-survive-a-switch) | our battle engine had a Gen 3 rule in it | **our own belief** | [`wPlayerBattleStatus3`][wPlayerBattleStatus3] |
 | [the learnset table is indexed by internal number, not by dex number](#the-learnset-table-is-indexed-by-internal-number-not-by-dex-number) | reading the first 151 slots loses all three starters | cartridge mechanic | — |
+| [NINTEN and SONY are real defaults, not just ROM strings](#ninten-and-sony-are-real-defaults-not-just-rom-strings) | a claim from outside, checked against our own cartridge | cartridge mechanic | [`wPlayerName`][wPlayerName] · [`wRivalName`][wRivalName] |
 | [two species share one printable name](#two-species-share-one-printable-name) | NIDORAN, and a lookup by name cannot tell them apart | cartridge mechanic | [`wPartyMon1Species`][wPartyMon1Species] |
 | [a menu row can be truncated by the row below it](#a-menu-row-can-be-truncated-by-the-row-below-it) | `HORN ATTACK` reads back as `HORN` | **our own belief** | [`wCurrentMenuItem`][wCurrentMenuItem] |
 | [a link that scored 100 per cent on the wrong task](#a-link-that-scored-100-per-cent-on-the-wrong-task) | a goal authored from a plausible idea | **our own belief** | — |
@@ -94,6 +95,8 @@ correct its body and say so in it — that is what the "our own belief" rows bel
 [wPlayerBattleStatus3]: by-name.md#s-wPlayerBattleStatus3
 [wPlayerNumAttacksLeft]: by-name.md#s-wPlayerNumAttacksLeft
 [wPlayerMoveListIndex]: by-name.md#s-wPlayerMoveListIndex
+[wPlayerName]: by-name.md#s-wPlayerName
+[wRivalName]: by-name.md#s-wRivalName
 
 **Every entry has the same shape**, because the shape is what makes it usable: *what it is*, *how
 it showed up* (the messy symptom, not the tidy one), *how it was found* including the wrong turns,
@@ -1205,6 +1208,73 @@ same 39 indices are what the community's MissingNo folklore is built on. **What 
 contain across the cartridge's other tables, and whether any of it is reachable or interesting,
 is its own subject and is deliberately not started.** Recording it here so it is a question with
 a home rather than a rumour.
+
+---
+
+### NINTEN and SONY are real defaults, not just ROM strings
+
+**Kind: an outside claim, checked against the cartridge — and confirmed.**
+
+**What it is.** A claim arrived from outside this project: *the real default names for the player
+and the rival, if the calls to the naming routines are skipped, are `NINTEN` and `SONY`.* True,
+for the cartridge this atlas verifies against — and true for a more specific reason than "the
+strings exist somewhere in the ROM."
+
+**How it was found.** A byte search first, then a read of the routine, then a real run on the
+emulator — in that order, so each step could have stopped the claim rather than confirm it.
+
+1. Gen 1 text encodes `A`-`Z` as `$80`-`$99` with a `$50` terminator. `NINTEN`
+   (`$8D $88 $8D $93 $84 $8D $50`) and `SONY` (`$92 $8E $8D $98 $50`) each appear **exactly once**
+   in the 1,048,576-byte ROM image, back to back, at ROM bank 1 `$45AA` (`NINTEN`, 7 bytes) and
+   `$45B1` (`SONY`, 5 bytes). One occurrence each is what a genuine data table looks like; a
+   coincidental byte run would be far less likely to also carry a `$50` right where a name's
+   terminator belongs, twice.
+2. A string being *in* the ROM says nothing about whether the game ever loads it anywhere. The
+   labels at those two addresses (`DebugNewGamePlayerName`, `DebugNewGameRivalName`) are read by
+   `PrepareOakSpeech`, which — on **every** new game, unconditionally — zero-fills `wPlayerName`
+   through `wBoxDataEnd` and then copies both 11-byte fields in before `OakSpeech` ever decides
+   whether to run the real naming screens. Both source strings are shorter than the 11-byte field,
+   so the copy runs past each one's own terminator: `wPlayerName` ends up holding `NINTEN` plus
+   the leading bytes of `SONY`, and `wRivalName` ends up holding `SONY` plus four bytes of
+   whatever ROM code follows it. Harmless — the game only ever reads a name up to its `$50` — but
+   it is a second, independent fact this atlas did not have to take on trust: the two names sit
+   contiguously in ROM in exactly the order a straight-line `CopyData bc=NAME_LENGTH` would
+   overread from one into the other.
+3. Whether the copied-in defaults *survive* depends on one bit: `OakSpeech` checks bit 1 of
+   `wStatusFlags6` (`$D732`) immediately afterward and, if set, jumps straight past
+   `ChoosePlayerName`/`ChooseRivalName` to `.skipSpeech`. On an unmodified cartridge that bit is
+   explicitly cleared by `StartNewGame` on every ordinary new game, so the naming screens always
+   run and always overwrite the debug defaults a moment later. A ROM hack that deletes the calls
+   to those two screens reaches exactly the state that bit already reaches on retail hardware —
+   this is not describing an emulator quirk or a Japanese-only leftover; it is the retail
+   USA/Europe cartridge's own existing (if never normally taken) code path.
+
+**Verified behaviourally**, not read off the disassembly alone:
+[`tools/gen1-observe/src/bin/investigate_defaultnames.rs`](../../../tools/gen1-observe/README.md)
+drives a cold boot — no save; the thing under test only exists before any save has a chosen name —
+of the exact cartridge this atlas's evidence is measured against (`data/evidence.json`'s
+`cartridge` block: `POKEMON BLUE`, USA/Europe, SHA-1 `d7037c83e1ae5b39bde3c30787637ba1d4c48ce2`)
+through the title screen and into a new game, twice:
+
+| run | `wPlayerName` | `wRivalName` |
+|---|---|---|
+| `wStatusFlags6` bit 1 forced on every frame (the debug-flag technique `investigate_gym.rs` already uses, forced continuously because `StartNewGame`'s own reset of that bit lands at an unknown frame during the button-mash) | `NINTEN` from frame 368, unchanged through frame 6600 | `SONY` from frame 368, unchanged through frame 6600 |
+| same script, bit not forced (a plain new game) | `NINTEN` at frame 368, overwritten with `BLUE` at frame 1784 | `SONY` at frame 368, overwritten with `RED` at frame 2270 |
+
+`BLUE`/`RED` are the first canned choices `ChoosePlayerName`/`ChooseRivalName` offer on this
+cartridge (Blue version: the player's own version name first, the paired name for the rival) —
+the button-mash landing on them is the naming screen behaving exactly as a naming screen should,
+which is the point of running the control at all.
+
+**The memory.** [`wPlayerName` `$D158`][wPlayerName], [`wRivalName` `$D34A`][wRivalName].
+
+**Verdict: true as stated**, for Pokémon Blue, USA/Europe — the cartridge this atlas verifies
+against. Both the player's and the rival's pre-naming defaults are confirmed; they come from the
+same routine and the same moment, not two independent facts that happened to agree. Not checked
+against the Japanese release (no such cartridge is available to this project), so no claim is made
+about whether the mechanism is identical there — only that it is not a Japanese-only leftover
+being mistakenly generalised: the identical labels, at the identical role, exist unmodified in the
+English cartridge.
 
 ---
 

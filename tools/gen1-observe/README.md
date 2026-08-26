@@ -46,6 +46,15 @@ This page is the mechanism; that one is what it found.
   a stable overworld state and watches for any effect, the same "force it, then check before
   trusting it" shape `investigate_gym.rs` already uses. See `docs/observation.md` round ten for
   what it found (a clean negative — the flag alone does nothing).
+- **`src/bin/investigate_defaultnames.rs`** — checks a specific outside claim (the pre-naming
+  default names are `NINTEN`/`SONY`) rather than sweeping for new descriptions: boots cold (no
+  save, deliberately — the thing under test only exists before any save has a chosen name),
+  forces `wStatusFlags6` bit 1 on every frame the same way `investigate_gym.rs` forces
+  `wCurOpponent`, and traces `wPlayerName`/`wRivalName` through a new game with and without that
+  force as a control. The finding itself lives in
+  [`atlases/pokemon-rb/docs/discoveries.md`](../../atlases/pokemon-rb/docs/discoveries.md#ninten-and-sony-are-real-defaults-not-just-rom-strings),
+  not here — it is a claim about the game, the kind of thing that page collects, not a new
+  address or writer-group linkage.
 
 ## How it works
 

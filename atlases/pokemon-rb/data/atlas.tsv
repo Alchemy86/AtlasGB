@@ -1608,7 +1608,7 @@ WRAM0	-	$D152	1	wSerialPlayerDataBlock	alias	WRAM	bag	rom,live	The 418-byte part
 WRAM0	-	$D153	3	wUnusedAlreadyOwnedFlag	entry	WRAM	scratch	rom,live		
 WRAM0	-	$D156	1	wEvoStoneItemID	entry	WRAM	battle	rom,live		
 WRAM0	-	$D157	1	wSavedNPCMovementDirections2Index	entry	WRAM	scratch	rom,live		
-WRAM0	-	$D158	11	wPlayerName	entry	WRAM	player	rom,live,inv	Your name, up to 10 characters and a `$50` terminator. This is what the OT field of every Pokemon you catch is compared against, so it is also what decides whether a Pokemon obeys you.	
+WRAM0	-	$D158	11	wPlayerName	entry	WRAM	player	rom,live,inv	Your name, up to 10 characters and a `$50` terminator. This is what the OT field of every Pokemon you catch is compared against, so it is also what decides whether a Pokemon obeys you. **Measured**: before the naming screen (`ChoosePlayerName`) ever runs, `PrepareOakSpeech` unconditionally copies `DebugNewGamePlayerName` (`NINTEN`, ROM bank 1 `$45AA`) into this field on every new game; the naming screen then overwrites it with the player's real choice.	
 WRAM0	-	$D163	1	wPartyCount	entry	Party Data	party	rom,live,inv	How many Pokemon you are carrying, 0 to 6. **Verified live**: the harness reads it, walks both parallel species lists, and requires them to agree and to be `$FF`-terminated.	
 WRAM0	-	$D163	1	wPartyDataStart	alias	Party Data	party	rom,live	Label for the first byte of the party block; the same address as `wPartyCount`.	
 WRAM0	-	$D164	7	wPartySpecies	entry	Party Data	party	rom,live,inv	Six species indices and an `$FF` terminator — a flat list beside the structures, written at a different moment from the copy inside each `party_struct`. The two agreeing is what makes both addresses trustworthy.	
@@ -1793,7 +1793,7 @@ WRAM0	-	$D31D	1	wNumBagItems	entry	Main Data	bag	rom,live,inv	How many *kinds* o
 WRAM0	-	$D31D	1	wPokedexSeenEnd	alias	Main Data	bag	rom,live	One past the seen array.	
 WRAM0	-	$D31E	41	wBagItems	entry	Main Data	bag	rom,live,inv	Twenty (item id, quantity) pairs and an `$FF` terminator. The count, the pairs and the terminator are three statements of the same fact, and the harness requires all three to agree.	
 WRAM0	-	$D347	3	wPlayerMoney	entry	Main Data	player	rom,live,inv	Money, three bytes of **big-endian BCD** — each nybble is one decimal digit, so the maximum is 999,999. Checked live: the harness refuses any nybble above 9.	
-WRAM0	-	$D34A	11	wRivalName	entry	Main Data	player	rom,live,inv	The rival's name, same 11-byte field. Used by the script engine when it prints his dialogue.	
+WRAM0	-	$D34A	11	wRivalName	entry	Main Data	player	rom,live,inv	The rival's name, same 11-byte field. Used by the script engine when it prints his dialogue. **Measured**: before `ChooseRivalName` runs, `PrepareOakSpeech` copies `DebugNewGameRivalName` (`SONY`, ROM bank 1 `$45B1`) into this field the same way — see `wPlayerName`.	
 WRAM0	-	$D355	1	wOptions	entry	Main Data	player	rom,live	The options menu in one byte: text speed in the low bits, battle animation and battle style above them.	
 WRAM0	-	$D356	1	wObtainedBadges	entry	Main Data	player	rom,live,inv	One bit per gym badge, low bit first in badge order. A badge raises the level at which a traded Pokemon stops obeying, and several enable a field move.	
 WRAM0	-	$D357	1	wUnusedObtainedBadges	entry	Main Data	player	live	A second badge byte the game keeps but never reads. Kept in the saved block, so it survives in every `.sav`.	

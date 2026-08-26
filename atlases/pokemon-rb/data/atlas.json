@@ -27055,7 +27055,7 @@
     "live",
     "inv"
    ],
-   "desc": "Your name, up to 10 characters and a `$50` terminator. This is what the OT field of every Pokemon you catch is compared against, so it is also what decides whether a Pokemon obeys you.",
+   "desc": "Your name, up to 10 characters and a `$50` terminator. This is what the OT field of every Pokemon you catch is compared against, so it is also what decides whether a Pokemon obeys you. **Measured**: before the naming screen (`ChoosePlayerName`) ever runs, `PrepareOakSpeech` unconditionally copies `DebugNewGamePlayerName` (`NINTEN`, ROM bank 1 `$45AA`) into this field on every new game; the naming screen then overwrites it with the player's real choice.",
    "related": [],
    "addr_int": 53592
   },
@@ -30088,7 +30088,7 @@
     "live",
     "inv"
    ],
-   "desc": "The rival's name, same 11-byte field. Used by the script engine when it prints his dialogue.",
+   "desc": "The rival's name, same 11-byte field. Used by the script engine when it prints his dialogue. **Measured**: before `ChooseRivalName` runs, `PrepareOakSpeech` copies `DebugNewGameRivalName` (`SONY`, ROM bank 1 `$45B1`) into this field the same way — see `wPlayerName`.",
    "related": [],
    "addr_int": 54090
   },

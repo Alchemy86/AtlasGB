@@ -23809,7 +23809,7 @@
     "rom",
     "live"
    ],
-   "desc": "0 normal, 1 the old man's tutorial, 2 Safari Zone. The tutorial is a real wild battle with real rolled DVs, but its Pokemon can never be added to the party.",
+   "desc": "0 normal, 1 the old man's tutorial, 2 Safari Zone. The tutorial is a real wild battle with real rolled DVs, but its Pokemon can never be added to the party. Anything outside those three is unhandled: DisplayBattleMenu skips drawing the player's own HUD and HP bar unless this byte is exactly 0, and picks the Safari Zone menu template only when it is exactly 2 -- so any other value renders the standard menu with the player's status box left undrawn (see discoveries.md).",
    "related": [],
    "addr_int": 53338
   },
@@ -23920,7 +23920,7 @@
     "rom",
     "live"
    ],
-   "desc": "Set when the accuracy check failed. Gen 1 gives even a 100%-accuracy move a 1-in-256 chance of landing here.",
+   "desc": "Set when the accuracy check failed. Gen 1 gives even a 100%-accuracy move a 1-in-256 chance of landing here. The same byte is reused before a wild battle even begins: PrintBeginningBattleText reads it to pick the intro line, printing \"Wild [species] appeared!\" when it is 0 and \"The hooked [species] attacked!\" otherwise -- the origin of the \"hooked\" encounters (see discoveries.md).",
    "related": [],
    "addr_int": 53343
   },

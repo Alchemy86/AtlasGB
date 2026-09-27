@@ -77,6 +77,7 @@ correct its body and say so in it — that is what the "our own belief" rows bel
 | [a menu row can be truncated by the row below it](#a-menu-row-can-be-truncated-by-the-row-below-it) | `HORN ATTACK` reads back as `HORN` | **our own belief** | [`wCurrentMenuItem`][wCurrentMenuItem] |
 | [a link that scored 100 per cent on the wrong task](#a-link-that-scored-100-per-cent-on-the-wrong-task) | a goal authored from a plausible idea | **our own belief** | — |
 | [the silent dead band](#the-silent-dead-band) | two components deciding the same thing | **our own belief** | — |
+| [the hooked Dragonite reuses two battle-state bytes we only had half of](#the-hooked-dragonite-reuses-two-battle-state-bytes-we-only-had-half-of) | one byte also picks the intro sentence, the other has an unhandled value that breaks the menu | **our own belief** | [`wMoveMissed`][wMoveMissed] · [`wBattleType`][wBattleType] |
 
 [wTileMap]: by-name.md#s-wTileMap
 [wShadowOAM]: by-name.md#s-wShadowOAM
@@ -97,6 +98,8 @@ correct its body and say so in it — that is what the "our own belief" rows bel
 [wPlayerMoveListIndex]: by-name.md#s-wPlayerMoveListIndex
 [wPlayerName]: by-name.md#s-wPlayerName
 [wRivalName]: by-name.md#s-wRivalName
+[wMoveMissed]: by-name.md#s-wMoveMissed
+[wBattleType]: by-name.md#s-wBattleType
 
 **Every entry has the same shape**, because the shape is what makes it usable: *what it is*, *how
 it showed up* (the messy symptom, not the tidy one), *how it was found* including the wrong turns,
@@ -272,6 +275,87 @@ choice; scoring the Oak's Lab loss as one is contradicting the game.
 *Every trainer battle in the first eleven links of the chain is this one fight, which is why all
 600 agents are in it together. Roughly a quarter of them are about to lose it, and it makes no
 difference to any of them.*
+
+---
+
+### The hooked Dragonite reuses two battle-state bytes we only had half of
+
+**What it is.** Two of this atlas's own battle-state entries were each recording only one of
+two roles the cartridge actually gives the byte. `wMoveMissed` (`$D05F`) is read during a
+battle to flag a missed accuracy check, which is all the atlas said — but the exact same byte
+is also read *before* the battle text prints, to choose the intro sentence. `wBattleType`
+(`$D05A`) had all three of its defined values recorded, and nothing said what happens for a
+value outside them, which the menu-drawing code very much does not handle gracefully.
+
+**How it showed up.** Checked against a long-documented community glitch — the "hooked
+Dragonite" walk-off-the-end-of-a-table overflow in the Pewter museum guide's NPC-path lookup,
+public since 2009 — whose own write-up names both bytes and a value (`wBattleType = $22`) that
+this atlas's entries did not cover.
+
+**How it was found.** By reproducing the two specific claims independently rather than trusting
+the write-up's prose: poking the bytes directly on a real cartridge boot under
+[TerminalGB](https://github.com/Alchemy86/TerminalGB)'s emulator (`terminalgb-mcp`'s
+`write_memory`/`observe`/`screenshot` tools, `--allow-write-memory`) and reading the ROM's own
+bytes at the code site named.
+
+**What is actually happening.**
+
+```asm
+; engine/battle/common_text.asm — PrintBeginningBattleText
+	ld a, [wEnemyMonSpecies2]
+	call PlayCry
+	ld hl, WildMonAppearedText
+	ld a, [wMoveMissed]
+	and a
+	jr z, .notFishing
+	ld hl, HookedMonAttackedText
+.notFishing
+```
+
+`WildMonAppearedText` is `"Wild @…appeared!"`, `HookedMonAttackedText` is `"The hooked@…
+attacked!"` (`data/text/text_2.asm`) — the actual origin of "hooked" in the glitch's name: the
+byte is the *fishing* code's leftover "hooked" flag, read here for an unrelated purpose because
+nothing clears it between the two contexts on the overflow's path. On a retail Pokémon Blue ROM
+this is `ld hl,$4E3B` / `ld a,[$D05F]` / `and a` / `jr z,+3` / `ld hl,$4E40` at ROM address
+`$16:$4DB0`, confirmed by reading the cartridge's own bytes (`21 3B 4E FA 5F D0 A7 28 03 21 40
+4E`) rather than assumed from the disassembly.
+
+```asm
+; engine/battle/core.asm — DisplayBattleMenu
+	ld a, [wBattleType]
+	and a
+	jr nz, .nonstandardbattle   ; anything but 0 skips the block below
+	call DrawHUDsAndHPBars
+	call PrintEmptyString
+	call SaveScreenTilesToBuffer1
+.nonstandardbattle
+	ld a, [wBattleType]
+	cp BATTLE_TYPE_SAFARI
+	ld a, BATTLE_MENU_TEMPLATE
+	jr nz, .menuselected        ; anything but BATTLE_TYPE_SAFARI (2) gets the normal template
+	ld a, SAFARI_BATTLE_MENU_TEMPLATE
+.menuselected
+```
+
+The three named values (0 normal, 1 old man, 2 Safari Zone) are the only ones this routine was
+ever written for. Any other value — the overflow leaves `$22` — is simply "not 0", so
+`DrawHUDsAndHPBars` never runs and the player's own status box is never drawn, and it is
+"not `BATTLE_TYPE_SAFARI`" too, so it still gets the ordinary menu template rather than a
+dedicated glitch template. There is no glitch-specific code path; the broken menu is what the
+ordinary path does when handed a value it was never told to expect.
+
+**The memory.** [`wMoveMissed` `$D05F`][wMoveMissed], [`wBattleType` `$D05A`][wBattleType],
+[`wCurOpponent` `$D059`][wCurOpponent].
+
+**Evidence.** Reproduced on a real save (party BULBASAUR/SPARK/CHARMANDER, Oak's Lab), poking
+`wCurOpponent=$42` (Dragonite) directly and stepping the emulator to the battle-intro text:
+`wMoveMissed=$00` decoded the screen as `"Wild D…"`, `wMoveMissed=$01` on an otherwise identical
+run decoded it as `"The hooked\nD…"` — the only byte changed between the two runs. Separately,
+holding `wMoveMissed=$00` and setting `wBattleType=$00` (control) rendered the ordinary menu
+with the player's own `BULBASAUR   L7   14/25` box present; `wBattleType=$22` on the same setup
+rendered the FIGHT/PKMN/ITEM/RUN menu with that box entirely missing and the player's overworld
+sprite left showing through where it should be — exactly what `DrawHUDsAndHPBars` never running
+predicts.
 
 ---
 
